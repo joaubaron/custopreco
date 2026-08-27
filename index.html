@@ -1,0 +1,1097 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>Custo do Pote</title>
+  <meta name="theme-color" content="#3c2440">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%233c2440'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='%23e8c15a'%3E%F0%9F%AB%99%3C/text%3E%3C/svg%3E">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :root {
+      --aubergine-950: #211326;
+      --aubergine-900: #2e1a34;
+      --aubergine-800: #3c2440;
+      --aubergine-700: #4d3054;
+      --olive: #7a8450;
+      --olive-dark: #5c6438;
+      --cream: #f4ecd9;
+      --cream-dim: #e8dcc0;
+      --gold: #e8c15a;
+      --tomato: #c1502e;
+      --line: rgba(244, 236, 217, 0.14);
+      --radius: 14px;
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 12% 8%, rgba(122, 132, 80, 0.18), transparent 45%),
+        radial-gradient(circle at 90% 85%, rgba(232, 193, 90, 0.10), transparent 40%),
+        var(--aubergine-950);
+      color: var(--cream);
+      font-family: -apple-system, "Iowan Old Style", "Georgia", serif;
+      min-height: 100vh;
+      padding: 16px 12px 80px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-left {
+      flex: 1;
+      min-width: 150px;
+    }
+
+    .eyebrow {
+      font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      font-size: 10px;
+      color: var(--gold);
+      opacity: .85;
+      margin: 0 0 2px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(22px, 5vw, 38px);
+      font-weight: 600;
+      line-height: 1.1;
+    }
+
+    #recipeName {
+      background: none;
+      border: none;
+      color: var(--cream);
+      font-family: inherit;
+      font-weight: 600;
+      font-size: clamp(22px, 5vw, 38px);
+      line-height: 1.1;
+      padding: 2px 4px;
+      border-radius: 6px;
+      width: 100%;
+      -webkit-appearance: none;
+    }
+
+    #recipeName:focus {
+      outline: 1px dashed var(--gold);
+      background: rgba(232, 193, 90, 0.06);
+    }
+
+    .reset-btn {
+      font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+      font-size: 11px;
+      letter-spacing: .04em;
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--cream-dim);
+      padding: 8px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: .2s;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      min-height: 44px;
+    }
+
+    .reset-btn:active {
+      transform: scale(0.95);
+    }
+
+    .reset-btn:hover {
+      border-color: var(--tomato);
+      color: var(--tomato);
+    }
+
+    /* Tabs - melhorado para mobile */
+    .tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 20px;
+      background: var(--aubergine-900);
+      padding: 4px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-btn {
+      flex: 1;
+      min-width: 90px;
+      padding: 12px 14px;
+      background: transparent;
+      border: none;
+      border-radius: 12px;
+      color: var(--cream-dim);
+      font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: .25s;
+      white-space: nowrap;
+      letter-spacing: .03em;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .tab-btn:active {
+      transform: scale(0.95);
+    }
+
+    .tab-btn:hover {
+      color: var(--cream);
+      background: rgba(244, 236, 217, 0.05);
+    }
+
+    .tab-btn.active {
+      background: var(--aubergine-800);
+      color: var(--gold);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn .3s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Cards */
+    section.card {
+      background: var(--aubergine-900);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px 14px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    section.card h2 {
+      font-size: 15px;
+      margin: 0 0 4px;
+      font-weight: 600;
+      color: var(--cream);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    section.card .sub {
+      font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+      font-size: 12px;
+      color: var(--cream-dim);
+      margin: 0 0 12px;
+      line-height: 1.4;
+    }
+
+    .badge {
+      font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+      font-size: 9px;
+      letter-spacing: .08em;
+      background: var(--olive-dark);
+      color: var(--cream);
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    /* Tables - mobile first */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+      font-size: 13px;
+    }
+
+    thead th {
+      text-align: left;
+      font-weight: 600;
+      color: var(--cream-dim);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      padding: 0 4px 8px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    thead th.num,
+    td.num {
+      text-align: right;
+    }
+
+    tbody td {
+      padding: 4px 4px;
+      border-bottom: 1px solid rgba(244, 236, 217, 0.06);
+      vertical-align: middle;
+    }
+
+    tbody tr:active {
+      background: rgba(244, 236, 217, 0.05);
+    }
+
+    input.cell {
+      width: 100%;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--cream);
+      font-family: inherit;
+      font-size: 13px;
+      padding: 6px 4px;
+      border-radius: 6px;
+      text-align: left;
+      transition: .2s;
+      -webkit-appearance: none;
+      min-height: 36px;
+    }
+
+    input.cell.num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    input.cell:hover {
+      border-color: var(--line);
+    }
+
+    input.cell:focus {
+      outline: none;
+      border-color: var(--gold);
+      background: rgba(232, 193, 90, 0.06);
+    }
+
+    .rm-btn {
+      background: none;
+      border: none;
+      color: var(--cream-dim);
+      cursor: pointer;
+      font-size: 18px;
+      line-height: 1;
+      padding: 6px 8px;
+      border-radius: 6px;
+      transition: .2s;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      min-height: 44px;
+      min-width: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .rm-btn:active {
+      transform: scale(0.9);
+    }
+
+    .rm-btn:hover {
+      color: var(--tomato);
+      background: rgba(193, 80, 46, 0.12);
+    }
+
+    tfoot td {
+      padding: 10px 4px 2px;
+      font-weight: 600;
+      border-top: 1px solid var(--line);
+    }
+
+    tfoot td.num {
+      color: var(--gold);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .add-row-btn {
+      margin-top: 10px;
+      font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+      font-size: 12px;
+      background: transparent;
+      border: 1px dashed var(--line);
+      color: var(--cream-dim);
+      padding: 10px 12px;
+      border-radius: 9px;
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
+      transition: .2s;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      min-height: 44px;
+    }
+
+    .add-row-btn:active {
+      transform: scale(0.97);
+    }
+
+    .add-row-btn:hover {
+      border-color: var(--olive);
+      color: var(--olive);
+      border-style: solid;
+    }
+
+    /* KV Grid */
+    .kv-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px 12px;
+      font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+      font-size: 14px;
+    }
+
+    .kv-grid .k {
+      color: var(--cream-dim);
+      align-self: center;
+    }
+
+    .kv-grid .v {
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+      align-self: center;
+    }
+
+    .kv-grid .v.editable input {
+      width: 110px;
+      text-align: right;
+      background: rgba(244, 236, 217, 0.05);
+      border: 1px solid var(--line);
+      color: var(--cream);
+      border-radius: 7px;
+      padding: 8px 10px;
+      font-family: inherit;
+      font-size: 14px;
+      font-variant-numeric: tabular-nums;
+      transition: .2s;
+      -webkit-appearance: none;
+      min-height: 44px;
+    }
+
+    .kv-grid .v.editable input:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .kv-grid .total .k,
+    .kv-grid .total .v {
+      font-weight: 700;
+      color: var(--cream);
+      padding-top: 8px;
+      border-top: 1px solid var(--line);
+      margin-top: 2px;
+    }
+
+    .kv-grid .divider {
+      grid-column: 1/-1;
+      height: 1px;
+      background: var(--line);
+      margin: 2px 0;
+    }
+
+    /* Jar - sempre visível no mobile */
+    .jar-col {
+      position: sticky;
+      top: 60px;
+      z-index: 5;
+    }
+
+    .jar-card {
+      background: var(--aubergine-900);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 16px 14px 14px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .jar-card h3 {
+      font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      font-size: 10px;
+      color: var(--cream-dim);
+      margin: 0 0 10px;
+      font-weight: 600;
+    }
+
+    svg#jar {
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .jar-legend {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+      font-size: 12px;
+      text-align: left;
+    }
+
+    .jar-legend div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .jar-legend .sw {
+      width: 9px;
+      height: 9px;
+      border-radius: 2px;
+      display: inline-block;
+      margin-right: 7px;
+      flex: none;
+    }
+
+    .jar-legend .lab {
+      display: flex;
+      align-items: center;
+      color: var(--cream-dim);
+    }
+
+    .jar-legend .val {
+      font-variant-numeric: tabular-nums;
+      color: var(--cream);
+      font-weight: 600;
+    }
+
+    .price-tag {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+
+    .price-tag .lbl {
+      font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .price-tag .amt {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--gold);
+      font-variant-numeric: tabular-nums;
+      margin-top: 2px;
+    }
+
+    .price-tag .per {
+      font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+      font-size: 11px;
+      color: var(--cream-dim);
+    }
+
+    .footer-note {
+      text-align: center;
+      font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+      font-size: 10px;
+      color: rgba(244, 236, 217, 0.3);
+      margin-top: 30px;
+      line-height: 1.6;
+      padding: 0 10px;
+    }
+
+    /* Layout mobile-first */
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .jar-col {
+      order: -1;
+    }
+
+    @media (min-width: 768px) {
+      .layout {
+        grid-template-columns: 1fr 240px;
+      }
+      .jar-col {
+        order: 0;
+        position: sticky;
+        top: 80px;
+      }
+      .tabs {
+        position: static;
+      }
+      .jar-card {
+        padding: 20px 16px 18px;
+      }
+    }
+
+    /* Ajustes para telas muito pequenas */
+    @media (max-width: 400px) {
+      body {
+        padding: 12px 8px 60px;
+      }
+      .tab-btn {
+        font-size: 11px;
+        padding: 10px 10px;
+        min-width: 70px;
+      }
+      section.card {
+        padding: 14px 10px;
+      }
+      table {
+        font-size: 11px;
+      }
+      input.cell {
+        font-size: 11px;
+        padding: 4px 3px;
+        min-height: 32px;
+      }
+      .kv-grid {
+        font-size: 12px;
+      }
+      .kv-grid .v.editable input {
+        width: 90px;
+        font-size: 12px;
+        padding: 6px 8px;
+        min-height: 36px;
+      }
+      .price-tag .amt {
+        font-size: 22px;
+      }
+    }
+
+    /* Safe area para notch */
+    @supports (padding: max(0px)) {
+      body {
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
+        padding-bottom: max(80px, env(safe-area-inset-bottom));
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- Header -->
+    <header>
+      <div class="header-left">
+        <p class="eyebrow">Calculadora de custo &amp; preço</p>
+        <h1><input id="recipeName" spellcheck="false" placeholder="Nome da receita" /></h1>
+      </div>
+      <button class="reset-btn" id="resetBtn">↺ restaurar</button>
+    </header>
+
+    <!-- Tabs - com ícones para mobile -->
+    <div class="tabs" id="tabContainer">
+      <button class="tab-btn active" data-tab="tab1">🧅 Ingredientes</button>
+      <button class="tab-btn" data-tab="tab2">🏺 Embalagem</button>
+      <button class="tab-btn" data-tab="tab3">⚖️ Custo &amp; Preço</button>
+    </div>
+
+    <div class="layout">
+      <div>
+
+        <!-- TAB 1: Ingredientes -->
+        <div class="tab-content active" id="tab1">
+          <section class="card">
+            <h2>🍆 Ingredientes da receita</h2>
+            <p class="sub">Ajuste quantidade, peso e valor conforme o que você comprou.</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Ingrediente</th>
+                  <th style="width:50px" class="num">Qtd.</th>
+                  <th style="width:60px">Un.</th>
+                  <th style="width:70px" class="num">Peso (g)</th>
+                  <th style="width:80px" class="num">Valor (R$)</th>
+                  <th style="width:30px"></th>
+                </tr>
+              </thead>
+              <tbody id="ingBody"></tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="3">Subtotal</td>
+                  <td class="num" id="ingSubW"></td>
+                  <td class="num" id="ingSubV"></td>
+                  <td></td>
+                </tr>
+              </tfoot>
+            </table>
+            <button class="add-row-btn" id="addIng">+ adicionar ingrediente</button>
+          </section>
+        </div>
+
+        <!-- TAB 2: Embalagem -->
+        <div class="tab-content" id="tab2">
+          <section class="card">
+            <h2>🏺 Embalagem e decoração <span class="badge">por pote</span></h2>
+            <p class="sub">Custo fixo que cada pote leva, independente do rendimento.</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th style="width:50px" class="num">Qtd.</th>
+                  <th style="width:60px">Un.</th>
+                  <th style="width:80px" class="num">Valor (R$)</th>
+                  <th style="width:30px"></th>
+                </tr>
+              </thead>
+              <tbody id="pkgBody"></tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="3">Subtotal por pote</td>
+                  <td class="num" id="pkgSubV"></td>
+                  <td></td>
+                </tr>
+              </tfoot>
+            </table>
+            <button class="add-row-btn" id="addPkg">+ adicionar item</button>
+          </section>
+        </div>
+
+        <!-- TAB 3: Custo e Preço -->
+        <div class="tab-content" id="tab3">
+          <section class="card">
+            <h2>⚖️ Rendimento da receita</h2>
+            <div class="kv-grid">
+              <div class="k">Peso total da receita</div>
+              <div class="v" id="totalWeight"></div>
+              <div class="k">Peso por pote (g)</div>
+              <div class="v editable"><input type="number" id="weightPerPot" min="1" step="1" inputmode="numeric"></div>
+              <div class="divider"></div>
+              <div class="k total">Número de potes</div>
+              <div class="v total" id="numPots"></div>
+            </div>
+          </section>
+
+          <section class="card">
+            <h2>💰 Custo por pote</h2>
+            <div class="kv-grid">
+              <div class="k">Ingredientes rateados</div>
+              <div class="v" id="costIngPot"></div>
+              <div class="k">Embalagem por pote</div>
+              <div class="v" id="costPkgPot"></div>
+              <div class="divider"></div>
+              <div class="k total">Custo total por pote</div>
+              <div class="v total" id="costTotalPot"></div>
+            </div>
+          </section>
+
+          <section class="card">
+            <h2>🏷️ Preço de venda <span class="badge">com markup</span></h2>
+            <div class="kv-grid">
+              <div class="k">Custo</div>
+              <div class="v" id="priceCost"></div>
+              <div class="k">Lucro desejado (%)</div>
+              <div class="v editable"><input type="number" id="profitPct" min="0" step="1" inputmode="numeric"></div>
+              <div class="k">Markup</div>
+              <div class="v" id="markup"></div>
+              <div class="divider"></div>
+              <div class="k total">Preço de venda por pote</div>
+              <div class="v total" id="finalPrice"></div>
+            </div>
+          </section>
+        </div>
+
+      </div>
+
+      <!-- Jar -->
+      <div class="jar-col">
+        <div class="jar-card">
+          <h3>Composição do preço</h3>
+          <svg id="jar" viewBox="0 0 160 220" width="160" height="220"></svg>
+          <div class="jar-legend" id="jarLegend"></div>
+          <div class="price-tag">
+            <div class="lbl">Preço por pote</div>
+            <div class="amt" id="jarPrice">R$ 0,00</div>
+            <div class="per" id="jarPots">— potes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="footer-note">Os dados ficam salvos só neste dispositivo (localStorage).<br>Feito para calcular o pote de caponata — mas funciona pra qualquer receita.</p>
+  </div>
+
+  <script>
+    (function() {
+      "use strict";
+
+      const STORAGE_KEY = "caponata-calc-v1";
+
+      const DEFAULT_STATE = {
+        recipeName: "Caponata de Berinjela",
+        ingredients: [
+          { name: "Berinjela", qty: 2, unit: "un", weight: 600, value: 8 },
+          { name: "Tomate", qty: 3, unit: "un", weight: 360, value: 6 },
+          { name: "Cebola", qty: 1, unit: "un", weight: 150, value: 2 },
+          { name: "Aipo (salsão)", qty: 2, unit: "talo", weight: 80, value: 3 },
+          { name: "Azeitona verde", qty: 100, unit: "g", weight: 100, value: 5.5 },
+          { name: "Alcaparras", qty: 30, unit: "g", weight: 30, value: 4 },
+          { name: "Molho de tomate", qty: 200, unit: "ml", weight: 200, value: 3.5 },
+          { name: "Vinagre", qty: 30, unit: "ml", weight: 30, value: 1 },
+          { name: "Açúcar", qty: 15, unit: "g", weight: 15, value: 0.5 },
+          { name: "Azeite de oliva", qty: 60, unit: "ml", weight: 55, value: 4.5 },
+          { name: "Alho", qty: 3, unit: "dente", weight: 9, value: 0.5 },
+          { name: "Sal e pimenta", qty: 1, unit: "a gosto", weight: 5, value: 0.5 }
+        ],
+        packaging: [
+          { name: "Vidro com tampa", qty: 1, unit: "un", value: 4.5 },
+          { name: "Rótulo", qty: 1, unit: "un", value: 1.5 },
+          { name: "Tecido para decoração", qty: 1, unit: "un", value: 2 },
+          { name: "Cordinha", qty: 1, unit: "un", value: 0.8 }
+        ],
+        weightPerPot: 520,
+        profitPct: 35
+      };
+
+      let state = loadState();
+
+      function loadState() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            if (parsed && Array.isArray(parsed.ingredients) && Array.isArray(parsed.packaging)) return parsed;
+          }
+        } catch (e) {}
+        return JSON.parse(JSON.stringify(DEFAULT_STATE));
+      }
+
+      function saveState() {
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+      }
+
+      function brl(n) {
+        if (!isFinite(n)) n = 0;
+        return "R$ " + n.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      }
+
+      function num(n, digits) {
+        if (!isFinite(n)) n = 0;
+        return n.toLocaleString("pt-BR", { minimumFractionDigits: digits || 0, maximumFractionDigits: digits || 2 });
+      }
+
+      // DOM refs
+      const recipeNameEl = document.getElementById("recipeName");
+      const ingBody = document.getElementById("ingBody");
+      const pkgBody = document.getElementById("pkgBody");
+      const weightPerPotEl = document.getElementById("weightPerPot");
+      const profitPctEl = document.getElementById("profitPct");
+
+      recipeNameEl.value = state.recipeName || "Minha receita";
+      weightPerPotEl.value = state.weightPerPot;
+      profitPctEl.value = state.profitPct;
+
+      recipeNameEl.addEventListener("input", function() {
+        state.recipeName = recipeNameEl.value;
+        saveState();
+      });
+
+      weightPerPotEl.addEventListener("input", function() {
+        state.weightPerPot = parseFloat(weightPerPotEl.value) || 0;
+        saveState();
+        render();
+      });
+
+      profitPctEl.addEventListener("input", function() {
+        state.profitPct = parseFloat(profitPctEl.value) || 0;
+        saveState();
+        render();
+      });
+
+      // Tabs
+      const tabBtns = document.querySelectorAll(".tab-btn");
+      const tabContents = {
+        tab1: document.getElementById("tab1"),
+        tab2: document.getElementById("tab2"),
+        tab3: document.getElementById("tab3")
+      };
+
+      tabBtns.forEach(btn => {
+        btn.addEventListener("click", function(e) {
+          e.preventDefault();
+          tabBtns.forEach(b => b.classList.remove("active"));
+          this.classList.add("active");
+          Object.values(tabContents).forEach(tc => tc.classList.remove("active"));
+          const target = document.getElementById(this.dataset.tab);
+          if (target) target.classList.add("active");
+        });
+      });
+
+      // Ingredient rows
+      function ingRow(item, idx) {
+        const tr = document.createElement("tr");
+        tr.innerHTML =
+          '<td><input class="cell" data-f="name" placeholder="nome" inputmode="text"></td>' +
+          '<td><input class="cell num" data-f="qty" type="number" step="any" inputmode="decimal"></td>' +
+          '<td><input class="cell" data-f="unit" placeholder="un" inputmode="text"></td>' +
+          '<td><input class="cell num" data-f="weight" type="number" step="any" inputmode="decimal"></td>' +
+          '<td><input class="cell num" data-f="value" type="number" step="any" inputmode="decimal"></td>' +
+          '<td><button class="rm-btn" title="remover">✕</button></td>';
+
+        const inputs = tr.querySelectorAll("input");
+        inputs[0].value = item.name;
+        inputs[1].value = item.qty;
+        inputs[2].value = item.unit;
+        inputs[3].value = item.weight;
+        inputs[4].value = item.value;
+
+        inputs.forEach(inp => {
+          inp.addEventListener("input", function() {
+            const f = inp.dataset.f;
+            const v = inp.value;
+            if (f === "qty" || f === "weight" || f === "value") {
+              state.ingredients[idx][f] = parseFloat(v) || 0;
+            } else {
+              state.ingredients[idx][f] = v;
+            }
+            saveState();
+            render();
+          });
+        });
+
+        tr.querySelector(".rm-btn").addEventListener("click", function() {
+          state.ingredients.splice(idx, 1);
+          saveState();
+          renderIngredients();
+          render();
+        });
+
+        return tr;
+      }
+
+      function renderIngredients() {
+        ingBody.innerHTML = "";
+        state.ingredients.forEach((item, idx) => {
+          ingBody.appendChild(ingRow(item, idx));
+        });
+      }
+
+      document.getElementById("addIng").addEventListener("click", function() {
+        state.ingredients.push({ name: "", qty: 1, unit: "un", weight: 0, value: 0 });
+        saveState();
+        renderIngredients();
+        render();
+      });
+
+      // Packaging rows
+      function pkgRow(item, idx) {
+        const tr = document.createElement("tr");
+        tr.innerHTML =
+          '<td><input class="cell" data-f="name" placeholder="nome" inputmode="text"></td>' +
+          '<td><input class="cell num" data-f="qty" type="number" step="any" inputmode="decimal"></td>' +
+          '<td><input class="cell" data-f="unit" placeholder="un" inputmode="text"></td>' +
+          '<td><input class="cell num" data-f="value" type="number" step="any" inputmode="decimal"></td>' +
+          '<td><button class="rm-btn" title="remover">✕</button></td>';
+
+        const inputs = tr.querySelectorAll("input");
+        inputs[0].value = item.name;
+        inputs[1].value = item.qty;
+        inputs[2].value = item.unit;
+        inputs[3].value = item.value;
+
+        inputs.forEach(inp => {
+          inp.addEventListener("input", function() {
+            const f = inp.dataset.f;
+            const v = inp.value;
+            if (f === "qty" || f === "value") {
+              state.packaging[idx][f] = parseFloat(v) || 0;
+            } else {
+              state.packaging[idx][f] = v;
+            }
+            saveState();
+            render();
+          });
+        });
+
+        tr.querySelector(".rm-btn").addEventListener("click", function() {
+          state.packaging.splice(idx, 1);
+          saveState();
+          renderPackaging();
+          render();
+        });
+
+        return tr;
+      }
+
+      function renderPackaging() {
+        pkgBody.innerHTML = "";
+        state.packaging.forEach((item, idx) => {
+          pkgBody.appendChild(pkgRow(item, idx));
+        });
+      }
+
+      document.getElementById("addPkg").addEventListener("click", function() {
+        state.packaging.push({ name: "", qty: 1, unit: "un", value: 0 });
+        saveState();
+        renderPackaging();
+        render();
+      });
+
+      // Reset
+      document.getElementById("resetBtn").addEventListener("click", function() {
+        if (!confirm("Isso vai substituir os dados atuais pelo exemplo da caponata. Continuar?")) return;
+        state = JSON.parse(JSON.stringify(DEFAULT_STATE));
+        saveState();
+        recipeNameEl.value = state.recipeName;
+        weightPerPotEl.value = state.weightPerPot;
+        profitPctEl.value = state.profitPct;
+        renderIngredients();
+        renderPackaging();
+        render();
+      });
+
+      // Jar SVG
+      const jarSvg = document.getElementById("jar");
+      const jarLegend = document.getElementById("jarLegend");
+      const jarPrice = document.getElementById("jarPrice");
+      const jarPots = document.getElementById("jarPots");
+
+      const JAR_TOP = 34,
+        JAR_BOTTOM = 208;
+      const JAR_H = JAR_BOTTOM - JAR_TOP;
+
+      function buildJarShell() {
+        return '' +
+          '<defs>' +
+          '<clipPath id="jarClip"><path d="M46,20 L114,20 L114,40 Q136,50 136,80 L136,196 Q136,212 118,212 L42,212 Q24,212 24,196 L24,80 Q24,50 46,40 Z"/></clipPath>' +
+          '</defs>' +
+          '<path d="M46,20 L114,20 L114,40 Q136,50 136,80 L136,196 Q136,212 118,212 L42,212 Q24,212 24,196 L24,80 Q24,50 46,40 Z" fill="rgba(244,236,217,0.05)" stroke="rgba(244,236,217,0.35)" stroke-width="2"/>' +
+          '<rect x="50" y="8" width="60" height="16" rx="4" fill="rgba(244,236,217,0.22)" stroke="rgba(244,236,217,0.35)" stroke-width="1.5"/>';
+      }
+
+      function render() {
+        // Subtotals
+        let subW = 0,
+          subV = 0;
+        state.ingredients.forEach(i => { subW += (parseFloat(i.weight) || 0);
+          subV += (parseFloat(i.value) || 0); });
+        document.getElementById("ingSubW").textContent = num(subW, 0) + " g";
+        document.getElementById("ingSubV").textContent = brl(subV);
+
+        let pkgV = 0;
+        state.packaging.forEach(i => { pkgV += (parseFloat(i.value) || 0); });
+        document.getElementById("pkgSubV").textContent = brl(pkgV);
+
+        // Rendimento
+        const weightPerPot = parseFloat(state.weightPerPot) || 0;
+        const numPots = weightPerPot > 0 ? (subW / weightPerPot) : 0;
+        document.getElementById("totalWeight").textContent = num(subW, 0) + " g";
+        document.getElementById("numPots").textContent = numPots.toFixed(2).replace(".", ",") + " potes";
+
+        // Custo por pote
+        const costIngPot = numPots > 0 ? (subV / numPots) : 0;
+        const costPkgPot = pkgV;
+        const costTotalPot = costIngPot + costPkgPot;
+        document.getElementById("costIngPot").textContent = brl(costIngPot);
+        document.getElementById("costPkgPot").textContent = brl(costPkgPot);
+        document.getElementById("costTotalPot").textContent = brl(costTotalPot);
+
+        // Preço
+        const profitPct = parseFloat(state.profitPct) || 0;
+        const markup = 1 + (profitPct / 100);
+        const price = costTotalPot * markup;
+        const profitValue = price - costTotalPot;
+
+        document.getElementById("priceCost").textContent = brl(costTotalPot);
+        document.getElementById("markup").textContent = "×" + markup.toFixed(2).replace(".", ",");
+        document.getElementById("finalPrice").textContent = brl(price);
+
+        // Jar
+        jarPrice.textContent = brl(price);
+        jarPots.textContent = (numPots > 0 ? numPots.toFixed(1).replace(".", ",") : "0") + " potes";
+
+        const segments = [
+          { label: "Ingredientes", value: costIngPot, color: "#7a8450" },
+          { label: "Embalagem", value: costPkgPot, color: "#c1502e" },
+          { label: "Lucro", value: profitValue, color: "#e8c15a" }
+        ];
+        const total = price > 0 ? price : 1;
+
+        let svgParts = [buildJarShell()];
+        let yCursor = JAR_BOTTOM;
+        svgParts.push('<g clip-path="url(#jarClip)">');
+        segments.forEach(seg => {
+          let h = JAR_H * (seg.value / total);
+          if (h < 0) h = 0;
+          let yTop = yCursor - h;
+          svgParts.push('<rect x="20" y="' + yTop.toFixed(1) + '" width="120" height="' + (h + 2).toFixed(1) + '" fill="' + seg.color + '" opacity="0.88"/>');
+          yCursor = yTop;
+        });
+        svgParts.push('</g>');
+        jarSvg.innerHTML = svgParts.join("");
+
+        jarLegend.innerHTML = segments.map(seg => {
+          const pct = total > 0 ? Math.round((seg.value / total) * 100) : 0;
+          return '<div><span class="lab"><span class="sw" style="background:' + seg.color + '"></span>' + seg.label + '</span><span class="val">' + pct + '%</span></div>';
+        }).join("");
+      }
+
+      renderIngredients();
+      renderPackaging();
+      render();
+
+      // Service Worker
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function() {
+          navigator.serviceWorker.register("sw.js").catch(function() {});
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
