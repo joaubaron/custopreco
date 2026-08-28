@@ -31,6 +31,7 @@
         --cream-dim: #e8dcc0;
         --gold: #e8c15a;
         --tomato: #c1502e;
+        --warning: #e8a83a;
         --line: rgba(244, 236, 217, 0.14);
         --radius: 14px;
         --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
@@ -226,6 +227,16 @@
         padding: 2px 10px;
         border-radius: 999px;
         font-weight: 600;
+      }
+      .warning-badge {
+        font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+        font-size: 9px;
+        letter-spacing: 0.08em;
+        background: var(--warning);
+        color: var(--aubergine-950);
+        padding: 2px 10px;
+        border-radius: 999px;
+        font-weight: 700;
       }
       table {
         width: 100%;
@@ -528,6 +539,20 @@
         font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
         font-size: 10.5px;
         color: var(--cream-dim);
+      }
+      .warning-message {
+        font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+        font-size: 12px;
+        color: var(--warning);
+        background: rgba(232, 168, 58, 0.12);
+        padding: 10px 12px;
+        border-radius: 8px;
+        border-left: 3px solid var(--warning);
+        margin: 6px 0 0;
+        display: none;
+      }
+      .warning-message.visible {
+        display: block;
       }
       @media (max-width: 380px) {
         .jar-inline-row {
@@ -835,6 +860,10 @@
                 <div class="k">Sobra da receita</div>
                 <div class="v leftover-note" id="leftoverWeight"></div>
               </div>
+              <div class="warning-message" id="insufficientWarning">
+                ⚠️ Atenção: a receita não rende um pote completo de <span id="warningPotSize"></span> g. 
+                O custo dos ingredientes está sendo calculado como se toda a receita fosse usada em um único pote.
+              </div>
             </section>
 
             <!-- CUSTO -->
@@ -908,11 +937,11 @@
     { name: "Pimentão amarelo", qty: 1, unit: "un", weight: 100, value: 1.20 },
     { name: "Tomates", qty: 3, unit: "un", weight: 300, value: 1.05 },
     { name: "Uvas passas", qty: 100, unit: "g", weight: 100, value: 7.89 },
-    { name: "Vinagre de arroz", qty: 0.5, unit: "xícara", weight: 120, value: 1.20 },
-    { name: "Azeite de oliva", qty: 0.5, unit: "xícara", weight: 110, value: 7.92 },
-    { name: "Shoyu", qty: 0.5, unit: "xícara", weight: 120, value: 4.70 },
-    { name: "Manjericão seco", qty: 2, unit: "col. sopa", weight: 6, value: 2.57 },
-    { name: "Sal e pimenta", qty: 1, unit: "gosto", weight: 5, value: 0.30 },
+    { name: "Vinagre de arroz", qty: 0.5, unit: "xíc.", weight: 120, value: 1.20 },
+    { name: "Azeite de oliva", qty: 0.5, unit: "xíc.", weight: 110, value: 7.92 },
+    { name: "Shoyu", qty: 0.5, unit: "xíc.", weight: 120, value: 4.70 },
+    { name: "Manjericão seco", qty: 2, unit: "c.sopa", weight: 6, value: 2.57 },
+    { name: "Sal e pimenta", qty: 1, unit: "a.g.", weight: 5, value: 0.30 },
   ],
   packaging: [
     { name: "Vidro com tampa", qty: 1, unit: "un", value: 4.5 },
@@ -921,7 +950,7 @@
     { name: "Cordinha", qty: 1, unit: "un", value: 0.8 },
   ],
   weightPerPot: 500,
-  profitPct: 35,
+  profitPct: 30,
 };
 
         let state = loadState();
@@ -938,7 +967,8 @@
                   parsed.weightPerPot = 500;
                 }
                 const savedProfit = parseFloat(parsed.profitPct);
-                if (!isFinite(savedProfit) || savedProfit < 0 || savedProfit >= 100) {
+                // CORREÇÃO: usar > 99.99 para manter coerência com o clamp do runtime
+                if (!isFinite(savedProfit) || savedProfit < 0 || savedProfit > 99.99) {
                   parsed.profitPct = 35;
                 }
                 return parsed;
@@ -1014,6 +1044,7 @@
           if (!isFinite(value)) {
             value = 0;
           }
+          // CORREÇÃO: usar clamp consistente
           value = Math.max(0, Math.min(value, 99.99));
           state.profitPct = value;
           saveState();
@@ -1053,16 +1084,19 @@
             '<input class="cell" data-f="name" placeholder="nome" inputmode="text">' +
             "</td>" +
             "<td>" +
-            '<input class="cell num" data-f="qty" type="number" step="any" inputmode="decimal">' +
+            // CORREÇÃO: adicionar min="0"
+            '<input class="cell num" data-f="qty" type="number" step="any" inputmode="decimal" min="0">' +
             "</td>" +
             "<td>" +
             '<input class="cell" data-f="unit" placeholder="un" inputmode="text">' +
             "</td>" +
             "<td>" +
-            '<input class="cell num" data-f="weight" type="number" step="any" inputmode="decimal">' +
+            // CORREÇÃO: adicionar min="0"
+            '<input class="cell num" data-f="weight" type="number" step="any" inputmode="decimal" min="0">' +
             "</td>" +
             "<td>" +
-            '<input class="cell num" data-f="value" type="number" step="any" inputmode="decimal">' +
+            // CORREÇÃO: adicionar min="0"
+            '<input class="cell num" data-f="value" type="number" step="any" inputmode="decimal" min="0">' +
             "</td>" +
             "<td>" +
             '<button class="rm-btn" title="remover">✕</button>' +
@@ -1080,7 +1114,9 @@
               const f = inp.dataset.f;
               const v = inp.value;
               if (f === "qty" || f === "weight" || f === "value") {
-                state.ingredients[idx][f] = parseFloat(v) || 0;
+                // CORREÇÃO: garantir que valores negativos sejam tratados como 0
+                const numVal = parseFloat(v);
+                state.ingredients[idx][f] = isFinite(numVal) && numVal >= 0 ? numVal : 0;
               } else {
                 state.ingredients[idx][f] = v;
               }
@@ -1121,13 +1157,15 @@
             '<input class="cell" data-f="name" placeholder="nome" inputmode="text">' +
             "</td>" +
             "<td>" +
-            '<input class="cell num" data-f="qty" type="number" step="any" inputmode="decimal">' +
+            // CORREÇÃO: adicionar min="0"
+            '<input class="cell num" data-f="qty" type="number" step="any" inputmode="decimal" min="0">' +
             "</td>" +
             "<td>" +
             '<input class="cell" data-f="unit" placeholder="un" inputmode="text">' +
             "</td>" +
             "<td>" +
-            '<input class="cell num" data-f="value" type="number" step="any" inputmode="decimal">' +
+            // CORREÇÃO: adicionar min="0"
+            '<input class="cell num" data-f="value" type="number" step="any" inputmode="decimal" min="0">' +
             "</td>" +
             "<td>" +
             '<button class="rm-btn" title="remover">✕</button>' +
@@ -1144,7 +1182,9 @@
               const f = inp.dataset.f;
               const v = inp.value;
               if (f === "qty" || f === "value") {
-                state.packaging[idx][f] = parseFloat(v) || 0;
+                // CORREÇÃO: garantir que valores negativos sejam tratados como 0
+                const numVal = parseFloat(v);
+                state.packaging[idx][f] = isFinite(numVal) && numVal >= 0 ? numVal : 0;
               } else {
                 state.packaging[idx][f] = v;
               }
@@ -1321,8 +1361,27 @@
           document.getElementById("numPots").textContent = numPots + (numPots === 1 ? " pote" : " potes");
           document.getElementById("leftoverWeight").textContent = num(leftoverWeight, 0) + " g";
 
+          // CORREÇÃO: aviso quando a receita não rende um pote completo
+          const warningEl = document.getElementById("insufficientWarning");
+          const warningPotSize = document.getElementById("warningPotSize");
+          if (numPots === 0 && subW > 0) {
+            warningPotSize.textContent = weightPerPot;
+            warningEl.classList.add("visible");
+          } else {
+            warningEl.classList.remove("visible");
+          }
+
           /* ----------------------------------------------------- CUSTO DOS INGREDIENTES POR POTE ----------------------------------------------------- */
-          const costIngPot = numPots > 0 ? subV / numPots : 0;
+          // CORREÇÃO: se não render potes inteiros, usar o custo total como se fosse um pote
+          let costIngPot;
+          if (numPots > 0) {
+            costIngPot = subV / numPots;
+          } else if (subW > 0) {
+            // Receita não rende um pote completo - o custo é o total
+            costIngPot = subV;
+          } else {
+            costIngPot = 0;
+          }
 
           /* ===================================================== CUSTO DA EMBALAGEM POR POTE ===================================================== */
           const costPkgPot = pkgV;
