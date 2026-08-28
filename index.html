@@ -49,7 +49,6 @@
             margin: 0 auto;
         }
 
-        /* Header */
         header {
             display: flex;
             gap: 12px;
@@ -128,7 +127,6 @@
             color: var(--tomato);
         }
 
-        /* Tabs */
         .tabs {
             display: flex;
             gap: 4px;
@@ -211,7 +209,6 @@
             }
         }
 
-        /* Cards */
         section.card {
             background: var(--aubergine-900);
             border: 1px solid var(--line);
@@ -251,7 +248,6 @@
             font-weight: 600;
         }
 
-        /* Tables - com colunas ajustadas */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -387,7 +383,6 @@
             border-style: solid;
         }
 
-        /* COLUNAS DA TABELA DE INGREDIENTES - AJUSTADAS */
         #ingBody td:first-child,
         #ingBody th:first-child {
             width: 35% !important;
@@ -424,7 +419,6 @@
             max-width: 26px;
         }
 
-        /* KV Grid */
         .kv-grid {
             display: grid;
             grid-template-columns: 1fr auto;
@@ -481,7 +475,6 @@
             margin: 2px 0;
         }
 
-        /* Composição do preço (pote) */
         .jar-card-inline {
             padding-bottom: 18px;
         }
@@ -591,7 +584,6 @@
             padding: 0 10px;
         }
 
-        /* Layout mobile-first */
         .layout {
             display: block;
         }
@@ -602,7 +594,6 @@
             }
         }
 
-        /* Ajustes para telas muito pequenas */
         @media (max-width: 400px) {
             body {
                 padding: 12px 8px 60px;
@@ -635,8 +626,6 @@
             .price-tag .amt {
                 font-size: 22px;
             }
-
-            /* Ajuste das colunas em telas muito pequenas */
             #ingBody td:first-child,
             #ingBody th:first-child {
                 width: 35% !important;
@@ -647,7 +636,6 @@
                 width: 55px !important;
                 max-width: 55px;
             }
-
             #ingBody td:nth-child(5),
             #ingBody th:nth-child(5) {
                 width: 70px !important;
@@ -655,7 +643,6 @@
             }
         }
 
-        /* Modal de confirmação */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -771,7 +758,6 @@
             }
         }
 
-        /* Safe area para notch */
         @supports (padding: max(0px)) {
             body {
                 padding-left: max(16px, env(safe-area-inset-left));
@@ -784,7 +770,6 @@
 <body>
     <div class="wrap">
 
-        <!-- Header -->
         <header>
             <div class="header-left">
                 <p class="eyebrow">Calculadora de custo &amp; preço</p>
@@ -793,7 +778,6 @@
             <button class="reset-btn" id="resetBtn">↺ restaurar</button>
         </header>
 
-        <!-- Tabs -->
         <div class="tabs" id="tabContainer">
             <button class="tab-btn active" data-tab="tab1">🧺 Ingredientes</button>
             <button class="tab-btn" data-tab="tab2">📦 Embalagem</button>
@@ -803,7 +787,6 @@
         <div class="layout">
             <div>
 
-                <!-- TAB 1: Ingredientes -->
                 <div class="tab-content active" id="tab1">
                     <section class="card">
                         <h2>Ingredientes da receita</h2>
@@ -814,28 +797,26 @@
                                     <th style="width:35%">Ingrediente</th>
                                     <th style="width:38px" class="num">Qtd.</th>
                                     <th style="width:40px">Un.</th>
-                                    <th style="width:45px" class="num">Peso</th>
-                                    <th style="width:60px" class="num">R$</th>
+                                    <th style="width:55px" class="num">Peso</th>
+                                    <th style="width:70px" class="num">R$</th>
                                     <th style="width:26px"></th>
                                 </tr>
                             </thead>
                             <tbody id="ingBody"></tbody>
                             <tfoot>
                                 <tr>
-    <td style="text-align:left;">Subtotal</td>
-    <td></td>
-    <td></td>
-    <td class="num" id="ingSubW" style="text-align:right; padding-right:4px; width:45px;"></td>
-    <td class="num" id="ingSubV" style="text-align:right; padding-right:4px; width:60px;"></td>
-    <td></td>
-</tr>
+                                    <td style="text-align:left;">Subtotal</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="num" id="ingSubTotal" style="text-align:right; padding-right:4px;" colspan="2"></td>
+                                    <td></td>
+                                </tr>
                             </tfoot>
                         </table>
                         <button class="add-row-btn" id="addIng">+ adicionar ingrediente</button>
                     </section>
                 </div>
 
-                <!-- TAB 2: Embalagem -->
                 <div class="tab-content" id="tab2">
                     <section class="card">
                         <h2>Embalagem e decoração <span class="badge">por pote</span></h2>
@@ -863,7 +844,6 @@
                     </section>
                 </div>
 
-                <!-- TAB 3: Custo e Preço -->
                 <div class="tab-content" id="tab3">
                     <section class="card jar-card-inline">
                         <h2>Composição do preço</h2>
@@ -928,7 +908,6 @@
         <p class="footer-note">Tudo fica salvo neste dispositivo.<br>Funciona pra qualquer receita — ajuste ingredientes e embalagem como quiser.</p>
     </div>
 
-    <!-- Modal -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-box">
             <div class="modal-icon" id="modalIcon">⚠️</div>
@@ -1012,7 +991,6 @@
                 return n.toLocaleString("pt-BR", { minimumFractionDigits: digits || 0, maximumFractionDigits: digits || 2 });
             }
 
-            // DOM refs
             const recipeNameEl = document.getElementById("recipeName");
             const ingBody = document.getElementById("ingBody");
             const pkgBody = document.getElementById("pkgBody");
@@ -1040,7 +1018,6 @@
                 render();
             });
 
-            // Tabs
             const tabBtns = document.querySelectorAll(".tab-btn");
             const tabContents = {
                 tab1: document.getElementById("tab1"),
@@ -1059,7 +1036,6 @@
                 });
             });
 
-            // Ingredient rows
             function ingRow(item, idx) {
                 const tr = document.createElement("tr");
                 tr.innerHTML =
@@ -1115,7 +1091,6 @@
                 render();
             });
 
-            // Packaging rows
             function pkgRow(item, idx) {
                 const tr = document.createElement("tr");
                 tr.innerHTML =
@@ -1169,7 +1144,6 @@
                 render();
             });
 
-            // ---------- Modal ----------
             const modalOverlay = document.getElementById("modalOverlay");
             const modalIcon = document.getElementById("modalIcon");
             const modalTitle = document.getElementById("modalTitle");
@@ -1211,7 +1185,6 @@
                 if (e.target === modalOverlay) closeModal();
             });
 
-            // Reset
             document.getElementById("resetBtn").addEventListener("click", function() {
                 showModal({
                     icon: "↺",
@@ -1232,7 +1205,6 @@
                 });
             });
 
-            // Jar SVG
             const jarSvg = document.getElementById("jar");
             const jarLegend = document.getElementById("jarLegend");
             const jarPrice = document.getElementById("jarPrice");
@@ -1252,25 +1224,23 @@
             }
 
             function render() {
-                // Subtotals
                 let subW = 0,
                     subV = 0;
                 state.ingredients.forEach(i => { subW += (parseFloat(i.weight) || 0);
                     subV += (parseFloat(i.value) || 0); });
-                document.getElementById("ingSubW").textContent = num(subW, 0) + " g";
-                document.getElementById("ingSubV").textContent = brl(subV);
+                
+                // Subtotal em UMA célula com espaço
+                document.getElementById("ingSubTotal").textContent = num(subW, 0) + " g     " + brl(subV);
 
                 let pkgV = 0;
                 state.packaging.forEach(i => { pkgV += (parseFloat(i.value) || 0); });
                 document.getElementById("pkgSubV").textContent = brl(pkgV);
 
-                // Rendimento
                 const weightPerPot = parseFloat(state.weightPerPot) || 0;
                 const numPots = weightPerPot > 0 ? (subW / weightPerPot) : 0;
                 document.getElementById("totalWeight").textContent = num(subW, 0) + " g";
                 document.getElementById("numPots").textContent = numPots.toFixed(2).replace(".", ",") + " potes";
 
-                // Custo por pote
                 const costIngPot = numPots > 0 ? (subV / numPots) : 0;
                 const costPkgPot = pkgV;
                 const costTotalPot = costIngPot + costPkgPot;
@@ -1278,7 +1248,6 @@
                 document.getElementById("costPkgPot").textContent = brl(costPkgPot);
                 document.getElementById("costTotalPot").textContent = brl(costTotalPot);
 
-                // Preço
                 const profitPct = parseFloat(state.profitPct) || 0;
                 const markup = 1 + (profitPct / 100);
                 const price = costTotalPot * markup;
@@ -1288,7 +1257,6 @@
                 document.getElementById("markup").textContent = "×" + markup.toFixed(2).replace(".", ",");
                 document.getElementById("finalPrice").textContent = brl(price);
 
-                // Jar
                 jarPrice.textContent = brl(price);
                 jarPots.textContent = (numPots > 0 ? numPots.toFixed(1).replace(".", ",") : "0") + " potes";
 
@@ -1324,7 +1292,6 @@
             renderPackaging();
             render();
 
-            // Service Worker
             if ("serviceWorker" in navigator) {
                 let refreshing = false;
                 navigator.serviceWorker.addEventListener("controllerchange", function() {
