@@ -2815,39 +2815,20 @@
                 ) +
                 " g";
 
+/* -----------------------------------------------------
+   CUSTO DOS INGREDIENTES POR POTE
 
-        /* =====================================================
-           CUSTO DOS INGREDIENTES POR GRAMA
+   Todo o custo da receita é distribuído entre
+   os potes efetivamente envasados.
 
-           O custo total da receita é distribuído
-           proporcionalmente ao peso total.
+   A sobra é considerada perda e, portanto,
+   seu custo é absorvido pelos potes vendidos.
+   ----------------------------------------------------- */
 
-           Portanto a sobra NÃO é cobrada integralmente
-           dos potes.
-
-           Exemplo:
-
-           1.634 g
-           R$ 39,00
-
-           R$ 39,00 ÷ 1.634
-           = custo por grama
-
-           × 500 g
-           = custo dos ingredientes de um pote.
-           ===================================================== */
-
-        const costPerGram =
-            subW > 0
-                ? subV /
-                  subW
-                : 0;
-
-
-        const costIngPot =
-            costPerGram *
-            weightPerPot;
-
+const costIngPot =
+    numPots > 0
+        ? subV / numPots
+        : 0;
 
         /* =====================================================
            CUSTO DA EMBALAGEM POR POTE
