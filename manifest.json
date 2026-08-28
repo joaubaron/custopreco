@@ -1,5 +1,5 @@
 {
-  "name": "Custo do Pote",
+  "name": "Custo/preço do Pote",
   "short_name": "Custo Pote",
   "description": "Calculadora de custo e preço para receitas em potes",
   "start_url": "index.html",
