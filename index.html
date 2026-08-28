@@ -358,6 +358,7 @@ text-align: right;
 }
 
 /* SUBTOTAL DOS INGREDIENTES */
+
 tfoot td.subtotal-row {
 position: relative;
 display: table-cell;
@@ -421,6 +422,7 @@ border-style: solid;
 }
 
 /* COLUNAS DA TABELA DE INGREDIENTES */
+
 #ingBody td:first-child,
 #ingBody th:first-child {
 width: 35% !important;
@@ -451,6 +453,68 @@ max-width: 38px;
 #ingBody th:last-child {
 width: 26px !important;
 max-width: 26px;
+}
+
+/* =====================================================
+COLUNAS DA EMBALAGEM
+===================================================== */
+
+#pkgBody td:first-child,
+#pkgBody th:first-child {
+width: 38% !important;
+}
+
+#pkgBody td:nth-child(2),
+#pkgBody th:nth-child(2) {
+width: 48px !important;
+max-width: 48px;
+}
+
+#pkgBody td:nth-child(3),
+#pkgBody th:nth-child(3) {
+width: 42px !important;
+max-width: 42px;
+}
+
+#pkgBody td:nth-child(4),
+#pkgBody th:nth-child(4) {
+width: 62px !important;
+max-width: 62px;
+}
+
+#pkgBody td:nth-child(5),
+#pkgBody th:nth-child(5) {
+width: 62px !important;
+max-width: 62px;
+}
+
+#pkgBody td:last-child,
+#pkgBody th:last-child {
+width: 26px !important;
+max-width: 26px;
+}
+
+.pkg-total {
+color: var(--gold);
+font-variant-numeric: tabular-nums;
+font-weight: 600;
+white-space: nowrap;
+text-align: right;
+}
+
+.pkg-needed {
+color: var(--cream);
+font-variant-numeric: tabular-nums;
+white-space: nowrap;
+text-align: right;
+}
+
+.pkg-hint {
+font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+font-size: 11px;
+color: var(--cream-dim);
+margin-top: 10px;
+line-height: 1.4;
 }
 
 .kv-grid {
@@ -602,6 +666,7 @@ color: var(--cream-dim);
 }
 
 @media (max-width: 380px) {
+
 .jar-inline-row {
 gap: 10px;
 }
@@ -614,6 +679,7 @@ height: 101px;
 .price-tag .amt {
 font-size: 19px;
 }
+
 }
 
 .footer-note {
@@ -636,12 +702,15 @@ display: block;
 }
 
 @media (min-width: 768px) {
+
 .tabs {
 position: static;
 }
+
 }
 
 @media (max-width: 400px) {
+
 body {
 padding: 12px 8px 60px;
 }
@@ -693,6 +762,36 @@ min-width: 70px;
 width: 35px !important;
 max-width: 35px;
 }
+
+#pkgBody td:first-child,
+#pkgBody th:first-child {
+width: 32% !important;
+}
+
+#pkgBody td:nth-child(2),
+#pkgBody th:nth-child(2) {
+width: 42px !important;
+max-width: 42px;
+}
+
+#pkgBody td:nth-child(3),
+#pkgBody th:nth-child(3) {
+width: 36px !important;
+max-width: 36px;
+}
+
+#pkgBody td:nth-child(4),
+#pkgBody th:nth-child(4) {
+width: 55px !important;
+max-width: 55px;
+}
+
+#pkgBody td:nth-child(5),
+#pkgBody th:nth-child(5) {
+width: 55px !important;
+max-width: 55px;
+}
+
 }
 
 .modal-overlay {
@@ -798,6 +897,7 @@ border-color: var(--olive-dark);
 }
 
 @media (min-width: 480px) {
+
 .modal-overlay {
 align-items: center;
 }
@@ -810,14 +910,17 @@ transform: translateY(10px) scale(0.98);
 .modal-overlay.open .modal-box {
 transform: translateY(0) scale(1);
 }
+
 }
 
 @supports (padding: max(0px)) {
+
 body {
 padding-left: max(16px, env(safe-area-inset-left));
 padding-right: max(16px, env(safe-area-inset-right));
 padding-bottom: max(80px, env(safe-area-inset-bottom));
 }
+
 }
 </style>
 </head>
@@ -827,33 +930,48 @@ padding-bottom: max(80px, env(safe-area-inset-bottom));
 <div class="wrap">
 
 <header>
+
 <div class="header-left">
-<p class="eyebrow">Calculadora de custo &amp; preço</p>
+
+<p class="eyebrow">
+Calculadora de custo &amp; preço
+</p>
 
 <h1>
-<input id="recipeName"
+<input
+id="recipeName"
 spellcheck="false"
 placeholder="Nome da receita">
 </h1>
+
 </div>
 
-<button class="reset-btn" id="resetBtn">
+<button
+class="reset-btn"
+id="resetBtn">
 ↺ restaurar
 </button>
+
 </header>
 
 
 <div class="tabs" id="tabContainer">
 
-<button class="tab-btn active" data-tab="tab1">
+<button
+class="tab-btn active"
+data-tab="tab1">
 🧺 Ingredientes
 </button>
 
-<button class="tab-btn" data-tab="tab2">
+<button
+class="tab-btn"
+data-tab="tab2">
 📦 Embalagem
 </button>
 
-<button class="tab-btn" data-tab="tab3">
+<button
+class="tab-btn"
+data-tab="tab3">
 💰 Custo &amp; Preço
 </button>
 
@@ -868,7 +986,9 @@ placeholder="Nome da receita">
 TAB 1 — INGREDIENTES
 ===================================================== -->
 
-<div class="tab-content active" id="tab1">
+<div
+class="tab-content active"
+id="tab1">
 
 <section class="card">
 
@@ -891,7 +1011,9 @@ Ajuste quantidade, peso e valor que você comprou.
 Ingrediente
 </th>
 
-<th style="width:38px" class="num">
+<th
+style="width:38px"
+class="num">
 Qtd.
 </th>
 
@@ -899,11 +1021,15 @@ Qtd.
 Un.
 </th>
 
-<th style="width:45px" class="num">
+<th
+style="width:45px"
+class="num">
 Peso
 </th>
 
-<th style="width:60px" class="num">
+<th
+style="width:60px"
+class="num">
 R$
 </th>
 
@@ -921,7 +1047,9 @@ R$
 
 <tr>
 
-<td colspan="6" class="subtotal-row">
+<td
+colspan="6"
+class="subtotal-row">
 
 <span class="subtotal-label">
 Subtotal
@@ -944,7 +1072,9 @@ Subtotal
 </table>
 
 
-<button class="add-row-btn" id="addIng">
+<button
+class="add-row-btn"
+id="addIng">
 + adicionar ingrediente
 </button>
 
@@ -957,7 +1087,9 @@ Subtotal
 TAB 2 — EMBALAGEM
 ===================================================== -->
 
-<div class="tab-content" id="tab2">
+<div
+class="tab-content"
+id="tab2">
 
 <section class="card">
 
@@ -973,7 +1105,7 @@ por pote
 
 
 <p class="sub">
-Custo fixo de cada pote da receita.
+Informe a quantidade usada em cada pote. O total necessário é calculado automaticamente conforme o rendimento.
 </p>
 
 
@@ -983,20 +1115,32 @@ Custo fixo de cada pote da receita.
 
 <tr>
 
-<th style="width:48%">
+<th style="width:38%">
 Item
 </th>
 
-<th style="width:40px" class="num">
-Qtd.
+<th
+style="width:48px"
+class="num">
+Por pote
 </th>
 
-<th style="width:44px">
+<th
+style="width:42px"
+class="num">
 Un.
 </th>
 
-<th style="width:60px" class="num">
-R$
+<th
+style="width:62px"
+class="num">
+R$/un.
+</th>
+
+<th
+style="width:62px"
+class="num">
+Total
 </th>
 
 <th style="width:26px"></th>
@@ -1013,11 +1157,13 @@ R$
 
 <tr>
 
-<td colspan="3" style="text-align:left;">
-Subtotal por pote
+<td colspan="4"
+style="text-align:left;">
+Embalagem total da receita
 </td>
 
-<td class="num"
+<td
+class="num"
 id="pkgSubV"
 style="text-align:right; padding-right:4px;">
 </td>
@@ -1031,7 +1177,15 @@ style="text-align:right; padding-right:4px;">
 </table>
 
 
-<button class="add-row-btn" id="addPkg">
+<div
+class="pkg-hint"
+id="pkgHint">
+</div>
+
+
+<button
+class="add-row-btn"
+id="addPkg">
 + adicionar item
 </button>
 
@@ -1044,10 +1198,10 @@ style="text-align:right; padding-right:4px;">
 TAB 3 — CUSTO & PREÇO
 ===================================================== -->
 
-<div class="tab-content" id="tab3">
+<div
+class="tab-content"
+id="tab3">
 
-
-<!-- COMPOSIÇÃO DO PREÇO -->
 
 <section class="card jar-card-inline">
 
@@ -1058,7 +1212,8 @@ Composição do preço
 
 <div class="jar-inline-row">
 
-<svg id="jar"
+<svg
+id="jar"
 viewBox="0 0 160 220"
 width="92"
 height="126">
@@ -1067,7 +1222,8 @@ height="126">
 
 <div class="jar-inline-info">
 
-<div class="jar-legend"
+<div
+class="jar-legend"
 id="jarLegend">
 </div>
 
@@ -1078,12 +1234,14 @@ id="jarLegend">
 Preço por pote
 </div>
 
-<div class="amt"
+<div
+class="amt"
 id="jarPrice">
 R$ 0,00
 </div>
 
-<div class="per"
+<div
+class="per"
 id="jarPots">
 — potes
 </div>
@@ -1096,8 +1254,6 @@ id="jarPots">
 
 </section>
 
-
-<!-- RENDIMENTO -->
 
 <section class="card">
 
@@ -1112,7 +1268,8 @@ id="jarPots">
 Peso total da receita
 </div>
 
-<div class="v"
+<div
+class="v"
 id="totalWeight">
 </div>
 
@@ -1145,7 +1302,8 @@ Tamanho do pote
 Número de potes
 </div>
 
-<div class="v total"
+<div
+class="v total"
 id="numPots">
 </div>
 
@@ -1154,7 +1312,8 @@ id="numPots">
 Sobra da receita
 </div>
 
-<div class="v leftover-note"
+<div
+class="v leftover-note"
 id="leftoverWeight">
 </div>
 
@@ -1162,8 +1321,6 @@ id="leftoverWeight">
 
 </section>
 
-
-<!-- CUSTO -->
 
 <section class="card">
 
@@ -1178,7 +1335,8 @@ id="leftoverWeight">
 Ingredientes rateados
 </div>
 
-<div class="v"
+<div
+class="v"
 id="costIngPot">
 </div>
 
@@ -1187,7 +1345,8 @@ id="costIngPot">
 Embalagem por pote
 </div>
 
-<div class="v"
+<div
+class="v"
 id="costPkgPot">
 </div>
 
@@ -1199,7 +1358,8 @@ id="costPkgPot">
 Custo total por pote
 </div>
 
-<div class="v total"
+<div
+class="v total"
 id="costTotalPot">
 </div>
 
@@ -1207,8 +1367,6 @@ id="costTotalPot">
 
 </section>
 
-
-<!-- PREÇO -->
 
 <section class="card">
 
@@ -1229,7 +1387,8 @@ com markup
 Custo
 </div>
 
-<div class="v"
+<div
+class="v"
 id="priceCost">
 </div>
 
@@ -1255,7 +1414,8 @@ inputmode="numeric">
 Markup
 </div>
 
-<div class="v"
+<div
+class="v"
 id="markup">
 </div>
 
@@ -1267,7 +1427,8 @@ id="markup">
 Preço de venda por pote
 </div>
 
-<div class="v total"
+<div
+class="v total"
 id="finalPrice">
 </div>
 
@@ -1298,31 +1459,42 @@ ajuste ingredientes e embalagem como quiser.
 MODAL
 ============================================================= -->
 
-<div class="modal-overlay" id="modalOverlay">
+<div
+class="modal-overlay"
+id="modalOverlay">
 
 <div class="modal-box">
 
-<div class="modal-icon" id="modalIcon">
+<div
+class="modal-icon"
+id="modalIcon">
 ⚠️
 </div>
 
-<p class="modal-title" id="modalTitle">
+<p
+class="modal-title"
+id="modalTitle">
 Título
 </p>
 
-<p class="modal-msg" id="modalMsg">
+<p
+class="modal-msg"
+id="modalMsg">
 Mensagem.
 </p>
 
-<div class="modal-actions"
+<div
+class="modal-actions"
 id="modalActions">
 
-<button class="modal-btn"
+<button
+class="modal-btn"
 id="modalCancelBtn">
 Cancelar
 </button>
 
-<button class="modal-btn primary"
+<button
+class="modal-btn primary"
 id="modalConfirmBtn">
 Confirmar
 </button>
@@ -1354,95 +1526,70 @@ const DEFAULT_STATE = {
 recipeName:
 "Minha Receita",
 
-
 ingredients: [
 
 {
 name: "Berinjela",
-qty: 1,
+qty: 2,
 unit: "un",
-weight: 350,
-value: 2.10
+weight: 600,
+value: 8
 },
 
 {
-name: "Abobrinha italiana",
-qty: 1,
-unit: "un",
-weight: 300,
-value: 1.20
-},
-
-{
-name: "Cebola grande",
-qty: 1,
-unit: "un",
-weight: 180,
-value: 0.77
-},
-
-{
-name: "Pimentão vermelho",
-qty: 1,
-unit: "un",
-weight: 100,
-value: 1.20
-},
-
-{
-name: "Pimentão amarelo",
-qty: 1,
-unit: "un",
-weight: 100,
-value: 1.20
-},
-
-{
-name: "Tomates",
+name: "Tomate",
 qty: 3,
 unit: "un",
-weight: 300,
-value: 1.05
+weight: 360,
+value: 6
 },
 
 {
-name: "Uvas passas",
+name: "Cebola",
+qty: 1,
+unit: "un",
+weight: 150,
+value: 2
+},
+
+{
+name: "Azeitona verde",
 qty: 100,
 unit: "g",
 weight: 100,
-value: 7.89
+value: 5.5
 },
 
 {
-name: "Vinagre de arroz",
-qty: 0.5,
-unit: "xícara",
-weight: 120,
-value: 1.20
+name: "Vinagre",
+qty: 30,
+unit: "ml",
+weight: 30,
+value: 1
+},
+
+{
+name: "Açúcar",
+qty: 15,
+unit: "g",
+weight: 15,
+value: 0.5
 },
 
 {
 name: "Azeite de oliva",
-qty: 0.5,
-unit: "xícara",
-weight: 110,
-value: 7.92
+qty: 60,
+unit: "ml",
+weight: 55,
+value: 4.5
 },
 
 {
-name: "Shoyu",
-qty: 0.5,
-unit: "xícara",
-weight: 120,
-value: 4.70
-},
-
-{
-name: "Manjericão seco",
-qty: 2,
-unit: "col. sopa",
-weight: 6,
-value: 2.57
+name: "Alho",
+qty: 3,
+unit: "dente",
+weight: 9,
+value: 0.5
 },
 
 {
@@ -1450,7 +1597,7 @@ name: "Sal e pimenta",
 qty: 1,
 unit: "a gosto",
 weight: 5,
-value: 0.30
+value: 0.5
 }
 
 ],
@@ -1487,19 +1634,8 @@ value: 0.8
 
 ],
 
-
-/* Somente 250 g ou 500 g */
-
 weightPerPot:
 500,
-
-
-/*
-* Margem de lucro desejada.
-*
-* 35 significa:
-* 35% do preço final é lucro.
-*/
 
 profitPct:
 35
@@ -1528,12 +1664,10 @@ localStorage.getItem(
 STORAGE_KEY
 );
 
-
 if (raw) {
 
 const parsed =
 JSON.parse(raw);
-
 
 if (
 parsed &&
@@ -1555,17 +1689,10 @@ parsed.weightPerPot =
 
 }
 
-
-/*
-* Garante valores válidos
-* para a margem.
-*/
-
 const savedProfit =
 parseFloat(
 parsed.profitPct
 );
-
 
 if (
 !isFinite(savedProfit) ||
@@ -1578,14 +1705,13 @@ parsed.profitPct =
 
 }
 
-
 return parsed;
+
 }
 
 }
 
 } catch (e) {}
-
 
 return JSON.parse(
 JSON.stringify(
@@ -1611,7 +1737,6 @@ if (!storageWarned) {
 
 storageWarned =
 true;
-
 
 showModal({
 
@@ -1650,7 +1775,6 @@ if (!isFinite(n)) {
 n = 0;
 }
 
-
 return "R$ " +
 n.toLocaleString(
 "pt-BR",
@@ -1668,7 +1792,6 @@ function num(n, digits) {
 if (!isFinite(n)) {
 n = 0;
 }
-
 
 return n.toLocaleString(
 "pt-BR",
@@ -1693,24 +1816,20 @@ document.getElementById(
 "recipeName"
 );
 
-
 const ingBody =
 document.getElementById(
 "ingBody"
 );
-
 
 const pkgBody =
 document.getElementById(
 "pkgBody"
 );
 
-
 const weightPerPotEl =
 document.getElementById(
 "weightPerPot"
 );
-
 
 const profitPctEl =
 document.getElementById(
@@ -1722,7 +1841,6 @@ recipeNameEl.value =
 state.recipeName ||
 "Minha Receita";
 
-
 weightPerPotEl.value =
 [250, 500].includes(
 parseInt(
@@ -1732,7 +1850,6 @@ state.weightPerPot,
 )
 ? state.weightPerPot
 : 500;
-
 
 profitPctEl.value =
 state.profitPct;
@@ -1769,13 +1886,11 @@ weightPerPotEl.value,
 10
 );
 
-
 state.weightPerPot =
 value === 250 ||
 value === 500
 ? value
 : 500;
-
 
 saveState();
 
@@ -1798,11 +1913,9 @@ parseFloat(
 profitPctEl.value
 );
 
-
 if (!isFinite(value)) {
 value = 0;
 }
-
 
 value =
 Math.max(
@@ -1813,10 +1926,8 @@ value,
 )
 );
 
-
 state.profitPct =
 value;
-
 
 saveState();
 
@@ -1834,7 +1945,6 @@ const tabBtns =
 document.querySelectorAll(
 ".tab-btn"
 );
-
 
 const tabContents = {
 
@@ -1865,7 +1975,6 @@ function (e) {
 
 e.preventDefault();
 
-
 tabBtns.forEach(
 function (b) {
 
@@ -1876,11 +1985,9 @@ b.classList.remove(
 }
 );
 
-
 this.classList.add(
 "active"
 );
-
 
 Object.values(
 tabContents
@@ -1894,12 +2001,10 @@ tc.classList.remove(
 }
 );
 
-
 const target =
 document.getElementById(
 this.dataset.tab
 );
-
 
 if (target) {
 
@@ -1927,7 +2032,6 @@ document.createElement(
 "tr"
 );
 
-
 tr.innerHTML =
 
 '<td>' +
@@ -1939,7 +2043,6 @@ tr.innerHTML =
 
 '</td>' +
 
-
 '<td>' +
 
 '<input class="cell num" ' +
@@ -1950,7 +2053,6 @@ tr.innerHTML =
 
 '</td>' +
 
-
 '<td>' +
 
 '<input class="cell" ' +
@@ -1959,7 +2061,6 @@ tr.innerHTML =
 'inputmode="text">' +
 
 '</td>' +
-
 
 '<td>' +
 
@@ -1971,7 +2072,6 @@ tr.innerHTML =
 
 '</td>' +
 
-
 '<td>' +
 
 '<input class="cell num" ' +
@@ -1981,7 +2081,6 @@ tr.innerHTML =
 'inputmode="decimal">' +
 
 '</td>' +
-
 
 '<td>' +
 
@@ -1995,7 +2094,6 @@ const inputs =
 tr.querySelectorAll(
 "input"
 );
-
 
 inputs[0].value =
 item.name;
@@ -2023,10 +2121,8 @@ function () {
 const f =
 inp.dataset.f;
 
-
 const v =
 inp.value;
-
 
 if (
 f === "qty" ||
@@ -2043,7 +2139,6 @@ state.ingredients[idx][f] =
 v;
 
 }
-
 
 saveState();
 
@@ -2067,7 +2162,6 @@ idx,
 1
 );
 
-
 saveState();
 
 renderIngredients();
@@ -2076,7 +2170,6 @@ render();
 
 }
 );
-
 
 return tr;
 
@@ -2087,7 +2180,6 @@ function renderIngredients() {
 
 ingBody.innerHTML =
 "";
-
 
 state.ingredients.forEach(
 function (item, idx) {
@@ -2125,7 +2217,6 @@ value: 0
 
 });
 
-
 saveState();
 
 renderIngredients();
@@ -2140,11 +2231,66 @@ render();
 EMBALAGEM
 ========================================================= */
 
+function getCurrentNumPots() {
+
+let subW = 0;
+
+state.ingredients.forEach(
+function (i) {
+
+subW +=
+parseFloat(
+i.weight
+) || 0;
+
+}
+);
+
+const weightPerPot =
+[250, 500].includes(
+parseInt(
+state.weightPerPot,
+10
+)
+)
+? parseInt(
+state.weightPerPot,
+10
+)
+: 500;
+
+return weightPerPot > 0
+? Math.floor(
+subW /
+weightPerPot
+)
+: 0;
+
+}
+
+
 function pkgRow(item, idx) {
 
 const tr =
 document.createElement(
 "tr"
+);
+
+const numPots =
+getCurrentNumPots();
+
+
+const totalQty =
+(
+parseFloat(item.qty) || 0
+) *
+numPots;
+
+
+const totalValue =
+totalQty *
+(
+parseFloat(item.value) || 0
 );
 
 
@@ -2159,7 +2305,6 @@ tr.innerHTML =
 
 '</td>' +
 
-
 '<td>' +
 
 '<input class="cell num" ' +
@@ -2170,16 +2315,13 @@ tr.innerHTML =
 
 '</td>' +
 
-
 '<td>' +
 
-'<input class="cell" ' +
-'data-f="unit" ' +
-'placeholder="un" ' +
-'inputmode="text">' +
+'<span class="pkg-needed">' +
+num(totalQty, 0) +
+'</span>' +
 
 '</td>' +
-
 
 '<td>' +
 
@@ -2191,6 +2333,13 @@ tr.innerHTML =
 
 '</td>' +
 
+'<td>' +
+
+'<span class="pkg-total">' +
+brl(totalValue) +
+'</span>' +
+
+'</td>' +
 
 '<td>' +
 
@@ -2205,7 +2354,6 @@ tr.querySelectorAll(
 "input"
 );
 
-
 inputs[0].value =
 item.name;
 
@@ -2213,9 +2361,6 @@ inputs[1].value =
 item.qty;
 
 inputs[2].value =
-item.unit;
-
-inputs[3].value =
 item.value;
 
 
@@ -2229,10 +2374,8 @@ function () {
 const f =
 inp.dataset.f;
 
-
 const v =
 inp.value;
-
 
 if (
 f === "qty" ||
@@ -2249,8 +2392,9 @@ v;
 
 }
 
-
 saveState();
+
+renderPackaging();
 
 render();
 
@@ -2272,7 +2416,6 @@ idx,
 1
 );
 
-
 saveState();
 
 renderPackaging();
@@ -2281,7 +2424,6 @@ render();
 
 }
 );
-
 
 return tr;
 
@@ -2292,7 +2434,6 @@ function renderPackaging() {
 
 pkgBody.innerHTML =
 "";
-
 
 state.packaging.forEach(
 function (item, idx) {
@@ -2328,7 +2469,6 @@ value: 0
 
 });
 
-
 saveState();
 
 renderPackaging();
@@ -2348,30 +2488,25 @@ document.getElementById(
 "modalOverlay"
 );
 
-
 const modalIcon =
 document.getElementById(
 "modalIcon"
 );
-
 
 const modalTitle =
 document.getElementById(
 "modalTitle"
 );
 
-
 const modalMsg =
 document.getElementById(
 "modalMsg"
 );
 
-
 const modalCancelBtn =
 document.getElementById(
 "modalCancelBtn"
 );
-
 
 const modalConfirmBtn =
 document.getElementById(
@@ -2397,21 +2532,17 @@ modalIcon.textContent =
 options.icon ||
 "⚠️";
 
-
 modalTitle.textContent =
 options.title ||
 "";
-
 
 modalMsg.textContent =
 options.message ||
 "";
 
-
 modalConfirmBtn.textContent =
 options.confirmText ||
 "OK";
-
 
 modalConfirmBtn.className =
 "modal-btn primary" +
@@ -2420,7 +2551,6 @@ options.danger
 ? ""
 : " neutral"
 );
-
 
 if (options.onlyOk) {
 
@@ -2432,24 +2562,20 @@ modalCancelBtn.style.display =
 modalCancelBtn.style.display =
 "";
 
-
 modalCancelBtn.textContent =
 options.cancelText ||
 "Cancelar";
 
 }
 
-
 modalOverlay.classList.add(
 "open"
 );
-
 
 modalConfirmBtn.onclick =
 function () {
 
 closeModal();
-
 
 if (
 typeof onConfirm ===
@@ -2461,7 +2587,6 @@ onConfirm();
 }
 
 };
-
 
 modalCancelBtn.onclick =
 function () {
@@ -2523,7 +2648,6 @@ true
 
 }, function () {
 
-
 state =
 JSON.parse(
 JSON.stringify(
@@ -2531,18 +2655,14 @@ DEFAULT_STATE
 )
 );
 
-
 recipeNameEl.value =
 state.recipeName;
-
 
 weightPerPotEl.value =
 state.weightPerPot;
 
-
 profitPctEl.value =
 state.profitPct;
-
 
 saveState();
 
@@ -2567,32 +2687,26 @@ document.getElementById(
 "jar"
 );
 
-
 const jarLegend =
 document.getElementById(
 "jarLegend"
 );
-
 
 const jarPrice =
 document.getElementById(
 "jarPrice"
 );
 
-
 const jarPots =
 document.getElementById(
 "jarPots"
 );
 
-
 const JAR_TOP =
 34;
 
-
 const JAR_BOTTOM =
 208;
-
 
 const JAR_H =
 JAR_BOTTOM -
@@ -2623,7 +2737,6 @@ return '' +
 
 '</defs>' +
 
-
 '<path d="' +
 
 'M46,20 L114,20 ' +
@@ -2641,7 +2754,6 @@ return '' +
 'stroke="rgba(244,236,217,0.35)" ' +
 
 'stroke-width="2"/>' +
-
 
 '<rect x="50" y="8" width="60" height="16" rx="4" ' +
 
@@ -2668,7 +2780,6 @@ SUBTOTAL DOS INGREDIENTES
 let subW =
 0;
 
-
 let subV =
 0;
 
@@ -2680,7 +2791,6 @@ subW +=
 parseFloat(
 i.weight
 ) || 0;
-
 
 subV +=
 parseFloat(
@@ -2708,45 +2818,6 @@ brl(subV);
 
 
 /* =====================================================
-EMBALAGEM
-===================================================== */
-
-let pkgV =
-0;
-
-
-state.packaging.forEach(
-function (i) {
-
-/*
-* Cada item da embalagem é informado
-* como custo de UMA unidade/pote.
-*
-* A quantidade permite, por exemplo,
-* 2 unidades de um item.
-*/
-
-pkgV +=
-(
-parseFloat(i.qty) ||
-0
-) *
-(
-parseFloat(i.value) ||
-0
-);
-
-}
-);
-
-
-document
-.getElementById("pkgSubV")
-.textContent =
-brl(pkgV);
-
-
-/* =====================================================
 TAMANHO DO POTE
 ===================================================== */
 
@@ -2766,16 +2837,6 @@ state.weightPerPot,
 
 /* =====================================================
 NÚMERO DE POTES
-
-Sempre inteiro.
-
-Exemplo:
-1.634 g ÷ 500 g
-= 3 potes completos.
-
-A sobra será:
-1.634 - 1.500
-= 134 g.
 ===================================================== */
 
 const numPots =
@@ -2838,27 +2899,83 @@ leftoverWeight,
 ) +
 " g";
 
-/* -----------------------------------------------------
+
+/* =====================================================
+EMBALAGEM
+
+A quantidade informada em state.packaging.qty
+é POR POTE.
+
+O sistema calcula automaticamente:
+quantidade por pote × número de potes.
+===================================================== */
+
+let pkgV =
+0;
+
+
+state.packaging.forEach(
+function (i) {
+
+const qtyPerPot =
+parseFloat(i.qty) || 0;
+
+const unitValue =
+parseFloat(i.value) || 0;
+
+const totalQty =
+qtyPerPot *
+numPots;
+
+pkgV +=
+totalQty *
+unitValue;
+
+}
+);
+
+
+document
+.getElementById("pkgSubV")
+.textContent =
+brl(pkgV);
+
+
+document
+.getElementById("pkgHint")
+.textContent =
+numPots +
+(
+numPots === 1
+? " pote será produzido."
+: " potes serão produzidos."
+) +
+" A coluna \"Total\" mostra a quantidade e o custo necessários para toda a receita.";
+
+
+/* =====================================================
 CUSTO DOS INGREDIENTES POR POTE
-
-Todo o custo da receita é distribuído entre
-os potes efetivamente envasados.
-
-A sobra é considerada perda e, portanto,
-seu custo é absorvido pelos potes vendidos.
------------------------------------------------------ */
+===================================================== */
 
 const costIngPot =
 numPots > 0
 ? subV / numPots
 : 0;
 
+
 /* =====================================================
 CUSTO DA EMBALAGEM POR POTE
+
+O subtotal da embalagem é o custo total
+de todos os potes.
+
+Divide-se pelo número de potes.
 ===================================================== */
 
 const costPkgPot =
-pkgV;
+numPots > 0
+? pkgV / numPots
+: 0;
 
 
 /* =====================================================
@@ -2896,30 +3013,6 @@ costTotalPot
 
 /* =====================================================
 PREÇO DE VENDA
-
-IMPORTANTE:
-
-profitPct representa MARGEM DE LUCRO.
-
-Exemplo:
-
-Custo = R$ 20,00
-Margem = 35%
-
-Preço =
-20 ÷ (1 - 0,35)
-
-Preço = R$ 30,77
-
-Lucro =
-30,77 - 20
-= R$ 10,77
-
-Portanto:
-
-35% do preço final = lucro.
-
-O markup é calculado depois.
 ===================================================== */
 
 const profitPct =
@@ -2933,34 +3026,31 @@ state.profitPct
 )
 );
 
-
 const margin =
 profitPct / 100;
 
 
-/* PREÇO DE VENDA COM MARGEM DE LUCRO */
-
 const price =
 margin < 1
-? costTotalPot / (1 - margin)
+? costTotalPot /
+(1 - margin)
 : 0;
 
-
-/* LUCRO EM REAIS */
 
 const profitValue =
 Math.max(
 0,
-price - costTotalPot
+price -
+costTotalPot
 );
 
 
-/* MARKUP */
-
 const markup =
 costTotalPot > 0
-? price / costTotalPot
+? price /
+costTotalPot
 : 0;
+
 
 document
 .getElementById("priceCost")
@@ -3079,11 +3169,9 @@ seg.value /
 total
 );
 
-
 if (h < 0) {
 h = 0;
 }
-
 
 const yTop =
 yCursor -
@@ -3101,7 +3189,6 @@ seg.color +
 '" opacity="0.88"/>'
 
 );
-
 
 yCursor =
 yTop;
@@ -3205,10 +3292,8 @@ if (refreshing) {
 return;
 }
 
-
 refreshing =
 true;
-
 
 window.location.reload();
 
