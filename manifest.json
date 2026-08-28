@@ -1,0 +1,24 @@
+{
+  "name": "Custo do Pote",
+  "short_name": "Custo Pote",
+  "description": "Calculadora de custo e preço para receitas em potes",
+  "start_url": "index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#211326",
+  "theme_color": "#3c2440",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
