@@ -439,11 +439,104 @@
       margin: 2px 0;
     }
 
-    /* Jar - sempre visível no mobile */
-    .jar-col {
-      position: sticky;
-      top: 60px;
-      z-index: 5;
+    /* Barra compacta do preço - só no mobile, sempre fixa e pequena */
+    .price-bar {
+      display: none;
+    }
+
+    @media (max-width: 767px) {
+      .price-bar {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        position: sticky;
+        top: 56px;
+        z-index: 6;
+        background: var(--aubergine-900);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 8px 10px;
+        margin-bottom: 14px;
+        box-shadow: var(--shadow);
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+      }
+
+      .price-bar:active {
+        transform: scale(0.99);
+      }
+
+      .price-bar-mini-jar {
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        flex: none;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column-reverse;
+        border: 1px solid var(--line);
+        background: rgba(244, 236, 217, 0.05);
+      }
+
+      .price-bar-mini-jar span {
+        display: block;
+        width: 100%;
+      }
+
+      .price-bar-text {
+        flex: 1;
+        min-width: 0;
+        font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+      }
+
+      .price-bar-text .lbl {
+        font-size: 9px;
+        text-transform: uppercase;
+        letter-spacing: .1em;
+        color: var(--cream-dim);
+        margin: 0;
+      }
+
+      .price-bar-text .amt {
+        font-size: 17px;
+        font-weight: 700;
+        color: var(--gold);
+        font-variant-numeric: tabular-nums;
+        line-height: 1.2;
+      }
+
+      .price-bar-chevron {
+        flex: none;
+        color: var(--cream-dim);
+        font-size: 12px;
+        transition: transform .25s;
+        padding: 6px;
+      }
+
+      .price-bar.expanded .price-bar-chevron {
+        transform: rotate(180deg);
+      }
+
+      /* No mobile o card completo do pote fica oculto até expandir */
+      .jar-col {
+        max-height: 0;
+        overflow: hidden;
+        margin-bottom: 0;
+        transition: max-height .3s ease;
+      }
+
+      .jar-col.expanded {
+        max-height: 600px;
+        margin-bottom: 14px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .jar-col {
+        position: sticky;
+        top: 80px;
+      }
     }
 
     .jar-card {
@@ -566,8 +659,6 @@
       }
       .jar-col {
         order: 0;
-        position: sticky;
-        top: 80px;
       }
       .tabs {
         position: static;
@@ -639,6 +730,16 @@
       <button class="tab-btn active" data-tab="tab1">🧅 Ingredientes</button>
       <button class="tab-btn" data-tab="tab2">🏺 Embalagem</button>
       <button class="tab-btn" data-tab="tab3">⚖️ Custo &amp; Preço</button>
+    </div>
+
+    <!-- Barra compacta do preço (só mobile) -->
+    <div class="price-bar" id="priceBar">
+      <div class="price-bar-mini-jar" id="priceBarMiniJar"></div>
+      <div class="price-bar-text">
+        <p class="lbl">Preço por pote</p>
+        <div class="amt" id="priceBarAmt">R$ 0,00</div>
+      </div>
+      <div class="price-bar-chevron">▾</div>
     </div>
 
     <div class="layout">
@@ -1079,7 +1180,25 @@
           const pct = total > 0 ? Math.round((seg.value / total) * 100) : 0;
           return '<div><span class="lab"><span class="sw" style="background:' + seg.color + '"></span>' + seg.label + '</span><span class="val">' + pct + '%</span></div>';
         }).join("");
+
+        // Barra compacta (mobile)
+        priceBarAmt.textContent = brl(price);
+        priceBarMiniJar.innerHTML = segments.map(seg => {
+          const pct = total > 0 ? (seg.value / total) * 100 : 0;
+          return '<span style="height:' + pct.toFixed(1) + '%;background:' + seg.color + '"></span>';
+        }).join("");
       }
+
+      // Barra compacta: toggle do pote completo
+      const priceBar = document.getElementById("priceBar");
+      const priceBarAmt = document.getElementById("priceBarAmt");
+      const priceBarMiniJar = document.getElementById("priceBarMiniJar");
+      const jarColEl = document.querySelector(".jar-col");
+
+      priceBar.addEventListener("click", function() {
+        priceBar.classList.toggle("expanded");
+        jarColEl.classList.toggle("expanded");
+      });
 
       renderIngredients();
       renderPackaging();
