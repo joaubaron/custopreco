@@ -359,6 +359,39 @@
             text-align: right;
         }
 
+        /* SUBTOTAL — linha independente das colunas dos ingredientes */
+tfoot .subtotal-row {
+    padding: 12px 4px 2px;
+    border-top: 1px solid var(--line);
+    font-weight: 600;
+    width: 100%;
+}
+
+.subtotal-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.subtotal-label {
+    text-align: left;
+}
+
+.subtotal-values {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 70px;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+    color: var(--gold);
+    font-size: 13px;
+}
+
+.subtotal-values span {
+    display: inline-block;
+}
+        
         .add-row-btn {
             margin-top: 10px;
             font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
@@ -811,15 +844,17 @@
                             </thead>
                             <tbody id="ingBody"></tbody>
                             <tfoot>
-                                <tr>
-    <td style="text-align:left;">Subtotal</td>
-    <td></td>
-    <td></td>
-    <td class="num" id="ingSubW" style="text-align:right; padding-right:8px; width:45px; font-size:13px; white-space:nowrap;"></td>
-    <td class="num" id="ingSubV" style="text-align:right; padding-left:8px; padding-right:4px; width:60px; font-size:13px; white-space:nowrap;"></td>
-    <td></td>
-</tr>
-                            </tfoot>
+    <tr>
+        <td colspan="6" class="subtotal-row">
+            <span class="subtotal-label">Subtotal</span>
+
+            <span class="subtotal-values">
+                <span id="ingSubW"></span>
+                <span id="ingSubV"></span>
+            </span>
+        </td>
+    </tr>
+</tfoot>
                         </table>
                         <button class="add-row-btn" id="addIng">+ adicionar ingrediente</button>
                     </section>
