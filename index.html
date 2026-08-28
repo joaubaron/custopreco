@@ -1230,7 +1230,7 @@
                     subV += (parseFloat(i.value) || 0); });
                 
                 // Subtotal em UMA célula com espaço
-               document.getElementById("ingSubTotal").textContent = num(subW, 0) + " g\t\t" + brl(subV);
+               document.getElementById("ingSubTotal").innerHTML = '<span style="text-align:left; color:var(--gold);">' + num(subW, 0) + ' g</span><span style="text-align:right; color:var(--gold);">' + brl(subV) + '</span>';
 
                 let pkgV = 0;
                 state.packaging.forEach(i => { pkgV += (parseFloat(i.value) || 0); });
