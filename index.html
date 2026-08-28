@@ -703,6 +703,122 @@
       }
     }
 
+    /* Modal de confirmação (substitui alert/confirm nativos do navegador) */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 8, 18, 0.72);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease;
+      padding: 0;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-box {
+      background: var(--aubergine-900);
+      border: 1px solid var(--line);
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      width: 100%;
+      max-width: 420px;
+      padding: 22px 20px max(22px, env(safe-area-inset-bottom));
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+      transform: translateY(24px);
+      transition: transform .25s ease;
+    }
+
+    .modal-overlay.open .modal-box {
+      transform: translateY(0);
+    }
+
+    .modal-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 19px;
+      background: rgba(232, 193, 90, 0.14);
+      margin-bottom: 12px;
+    }
+
+    .modal-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--cream);
+      margin: 0 0 6px;
+    }
+
+    .modal-msg {
+      font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: var(--cream-dim);
+      margin: 0 0 20px;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .modal-btn {
+      flex: 1;
+      font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+      font-size: 13.5px;
+      font-weight: 700;
+      padding: 13px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--cream-dim);
+      transition: .2s;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      min-height: 46px;
+    }
+
+    .modal-btn:active {
+      transform: scale(0.97);
+    }
+
+    .modal-btn.primary {
+      background: var(--tomato);
+      border-color: var(--tomato);
+      color: #fff;
+    }
+
+    .modal-btn.primary.neutral {
+      background: var(--olive-dark);
+      border-color: var(--olive-dark);
+    }
+
+    @media (min-width: 480px) {
+      .modal-overlay {
+        align-items: center;
+      }
+      .modal-box {
+        border-radius: 20px;
+        transform: translateY(10px) scale(0.98);
+      }
+      .modal-overlay.open .modal-box {
+        transform: translateY(0) scale(1);
+      }
+    }
+
     /* Safe area para notch */
     @supports (padding: max(0px)) {
       body {
@@ -867,6 +983,19 @@
     <p class="footer-note">Os dados ficam salvos só neste dispositivo (localStorage).<br>Feito para calcular o pote de caponata — mas funciona pra qualquer receita.</p>
   </div>
 
+  <!-- Modal de confirmação/aviso (substitui os pop-ups nativos do navegador) -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box">
+      <div class="modal-icon" id="modalIcon">⚠️</div>
+      <p class="modal-title" id="modalTitle">Título</p>
+      <p class="modal-msg" id="modalMsg">Mensagem.</p>
+      <div class="modal-actions" id="modalActions">
+        <button class="modal-btn" id="modalCancelBtn">Cancelar</button>
+        <button class="modal-btn primary" id="modalConfirmBtn">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     (function() {
       "use strict";
@@ -901,6 +1030,8 @@
 
       let state = loadState();
 
+      let storageWarned = false;
+
       function loadState() {
         try {
           const raw = localStorage.getItem(STORAGE_KEY);
@@ -913,7 +1044,20 @@
       }
 
       function saveState() {
-        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        } catch (e) {
+          if (!storageWarned) {
+            storageWarned = true;
+            showModal({
+              icon: "⚠️",
+              title: "Não foi possível salvar",
+              message: "O navegador bloqueou o armazenamento local (pode estar em modo privado/anônimo ou sem espaço). Suas alterações vão funcionar nesta sessão, mas podem se perder ao fechar.",
+              confirmText: "Entendi",
+              onlyOk: true
+            });
+          }
+        }
       }
 
       function brl(n) {
@@ -1083,17 +1227,68 @@
         render();
       });
 
+      // ---------- Modal (substitui alert/confirm nativos) ----------
+      const modalOverlay = document.getElementById("modalOverlay");
+      const modalIcon = document.getElementById("modalIcon");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalMsg = document.getElementById("modalMsg");
+      const modalActions = document.getElementById("modalActions");
+      const modalCancelBtn = document.getElementById("modalCancelBtn");
+      const modalConfirmBtn = document.getElementById("modalConfirmBtn");
+
+      function closeModal() {
+        modalOverlay.classList.remove("open");
+      }
+
+      // options: { icon, title, message, confirmText, cancelText, danger, onlyOk }
+      function showModal(options, onConfirm) {
+        modalIcon.textContent = options.icon || "⚠️";
+        modalTitle.textContent = options.title || "";
+        modalMsg.textContent = options.message || "";
+        modalConfirmBtn.textContent = options.confirmText || "OK";
+        modalConfirmBtn.className = "modal-btn primary" + (options.danger ? "" : " neutral");
+
+        if (options.onlyOk) {
+          modalCancelBtn.style.display = "none";
+        } else {
+          modalCancelBtn.style.display = "";
+          modalCancelBtn.textContent = options.cancelText || "Cancelar";
+        }
+
+        modalOverlay.classList.add("open");
+
+        modalConfirmBtn.onclick = function() {
+          closeModal();
+          if (typeof onConfirm === "function") onConfirm();
+        };
+        modalCancelBtn.onclick = function() {
+          closeModal();
+        };
+      }
+
+      modalOverlay.addEventListener("click", function(e) {
+        if (e.target === modalOverlay) closeModal();
+      });
+
       // Reset
       document.getElementById("resetBtn").addEventListener("click", function() {
-        if (!confirm("Isso vai substituir os dados atuais pelo exemplo da caponata. Continuar?")) return;
-        state = JSON.parse(JSON.stringify(DEFAULT_STATE));
-        saveState();
-        recipeNameEl.value = state.recipeName;
-        weightPerPotEl.value = state.weightPerPot;
-        profitPctEl.value = state.profitPct;
-        renderIngredients();
-        renderPackaging();
-        render();
+        showModal({
+          icon: "↺",
+          title: "Restaurar exemplo?",
+          message: "Isso vai substituir os dados atuais pelos dados de exemplo da caponata. Essa ação não pode ser desfeita.",
+          confirmText: "Restaurar",
+          cancelText: "Cancelar",
+          danger: true
+        }, function() {
+          state = JSON.parse(JSON.stringify(DEFAULT_STATE));
+          saveState();
+          recipeNameEl.value = state.recipeName;
+          weightPerPotEl.value = state.weightPerPot;
+          profitPctEl.value = state.profitPct;
+          renderIngredients();
+          renderPackaging();
+          render();
+        });
       });
 
       // Jar SVG
