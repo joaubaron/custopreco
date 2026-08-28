@@ -1416,10 +1416,9 @@
           jarPots.textContent = numPots + (numPots === 1 ? " pote" : " potes");
 
           const segments = [
-            { label: "Lucro", value: profitValue, color: "#e8c15a" },
-            { label: "Embalagem", value: costPkgPot, color: "#c1502e" },
             { label: "Ingredientes", value: costIngPot, color: "#7a8450" },
-                 
+            { label: "Embalagem", value: costPkgPot, color: "#c1502e" },
+            { label: "Lucro", value: profitValue, color: "#e8c15a" },                
           ];
 
           const total = price > 0 ? price : 1;
