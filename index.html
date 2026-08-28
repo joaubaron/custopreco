@@ -370,11 +370,12 @@ tfoot .subtotal-row {
 .subtotal-row {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    width: 100%;
 }
 
 .subtotal-label {
     text-align: left;
+    flex: 1;
 }
 
 .subtotal-values {
@@ -386,6 +387,7 @@ tfoot .subtotal-row {
     font-variant-numeric: tabular-nums;
     color: var(--gold);
     font-size: 13px;
+    margin-left: auto;
 }
 
 .subtotal-values span {
