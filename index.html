@@ -50,7 +50,6 @@
             margin: 0 auto;
         }
 
-        /* Header */
         header {
             display: flex;
             gap: 12px;
@@ -129,7 +128,6 @@
             color: var(--tomato);
         }
 
-        /* Tabs */
         .tabs {
             display: flex;
             gap: 4px;
@@ -206,13 +204,13 @@
                 opacity: 0;
                 transform: translateY(8px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        /* Cards */
         section.card {
             background: var(--aubergine-900);
             border: 1px solid var(--line);
@@ -252,7 +250,6 @@
             font-weight: 600;
         }
 
-        /* Tables */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -360,7 +357,7 @@
             text-align: right;
         }
 
-        /* SUBTOTAL — uma única célula, independente das colunas */
+        /* SUBTOTAL DOS INGREDIENTES */
         tfoot td.subtotal-row {
             position: relative;
             display: table-cell;
@@ -456,7 +453,6 @@
             max-width: 26px;
         }
 
-        /* KV Grid */
         .kv-grid {
             display: grid;
             grid-template-columns: 1fr auto;
@@ -519,7 +515,6 @@
             margin: 2px 0;
         }
 
-        /* Composição do preço */
         .jar-card-inline {
             padding-bottom: 18px;
         }
@@ -636,7 +631,6 @@
             font-weight: 600;
         }
 
-        /* Layout mobile-first */
         .layout {
             display: block;
         }
@@ -647,7 +641,6 @@
             }
         }
 
-        /* Telas pequenas */
         @media (max-width: 400px) {
             body {
                 padding: 12px 8px 60px;
@@ -702,7 +695,6 @@
             }
         }
 
-        /* Modal */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -831,103 +823,196 @@
 </head>
 
 <body>
+
 <div class="wrap">
 
-    <!-- Header -->
     <header>
         <div class="header-left">
             <p class="eyebrow">Calculadora de custo &amp; preço</p>
+
             <h1>
-                <input id="recipeName" spellcheck="false" placeholder="Nome da receita">
+                <input id="recipeName"
+                       spellcheck="false"
+                       placeholder="Nome da receita">
             </h1>
         </div>
 
-        <button class="reset-btn" id="resetBtn">↺ restaurar</button>
+        <button class="reset-btn" id="resetBtn">
+            ↺ restaurar
+        </button>
     </header>
 
-    <!-- Tabs -->
+
     <div class="tabs" id="tabContainer">
-        <button class="tab-btn active" data-tab="tab1">🧺 Ingredientes</button>
-        <button class="tab-btn" data-tab="tab2">📦 Embalagem</button>
-        <button class="tab-btn" data-tab="tab3">💰 Custo &amp; Preço</button>
+
+        <button class="tab-btn active" data-tab="tab1">
+            🧺 Ingredientes
+        </button>
+
+        <button class="tab-btn" data-tab="tab2">
+            📦 Embalagem
+        </button>
+
+        <button class="tab-btn" data-tab="tab3">
+            💰 Custo &amp; Preço
+        </button>
+
     </div>
 
+
     <div class="layout">
+
         <div>
 
-            <!-- TAB 1 -->
+            <!-- =====================================================
+                 TAB 1 — INGREDIENTES
+                 ===================================================== -->
+
             <div class="tab-content active" id="tab1">
+
                 <section class="card">
 
-                    <h2>Ingredientes da receita</h2>
+                    <h2>
+                        Ingredientes da receita
+                    </h2>
 
                     <p class="sub">
                         Ajuste quantidade, peso e valor que você comprou.
                     </p>
 
+
                     <table>
+
                         <thead>
+
                         <tr>
-                            <th style="width:35%">Ingrediente</th>
-                            <th style="width:38px" class="num">Qtd.</th>
-                            <th style="width:40px">Un.</th>
-                            <th style="width:45px" class="num">Peso</th>
-                            <th style="width:60px" class="num">R$</th>
+
+                            <th style="width:35%">
+                                Ingrediente
+                            </th>
+
+                            <th style="width:38px" class="num">
+                                Qtd.
+                            </th>
+
+                            <th style="width:40px">
+                                Un.
+                            </th>
+
+                            <th style="width:45px" class="num">
+                                Peso
+                            </th>
+
+                            <th style="width:60px" class="num">
+                                R$
+                            </th>
+
                             <th style="width:26px"></th>
+
                         </tr>
+
                         </thead>
+
 
                         <tbody id="ingBody"></tbody>
 
+
                         <tfoot>
+
                         <tr>
+
                             <td colspan="6" class="subtotal-row">
-                                <span class="subtotal-label">Subtotal</span>
+
+                                <span class="subtotal-label">
+                                    Subtotal
+                                </span>
 
                                 <span class="subtotal-values">
+
                                     <span id="ingSubW"></span>
+
                                     <span id="ingSubV"></span>
+
                                 </span>
+
                             </td>
+
                         </tr>
+
                         </tfoot>
+
                     </table>
+
 
                     <button class="add-row-btn" id="addIng">
                         + adicionar ingrediente
                     </button>
 
                 </section>
+
             </div>
 
-            <!-- TAB 2 -->
+
+            <!-- =====================================================
+                 TAB 2 — EMBALAGEM
+                 ===================================================== -->
+
             <div class="tab-content" id="tab2">
+
                 <section class="card">
 
                     <h2>
+
                         Embalagem e decoração
-                        <span class="badge">por pote</span>
+
+                        <span class="badge">
+                            por pote
+                        </span>
+
                     </h2>
+
 
                     <p class="sub">
                         Custo fixo de cada pote da receita.
                     </p>
 
+
                     <table>
+
                         <thead>
+
                         <tr>
-                            <th style="width:48%">Item</th>
-                            <th style="width:40px" class="num">Qtd.</th>
-                            <th style="width:44px">Un.</th>
-                            <th style="width:60px" class="num">R$</th>
+
+                            <th style="width:48%">
+                                Item
+                            </th>
+
+                            <th style="width:40px" class="num">
+                                Qtd.
+                            </th>
+
+                            <th style="width:44px">
+                                Un.
+                            </th>
+
+                            <th style="width:60px" class="num">
+                                R$
+                            </th>
+
                             <th style="width:26px"></th>
+
                         </tr>
+
                         </thead>
+
 
                         <tbody id="pkgBody"></tbody>
 
+
                         <tfoot>
+
                         <tr>
+
                             <td colspan="3" style="text-align:left;">
                                 Subtotal por pote
                             </td>
@@ -938,24 +1023,38 @@
                             </td>
 
                             <td></td>
+
                         </tr>
+
                         </tfoot>
+
                     </table>
+
 
                     <button class="add-row-btn" id="addPkg">
                         + adicionar item
                     </button>
 
                 </section>
+
             </div>
 
-            <!-- TAB 3 -->
+
+            <!-- =====================================================
+                 TAB 3 — CUSTO & PREÇO
+                 ===================================================== -->
+
             <div class="tab-content" id="tab3">
 
-                <!-- COMPOSIÇÃO -->
+
+                <!-- COMPOSIÇÃO DO PREÇO -->
+
                 <section class="card jar-card-inline">
 
-                    <h2>Composição do preço</h2>
+                    <h2>
+                        Composição do preço
+                    </h2>
+
 
                     <div class="jar-inline-row">
 
@@ -965,9 +1064,13 @@
                              height="126">
                         </svg>
 
+
                         <div class="jar-inline-info">
 
-                            <div class="jar-legend" id="jarLegend"></div>
+                            <div class="jar-legend"
+                                 id="jarLegend">
+                            </div>
+
 
                             <div class="price-tag">
 
@@ -975,11 +1078,13 @@
                                     Preço por pote
                                 </div>
 
-                                <div class="amt" id="jarPrice">
+                                <div class="amt"
+                                     id="jarPrice">
                                     R$ 0,00
                                 </div>
 
-                                <div class="per" id="jarPots">
+                                <div class="per"
+                                     id="jarPots">
                                     — potes
                                 </div>
 
@@ -991,10 +1096,15 @@
 
                 </section>
 
+
                 <!-- RENDIMENTO -->
+
                 <section class="card">
 
-                    <h2>⚖️ Rendimento da receita</h2>
+                    <h2>
+                        ⚖️ Rendimento da receita
+                    </h2>
+
 
                     <div class="kv-grid">
 
@@ -1002,7 +1112,9 @@
                             Peso total da receita
                         </div>
 
-                        <div class="v" id="totalWeight"></div>
+                        <div class="v"
+                             id="totalWeight">
+                        </div>
 
 
                         <div class="k">
@@ -1010,10 +1122,19 @@
                         </div>
 
                         <div class="v editable">
+
                             <select id="weightPerPot">
-                                <option value="250">250 g</option>
-                                <option value="500">500 g</option>
+
+                                <option value="250">
+                                    250 g
+                                </option>
+
+                                <option value="500">
+                                    500 g
+                                </option>
+
                             </select>
+
                         </div>
 
 
@@ -1024,23 +1145,32 @@
                             Número de potes
                         </div>
 
-                        <div class="v total" id="numPots"></div>
+                        <div class="v total"
+                             id="numPots">
+                        </div>
 
 
                         <div class="k">
                             Sobra da receita
                         </div>
 
-                        <div class="v leftover-note" id="leftoverWeight"></div>
+                        <div class="v leftover-note"
+                             id="leftoverWeight">
+                        </div>
 
                     </div>
 
                 </section>
 
+
                 <!-- CUSTO -->
+
                 <section class="card">
 
-                    <h2>💰 Custo por pote</h2>
+                    <h2>
+                        💰 Custo por pote
+                    </h2>
+
 
                     <div class="kv-grid">
 
@@ -1048,14 +1178,18 @@
                             Ingredientes rateados
                         </div>
 
-                        <div class="v" id="costIngPot"></div>
+                        <div class="v"
+                             id="costIngPot">
+                        </div>
 
 
                         <div class="k">
                             Embalagem por pote
                         </div>
 
-                        <div class="v" id="costPkgPot"></div>
+                        <div class="v"
+                             id="costPkgPot">
+                        </div>
 
 
                         <div class="divider"></div>
@@ -1065,19 +1199,29 @@
                             Custo total por pote
                         </div>
 
-                        <div class="v total" id="costTotalPot"></div>
+                        <div class="v total"
+                             id="costTotalPot">
+                        </div>
 
                     </div>
 
                 </section>
 
+
                 <!-- PREÇO -->
+
                 <section class="card">
 
                     <h2>
+
                         🏷️ Preço de venda
-                        <span class="badge">com markup</span>
+
+                        <span class="badge">
+                            com markup
+                        </span>
+
                     </h2>
+
 
                     <div class="kv-grid">
 
@@ -1085,7 +1229,9 @@
                             Custo
                         </div>
 
-                        <div class="v" id="priceCost"></div>
+                        <div class="v"
+                             id="priceCost">
+                        </div>
 
 
                         <div class="k">
@@ -1093,12 +1239,15 @@
                         </div>
 
                         <div class="v editable">
+
                             <input
                                 type="number"
                                 id="profitPct"
                                 min="0"
+                                max="99.99"
                                 step="1"
                                 inputmode="numeric">
+
                         </div>
 
 
@@ -1106,7 +1255,9 @@
                             Markup
                         </div>
 
-                        <div class="v" id="markup"></div>
+                        <div class="v"
+                             id="markup">
+                        </div>
 
 
                         <div class="divider"></div>
@@ -1116,7 +1267,9 @@
                             Preço de venda por pote
                         </div>
 
-                        <div class="v total" id="finalPrice"></div>
+                        <div class="v total"
+                             id="finalPrice">
+                        </div>
 
                     </div>
 
@@ -1125,17 +1278,26 @@
             </div>
 
         </div>
+
     </div>
 
+
     <p class="footer-note">
+
         Tudo fica salvo neste dispositivo.<br>
-        Funciona pra qualquer receita — ajuste ingredientes e embalagem como quiser.
+
+        Funciona pra qualquer receita —
+        ajuste ingredientes e embalagem como quiser.
+
     </p>
 
 </div>
 
 
-<!-- MODAL -->
+<!-- =============================================================
+     MODAL
+     ============================================================= -->
+
 <div class="modal-overlay" id="modalOverlay">
 
     <div class="modal-box">
@@ -1152,13 +1314,16 @@
             Mensagem.
         </p>
 
-        <div class="modal-actions" id="modalActions">
+        <div class="modal-actions"
+             id="modalActions">
 
-            <button class="modal-btn" id="modalCancelBtn">
+            <button class="modal-btn"
+                    id="modalCancelBtn">
                 Cancelar
             </button>
 
-            <button class="modal-btn primary" id="modalConfirmBtn">
+            <button class="modal-btn primary"
+                    id="modalConfirmBtn">
                 Confirmar
             </button>
 
@@ -1170,12 +1335,14 @@
 
 
 <script>
+
 (function () {
 
     "use strict";
 
 
-    const STORAGE_KEY = "caponata-calc-v1";
+    const STORAGE_KEY =
+        "caponata-calc-v1";
 
 
     /* =========================================================
@@ -1184,9 +1351,12 @@
 
     const DEFAULT_STATE = {
 
-        recipeName: "Minha Receita",
+        recipeName:
+            "Minha Receita",
+
 
         ingredients: [
+
             {
                 name: "Berinjela",
                 qty: 2,
@@ -1194,6 +1364,7 @@
                 weight: 600,
                 value: 8
             },
+
             {
                 name: "Tomate",
                 qty: 3,
@@ -1201,6 +1372,7 @@
                 weight: 360,
                 value: 6
             },
+
             {
                 name: "Cebola",
                 qty: 1,
@@ -1208,6 +1380,7 @@
                 weight: 150,
                 value: 2
             },
+
             {
                 name: "Azeitona verde",
                 qty: 100,
@@ -1215,6 +1388,7 @@
                 weight: 100,
                 value: 5.5
             },
+
             {
                 name: "Vinagre",
                 qty: 30,
@@ -1222,6 +1396,7 @@
                 weight: 30,
                 value: 1
             },
+
             {
                 name: "Açúcar",
                 qty: 15,
@@ -1229,6 +1404,7 @@
                 weight: 15,
                 value: 0.5
             },
+
             {
                 name: "Azeite de oliva",
                 qty: 60,
@@ -1236,6 +1412,7 @@
                 weight: 55,
                 value: 4.5
             },
+
             {
                 name: "Alho",
                 qty: 3,
@@ -1243,6 +1420,7 @@
                 weight: 9,
                 value: 0.5
             },
+
             {
                 name: "Sal e pimenta",
                 qty: 1,
@@ -1250,45 +1428,68 @@
                 weight: 5,
                 value: 0.5
             }
+
         ],
 
+
         packaging: [
+
             {
                 name: "Vidro com tampa",
                 qty: 1,
                 unit: "un",
                 value: 4.5
             },
+
             {
                 name: "Rótulo",
                 qty: 1,
                 unit: "un",
                 value: 1.5
             },
+
             {
                 name: "Tecido para decoração",
                 qty: 1,
                 unit: "un",
                 value: 2
             },
+
             {
                 name: "Cordinha",
                 qty: 1,
                 unit: "un",
                 value: 0.8
             }
+
         ],
 
-        /* SOMENTE 250 OU 500 */
-        weightPerPot: 500,
 
-        profitPct: 35
+        /* Somente 250 g ou 500 g */
+
+        weightPerPot:
+            500,
+
+
+        /*
+         * Margem de lucro desejada.
+         *
+         * 35 significa:
+         * 35% do preço final é lucro.
+         */
+
+        profitPct:
+            35
+
     };
 
 
-    let state = loadState();
+    let state =
+        loadState();
 
-    let storageWarned = false;
+
+    let storageWarned =
+        false;
 
 
     /* =========================================================
@@ -1299,11 +1500,17 @@
 
         try {
 
-            const raw = localStorage.getItem(STORAGE_KEY);
+            const raw =
+                localStorage.getItem(
+                    STORAGE_KEY
+                );
+
 
             if (raw) {
 
-                const parsed = JSON.parse(raw);
+                const parsed =
+                    JSON.parse(raw);
+
 
                 if (
                     parsed &&
@@ -1311,18 +1518,58 @@
                     Array.isArray(parsed.packaging)
                 ) {
 
-                    /* Corrige valores antigos como 520 g */
-                    if (![250, 500].includes(parseInt(parsed.weightPerPot, 10))) {
-                        parsed.weightPerPot = 500;
+                    if (
+                        ![250, 500].includes(
+                            parseInt(
+                                parsed.weightPerPot,
+                                10
+                            )
+                        )
+                    ) {
+
+                        parsed.weightPerPot =
+                            500;
+
                     }
+
+
+                    /*
+                     * Garante valores válidos
+                     * para a margem.
+                     */
+
+                    const savedProfit =
+                        parseFloat(
+                            parsed.profitPct
+                        );
+
+
+                    if (
+                        !isFinite(savedProfit) ||
+                        savedProfit < 0 ||
+                        savedProfit >= 100
+                    ) {
+
+                        parsed.profitPct =
+                            35;
+
+                    }
+
 
                     return parsed;
                 }
+
             }
 
         } catch (e) {}
 
-        return JSON.parse(JSON.stringify(DEFAULT_STATE));
+
+        return JSON.parse(
+            JSON.stringify(
+                DEFAULT_STATE
+            )
+        );
+
     }
 
 
@@ -1339,26 +1586,34 @@
 
             if (!storageWarned) {
 
-                storageWarned = true;
+                storageWarned =
+                    true;
+
 
                 showModal({
 
                     icon: "⚠️",
 
-                    title: "Não foi possível salvar",
+                    title:
+                        "Não foi possível salvar",
 
                     message:
                         "O navegador bloqueou o armazenamento local. " +
                         "Suas alterações vão funcionar nesta sessão, " +
                         "mas podem se perder ao fechar.",
 
-                    confirmText: "Entendi",
+                    confirmText:
+                        "Entendi",
 
-                    onlyOk: true
+                    onlyOk:
+                        true
 
                 });
+
             }
+
         }
+
     }
 
 
@@ -1372,11 +1627,16 @@
             n = 0;
         }
 
+
         return "R$ " +
-            n.toLocaleString("pt-BR", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            });
+            n.toLocaleString(
+                "pt-BR",
+                {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }
+            );
+
     }
 
 
@@ -1386,10 +1646,18 @@
             n = 0;
         }
 
-        return n.toLocaleString("pt-BR", {
-            minimumFractionDigits: digits || 0,
-            maximumFractionDigits: digits || 2
-        });
+
+        return n.toLocaleString(
+            "pt-BR",
+            {
+                minimumFractionDigits:
+                    digits || 0,
+
+                maximumFractionDigits:
+                    digits || 2
+            }
+        );
+
     }
 
 
@@ -1398,27 +1666,47 @@
        ========================================================= */
 
     const recipeNameEl =
-        document.getElementById("recipeName");
+        document.getElementById(
+            "recipeName"
+        );
+
 
     const ingBody =
-        document.getElementById("ingBody");
+        document.getElementById(
+            "ingBody"
+        );
+
 
     const pkgBody =
-        document.getElementById("pkgBody");
+        document.getElementById(
+            "pkgBody"
+        );
+
 
     const weightPerPotEl =
-        document.getElementById("weightPerPot");
+        document.getElementById(
+            "weightPerPot"
+        );
+
 
     const profitPctEl =
-        document.getElementById("profitPct");
+        document.getElementById(
+            "profitPct"
+        );
 
 
     recipeNameEl.value =
-        state.recipeName || "Minha Receita";
+        state.recipeName ||
+        "Minha Receita";
 
 
     weightPerPotEl.value =
-        [250, 500].includes(parseInt(state.weightPerPot, 10))
+        [250, 500].includes(
+            parseInt(
+                state.weightPerPot,
+                10
+            )
+        )
             ? state.weightPerPot
             : 500;
 
@@ -1439,6 +1727,7 @@
                 recipeNameEl.value;
 
             saveState();
+
         }
     );
 
@@ -1452,34 +1741,64 @@
         function () {
 
             const value =
-                parseInt(weightPerPotEl.value, 10);
+                parseInt(
+                    weightPerPotEl.value,
+                    10
+                );
+
 
             state.weightPerPot =
-                value === 250 || value === 500
+                value === 250 ||
+                value === 500
                     ? value
                     : 500;
+
 
             saveState();
 
             render();
+
         }
     );
 
 
     /* =========================================================
-       LUCRO
+       MARGEM DE LUCRO
        ========================================================= */
 
     profitPctEl.addEventListener(
         "input",
         function () {
 
+            let value =
+                parseFloat(
+                    profitPctEl.value
+                );
+
+
+            if (!isFinite(value)) {
+                value = 0;
+            }
+
+
+            value =
+                Math.max(
+                    0,
+                    Math.min(
+                        value,
+                        99.99
+                    )
+                );
+
+
             state.profitPct =
-                parseFloat(profitPctEl.value) || 0;
+                value;
+
 
             saveState();
 
             render();
+
         }
     );
 
@@ -1489,48 +1808,89 @@
        ========================================================= */
 
     const tabBtns =
-        document.querySelectorAll(".tab-btn");
+        document.querySelectorAll(
+            ".tab-btn"
+        );
+
 
     const tabContents = {
 
-        tab1: document.getElementById("tab1"),
+        tab1:
+            document.getElementById(
+                "tab1"
+            ),
 
-        tab2: document.getElementById("tab2"),
+        tab2:
+            document.getElementById(
+                "tab2"
+            ),
 
-        tab3: document.getElementById("tab3")
+        tab3:
+            document.getElementById(
+                "tab3"
+            )
+
     };
 
 
-    tabBtns.forEach(function (btn) {
+    tabBtns.forEach(
+        function (btn) {
 
-        btn.addEventListener(
-            "click",
-            function (e) {
+            btn.addEventListener(
+                "click",
+                function (e) {
 
-                e.preventDefault();
+                    e.preventDefault();
 
-                tabBtns.forEach(function (b) {
-                    b.classList.remove("active");
-                });
 
-                this.classList.add("active");
+                    tabBtns.forEach(
+                        function (b) {
 
-                Object.values(tabContents)
-                    .forEach(function (tc) {
-                        tc.classList.remove("active");
-                    });
+                            b.classList.remove(
+                                "active"
+                            );
 
-                const target =
-                    document.getElementById(
-                        this.dataset.tab
+                        }
                     );
 
-                if (target) {
-                    target.classList.add("active");
+
+                    this.classList.add(
+                        "active"
+                    );
+
+
+                    Object.values(
+                        tabContents
+                    ).forEach(
+                        function (tc) {
+
+                            tc.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+
+                    const target =
+                        document.getElementById(
+                            this.dataset.tab
+                        );
+
+
+                    if (target) {
+
+                        target.classList.add(
+                            "active"
+                        );
+
+                    }
+
                 }
-            }
-        );
-    });
+            );
+
+        }
+    );
 
 
     /* =========================================================
@@ -1540,43 +1900,78 @@
     function ingRow(item, idx) {
 
         const tr =
-            document.createElement("tr");
+            document.createElement(
+                "tr"
+            );
 
 
         tr.innerHTML =
 
             '<td>' +
-                '<input class="cell" data-f="name" ' +
-                'placeholder="nome" inputmode="text">' +
+
+                '<input class="cell" ' +
+                'data-f="name" ' +
+                'placeholder="nome" ' +
+                'inputmode="text">' +
+
             '</td>' +
 
-            '<td>' +
-                '<input class="cell num" data-f="qty" ' +
-                'type="number" step="any" inputmode="decimal">' +
-            '</td>' +
 
             '<td>' +
-                '<input class="cell" data-f="unit" ' +
-                'placeholder="un" inputmode="text">' +
+
+                '<input class="cell num" ' +
+                'data-f="qty" ' +
+                'type="number" ' +
+                'step="any" ' +
+                'inputmode="decimal">' +
+
             '</td>' +
 
-            '<td>' +
-                '<input class="cell num" data-f="weight" ' +
-                'type="number" step="any" inputmode="decimal">' +
-            '</td>' +
 
             '<td>' +
-                '<input class="cell num" data-f="value" ' +
-                'type="number" step="any" inputmode="decimal">' +
+
+                '<input class="cell" ' +
+                'data-f="unit" ' +
+                'placeholder="un" ' +
+                'inputmode="text">' +
+
             '</td>' +
 
+
             '<td>' +
-                '<button class="rm-btn" title="remover">✕</button>' +
+
+                '<input class="cell num" ' +
+                'data-f="weight" ' +
+                'type="number" ' +
+                'step="any" ' +
+                'inputmode="decimal">' +
+
+            '</td>' +
+
+
+            '<td>' +
+
+                '<input class="cell num" ' +
+                'data-f="value" ' +
+                'type="number" ' +
+                'step="any" ' +
+                'inputmode="decimal">' +
+
+            '</td>' +
+
+
+            '<td>' +
+
+                '<button class="rm-btn" ' +
+                'title="remover">✕</button>' +
+
             '</td>';
 
 
         const inputs =
-            tr.querySelectorAll("input");
+            tr.querySelectorAll(
+                "input"
+            );
 
 
         inputs[0].value =
@@ -1595,75 +1990,95 @@
             item.value;
 
 
-        inputs.forEach(function (inp) {
+        inputs.forEach(
+            function (inp) {
 
-            inp.addEventListener(
-                "input",
-                function () {
+                inp.addEventListener(
+                    "input",
+                    function () {
 
-                    const f =
-                        inp.dataset.f;
-
-                    const v =
-                        inp.value;
+                        const f =
+                            inp.dataset.f;
 
 
-                    if (
-                        f === "qty" ||
-                        f === "weight" ||
-                        f === "value"
-                    ) {
+                        const v =
+                            inp.value;
 
-                        state.ingredients[idx][f] =
-                            parseFloat(v) || 0;
 
-                    } else {
+                        if (
+                            f === "qty" ||
+                            f === "weight" ||
+                            f === "value"
+                        ) {
 
-                        state.ingredients[idx][f] =
-                            v;
+                            state.ingredients[idx][f] =
+                                parseFloat(v) || 0;
+
+                        } else {
+
+                            state.ingredients[idx][f] =
+                                v;
+
+                        }
+
+
+                        saveState();
+
+                        render();
+
                     }
+                );
+
+            }
+        );
 
 
-                    saveState();
+        tr.querySelector(
+            ".rm-btn"
+        ).addEventListener(
+            "click",
+            function () {
 
-                    render();
-                }
-            );
-        });
+                state.ingredients.splice(
+                    idx,
+                    1
+                );
 
 
-        tr.querySelector(".rm-btn")
-            .addEventListener(
-                "click",
-                function () {
+                saveState();
 
-                    state.ingredients.splice(idx, 1);
+                renderIngredients();
 
-                    saveState();
+                render();
 
-                    renderIngredients();
-
-                    render();
-                }
-            );
+            }
+        );
 
 
         return tr;
+
     }
 
 
     function renderIngredients() {
 
-        ingBody.innerHTML = "";
+        ingBody.innerHTML =
+            "";
+
 
         state.ingredients.forEach(
             function (item, idx) {
 
                 ingBody.appendChild(
-                    ingRow(item, idx)
+                    ingRow(
+                        item,
+                        idx
+                    )
                 );
+
             }
         );
+
     }
 
 
@@ -1684,13 +2099,16 @@
                     weight: 0,
 
                     value: 0
+
                 });
+
 
                 saveState();
 
                 renderIngredients();
 
                 render();
+
             }
         );
 
@@ -1702,38 +2120,67 @@
     function pkgRow(item, idx) {
 
         const tr =
-            document.createElement("tr");
+            document.createElement(
+                "tr"
+            );
 
 
         tr.innerHTML =
 
             '<td>' +
-                '<input class="cell" data-f="name" ' +
-                'placeholder="nome" inputmode="text">' +
+
+                '<input class="cell" ' +
+                'data-f="name" ' +
+                'placeholder="nome" ' +
+                'inputmode="text">' +
+
             '</td>' +
 
-            '<td>' +
-                '<input class="cell num" data-f="qty" ' +
-                'type="number" step="any" inputmode="decimal">' +
-            '</td>' +
 
             '<td>' +
-                '<input class="cell" data-f="unit" ' +
-                'placeholder="un" inputmode="text">' +
+
+                '<input class="cell num" ' +
+                'data-f="qty" ' +
+                'type="number" ' +
+                'step="any" ' +
+                'inputmode="decimal">' +
+
             '</td>' +
 
-            '<td>' +
-                '<input class="cell num" data-f="value" ' +
-                'type="number" step="any" inputmode="decimal">' +
-            '</td>' +
 
             '<td>' +
-                '<button class="rm-btn" title="remover">✕</button>' +
+
+                '<input class="cell" ' +
+                'data-f="unit" ' +
+                'placeholder="un" ' +
+                'inputmode="text">' +
+
+            '</td>' +
+
+
+            '<td>' +
+
+                '<input class="cell num" ' +
+                'data-f="value" ' +
+                'type="number" ' +
+                'step="any" ' +
+                'inputmode="decimal">' +
+
+            '</td>' +
+
+
+            '<td>' +
+
+                '<button class="rm-btn" ' +
+                'title="remover">✕</button>' +
+
             '</td>';
 
 
         const inputs =
-            tr.querySelectorAll("input");
+            tr.querySelectorAll(
+                "input"
+            );
 
 
         inputs[0].value =
@@ -1749,74 +2196,94 @@
             item.value;
 
 
-        inputs.forEach(function (inp) {
+        inputs.forEach(
+            function (inp) {
 
-            inp.addEventListener(
-                "input",
-                function () {
+                inp.addEventListener(
+                    "input",
+                    function () {
 
-                    const f =
-                        inp.dataset.f;
-
-                    const v =
-                        inp.value;
+                        const f =
+                            inp.dataset.f;
 
 
-                    if (
-                        f === "qty" ||
-                        f === "value"
-                    ) {
+                        const v =
+                            inp.value;
 
-                        state.packaging[idx][f] =
-                            parseFloat(v) || 0;
 
-                    } else {
+                        if (
+                            f === "qty" ||
+                            f === "value"
+                        ) {
 
-                        state.packaging[idx][f] =
-                            v;
+                            state.packaging[idx][f] =
+                                parseFloat(v) || 0;
+
+                        } else {
+
+                            state.packaging[idx][f] =
+                                v;
+
+                        }
+
+
+                        saveState();
+
+                        render();
+
                     }
+                );
+
+            }
+        );
 
 
-                    saveState();
+        tr.querySelector(
+            ".rm-btn"
+        ).addEventListener(
+            "click",
+            function () {
 
-                    render();
-                }
-            );
-        });
+                state.packaging.splice(
+                    idx,
+                    1
+                );
 
 
-        tr.querySelector(".rm-btn")
-            .addEventListener(
-                "click",
-                function () {
+                saveState();
 
-                    state.packaging.splice(idx, 1);
+                renderPackaging();
 
-                    saveState();
+                render();
 
-                    renderPackaging();
-
-                    render();
-                }
-            );
+            }
+        );
 
 
         return tr;
+
     }
 
 
     function renderPackaging() {
 
-        pkgBody.innerHTML = "";
+        pkgBody.innerHTML =
+            "";
+
 
         state.packaging.forEach(
             function (item, idx) {
 
                 pkgBody.appendChild(
-                    pkgRow(item, idx)
+                    pkgRow(
+                        item,
+                        idx
+                    )
                 );
+
             }
         );
+
     }
 
 
@@ -1835,13 +2302,16 @@
                     unit: "un",
 
                     value: 0
+
                 });
+
 
                 saveState();
 
                 renderPackaging();
 
                 render();
+
             }
         );
 
@@ -1851,48 +2321,82 @@
        ========================================================= */
 
     const modalOverlay =
-        document.getElementById("modalOverlay");
+        document.getElementById(
+            "modalOverlay"
+        );
+
 
     const modalIcon =
-        document.getElementById("modalIcon");
+        document.getElementById(
+            "modalIcon"
+        );
+
 
     const modalTitle =
-        document.getElementById("modalTitle");
+        document.getElementById(
+            "modalTitle"
+        );
+
 
     const modalMsg =
-        document.getElementById("modalMsg");
+        document.getElementById(
+            "modalMsg"
+        );
+
 
     const modalCancelBtn =
-        document.getElementById("modalCancelBtn");
+        document.getElementById(
+            "modalCancelBtn"
+        );
+
 
     const modalConfirmBtn =
-        document.getElementById("modalConfirmBtn");
+        document.getElementById(
+            "modalConfirmBtn"
+        );
 
 
     function closeModal() {
 
-        modalOverlay.classList.remove("open");
+        modalOverlay.classList.remove(
+            "open"
+        );
+
     }
 
 
-    function showModal(options, onConfirm) {
+    function showModal(
+        options,
+        onConfirm
+    ) {
 
         modalIcon.textContent =
-            options.icon || "⚠️";
+            options.icon ||
+            "⚠️";
+
 
         modalTitle.textContent =
-            options.title || "";
+            options.title ||
+            "";
+
 
         modalMsg.textContent =
-            options.message || "";
+            options.message ||
+            "";
+
 
         modalConfirmBtn.textContent =
-            options.confirmText || "OK";
+            options.confirmText ||
+            "OK";
 
 
         modalConfirmBtn.className =
             "modal-btn primary" +
-            (options.danger ? "" : " neutral");
+            (
+                options.danger
+                    ? ""
+                    : " neutral"
+            );
 
 
         if (options.onlyOk) {
@@ -1905,12 +2409,17 @@
             modalCancelBtn.style.display =
                 "";
 
+
             modalCancelBtn.textContent =
-                options.cancelText || "Cancelar";
+                options.cancelText ||
+                "Cancelar";
+
         }
 
 
-        modalOverlay.classList.add("open");
+        modalOverlay.classList.add(
+            "open"
+        );
 
 
         modalConfirmBtn.onclick =
@@ -1918,9 +2427,16 @@
 
                 closeModal();
 
-                if (typeof onConfirm === "function") {
+
+                if (
+                    typeof onConfirm ===
+                    "function"
+                ) {
+
                     onConfirm();
+
                 }
+
             };
 
 
@@ -1928,7 +2444,9 @@
             function () {
 
                 closeModal();
+
             };
+
     }
 
 
@@ -1936,9 +2454,15 @@
         "click",
         function (e) {
 
-            if (e.target === modalOverlay) {
+            if (
+                e.target ===
+                modalOverlay
+            ) {
+
                 closeModal();
+
             }
+
         }
     );
 
@@ -1957,20 +2481,25 @@
 
                     icon: "↺",
 
-                    title: "Restaurar exemplo?",
+                    title:
+                        "Restaurar exemplo?",
 
                     message:
                         "Isso vai substituir os dados atuais " +
                         "pelos dados de exemplo. " +
                         "Essa ação não pode ser desfeita.",
 
-                    confirmText: "Restaurar",
+                    confirmText:
+                        "Restaurar",
 
-                    cancelText: "Cancelar",
+                    cancelText:
+                        "Cancelar",
 
-                    danger: true
+                    danger:
+                        true
 
                 }, function () {
+
 
                     state =
                         JSON.parse(
@@ -1983,8 +2512,10 @@
                     recipeNameEl.value =
                         state.recipeName;
 
+
                     weightPerPotEl.value =
                         state.weightPerPot;
+
 
                     profitPctEl.value =
                         state.profitPct;
@@ -1997,7 +2528,9 @@
                     renderPackaging();
 
                     render();
+
                 });
+
             }
         );
 
@@ -2007,24 +2540,40 @@
        ========================================================= */
 
     const jarSvg =
-        document.getElementById("jar");
+        document.getElementById(
+            "jar"
+        );
+
 
     const jarLegend =
-        document.getElementById("jarLegend");
+        document.getElementById(
+            "jarLegend"
+        );
+
 
     const jarPrice =
-        document.getElementById("jarPrice");
+        document.getElementById(
+            "jarPrice"
+        );
+
 
     const jarPots =
-        document.getElementById("jarPots");
+        document.getElementById(
+            "jarPots"
+        );
 
 
-    const JAR_TOP = 34;
+    const JAR_TOP =
+        34;
 
-    const JAR_BOTTOM = 208;
+
+    const JAR_BOTTOM =
+        208;
+
 
     const JAR_H =
-        JAR_BOTTOM - JAR_TOP;
+        JAR_BOTTOM -
+        JAR_TOP;
 
 
     function buildJarShell() {
@@ -2036,30 +2585,49 @@
                 '<clipPath id="jarClip">' +
 
                     '<path d="' +
+
                     'M46,20 L114,20 ' +
+
                     'L114,40 Q136,50 136,80 ' +
+
                     'L136,196 Q136,212 118,212 ' +
+
                     'L42,212 Q24,212 24,196 ' +
+
                     'L24,80 Q24,50 46,40 Z"/>' +
 
                 '</clipPath>' +
 
             '</defs>' +
 
+
             '<path d="' +
+
             'M46,20 L114,20 ' +
+
             'L114,40 Q136,50 136,80 ' +
+
             'L136,196 Q136,212 118,212 ' +
+
             'L42,212 Q24,212 24,196 ' +
+
             'L24,80 Q24,50 46,40 Z" ' +
+
             'fill="rgba(244,236,217,0.05)" ' +
+
             'stroke="rgba(244,236,217,0.35)" ' +
+
             'stroke-width="2"/>' +
 
+
             '<rect x="50" y="8" width="60" height="16" rx="4" ' +
+
             'fill="rgba(244,236,217,0.22)" ' +
+
             'stroke="rgba(244,236,217,0.35)" ' +
+
             'stroke-width="1.5"/>';
+
     }
 
 
@@ -2069,23 +2637,33 @@
 
     function render() {
 
-        /* -----------------------------------------------------
+
+        /* =====================================================
            SUBTOTAL DOS INGREDIENTES
-           ----------------------------------------------------- */
+           ===================================================== */
 
-        let subW = 0;
+        let subW =
+            0;
 
-        let subV = 0;
+
+        let subV =
+            0;
 
 
         state.ingredients.forEach(
             function (i) {
 
                 subW +=
-                    parseFloat(i.weight) || 0;
+                    parseFloat(
+                        i.weight
+                    ) || 0;
+
 
                 subV +=
-                    parseFloat(i.value) || 0;
+                    parseFloat(
+                        i.value
+                    ) || 0;
+
             }
         );
 
@@ -2093,7 +2671,11 @@
         document
             .getElementById("ingSubW")
             .textContent =
-                num(subW, 0) + " g";
+                num(
+                    subW,
+                    0
+                ) +
+                " g";
 
 
         document
@@ -2102,18 +2684,35 @@
                 brl(subV);
 
 
-        /* -----------------------------------------------------
+        /* =====================================================
            EMBALAGEM
-           ----------------------------------------------------- */
+           ===================================================== */
 
-        let pkgV = 0;
+        let pkgV =
+            0;
 
 
         state.packaging.forEach(
             function (i) {
 
+                /*
+                 * Cada item da embalagem é informado
+                 * como custo de UMA unidade/pote.
+                 *
+                 * A quantidade permite, por exemplo,
+                 * 2 unidades de um item.
+                 */
+
                 pkgV +=
-                    parseFloat(i.value) || 0;
+                    (
+                        parseFloat(i.qty) ||
+                        0
+                    ) *
+                    (
+                        parseFloat(i.value) ||
+                        0
+                    );
+
             }
         );
 
@@ -2124,97 +2723,124 @@
                 brl(pkgV);
 
 
-        /* -----------------------------------------------------
+        /* =====================================================
            TAMANHO DO POTE
-           SOMENTE 250 OU 500
-           ----------------------------------------------------- */
+           ===================================================== */
 
         const weightPerPot =
             [250, 500].includes(
-                parseInt(state.weightPerPot, 10)
+                parseInt(
+                    state.weightPerPot,
+                    10
+                )
             )
-                ? parseInt(state.weightPerPot, 10)
+                ? parseInt(
+                    state.weightPerPot,
+                    10
+                )
                 : 500;
 
 
-        /* -----------------------------------------------------
+        /* =====================================================
            NÚMERO DE POTES
-           
-           SEMPRE INTEIRO.
-           
-           Math.floor garante que nunca apareça:
-           3,3
-           5,2
-           6,5
-           etc.
-           ----------------------------------------------------- */
+
+           Sempre inteiro.
+
+           Exemplo:
+           1.634 g ÷ 500 g
+           = 3 potes completos.
+
+           A sobra será:
+           1.634 - 1.500
+           = 134 g.
+           ===================================================== */
 
         const numPots =
             weightPerPot > 0
                 ? Math.floor(
-                    subW / weightPerPot
+                    subW /
+                    weightPerPot
                 )
                 : 0;
 
 
-        /* -----------------------------------------------------
+        /* =====================================================
            PESO ENVASADO
-           ----------------------------------------------------- */
+           ===================================================== */
 
         const packagedWeight =
-            numPots * weightPerPot;
+            numPots *
+            weightPerPot;
 
 
-        /* -----------------------------------------------------
+        /* =====================================================
            SOBRA
-           ----------------------------------------------------- */
+           ===================================================== */
 
         const leftoverWeight =
             Math.max(
                 0,
-                subW - packagedWeight
+                subW -
+                packagedWeight
             );
 
 
         document
             .getElementById("totalWeight")
             .textContent =
-                num(subW, 0) + " g";
+                num(
+                    subW,
+                    0
+                ) +
+                " g";
 
 
         document
             .getElementById("numPots")
             .textContent =
                 numPots +
-                (numPots === 1
-                    ? " pote"
-                    : " potes");
+                (
+                    numPots === 1
+                        ? " pote"
+                        : " potes"
+                );
 
 
         document
             .getElementById("leftoverWeight")
             .textContent =
-                num(leftoverWeight, 0) +
+                num(
+                    leftoverWeight,
+                    0
+                ) +
                 " g";
 
 
-        /* -----------------------------------------------------
+        /* =====================================================
            CUSTO DOS INGREDIENTES POR GRAMA
-           
-           O custo da sobra NÃO é colocado nos potes.
-           
+
+           O custo total da receita é distribuído
+           proporcionalmente ao peso total.
+
+           Portanto a sobra NÃO é cobrada integralmente
+           dos potes.
+
            Exemplo:
+
            1.634 g
-           3 potes de 500 g
-           134 g de sobra
-           
-           Cada pote recebe somente o custo
-           correspondente aos seus 500 g.
-           ----------------------------------------------------- */
+           R$ 39,00
+
+           R$ 39,00 ÷ 1.634
+           = custo por grama
+
+           × 500 g
+           = custo dos ingredientes de um pote.
+           ===================================================== */
 
         const costPerGram =
             subW > 0
-                ? subV / subW
+                ? subV /
+                  subW
                 : 0;
 
 
@@ -2223,17 +2849,17 @@
             weightPerPot;
 
 
-        /* -----------------------------------------------------
-           CUSTO DA EMBALAGEM
-           ----------------------------------------------------- */
+        /* =====================================================
+           CUSTO DA EMBALAGEM POR POTE
+           ===================================================== */
 
         const costPkgPot =
             pkgV;
 
 
-        /* -----------------------------------------------------
+        /* =====================================================
            CUSTO TOTAL POR POTE
-           ----------------------------------------------------- */
+           ===================================================== */
 
         const costTotalPot =
             costIngPot +
@@ -2243,45 +2869,128 @@
         document
             .getElementById("costIngPot")
             .textContent =
-                brl(costIngPot);
+                brl(
+                    costIngPot
+                );
 
 
         document
             .getElementById("costPkgPot")
             .textContent =
-                brl(costPkgPot);
+                brl(
+                    costPkgPot
+                );
 
 
         document
             .getElementById("costTotalPot")
             .textContent =
-                brl(costTotalPot);
+                brl(
+                    costTotalPot
+                );
 
 
-        /* -----------------------------------------------------
-           PREÇO
-           ----------------------------------------------------- */
+        /* =====================================================
+           PREÇO DE VENDA
+
+           IMPORTANTE:
+
+           profitPct representa MARGEM DE LUCRO.
+
+           Exemplo:
+
+           Custo = R$ 20,00
+           Margem = 35%
+
+           Preço =
+           20 ÷ (1 - 0,35)
+
+           Preço = R$ 30,77
+
+           Lucro =
+           30,77 - 20
+           = R$ 10,77
+
+           Portanto:
+
+           35% do preço final = lucro.
+
+           O markup é calculado depois.
+           ===================================================== */
 
         const profitPct =
-            parseFloat(state.profitPct) || 0;
+            Math.max(
+                0,
+                Math.min(
+                    parseFloat(
+                        state.profitPct
+                    ) || 0,
+                    99.99
+                )
+            );
 
 
-        const markup =
-            1 + (profitPct / 100);
+        const margin =
+            profitPct /
+            100;
 
+
+        /*
+         * Preço de venda.
+         *
+         * Para margem de 0%:
+         * preço = custo.
+         *
+         * Para margem de 35%:
+         * preço = custo / 0,65.
+         */
 
         const price =
-            costTotalPot * markup;
+            costTotalPot > 0
+                ? costTotalPot /
+                    (1 - margin)
+                : 0;
 
+
+        /*
+         * Lucro em reais.
+         */
 
         const profitValue =
-            price - costTotalPot;
+            Math.max(
+                0,
+                price -
+                costTotalPot
+            );
+
+
+        /*
+         * Markup correspondente.
+
+         * Exemplo:
+         * preço R$ 30,77
+         * custo R$ 20,00
+         *
+         * 30,77 ÷ 20
+         * = 1,5385
+         *
+         * Markup exibido:
+         * ×1,54
+         */
+
+        const markup =
+            costTotalPot > 0
+                ? price /
+                    costTotalPot
+                : 0;
 
 
         document
             .getElementById("priceCost")
             .textContent =
-                brl(costTotalPot);
+                brl(
+                    costTotalPot
+                );
 
 
         document
@@ -2290,49 +2999,74 @@
                 "×" +
                 markup
                     .toFixed(2)
-                    .replace(".", ",");
+                    .replace(
+                        ".",
+                        ","
+                    );
 
 
         document
             .getElementById("finalPrice")
             .textContent =
-                brl(price);
+                brl(
+                    price
+                );
 
 
-        /* -----------------------------------------------------
+        /* =====================================================
            JAR
-           ----------------------------------------------------- */
+           ===================================================== */
 
         jarPrice.textContent =
-            brl(price);
+            brl(
+                price
+            );
 
 
         jarPots.textContent =
             numPots +
-            (numPots === 1
-                ? " pote"
-                : " potes");
+            (
+                numPots === 1
+                    ? " pote"
+                    : " potes"
+            );
 
 
         const segments = [
 
             {
-                label: "Ingredientes",
-                value: costIngPot,
-                color: "#7a8450"
+                label:
+                    "Ingredientes",
+
+                value:
+                    costIngPot,
+
+                color:
+                    "#7a8450"
             },
 
             {
-                label: "Embalagem",
-                value: costPkgPot,
-                color: "#c1502e"
+                label:
+                    "Embalagem",
+
+                value:
+                    costPkgPot,
+
+                color:
+                    "#c1502e"
             },
 
             {
-                label: "Lucro",
-                value: profitValue,
-                color: "#e8c15a"
+                label:
+                    "Lucro",
+
+                value:
+                    profitValue,
+
+                color:
+                    "#e8c15a"
             }
+
         ];
 
 
@@ -2343,7 +3077,9 @@
 
 
         let svgParts = [
+
             buildJarShell()
+
         ];
 
 
@@ -2361,7 +3097,10 @@
 
                 let h =
                     JAR_H *
-                    (seg.value / total);
+                    (
+                        seg.value /
+                        total
+                    );
 
 
                 if (h < 0) {
@@ -2369,8 +3108,9 @@
                 }
 
 
-                let yTop =
-                    yCursor - h;
+                const yTop =
+                    yCursor -
+                    h;
 
 
                 svgParts.push(
@@ -2382,25 +3122,31 @@
                     '" fill="' +
                     seg.color +
                     '" opacity="0.88"/>'
+
                 );
 
 
                 yCursor =
                     yTop;
+
             }
         );
 
 
-        svgParts.push("</g>");
+        svgParts.push(
+            "</g>"
+        );
 
 
         jarSvg.innerHTML =
-            svgParts.join("");
+            svgParts.join(
+                ""
+            );
 
 
-        /* -----------------------------------------------------
+        /* =====================================================
            LEGENDA
-           ----------------------------------------------------- */
+           ===================================================== */
 
         jarLegend.innerHTML =
             segments.map(
@@ -2409,7 +3155,11 @@
                     const pct =
                         total > 0
                             ? Math.round(
-                                (seg.value / total) * 100
+                                (
+                                    seg.value /
+                                    total
+                                ) *
+                                100
                             )
                             : 0;
 
@@ -2435,9 +3185,14 @@
                             '</span>' +
 
                         '</div>'
+
                     );
+
                 }
-            ).join("");
+            ).join(
+                ""
+            );
+
     }
 
 
@@ -2456,9 +3211,13 @@
        SERVICE WORKER
        ========================================================= */
 
-    if ("serviceWorker" in navigator) {
+    if (
+        "serviceWorker" in
+        navigator
+    ) {
 
-        let refreshing = false;
+        let refreshing =
+            false;
 
 
         navigator.serviceWorker.addEventListener(
@@ -2469,9 +3228,13 @@
                     return;
                 }
 
-                refreshing = true;
+
+                refreshing =
+                    true;
+
 
                 window.location.reload();
+
             }
         );
 
@@ -2481,13 +3244,20 @@
             function () {
 
                 navigator.serviceWorker
-                    .register("sw.js")
-                    .catch(function () {});
+                    .register(
+                        "sw.js"
+                    )
+                    .catch(
+                        function () {}
+                    );
+
             }
         );
+
     }
 
 })();
+
 </script>
 
 </body>
