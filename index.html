@@ -802,7 +802,7 @@
           <div class="tab-content" id="tab2">
             <section class="card">
               <h2>Embalagem e decoração <span class="badge"> por pote </span></h2>
-              <p class="sub">Quantidade total para o rendimento da receita. O custo é rateado por pote automaticamente.</p>
+              <p class="sub">Custo fixo de cada pote da receita.</p>
               <table>
                 <thead>
                   <tr>
@@ -1177,7 +1177,6 @@
           const inputs = tr.querySelectorAll("input");
           inputs[0].value = item.name;
           inputs[1].value = item.qty;
-          inputs[1].dataset.baseQty = item.qty;
           inputs[2].value = item.unit;
           inputs[3].value = item.value;
 
@@ -1186,17 +1185,9 @@
               const f = inp.dataset.f;
               const v = inp.value;
               if (f === "qty" || f === "value") {
-                // Qtd. da embalagem é exibida como quantidade TOTAL da receita.
-                // Internamente, qty representa a quantidade necessária POR POTE.
+                // CORREÇÃO: garantir que valores negativos sejam tratados como 0
                 const numVal = parseFloat(v);
-                if (f === "qty") {
-                  const totalPots = getCurrentNumPots();
-                  state.packaging[idx].qty = isFinite(numVal) && numVal >= 0
-                    ? (totalPots > 0 ? numVal / totalPots : numVal)
-                    : 0;
-                } else {
-                  state.packaging[idx].value = isFinite(numVal) && numVal >= 0 ? numVal : 0;
-                }
+                state.packaging[idx][f] = isFinite(numVal) && numVal >= 0 ? numVal : 0;
               } else {
                 state.packaging[idx][f] = v;
               }
@@ -1213,28 +1204,6 @@
           });
 
           return tr;
-        }
-
-        function getCurrentNumPots() {
-          let totalWeight = 0;
-          state.ingredients.forEach(function (i) {
-            totalWeight += parseFloat(i.weight) || 0;
-          });
-          const potWeight = [250, 500].includes(parseInt(state.weightPerPot, 10))
-            ? parseInt(state.weightPerPot, 10)
-            : 500;
-          return potWeight > 0 ? Math.floor(totalWeight / potWeight) : 0;
-        }
-
-        function syncPackagingQuantities(numPots) {
-          const rows = pkgBody.querySelectorAll("tr");
-          rows.forEach(function (row, idx) {
-            const qtyInput = row.querySelector('input[data-f="qty"]');
-            if (qtyInput && state.packaging[idx]) {
-              const totalQty = (parseFloat(state.packaging[idx].qty) || 0) * numPots;
-              qtyInput.value = numPots > 0 ? totalQty : 0;
-            }
-          });
         }
 
         function renderPackaging() {
@@ -1394,7 +1363,6 @@
           document.getElementById("totalWeight").textContent = num(subW, 0) + " g";
           document.getElementById("numPots").textContent = numPots + (numPots === 1 ? " pote" : " potes");
           document.getElementById("leftoverWeight").textContent = num(leftoverWeight, 0) + " g";
-          syncPackagingQuantities(numPots);
 
           // CORREÇÃO: aviso quando a receita não rende um pote completo
           const warningEl = document.getElementById("insufficientWarning");
@@ -1419,7 +1387,7 @@
           }
 
           /* ===================================================== CUSTO DA EMBALAGEM POR POTE ===================================================== */
-          const costPkgPot = numPots > 0 ? pkgV / numPots : pkgV;
+          const costPkgPot = pkgV;
 
           /* ===================================================== CUSTO TOTAL POR POTE ===================================================== */
           const costTotalPot = costIngPot + costPkgPot;
