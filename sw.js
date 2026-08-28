@@ -1,4 +1,7 @@
-const CACHE = "custo-pote-v1";
+// Service Worker 
+// Toda vez que trocar fotos/áudios, a versão será atualizada automaticamente pelo deploy.yml
+const CACHE_VERSION = '28.08.2026-0840';
+const CACHE_NAME = `20anos-${CACHE_VERSION}`;
 
 const ASSETS = [
   "index.html",
