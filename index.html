@@ -320,15 +320,15 @@
       border: none;
       color: var(--cream-dim);
       cursor: pointer;
-      font-size: 18px;
+      font-size: 15px;
       line-height: 1;
-      padding: 6px 8px;
+      padding: 4px;
       border-radius: 6px;
       transition: .2s;
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
-      min-height: 44px;
-      min-width: 44px;
+      min-height: 32px;
+      min-width: 26px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -752,11 +752,11 @@
               <thead>
                 <tr>
                   <th>Ingrediente</th>
-                  <th style="width:50px" class="num">Qtd.</th>
-                  <th style="width:60px">Un.</th>
-                  <th style="width:70px" class="num">Peso (g)</th>
-                  <th style="width:80px" class="num">Valor (R$)</th>
-                  <th style="width:30px"></th>
+                  <th style="width:34px" class="num">Qtd.</th>
+                  <th style="width:34px">Un.</th>
+                  <th style="width:46px" class="num">Peso</th>
+                  <th style="width:56px" class="num">R$</th>
+                  <th style="width:26px"></th>
                 </tr>
               </thead>
               <tbody id="ingBody"></tbody>
@@ -782,10 +782,10 @@
               <thead>
                 <tr>
                   <th>Item</th>
-                  <th style="width:50px" class="num">Qtd.</th>
-                  <th style="width:60px">Un.</th>
-                  <th style="width:80px" class="num">Valor (R$)</th>
-                  <th style="width:30px"></th>
+                  <th style="width:34px" class="num">Qtd.</th>
+                  <th style="width:34px">Un.</th>
+                  <th style="width:56px" class="num">R$</th>
+                  <th style="width:26px"></th>
                 </tr>
               </thead>
               <tbody id="pkgBody"></tbody>
@@ -863,7 +863,7 @@
       </div>
     </div>
 
-    <p class="footer-note">Os dados ficam salvos só neste dispositivo (localStorage).<br>Feito para calcular o pote de caponata — mas funciona pra qualquer receita.</p>
+    <p class="footer-note">Os dados ficam salvos só neste dispositivo (localStorage).<br>Funciona pra qualquer receita — ajuste ingredientes e embalagem como quiser.</p>
   </div>
 
   <!-- Modal de confirmação/aviso (substitui os pop-ups nativos do navegador) -->
@@ -886,15 +886,12 @@
       const STORAGE_KEY = "caponata-calc-v1";
 
       const DEFAULT_STATE = {
-        recipeName: "Caponata de Berinjela",
+        recipeName: "Minha Receita",
         ingredients: [
           { name: "Berinjela", qty: 2, unit: "un", weight: 600, value: 8 },
           { name: "Tomate", qty: 3, unit: "un", weight: 360, value: 6 },
           { name: "Cebola", qty: 1, unit: "un", weight: 150, value: 2 },
-          { name: "Aipo (salsão)", qty: 2, unit: "talo", weight: 80, value: 3 },
           { name: "Azeitona verde", qty: 100, unit: "g", weight: 100, value: 5.5 },
-          { name: "Alcaparras", qty: 30, unit: "g", weight: 30, value: 4 },
-          { name: "Molho de tomate", qty: 200, unit: "ml", weight: 200, value: 3.5 },
           { name: "Vinagre", qty: 30, unit: "ml", weight: 30, value: 1 },
           { name: "Açúcar", qty: 15, unit: "g", weight: 15, value: 0.5 },
           { name: "Azeite de oliva", qty: 60, unit: "ml", weight: 55, value: 4.5 },
@@ -1158,7 +1155,7 @@
         showModal({
           icon: "↺",
           title: "Restaurar exemplo?",
-          message: "Isso vai substituir os dados atuais pelos dados de exemplo da caponata. Essa ação não pode ser desfeita.",
+          message: "Isso vai substituir os dados atuais pelos dados de exemplo. Essa ação não pode ser desfeita.",
           confirmText: "Restaurar",
           cancelText: "Cancelar",
           danger: true
