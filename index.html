@@ -128,7 +128,7 @@ border-color: var(--tomato);
 color: var(--tomato);
 }
 
-/* Tabs - melhorado para mobile */
+/* Tabs */
 .tabs {
 display: flex;
 gap: 4px;
@@ -251,12 +251,13 @@ border-radius: 999px;
 font-weight: 600;
 }
 
-/* Tables - mobile first */
+/* Tables - com colunas ajustadas */
 table {
 width: 100%;
 border-collapse: collapse;
 font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
 font-size: 13px;
+table-layout: fixed;
 }
 
 thead th {
@@ -386,6 +387,39 @@ color: var(--olive);
 border-style: solid;
 }
 
+/* COLUNAS DA TABELA DE INGREDIENTES - AJUSTADAS */
+#ingBody td:first-child,
+#ingBody th:first-child {
+width: 48% !important;
+min-width: 120px;
+}
+
+#ingBody td:nth-child(3),
+#ingBody th:nth-child(3),
+#ingBody td:nth-child(5),
+#ingBody th:nth-child(5) {
+width: 40px !important;
+max-width: 40px;
+}
+
+#ingBody td:nth-child(4),
+#ingBody th:nth-child(4) {
+width: 35px !important;
+max-width: 35px;
+}
+
+#ingBody td:nth-child(2),
+#ingBody th:nth-child(2) {
+width: 38px !important;
+max-width: 38px;
+}
+
+#ingBody td:last-child,
+#ingBody th:last-child {
+width: 26px !important;
+max-width: 26px;
+}
+
 /* KV Grid */
 .kv-grid {
 display: grid;
@@ -443,7 +477,7 @@ background: var(--line);
 margin: 2px 0;
 }
 
-/* Composição do preço (pote) - agora dentro da aba Custo & Preço, tamanho reduzido */
+/* Composição do preço (pote) */
 .jar-card-inline {
 padding-bottom: 18px;
 }
@@ -597,9 +631,21 @@ min-height: 36px;
 .price-tag .amt {
 font-size: 22px;
 }
+
+/* Ajuste das colunas em telas muito pequenas */
+#ingBody td:first-child,
+#ingBody th:first-child {
+width: 40% !important;
+min-width: 80px;
+}
+#ingBody td:nth-child(4),
+#ingBody th:nth-child(4) {
+width: 30px !important;
+max-width: 30px;
+}
 }
 
-/* Modal de confirmação (substitui alert/confirm nativos do navegador) */
+/* Modal de confirmação */
 .modal-overlay {
 position: fixed;
 inset: 0;
@@ -737,7 +783,7 @@ padding-bottom: max(80px, env(safe-area-inset-bottom));
 <button class="reset-btn" id="resetBtn">↺ restaurar</button>
 </header>
 
-<!-- Tabs - com ícones para mobile -->
+<!-- Tabs -->
 <div class="tabs" id="tabContainer">
 <button class="tab-btn active" data-tab="tab1">🧺 Ingredientes</button>
 <button class="tab-btn" data-tab="tab2">📦 Embalagem</button>
@@ -756,10 +802,10 @@ padding-bottom: max(80px, env(safe-area-inset-bottom));
 <thead>
 <tr>
 <th style="width:48%">Ingrediente</th>
-<th style="width:40px" class="num">Qtd.</th>
-<th style="width:44px">Un.</th>
-<th style="width:40px" class="num">Peso</th>
-<th style="width:60px" class="num">R$</th>
+<th style="width:38px" class="num">Qtd.</th>
+<th style="width:40px">Un.</th>
+<th style="width:35px" class="num">Peso</th>
+<th style="width:40px" class="num">R$</th>
 <th style="width:26px"></th>
 </tr>
 </thead>
@@ -870,7 +916,7 @@ padding-bottom: max(80px, env(safe-area-inset-bottom));
 <p class="footer-note">Tudo fica salvo neste dispositivo.<br>Funciona pra qualquer receita — ajuste ingredientes e embalagem como quiser.</p>
 </div>
 
-<!-- Modal de confirmação/aviso (substitui os pop-ups nativos do navegador) -->
+<!-- Modal -->
 <div class="modal-overlay" id="modalOverlay">
 <div class="modal-box">
 <div class="modal-icon" id="modalIcon">⚠️</div>
@@ -1111,7 +1157,7 @@ renderPackaging();
 render();
 });
 
-// ---------- Modal (substitui alert/confirm nativos) ----------
+// ---------- Modal ----------
 const modalOverlay = document.getElementById("modalOverlay");
 const modalIcon = document.getElementById("modalIcon");
 const modalTitle = document.getElementById("modalTitle");
@@ -1124,7 +1170,6 @@ function closeModal() {
 modalOverlay.classList.remove("open");
 }
 
-// options: { icon, title, message, confirmText, cancelText, danger, onlyOk }
 function showModal(options, onConfirm) {
 modalIcon.textContent = options.icon || "⚠️";
 modalTitle.textContent = options.title || "";
@@ -1265,7 +1310,7 @@ renderIngredients();
 renderPackaging();
 render();
 
-// Service Worker — registra e recarrega sozinho quando uma versão nova assume o controle
+// Service Worker
 if ("serviceWorker" in navigator) {
 let refreshing = false;
 navigator.serviceWorker.addEventListener("controllerchange", function() {
