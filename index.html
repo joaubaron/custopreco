@@ -1095,13 +1095,11 @@ padding-bottom: max(80px, env(safe-area-inset-bottom));
 <tbody id="recBody"></tbody>
 <tfoot>
 <tr>
-<td colspan="4" class="subtotal-row">
-<span class="subtotal-label">Subtotal receita</span>
-<span class="subtotal-values">
-<span id="recSubW"></span>
-<span id="recSubV"></span>
-</span>
-</td>
+<td class="total-label" style="text-align:left;">Subtotal receita</td>
+<td></td>
+<td></td>
+<td class="total-value" style="text-align:right;" id="recSubV">R$ 0,00</td>
+<td></td>
 </tr>
 </tfoot>
 </table>
@@ -1126,9 +1124,9 @@ padding-bottom: max(80px, env(safe-area-inset-bottom));
 </thead>
 <tbody id="pkgBody"></tbody>
 <tfoot>
-<tr class="pkg-subtotal-row">
-<td class="pkg-label" colspan="3">Subtotal por pote</td>
-<td class="pkg-value" id="pkgSubV">R$ 0,00</td>
+<tr>
+<td class="total-label" style="text-align:left;" colspan="3">Subtotal por pote</td>
+<td class="total-value" style="text-align:right;" id="pkgSubV">R$ 0,00</td>
 <td></td>
 </tr>
 </tfoot>
@@ -1513,6 +1511,12 @@ return;
 state.recipe.forEach(function (item, idx) {
 recBody.appendChild(recRow(item, idx));
 });
+// Atualiza o subtotal da receita
+let recV = 0;
+state.recipe.forEach(function (r) {
+recV += getIngredientCost(r.invIndex, r.qty);
+});
+document.getElementById("recSubV").textContent = brl(recV);
 }
 
 document.getElementById("addRec").addEventListener("click", function () {
@@ -1578,6 +1582,12 @@ pkgBody.innerHTML = "";
 state.packaging.forEach(function (item, idx) {
 pkgBody.appendChild(pkgRow(item, idx));
 });
+// Atualiza o subtotal da embalagem
+let pkgV = 0;
+state.packaging.forEach(function (i) {
+pkgV += (parseFloat(i.qty) || 0) * (parseFloat(i.value) || 0);
+});
+document.getElementById("pkgSubV").textContent = brl(pkgV);
 }
 
 document.getElementById("addPkg").addEventListener("click", function () {
@@ -1682,7 +1692,6 @@ recW += qty;
 recV += getIngredientCost(r.invIndex, qty);
 });
 
-document.getElementById("recSubW").textContent = num(recW, 0) + " g";
 document.getElementById("recSubV").textContent = brl(recV);
 
 let pkgV = 0;
