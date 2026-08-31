@@ -407,6 +407,7 @@ color: var(--red);
 background: var(--red-dim);
 }
 
+/* ===== FOOTER TOTALS - agora todos com a mesma cor e tamanho ===== */
 tfoot td {
 padding: 14px 4px 4px;
 font-weight: 600;
@@ -422,6 +423,7 @@ padding-left: 16px;
 text-align: right;
 }
 
+/* Subtotal da receita e embalagem com a mesma cor e tamanho do total do estoque */
 tfoot td.subtotal-row {
 position: relative;
 display: table-cell;
@@ -960,7 +962,7 @@ padding-bottom: max(80px, env(safe-area-inset-bottom));
 <div class="wrap">
 <header>
 <div class="header-left">
-<p class="eyebrow">🍽️ Calculadora de custo &amp; preço</p>
+<p class="eyebrow">🍽️ Calculadora de preço</p>
 <h1>
 <input id="recipeName" spellcheck="false" placeholder="Nome da receita" />
 </h1>
@@ -1054,8 +1056,10 @@ Total em estoque: <span id="invTotalValue">R$ 0,00</span>
 <tbody id="pkgBody"></tbody>
 <tfoot>
 <tr>
-<td colspan="3" style="text-align:left;">Subtotal por pote</td>
-<td class="num" id="pkgSubV" style="text-align:right; padding-right:4px;"></td>
+<td colspan="3" style="text-align:left; font-weight:600; font-size:16px; color:var(--gold);">
+Subtotal por pote
+</td>
+<td class="num" id="pkgSubV" style="text-align:right; padding-right:4px; font-weight:600; font-size:16px; color:var(--gold);"></td>
 <td></td>
 </tr>
 </tfoot>
