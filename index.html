@@ -2812,11 +2812,13 @@ productName +
 '<div class="cost-display" ' +
 'data-f="cost">' +
 
-"0,00" +  // <-- AGORA SEM O R$
+"R$ 0,00" +
 
 "</div>" +
 
 "</td>" +
+
+"<td>" +
 
 '<button class="rm-btn" ' +
 'title="remover">✕</button>' +
@@ -2851,7 +2853,7 @@ qtyInput.value
 );
 
 costCell.textContent =
-brl(cost);
+num(cost, 2);  // <-- AGORA SEM O R$
 
 }
 
