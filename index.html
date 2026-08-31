@@ -475,18 +475,18 @@ table-layout: fixed !important;
 }
 #tab0 th:first-child,
 #tab0 td:first-child {
-width: 44% !important;
+width: calc(44% + 5px) !important;
 min-width: 0 !important;
 }
 #tab0 th:nth-child(2),
 #tab0 td:nth-child(2) {
-width: 24% !important;
+width: calc(24% - 2.5px) !important;
 min-width: 0 !important;
 text-align: right;
 }
 #tab0 th:nth-child(3),
 #tab0 td:nth-child(3) {
-width: 24% !important;
+width: calc(24% - 2.5px) !important;
 min-width: 0 !important;
 text-align: right;
 }
@@ -1150,9 +1150,9 @@ box-shadow: 0 4px 14px rgba(49, 95, 145, .30) !important;
 }
 
 /* Ajuste das colunas no mobile */
-#tab0 th:first-child, #tab0 td:first-child { width: 38% !important; }
-#tab0 th:nth-child(2), #tab0 td:nth-child(2) { width: 26% !important; }
-#tab0 th:nth-child(3), #tab0 td:nth-child(3) { width: 26% !important; }
+#tab0 th:first-child, #tab0 td:first-child { width: calc(38% + 5px) !important; }
+#tab0 th:nth-child(2), #tab0 td:nth-child(2) { width: calc(26% - 2.5px) !important; }
+#tab0 th:nth-child(3), #tab0 td:nth-child(3) { width: calc(26% - 2.5px) !important; }
 
  #tab1 td:first-child { width: 36% !important; }
 #tab1 th:nth-child(2), #tab1 td:nth-child(2) { width: 20% !important; }
