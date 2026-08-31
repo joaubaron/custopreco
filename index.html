@@ -496,48 +496,38 @@ width: 8% !important;
 min-width: 0 !important;
 }
 
-/* ===== TABELA RECEITA - FORÇADO ===== */
+/* ===== TABELA RECEITA - AJUSTE EXATO ===== */
 #tab1 table {
 min-width: 0 !important;
 width: 100% !important;
 table-layout: fixed !important;
 }
-
-#tab1 thead th:first-child,
-#tab1 tbody td:first-child {
-width: 44% !important;
+#tab1 th:first-child,
+#tab1 td:first-child {
+width: 44% !important; /* AUMENTOU de 42% para 44% */
 min-width: 0 !important;
-max-width: 44% !important;
 }
-
-#tab1 thead th:nth-child(2),
-#tab1 tbody td:nth-child(2) {
-width: 16% !important;
+#tab1 th:nth-child(2),
+#tab1 td:nth-child(2) {
+width: 16% !important; /* DIMINUIU de 18% para 16% */
 min-width: 0 !important;
-max-width: 16% !important;
-text-align: right !important;
+text-align: right;
 }
-
-#tab1 thead th:nth-child(3),
-#tab1 tbody td:nth-child(3) {
-width: 14% !important;
+#tab1 th:nth-child(3),
+#tab1 td:nth-child(3) {
+width: 14% !important; /* DIMINUIU de 16% para 14% */
 min-width: 0 !important;
-max-width: 14% !important;
 }
-
-#tab1 thead th:nth-child(4),
-#tab1 tbody td:nth-child(4) {
+#tab1 th:nth-child(4),
+#tab1 td:nth-child(4) {
 width: 18% !important;
 min-width: 0 !important;
-max-width: 18% !important;
-text-align: right !important;
+text-align: right;
 }
-
-#tab1 thead th:last-child,
-#tab1 tbody td:last-child {
+#tab1 th:last-child,
+#tab1 td:last-child {
 width: 8% !important;
 min-width: 0 !important;
-max-width: 8% !important;
 }
 
 /* Forçar células a respeitarem */
