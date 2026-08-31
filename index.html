@@ -504,29 +504,29 @@ table-layout: fixed !important;
 }
 #tab1 th:first-child,
 #tab1 td:first-child {
-width: 48% !important;
+width: calc(48% - 5px) !important; /* redução de 5px */
 min-width: 0 !important;
 }
 #tab1 th:nth-child(2),
 #tab1 td:nth-child(2) {
-width: 18% !important;
+width: calc(18% + 1.67px) !important; /* distribuição proporcional */
 min-width: 0 !important;
 text-align: right;
 }
 #tab1 th:nth-child(3),
 #tab1 td:nth-child(3) {
-width: 16% !important;
+width: calc(16% + 1.67px) !important;
 min-width: 0 !important;
 }
 #tab1 th:nth-child(4),
 #tab1 td:nth-child(4) {
-width: 16% !important;
+width: calc(16% + 1.67px) !important;
 min-width: 0 !important;
 text-align: right;
 }
 #tab1 th:last-child,
 #tab1 td:last-child {
-width: 8% !important;
+width: calc(8% + 1.67px) !important; /* redistribuição dos 5px */
 min-width: 0 !important;
 }
 
