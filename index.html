@@ -1343,6 +1343,166 @@ tbody td {
   }
 }
 
+
+/* ===== AJUSTE FINAL — POCO X5 PRO / ANDROID — SEM ALTERAR JS ===== */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  padding-left: max(8px, env(safe-area-inset-left));
+  padding-right: max(8px, env(safe-area-inset-right));
+}
+
+.wrap, header, .tabs, .layout, section.card {
+  max-width: 100%;
+  min-width: 0;
+}
+
+header {
+  overflow: hidden;
+}
+
+.header-left {
+  min-width: 0;
+  max-width: 100%;
+}
+
+#recipeName {
+  min-width: 0;
+  max-width: 100%;
+  text-overflow: ellipsis;
+}
+
+.tabs {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* O conteúdo normal nunca cria largura horizontal na tela.
+   Somente as tabelas podem rolar internamente quando necessário. */
+.tab-content,
+section.card,
+.kv-grid,
+.jar-inline-row,
+.jar-inline-info {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.jar-inline-row {
+  overflow: hidden;
+}
+
+.jar-inline-info {
+  overflow: hidden;
+}
+
+.jar-legend div {
+  min-width: 0;
+}
+
+.jar-legend .lab,
+.jar-legend .val {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Totais: não deixam o texto escapar da largura do card */
+.tfoot-total-row td,
+.pkg-subtotal-row td,
+tfoot td.subtotal-row {
+  min-width: 0;
+}
+
+/* Mobile Poco X5 Pro: tabelas rolam dentro do card, nunca a página */
+@media (max-width: 600px) {
+  body {
+    padding-left: max(6px, env(safe-area-inset-left));
+    padding-right: max(6px, env(safe-area-inset-right));
+  }
+
+  section.card {
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    overflow: hidden;
+  }
+
+  .table-scroll {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  /* Não permitir que o rodapé da tabela force a página para fora */
+  .table-scroll tfoot {
+    white-space: nowrap;
+  }
+
+  .subtotal-values {
+    right: 4px;
+    max-width: calc(100% - 8px);
+  }
+
+  .kv-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, auto);
+    gap: 8px 10px;
+  }
+
+  .kv-grid .k,
+  .kv-grid .v {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .kv-grid .v.editable {
+    min-width: 0;
+  }
+
+  .kv-grid .v.editable input,
+  .kv-grid .v.editable select {
+    max-width: 92px;
+  }
+
+  .price-tag .amt {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+/* Telas estreitas: reduzir apenas o que pode quebrar layout. */
+@media (max-width: 400px) {
+  header {
+    gap: 8px;
+  }
+
+  .reset-btn {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .jar-inline-row {
+    gap: 10px;
+  }
+
+  .jar-inline-info {
+    flex: 1 1 0;
+  }
+
+  .price-tag .amt {
+    font-size: 21px;
+  }
+}
+
 </style>
   <meta property="og:image" content="https://bolt.new/static/og_default.png">
     <meta name="twitter:card" content="summary_large_image">
