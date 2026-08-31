@@ -7,7 +7,7 @@ name="viewport"
 content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
 />
 <title>Custo do Pote</title>
-<meta name="theme-color" content="#1a1a2e" />
+<meta name="theme-color" content="#0f0e1a" />
 <link
 rel="icon"
 href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231a1a2e'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='%23f7c948'%3E%F0%9F%AB%99%3C/text%3E%3C/svg%3E"
@@ -30,26 +30,26 @@ padding: 0;
 --text-secondary: #b8b5c4;
 --text-muted: #7a7790;
 --gold: #f7c948;
---gold-dim: #f7c94833;
+--gold-dim: rgba(247, 201, 72, 0.15);
 --green: #6bcb8a;
---green-dim: #6bcb8a22;
+--green-dim: rgba(107, 203, 138, 0.15);
 --red: #e86a6a;
---red-dim: #e86a6a22;
+--red-dim: rgba(232, 106, 106, 0.15);
 --blue: #6ab0e8;
---blue-dim: #6ab0e822;
+--blue-dim: rgba(106, 176, 232, 0.15);
 --orange: #f5a84a;
---orange-dim: #f5a84a22;
+--orange-dim: rgba(245, 168, 74, 0.15);
 --border: #3a3a5a;
 --border-light: #4a4a6a;
 --radius: 16px;
---shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+--shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
 background: var(--bg-primary);
 color: var(--text-primary);
-font-family: -apple-system, "Inter", "Segoe UI", Roboto, system-ui, sans-serif;
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
 min-height: 100vh;
 padding: 16px 12px 80px;
 -webkit-font-smoothing: antialiased;
@@ -71,7 +71,7 @@ gap: 12px;
 align-items: center;
 justify-content: space-between;
 flex-wrap: wrap;
-margin-bottom: 24px;
+margin-bottom: 20px;
 padding: 16px 20px;
 background: var(--bg-secondary);
 border-radius: var(--radius);
@@ -81,35 +81,34 @@ backdrop-filter: blur(10px);
 
 .header-left {
 flex: 1;
-min-width: 150px;
+min-width: 180px;
 }
 
 .eyebrow {
-font-family: -apple-system, "Inter", sans-serif;
 text-transform: uppercase;
-letter-spacing: 0.15em;
-font-size: 10px;
+letter-spacing: 0.12em;
+font-size: 11px;
 color: var(--gold);
-opacity: 0.7;
-margin: 0 0 2px;
-font-weight: 600;
+opacity: 0.85;
+margin: 0 0 4px;
+font-weight: 700;
 }
 
 h1 {
 margin: 0;
-font-size: clamp(22px, 5vw, 36px);
+font-size: clamp(22px, 5vw, 32px);
 font-weight: 700;
-line-height: 1.1;
+line-height: 1.2;
 }
 
 #recipeName {
 background: transparent;
-border: none;
+border: 1px solid transparent;
 color: var(--text-primary);
 font-family: inherit;
 font-weight: 700;
-font-size: clamp(22px, 5vw, 36px);
-line-height: 1.1;
+font-size: clamp(22px, 5vw, 32px);
+line-height: 1.2;
 padding: 4px 8px;
 border-radius: 8px;
 width: 100%;
@@ -117,11 +116,14 @@ transition: var(--transition);
 -webkit-appearance: none;
 }
 
+#recipeName:hover {
+border-color: var(--border-light);
+}
+
 #recipeName:focus {
-outline: 2px solid var(--gold);
-outline-offset: 2px;
+outline: none;
+border-color: var(--gold);
 background: var(--gold-dim);
-border-radius: 8px;
 }
 
 #recipeName::placeholder {
@@ -129,9 +131,8 @@ color: var(--text-muted);
 }
 
 .reset-btn {
-font-family: -apple-system, "Inter", sans-serif;
-font-size: 12px;
-font-weight: 500;
+font-size: 13px;
+font-weight: 600;
 background: var(--bg-input);
 border: 1px solid var(--border);
 color: var(--text-secondary);
@@ -141,7 +142,7 @@ cursor: pointer;
 white-space: nowrap;
 transition: var(--transition);
 touch-action: manipulation;
-min-height: 44px;
+min-height: 40px;
 }
 
 .reset-btn:active {
@@ -157,8 +158,8 @@ background: var(--red-dim);
 /* ===== TABS ===== */
 .tabs {
 display: flex;
-gap: 6px;
-margin-bottom: 24px;
+gap: 8px;
+margin-bottom: 20px;
 background: var(--bg-secondary);
 padding: 6px;
 border-radius: 14px;
@@ -167,7 +168,7 @@ overflow-x: auto;
 -webkit-overflow-scrolling: touch;
 scrollbar-width: none;
 position: sticky;
-top: 0;
+top: 10px;
 z-index: 10;
 backdrop-filter: blur(12px);
 -webkit-backdrop-filter: blur(12px);
@@ -179,39 +180,34 @@ display: none;
 
 .tab-btn {
 flex: 1;
-min-width: 70px;
-padding: 12px 14px;
+min-width: 90px;
+padding: 10px 14px;
 background: transparent;
 border: none;
 border-radius: 10px;
 color: var(--text-muted);
-font-family: -apple-system, "Inter", sans-serif;
-font-size: 12px;
+font-size: 13px;
 font-weight: 600;
 cursor: pointer;
 transition: var(--transition);
 white-space: nowrap;
-letter-spacing: 0.02em;
+letter-spacing: 0.01em;
 touch-action: manipulation;
-min-height: 44px;
+min-height: 42px;
 display: flex;
 align-items: center;
 justify-content: center;
 gap: 8px;
 }
 
-.tab-btn:active {
-transform: scale(0.96);
-}
-
 .tab-btn:hover {
-color: var(--text-secondary);
+color: var(--text-primary);
 background: var(--bg-input);
 }
 
 .tab-btn.active {
 background: var(--gold);
-color: var(--bg-primary);
+color: #0f0e1a;
 box-shadow: 0 4px 16px rgba(247, 201, 72, 0.25);
 }
 
@@ -222,7 +218,7 @@ font-size: 16px;
 /* ===== TAB CONTENT ===== */
 .tab-content {
 display: none;
-animation: fadeUp 0.35s ease;
+animation: fadeUp 0.3s ease;
 }
 
 .tab-content.active {
@@ -232,7 +228,7 @@ display: block;
 @keyframes fadeUp {
 from {
 opacity: 0;
-transform: translateY(12px);
+transform: translateY(8px);
 }
 to {
 opacity: 1;
@@ -245,8 +241,8 @@ section.card {
 background: var(--bg-card);
 border: 1px solid var(--border);
 border-radius: var(--radius);
-padding: 20px 18px;
-margin-bottom: 18px;
+padding: 20px;
+margin-bottom: 20px;
 box-shadow: var(--shadow);
 transition: var(--transition);
 }
@@ -256,9 +252,9 @@ border-color: var(--border-light);
 }
 
 section.card h2 {
-font-size: 16px;
-margin: 0 0 4px;
-font-weight: 600;
+font-size: 17px;
+margin: 0 0 6px;
+font-weight: 700;
 color: var(--text-primary);
 display: flex;
 align-items: center;
@@ -268,40 +264,38 @@ letter-spacing: -0.01em;
 }
 
 section.card .sub {
-font-family: -apple-system, "Inter", sans-serif;
-font-size: 12.5px;
+font-size: 13px;
 color: var(--text-secondary);
-margin: 0 0 14px;
+margin: 0 0 16px;
 line-height: 1.5;
 }
 
 .badge {
-font-family: -apple-system, "Inter", sans-serif;
-font-size: 9px;
-letter-spacing: 0.06em;
+font-size: 10px;
+letter-spacing: 0.05em;
 background: var(--green);
-color: var(--bg-primary);
-padding: 3px 12px;
+color: #0f0e1a;
+padding: 3px 10px;
 border-radius: 999px;
 font-weight: 700;
+text-transform: uppercase;
 }
 
 .warning-badge {
-font-family: -apple-system, "Inter", sans-serif;
-font-size: 9px;
-letter-spacing: 0.06em;
+font-size: 10px;
+letter-spacing: 0.05em;
 background: var(--orange);
-color: var(--bg-primary);
-padding: 3px 12px;
+color: #0f0e1a;
+padding: 3px 10px;
 border-radius: 999px;
 font-weight: 700;
+text-transform: uppercase;
 }
 
-/* ===== TABLES ===== */
+/* ===== PADRONIZAÇÃO DE TABELAS ===== */
 table {
 width: 100%;
 border-collapse: collapse;
-font-family: -apple-system, "Inter", sans-serif;
 font-size: 13px;
 table-layout: fixed;
 }
@@ -310,10 +304,10 @@ thead th {
 text-align: left;
 font-weight: 600;
 color: var(--text-muted);
-font-size: 10px;
+font-size: 11px;
 text-transform: uppercase;
-letter-spacing: 0.08em;
-padding: 0 4px 10px;
+letter-spacing: 0.06em;
+padding: 0 6px 12px;
 border-bottom: 1px solid var(--border);
 }
 
@@ -323,24 +317,24 @@ text-align: right;
 }
 
 tbody td {
-padding: 4px 4px;
+padding: 6px 4px;
 border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 vertical-align: middle;
 }
 
 tbody tr:hover {
 background: var(--bg-card-hover);
-border-radius: 8px;
 }
 
+/* INPUTS DA TABELA */
 input.cell,
 select.cell {
 width: 100%;
 background: var(--bg-input);
-border: 1px solid transparent;
+border: 1px solid var(--border);
 color: var(--text-primary);
 font-family: inherit;
-font-size: 13px;
+font-size: 13.5px;
 padding: 8px 10px;
 border-radius: 8px;
 text-align: left;
@@ -352,9 +346,10 @@ min-height: 38px;
 select.cell {
 background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 0l6 8 6-8z' fill='%23b8b5c4'/%3E%3C/svg%3E");
 background-repeat: no-repeat;
-background-position: right 12px center;
-padding-right: 32px;
+background-position: right 10px center;
+padding-right: 28px;
 cursor: pointer;
+text-overflow: ellipsis;
 }
 
 select.cell option {
@@ -365,6 +360,7 @@ color: var(--text-primary);
 input.cell.num {
 text-align: right;
 font-variant-numeric: tabular-nums;
+font-weight: 500;
 }
 
 input.cell:hover,
@@ -377,29 +373,26 @@ select.cell:focus {
 outline: none;
 border-color: var(--gold);
 background: var(--gold-dim);
-box-shadow: 0 0 0 3px var(--gold-dim);
+box-shadow: 0 0 0 2px var(--gold-dim);
 }
 
 .rm-btn {
-background: none;
+background: transparent;
 border: none;
 color: var(--text-muted);
 cursor: pointer;
-font-size: 15px;
+font-size: 14px;
 line-height: 1;
-padding: 4px;
-border-radius: 8px;
+padding: 6px;
+border-radius: 6px;
 transition: var(--transition);
 touch-action: manipulation;
-min-height: 32px;
-min-width: 28px;
+min-height: 34px;
+min-width: 32px;
 display: flex;
 align-items: center;
 justify-content: center;
-}
-
-.rm-btn:active {
-transform: scale(0.9);
+margin: 0 auto;
 }
 
 .rm-btn:hover {
@@ -407,49 +400,57 @@ color: var(--red);
 background: var(--red-dim);
 }
 
-/* ===== FOOTER TOTALS ===== */
+/* VALORES CALCULADOS EM CELULAS DA TABELA */
+td.num[data-f="cost"] {
+font-variant-numeric: tabular-nums;
+font-weight: 600;
+color: var(--text-primary);
+padding-right: 8px;
+}
+
+/* ===== FOOTERS / SUBTOTAIS DAS TABELAS ===== */
 tfoot td {
-padding: 14px 4px 4px;
+padding: 14px 6px 4px;
 font-weight: 600;
 border-top: 1px solid var(--border);
 }
 
-tfoot td.num {
+.tfoot-total-row .total-label,
+.subtotal-label,
+.pkg-label {
+text-align: left;
+color: var(--text-secondary);
+font-size: 13.5px;
+font-weight: 600;
+}
+
+.tfoot-total-row .total-value,
+.pkg-value {
 color: var(--gold);
 font-variant-numeric: tabular-nums;
-white-space: nowrap;
 font-size: 16px;
-padding-left: 16px;
+font-weight: 700;
 text-align: right;
 }
 
-/* ===== SUBTOTAL DA RECEITA ===== */
 tfoot td.subtotal-row {
 position: relative;
 display: table-cell;
 width: 100%;
-padding: 14px 4px 4px;
+padding: 14px 6px 4px;
 border-top: 1px solid var(--border);
-font-weight: 600;
 height: 42px;
-}
-
-.subtotal-label {
-display: block;
-text-align: left;
-color: var(--text-secondary);
-font-size: 13px;
 }
 
 .subtotal-values {
 position: absolute;
-right: 4px;
+right: 6px;
 top: 50%;
-transform: translateY(-50%);
+transform: translateY(-30%);
 display: flex;
 align-items: center;
 justify-content: flex-end;
-gap: 50px;
+gap: 24px;
 white-space: nowrap;
 font-variant-numeric: tabular-nums;
 color: var(--gold);
@@ -457,78 +458,26 @@ font-size: 16px;
 font-weight: 700;
 }
 
-.subtotal-values span {
-display: inline-block;
-}
-
-/* ===== TOTAL DO ESTOQUE - AGORA IGUAL AO SUBTOTAL POR POTE ===== */
-.tfoot-total-row {
-display: table-row;
-}
-
-.tfoot-total-row td {
-padding: 14px 4px 4px;
-font-weight: 600;
-border-top: 1px solid var(--border);
-text-align: right;
-}
-
-.tfoot-total-row .total-label {
-text-align: left;
-color: var(--text-secondary);
-font-size: 13px;
-}
-
-.tfoot-total-row .total-value {
-color: var(--gold);
-font-variant-numeric: tabular-nums;
-font-size: 16px;
-font-weight: 700;
-text-align: right;
-}
-
-/* ===== EMBALAGEM SUBTOTAL ===== */
-.pkg-subtotal-row td {
-padding: 14px 4px 4px;
-font-weight: 600;
-border-top: 1px solid var(--border);
-}
-
-.pkg-subtotal-row .pkg-label {
-text-align: left;
-color: var(--text-secondary);
-font-size: 13px;
-}
-
-.pkg-subtotal-row .pkg-value {
-color: var(--gold);
-font-variant-numeric: tabular-nums;
-font-size: 16px;
-font-weight: 700;
-text-align: right;
-}
-
-/* ===== ADD ROW BUTTON ===== */
+/* ===== BOTOES ADICIONAR LINHA ===== */
 .add-row-btn {
 margin-top: 14px;
-font-family: -apple-system, "Inter", sans-serif;
-font-size: 12.5px;
-font-weight: 500;
+font-size: 13px;
+font-weight: 600;
 background: transparent;
 border: 2px dashed var(--border);
-color: var(--text-muted);
-padding: 12px 14px;
+color: var(--text-secondary);
+padding: 10px 14px;
 border-radius: 10px;
 cursor: pointer;
 width: 100%;
 text-align: center;
 transition: var(--transition);
 touch-action: manipulation;
-min-height: 48px;
-}
-
-.add-row-btn:active {
-transform: scale(0.97);
+min-height: 44px;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 6px;
 }
 
 .add-row-btn:hover {
@@ -538,65 +487,11 @@ background: var(--green-dim);
 border-style: solid;
 }
 
-/* ===== INVENTORY TABLE ===== */
-#invBody td:first-child,
-#invBody th:first-child {
-width: 32%;
-min-width: 80px;
-}
-#invBody td:nth-child(2),
-#invBody th:nth-child(2) {
-width: 28%;
-min-width: 70px;
-text-align: right;
-}
-#invBody td:nth-child(3),
-#invBody th:nth-child(3) {
-width: 25%;
-min-width: 65px;
-text-align: right;
-}
-#invBody td:last-child,
-#invBody th:last-child {
-width: 26px;
-max-width: 26px;
-}
-
-/* ===== RECIPE TABLE ===== */
-#recBody td:first-child,
-#recBody th:first-child {
-width: 42%;
-min-width: 120px;
-}
-#recBody td:nth-child(2),
-#recBody th:nth-child(2) {
-width: 28px;
-max-width: 28px;
-text-align: right;
-}
-#recBody td:nth-child(3),
-#recBody th:nth-child(3) {
-width: 28px;
-max-width: 28px;
-}
-#recBody td:nth-child(4),
-#recBody th:nth-child(4) {
-width: 60px;
-max-width: 60px;
-text-align: right;
-}
-#recBody td:last-child,
-#recBody th:last-child {
-width: 26px;
-max-width: 26px;
-}
-
-/* ===== KV GRID ===== */
+/* ===== KV GRID (COMPOSICAO / RENDIMENTO) ===== */
 .kv-grid {
 display: grid;
 grid-template-columns: 1fr auto;
-gap: 10px 16px;
-font-family: -apple-system, "Inter", sans-serif;
+gap: 12px 16px;
 font-size: 14px;
 }
 
@@ -609,7 +504,8 @@ align-self: center;
 font-variant-numeric: tabular-nums;
 text-align: right;
 align-self: center;
-font-weight: 500;
+font-weight: 600;
+color: var(--text-primary);
 }
 
 .kv-grid .v.editable {
@@ -630,31 +526,23 @@ border-radius: 8px;
 padding: 8px 12px;
 font-family: inherit;
 font-size: 14px;
+font-weight: 600;
 font-variant-numeric: tabular-nums;
 transition: var(--transition);
 -webkit-appearance: none;
-min-height: 44px;
+min-height: 40px;
 }
 
 .kv-grid .v.editable .unit-suffix {
 color: var(--text-muted);
 font-size: 13px;
-font-weight: 400;
+font-weight: 500;
 }
 
-.kv-grid .v.editable select {
-cursor: pointer;
-background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 0l6 8 6-8z' fill='%23b8b5c4'/%3E%3C/svg%3E");
-background-repeat: no-repeat;
-background-position: right 12px center;
-padding-right: 32px;
-}
-
-.kv-grid .v.editable input:focus,
-.kv-grid .v.editable select:focus {
+.kv-grid .v.editable input:focus {
 outline: none;
 border-color: var(--gold);
-box-shadow: 0 0 0 3px var(--gold-dim);
+box-shadow: 0 0 0 2px var(--gold-dim);
 }
 
 .kv-grid .total .k,
@@ -662,8 +550,13 @@ box-shadow: 0 0 0 3px var(--gold-dim);
 font-weight: 700;
 color: var(--text-primary);
 padding-top: 10px;
-border-top: 2px solid var(--border);
-margin-top: 4px;
+border-top: 1px solid var(--border);
+margin-top: 2px;
+}
+
+.kv-grid .total .v {
+color: var(--gold);
+font-size: 16px;
 }
 
 .kv-grid .divider {
@@ -673,7 +566,7 @@ background: var(--border);
 margin: 4px 0;
 }
 
-/* ===== JAR ===== */
+/* ===== JAR SVG & GRÁFICO ===== */
 .jar-card-inline {
 padding-bottom: 20px;
 }
@@ -681,15 +574,17 @@ padding-bottom: 20px;
 .jar-inline-row {
 display: flex;
 align-items: center;
-gap: 20px;
+gap: 24px;
+margin-top: 8px;
 }
 
 svg#jar {
 display: block;
 flex: none;
-border-radius: 8px;
+border-radius: 12px;
 background: var(--bg-secondary);
-padding: 4px;
+padding: 6px;
+border: 1px solid var(--border);
 }
 
 .jar-inline-info {
@@ -700,10 +595,8 @@ min-width: 0;
 .jar-legend {
 display: flex;
 flex-direction: column;
-gap: 6px;
-font-family: -apple-system, "Inter", sans-serif;
-font-size: 12px;
-text-align: left;
+gap: 8px;
+font-size: 12.5px;
 }
 
 .jar-legend div {
@@ -711,9 +604,10 @@ display: flex;
 align-items: center;
 justify-content: space-between;
 gap: 8px;
-padding: 4px 8px;
-border-radius: 6px;
+padding: 6px 10px;
+border-radius: 8px;
 background: var(--bg-input);
+border: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 .jar-legend .sw {
@@ -735,27 +629,25 @@ font-weight: 500;
 .jar-legend .val {
 font-variant-numeric: tabular-nums;
 color: var(--text-primary);
-font-weight: 600;
+font-weight: 700;
 }
 
 .price-tag {
-margin-top: 12px;
+margin-top: 14px;
 padding-top: 12px;
 border-top: 1px solid var(--border);
-text-align: left;
 }
 
 .price-tag .lbl {
-font-family: -apple-system, "Inter", sans-serif;
-font-size: 10px;
-letter-spacing: 0.12em;
+font-size: 11px;
+letter-spacing: 0.08em;
 text-transform: uppercase;
 color: var(--gold);
-font-weight: 600;
+font-weight: 700;
 }
 
 .price-tag .amt {
-font-size: 26px;
+font-size: 28px;
 font-weight: 800;
 color: var(--gold);
 font-variant-numeric: tabular-nums;
@@ -764,21 +656,20 @@ letter-spacing: -0.02em;
 }
 
 .price-tag .per {
-font-family: -apple-system, "Inter", sans-serif;
-font-size: 11px;
+font-size: 12px;
 color: var(--text-muted);
+margin-top: 2px;
 }
 
 /* ===== WARNING ===== */
 .warning-message {
-font-family: -apple-system, "Inter", sans-serif;
-font-size: 12.5px;
+font-size: 13px;
 color: var(--orange);
 background: var(--orange-dim);
 padding: 12px 16px;
 border-radius: 10px;
 border-left: 4px solid var(--orange);
-margin: 8px 0 0;
+margin: 12px 0 0;
 display: none;
 line-height: 1.5;
 }
@@ -787,92 +678,87 @@ line-height: 1.5;
 display: block;
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 380px) {
-.jar-inline-row {
-gap: 12px;
-flex-wrap: wrap;
-}
-svg#jar {
-width: 74px;
-height: 101px;
-}
-.price-tag .amt {
-font-size: 20px;
-}
+.leftover-note {
+color: var(--gold);
+font-weight: 700;
 }
 
-@media (max-width: 400px) {
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 480px) {
 body {
-padding: 10px 6px 60px;
+padding: 10px 8px 60px;
 }
-.tab-btn {
-font-size: 10px;
-padding: 10px 6px;
-min-width: 50px;
-}
-.tab-btn .emoji {
-font-size: 14px;
-}
-section.card {
-padding: 14px 10px;
-}
-table {
-font-size: 11px;
-}
-input.cell,
-select.cell {
-font-size: 11px;
-padding: 4px 6px;
-min-height: 32px;
-}
-.kv-grid {
-font-size: 12px;
-gap: 6px 12px;
-}
-.kv-grid .v.editable input,
-.kv-grid .v.editable select {
-width: 80px;
-font-size: 12px;
-padding: 6px 8px;
-min-height: 36px;
-}
-.price-tag .amt {
-font-size: 22px;
-}
+
 header {
 padding: 12px 14px;
 }
+
+.tabs {
+gap: 4px;
+padding: 4px;
 }
 
-@media (min-width: 768px) {
-.tabs {
-position: static;
+.tab-btn {
+font-size: 11px;
+padding: 8px 6px;
+min-width: 65px;
+gap: 4px;
+}
+
+.tab-btn .emoji {
+font-size: 13px;
+}
+
+section.card {
+padding: 14px 12px;
+}
+
+table {
+font-size: 12px;
+}
+
+input.cell,
+select.cell {
+font-size: 12px;
+padding: 6px 6px;
+min-height: 34px;
+}
+
+.subtotal-values {
+gap: 12px;
+font-size: 14px;
+}
+
+.jar-inline-row {
+gap: 12px;
+flex-direction: column;
+align-items: stretch;
+}
+
+svg#jar {
+margin: 0 auto;
+}
+
+.price-tag {
+text-align: center;
 }
 }
 
 /* ===== FOOTER ===== */
 .footer-note {
 text-align: center;
-font-family: -apple-system, "Inter", sans-serif;
-font-size: 11px;
+font-size: 12px;
 color: var(--text-muted);
-margin-top: 40px;
-line-height: 1.8;
-padding: 0 10px;
-opacity: 0.6;
-}
-
-.leftover-note {
-color: var(--gold);
-font-weight: 600;
+margin-top: 32px;
+line-height: 1.6;
+opacity: 0.7;
 }
 
 /* ===== MODAL ===== */
 .modal-overlay {
 position: fixed;
 inset: 0;
-background: rgba(0, 0, 0, 0.7);
+background: rgba(0, 0, 0, 0.75);
 backdrop-filter: blur(6px);
 -webkit-backdrop-filter: blur(6px);
 display: flex;
@@ -893,11 +779,11 @@ pointer-events: auto;
 .modal-box {
 background: var(--bg-card);
 border: 1px solid var(--border);
-border-top-left-radius: 24px;
-border-top-right-radius: 24px;
+border-top-left-radius: 20px;
+border-top-right-radius: 20px;
 width: 100%;
 max-width: 420px;
-padding: 28px 24px max(28px, env(safe-area-inset-bottom));
+padding: 24px 20px max(24px, env(safe-area-inset-bottom));
 box-shadow: 0 -12px 48px rgba(0, 0, 0, 0.6);
 transform: translateY(20px);
 transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -908,30 +794,29 @@ transform: translateY(0);
 }
 
 .modal-icon {
-width: 48px;
-height: 48px;
-border-radius: 14px;
+width: 44px;
+height: 44px;
+border-radius: 12px;
 display: flex;
 align-items: center;
 justify-content: center;
-font-size: 22px;
+font-size: 20px;
 background: var(--gold-dim);
-margin-bottom: 14px;
+margin-bottom: 12px;
 }
 
 .modal-title {
-font-size: 18px;
+font-size: 17px;
 font-weight: 700;
 color: var(--text-primary);
 margin: 0 0 6px;
 }
 
 .modal-msg {
-font-family: -apple-system, "Inter", sans-serif;
-font-size: 14px;
-line-height: 1.6;
+font-size: 13.5px;
+line-height: 1.5;
 color: var(--text-secondary);
-margin: 0 0 22px;
+margin: 0 0 20px;
 }
 
 .modal-actions {
@@ -941,46 +826,42 @@ gap: 10px;
 
 .modal-btn {
 flex: 1;
-font-family: -apple-system, "Inter", sans-serif;
-font-size: 14px;
+font-size: 13.5px;
 font-weight: 600;
-padding: 14px 16px;
-border-radius: 12px;
+padding: 12px 14px;
+border-radius: 10px;
 cursor: pointer;
 border: 1px solid var(--border);
 background: transparent;
 color: var(--text-secondary);
 transition: var(--transition);
 touch-action: manipulation;
-min-height: 48px;
-}
-
-.modal-btn:active {
-transform: scale(0.97);
+min-height: 44px;
 }
 
 .modal-btn:hover {
 background: var(--bg-input);
+color: var(--text-primary);
 }
 
 .modal-btn.primary {
 background: var(--gold);
 border-color: var(--gold);
-color: var(--bg-primary);
+color: #0f0e1a;
 }
 
 .modal-btn.primary:hover {
-box-shadow: 0 4px 20px rgba(247, 201, 72, 0.3);
+box-shadow: 0 4px 16px rgba(247, 201, 72, 0.3);
 }
 
 .modal-btn.primary.neutral {
 background: var(--green);
 border-color: var(--green);
-color: var(--bg-primary);
+color: #0f0e1a;
 }
 
 .modal-btn.primary.neutral:hover {
-box-shadow: 0 4px 20px rgba(107, 203, 138, 0.3);
+box-shadow: 0 4px 16px rgba(107, 203, 138, 0.3);
 }
 
 @media (min-width: 480px) {
@@ -988,19 +869,11 @@ box-shadow: 0 4px 20px rgba(107, 203, 138, 0.3);
 align-items: center;
 }
 .modal-box {
-border-radius: 24px;
+border-radius: 20px;
 transform: translateY(10px) scale(0.98);
 }
 .modal-overlay.open .modal-box {
 transform: translateY(0) scale(1);
-}
-}
-
-@supports (padding: max(0px)) {
-body {
-padding-left: max(16px, env(safe-area-inset-left));
-padding-right: max(16px, env(safe-area-inset-right));
-padding-bottom: max(80px, env(safe-area-inset-bottom));
 }
 }
 </style>
@@ -1009,7 +882,7 @@ padding-bottom: max(80px, env(safe-area-inset-bottom));
 <div class="wrap">
 <header>
 <div class="header-left">
-<p class="eyebrow">🍽️ Calculadora de preço</p>
+<p class="eyebrow">🍽️ Calculadora de Preço</p>
 <h1>
 <input id="recipeName" spellcheck="false" placeholder="Nome da receita" />
 </h1>
@@ -1026,25 +899,23 @@ padding-bottom: max(80px, env(safe-area-inset-bottom));
 
 <div class="layout">
 <div>
-<!-- ===================================================== TAB 0 — ESTOQUE ===================================================== -->
 <div class="tab-content active" id="tab0">
 <section class="card">
 <h2>🛒 Mercado</h2>
-<p class="sub">Cadastre os produtos que você compra e seus valores.</p>
+<p class="sub">Cadastre os produtos que você compra no supermercado e seus custos totais.</p>
 <table>
 <thead>
 <tr>
-<th style="width:32%">Produto</th>
-<th style="width:28%" class="num">g ou ml</th>
-<th style="width:25%" class="num">R$</th>
-<th style="width:26px"></th>
+<th style="width: 40%;">Produto</th>
+<th style="width: 25%;" class="num">Qtd (g/ml)</th>
+<th style="width: 25%;" class="num">Valor (R$)</th>
+<th style="width: 10%;"></th>
 </tr>
 </thead>
 <tbody id="invBody"></tbody>
 <tfoot>
 <tr class="tfoot-total-row">
-<td class="total-label">Total em estoque</td>
-<td></td>
+<td class="total-label" colspan="2">Total em compras / estoque</td>
 <td class="total-value" id="invTotalValue">R$ 0,00</td>
 <td></td>
 </tr>
@@ -1054,25 +925,24 @@ padding-bottom: max(80px, env(safe-area-inset-bottom));
 </section>
 </div>
 
-<!-- ===================================================== TAB 1 — RECEITA ===================================================== -->
 <div class="tab-content" id="tab1">
 <section class="card">
 <h2>🧺 Receita</h2>
-<p class="sub">Informe o produto e a quantidade usada na receita.</p>
+<p class="sub">Selecione o ingrediente do estoque e informe a quantidade usada na receita.</p>
 <table>
 <thead>
 <tr>
-<th style="width:42%">Produto</th>
-<th style="width:28px" class="num">Qtd.</th>
-<th style="width:28px">Un.</th>
-<th style="width:60px" class="num">Custo (R$)</th>
-<th style="width:26px"></th>
+<th style="width: 38%;">Produto</th>
+<th style="width: 20%;" class="num">Qtd.</th>
+<th style="width: 14%;">Unidade</th>
+<th style="width: 20%;" class="num">Custo</th>
+<th style="width: 8%;"></th>
 </tr>
 </thead>
 <tbody id="recBody"></tbody>
 <tfoot>
 <tr>
-<td colspan="4" class="subtotal-row">
+<td colspan="5" class="subtotal-row">
 <span class="subtotal-label">Subtotal receita</span>
 <span class="subtotal-values">
 <span id="recSubW"></span>
@@ -1086,35 +956,33 @@ padding-bottom: max(80px, env(safe-area-inset-bottom));
 </section>
 </div>
 
-<!-- ===================================================== TAB 2 — EMBALAGEM ===================================================== -->
 <div class="tab-content" id="tab2">
 <section class="card">
 <h2>📦 Embalagem <span class="badge">por pote</span></h2>
-<p class="sub">Custo fixo de cada pote da receita.</p>
+<p class="sub">Custos fixos diretos de cada embalagem ou rótulo por pote produzido.</p>
 <table>
 <thead>
 <tr>
-<th style="width:48%">Item</th>
-<th style="width:40px" class="num">Qtd.</th>
-<th style="width:44px">Un.</th>
-<th style="width:60px" class="num">R$</th>
-<th style="width:26px"></th>
+<th style="width: 40%;">Item</th>
+<th style="width: 20%;" class="num">Qtd.</th>
+<th style="width: 15%;">Unidade</th>
+<th style="width: 17%;" class="num">Custo (R$)</th>
+<th style="width: 8%;"></th>
 </tr>
 </thead>
 <tbody id="pkgBody"></tbody>
 <tfoot>
 <tr class="pkg-subtotal-row">
-<td class="pkg-label" colspan="3">Subtotal por pote</td>
+<td class="pkg-label" colspan="3">Subtotal de embalagem por pote</td>
 <td class="pkg-value" id="pkgSubV">R$ 0,00</td>
 <td></td>
 </tr>
 </tfoot>
 </table>
-<button class="add-row-btn" id="addPkg">+ Adicionar item</button>
+<button class="add-row-btn" id="addPkg">+ Adicionar item de embalagem</button>
 </section>
 </div>
 
-<!-- ===================================================== TAB 3 — CUSTO & PREÇO ===================================================== -->
 <div class="tab-content" id="tab3">
 <section class="card jar-card-inline">
 <h2>📊 Composição do preço</h2>
@@ -1123,7 +991,7 @@ padding-bottom: max(80px, env(safe-area-inset-bottom));
 <div class="jar-inline-info">
 <div class="jar-legend" id="jarLegend"></div>
 <div class="price-tag">
-<div class="lbl">Preço por pote</div>
+<div class="lbl">Preço sug. por pote</div>
 <div class="amt" id="jarPrice">R$ 0,00</div>
 <div class="per" id="jarPots">— potes</div>
 </div>
@@ -1132,17 +1000,17 @@ padding-bottom: max(80px, env(safe-area-inset-bottom));
 </section>
 
 <section class="card">
-<h2>🫙 Rendimento</h2>
+<h2>🫙 Rendimento da Receita</h2>
 <div class="kv-grid">
 <div class="k">Peso total da receita</div>
 <div class="v" id="totalWeight"></div>
-<div class="k">Tamanho do pote</div>
+<div class="k">Tamanho/capacidade do pote</div>
 <div class="v editable">
 <input type="number" id="weightPerPot" min="1" step="1" inputmode="numeric" />
 <span class="unit-suffix">g</span>
 </div>
 <div class="divider"></div>
-<div class="k total">Número de potes</div>
+<div class="k total">Total de potes cheios</div>
 <div class="v total" id="numPots"></div>
 <div class="k">Sobra da receita</div>
 <div class="v leftover-note" id="leftoverWeight"></div>
@@ -1154,31 +1022,31 @@ O custo dos ingredientes está sendo calculado como se toda a receita fosse usad
 </section>
 
 <section class="card">
-<h2>💰 Custo por pote</h2>
+<h2>💰 Custo Unitário (por Pote)</h2>
 <div class="kv-grid">
 <div class="k">Ingredientes rateados</div>
 <div class="v" id="costIngPot"></div>
 <div class="k">Embalagem por pote</div>
 <div class="v" id="costPkgPot"></div>
 <div class="divider"></div>
-<div class="k total">Custo total por pote</div>
+<div class="k total">Custo total unitário</div>
 <div class="v total" id="costTotalPot"></div>
 </div>
 </section>
 
 <section class="card">
-<h2>🏷️ Preço de venda <span class="badge">com markup</span></h2>
+<h2>🏷️ Preço de Venda <span class="badge">com markup</span></h2>
 <div class="kv-grid">
-<div class="k">Custo</div>
+<div class="k">Custo Total</div>
 <div class="v" id="priceCost"></div>
-<div class="k">Lucro desejado (%)</div>
+<div class="k">Margem de Lucro Desejada (%)</div>
 <div class="v editable">
 <input type="number" id="profitPct" min="0" max="99.99" step="1" inputmode="numeric" />
 </div>
-<div class="k">Markup</div>
+<div class="k">Markup aplicável</div>
 <div class="v" id="markup"></div>
 <div class="divider"></div>
-<div class="k total">Preço de venda por pote</div>
+<div class="k total">Preço final por pote</div>
 <div class="v total" id="finalPrice"></div>
 </div>
 </section>
@@ -1187,12 +1055,11 @@ O custo dos ingredientes está sendo calculado como se toda a receita fosse usad
 </div>
 
 <p class="footer-note">
-✨ Tudo fica salvo neste dispositivo.<br />
-Funciona para qualquer receita — ajuste ingredientes e embalagem como quiser.
+✨ Todos os dados são salvos localmente neste navegador.<br />
+Ajuste ingredientes e custos de embalagem livremente para calcular o preço final de qualquer receita.
 </p>
 </div>
 
-<!-- ============================================================= MODAL ============================================================= -->
 <div class="modal-overlay" id="modalOverlay">
 <div class="modal-box">
 <div class="modal-icon" id="modalIcon">⚠️</div>
