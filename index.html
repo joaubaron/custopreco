@@ -1607,10 +1607,10 @@ qtyInput.value = item.qty;
 unitInput.value = item.unit;
 
 function updateCost() {
-const invIdx = parseInt(select.value);
-const qty = parseFloat(qtyInput.value) || 0;
-const cost = getIngredientCost(invIdx, qty);
-costCell.textContent = brl(cost);
+  const invIdx = parseInt(select.value);
+  const qty = parseFloat(qtyInput.value) || 0;
+  const cost = getIngredientCost(invIdx, qty);
+  costCell.textContent = cost.toFixed(2).replace(".", ",");
 }
 
 select.addEventListener("change", function() {
