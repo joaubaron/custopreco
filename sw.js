@@ -1,6 +1,6 @@
 // Service Worker
 // A versão é atualizada automaticamente pelo deploy.yml a cada push no GitHub Pages.
-const CACHE_VERSION = '28.08.2026-1632';
+const CACHE_VERSION = '31.08.2026-0926';
 const CACHE_NAME = `custo-pote-${CACHE_VERSION}`;
 
 const ASSETS = [
