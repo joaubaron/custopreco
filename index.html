@@ -578,10 +578,22 @@ min-width: 0 !important;
 }
 
 /* ===== CÉLULAS DE CUSTO ===== */
-#tab1 td[data-f="cost"] {
-text-align: right !important;
-font-weight: 600;
+#tab1 .cost-display {
+display: flex;
+align-items: center;
+justify-content: flex-end;
+width: 100%;
+background: var(--bg-input);
+border: 1px solid transparent;
 color: var(--gold);
+font-family: inherit;
+font-size: 13px;
+font-weight: 600;
+padding: 8px 10px;
+border-radius: 8px;
+min-height: 38px;
+font-variant-numeric: tabular-nums;
+box-sizing: border-box;
 }
 
 /* ===== RODAPÉS ===== */
@@ -1585,13 +1597,13 @@ state.inventory.map((inv, i) =>
 "</td>" +
 "<td>" + '<input class="cell num" data-f="qty" type="number" step="any" inputmode="decimal" min="0">' + "</td>" +
 "<td>" + '<input class="cell" data-f="unit" placeholder="g/ml" inputmode="text">' + "</td>" +
-"<td class=\"num\" data-f=\"cost\">R$ 0,00</td>" +
+'<td class="num"><div class="cost-display" data-f="cost">R$ 0,00</div></td>' +
 "<td>" + '<button class="rm-btn" title="remover">✕</button>' + "</td>";
 
 const select = tr.querySelector("select");
 const qtyInput = tr.querySelectorAll("input")[0];
 const unitInput = tr.querySelectorAll("input")[1];
-const costCell = tr.querySelector("td[data-f=\"cost\"]");
+const costCell = tr.querySelector(".cost-display");
 
 select.value = item.invIndex;
 qtyInput.value = item.qty;
@@ -1601,7 +1613,7 @@ function updateCost() {
   const invIdx = parseInt(select.value);
   const qty = parseFloat(qtyInput.value) || 0;
   const cost = getIngredientCost(invIdx, qty);
-  costCell.textContent = cost.toFixed(2).replace(".", ",");
+  costCell.textContent = "R$ " + cost.toFixed(2).replace(".", ",");
 }
 
 select.addEventListener("change", function() {
