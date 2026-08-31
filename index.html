@@ -735,14 +735,6 @@ align-items: center;
 gap: 20px;
 }
 
-svg#jar {
-display: block;
-flex: none;
-border-radius: 8px;
-background: var(--bg-secondary);
-padding: 4px;
-}
-
 .jar-inline-info {
 flex: 1;
 min-width: 0;
@@ -1796,29 +1788,9 @@ render();
 });
 });
 
-const jarSvg = document.getElementById("jar");
 const jarLegend = document.getElementById("jarLegend");
 const jarPrice = document.getElementById("jarPrice");
 const jarPots = document.getElementById("jarPots");
-
-const JAR_TOP = 34;
-const JAR_BOTTOM = 208;
-const JAR_H = JAR_BOTTOM - JAR_TOP;
-
-function buildJarShell() {
-return (
-"<defs>" +
-'<clipPath id="jarClip">' +
-'<path d="' +
-"M46,20 L114,20 L114,40 Q136,50 136,80 L136,196 Q136,212 118,212 L42,212 Q24,212 24,196 L24,80 Q24,50 46,40 Z" +
-'"/>' +
-"</defs>" +
-'<path d="' +
-"M46,20 L114,20 L114,40 Q136,50 136,80 L136,196 Q136,212 118,212 L42,212 Q24,212 24,196 L24,80 Q24,50 46,40 Z" +
-'" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>' +
-'<rect x="50" y="8" width="60" height="16" rx="4" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>'
-);
-}
 
 function render() {
 let recW = 0;
@@ -1890,20 +1862,6 @@ const segments = [
 ];
 
 const total = price > 0 ? price : 1;
-let svgParts = [buildJarShell()];
-let yCursor = JAR_BOTTOM;
-svgParts.push('<g clip-path="url(#jarClip)">');
-segments.forEach(function(seg) {
-let h = JAR_H * (seg.value / total);
-if (h < 0) h = 0;
-const yTop = yCursor - h;
-svgParts.push(
-'<rect x="20" y="' + yTop.toFixed(1) + '" width="120" height="' + (h + 2).toFixed(1) + '" fill="' + seg.color + '" opacity="0.85"/>'
-);
-yCursor = yTop;
-});
-svgParts.push("</g>");
-jarSvg.innerHTML = svgParts.join("");
 
 jarLegend.innerHTML = segments
 .map(function(seg) {
