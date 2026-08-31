@@ -504,18 +504,18 @@ table-layout: fixed !important;
 }
 #tab1 th:first-child,
 #tab1 td:first-child {
-width: 42% !important;
+width: calc(42% + 5px) !important; /* AUMENTOU 5px */
 min-width: 0 !important;
 }
 #tab1 th:nth-child(2),
 #tab1 td:nth-child(2) {
-width: 18% !important;
+width: calc(18% - 5px) !important; /* DIMINUIU 5px */
 min-width: 0 !important;
 text-align: right;
 }
 #tab1 th:nth-child(3),
 #tab1 td:nth-child(3) {
-width: 16% !important;
+width: calc(16% - 5px) !important; /* DIMINUIU 5px */
 min-width: 0 !important;
 }
 #tab1 th:nth-child(4),
