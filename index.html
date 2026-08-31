@@ -398,11 +398,13 @@
       #invBody th:nth-child(2) {
         width: 28%;
         min-width: 70px;
+        text-align: right;
       }
       #invBody td:nth-child(3),
       #invBody th:nth-child(3) {
         width: 25%;
         min-width: 65px;
+        text-align: right;
       }
       #invBody td:last-child,
       #invBody th:last-child {
@@ -419,6 +421,7 @@
       #recBody th:nth-child(2) {
         width: 38px;
         max-width: 38px;
+        text-align: right;
       }
       #recBody td:nth-child(3),
       #recBody th:nth-child(3) {
@@ -429,6 +432,7 @@
       #recBody th:nth-child(4) {
         width: 60px;
         max-width: 60px;
+        text-align: right;
       }
       #recBody td:last-child,
       #recBody th:last-child {
@@ -794,8 +798,8 @@
                 <thead>
                   <tr>
                     <th style="width:32%">Produto</th>
-                    <th style="width:28%">g ou ml</th>
-                    <th style="width:25%">R$</th>
+                    <th style="width:28%" class="num">g ou ml</th>
+                    <th style="width:25%" class="num">R$</th>
                     <th style="width:26px"></th>
                   </tr>
                 </thead>
@@ -1127,7 +1131,6 @@
             state.inventory[idx][f] = v;
           }
           saveState();
-          // 🔥 CORREÇÃO: re-renderiza a receita inteira para atualizar todos os custos
           renderRecipe();
           render();
         });
@@ -1160,7 +1163,7 @@
       state.inventory.push({ name: "", total: 0, value: 0 });
       saveState();
       renderInventory();
-      renderRecipe(); // atualiza os selects
+      renderRecipe();
       render();
     });
 
@@ -1410,7 +1413,6 @@
 
     /* ========================================================= RENDER PRINCIPAL ========================================================= */
     function render() {
-      // -- Receita: subtotais --
       let recW = 0;
       let recV = 0;
       state.recipe.forEach(function (r) {
@@ -1422,14 +1424,12 @@
       document.getElementById("recSubW").textContent = num(recW, 0) + " g";
       document.getElementById("recSubV").textContent = brl(recV);
 
-      // -- Embalagem --
       let pkgV = 0;
       state.packaging.forEach(function (i) {
         pkgV += (parseFloat(i.qty) || 0) * (parseFloat(i.value) || 0);
       });
       document.getElementById("pkgSubV").textContent = brl(pkgV);
 
-      // -- Rendimento --
       const weightPerPotVal = parseFloat(state.weightPerPot);
       const weightPerPot = isFinite(weightPerPotVal) && weightPerPotVal > 0 ? weightPerPotVal : 500;
       const numPots = weightPerPot > 0 ? Math.floor(recW / weightPerPot) : 0;
@@ -1448,7 +1448,6 @@
         warningEl.classList.remove("visible");
       }
 
-      // -- Custo --
       let costIngPot;
       if (numPots > 0) {
         costIngPot = recV / numPots;
@@ -1464,7 +1463,6 @@
       document.getElementById("costPkgPot").textContent = brl(costPkgPot);
       document.getElementById("costTotalPot").textContent = brl(costTotalPot);
 
-      // -- Preço --
       const profitPct = Math.max(0, Math.min(parseFloat(state.profitPct) || 0, 99.99));
       const margin = profitPct / 100;
       const price = margin < 1 ? costTotalPot / (1 - margin) : 0;
@@ -1475,7 +1473,6 @@
       document.getElementById("markup").textContent = "×" + markup.toFixed(2).replace(".", ",");
       document.getElementById("finalPrice").textContent = brl(price);
 
-      // -- JAR --
       jarPrice.textContent = brl(price);
       jarPots.textContent = numPots + (numPots === 1 ? " pote" : " potes");
 
@@ -1521,7 +1518,6 @@
       document.getElementById("invTotalValue").textContent = brl(invTotal);
     }
 
-    /* ========================================================= INICIALIZAÇÃO ========================================================= */
     renderInventory();
     renderRecipe();
     renderPackaging();
