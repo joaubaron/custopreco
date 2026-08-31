@@ -1220,3 +1220,559 @@ inventory: [
 { name: "Berinjela", total: 1000, value: 6.00 },
 { name: "Abobrinha italiana", total: 1000, value: 4.00 },
 { name: "Cebola", total: 1000, value: 4.50 },
+{ name: "Pimentão vermelho", total: 500, value: 6.00 },
+{ name: "Pimentão amarelo", total: 500, value: 6.00 },
+{ name: "Tomate", total: 1000, value: 3.50 },
+{ name: "Uva passa", total: 200, value: 15.78 },
+{ name: "Manjericão seco", total: 50, value: 12.85 },
+],
+recipe: [
+{ invIndex: 0, qty: 120, unit: "ml" },
+{ invIndex: 1, qty: 120, unit: "ml" },
+{ invIndex: 2, qty: 120, unit: "ml" },
+{ invIndex: 3, qty: 350, unit: "g" },
+{ invIndex: 4, qty: 300, unit: "g" },
+{ invIndex: 5, qty: 180, unit: "g" },
+{ invIndex: 6, qty: 100, unit: "g" },
+{ invIndex: 7, qty: 100, unit: "g" },
+{ invIndex: 8, qty: 300, unit: "g" },
+{ invIndex: 9, qty: 100, unit: "g" },
+{ invIndex: 10, qty: 6, unit: "g" },
+],
+packaging: [
+{ name: "Vidro com tampa", qty: 1, unit: "un", value: 4.5 },
+{ name: "Rótulo", qty: 1, unit: "un", value: 1.5 },
+{ name: "Tecido para decoração", qty: 1, unit: "un", value: 2 },
+{ name: "Cordinha", qty: 1, unit: "un", value: 0.8 },
+],
+weightPerPot: 500,
+profitPct: 35,
+};
+
+let state = loadState();
+let storageWarned = false;
+
+function loadState() {
+try {
+const raw = localStorage.getItem(STORAGE_KEY);
+if (raw) {
+const parsed = JSON.parse(raw);
+if (parsed && Array.isArray(parsed.inventory) && Array.isArray(parsed.recipe) && Array.isArray(parsed.packaging)) {
+if (!isFinite(parsed.weightPerPot) || parsed.weightPerPot <= 0) parsed.weightPerPot = 500;
+if (!isFinite(parsed.profitPct) || parsed.profitPct < 0 || parsed.profitPct > 99.99) parsed.profitPct = 35;
+return parsed;
+}
+}
+} catch (e) {}
+return JSON.parse(JSON.stringify(DEFAULT_STATE));
+}
+
+function saveState() {
+try {
+localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+} catch (e) {
+if (!storageWarned) {
+storageWarned = true;
+showModal({
+icon: "⚠️",
+title: "Não foi possível salvar",
+message: "O navegador bloqueou o armazenamento local. Suas alterações funcionarão nesta sessão, mas podem se perder ao fechar.",
+confirmText: "Entendi",
+onlyOk: true,
+});
+}
+}
+}
+
+function brl(n) {
+if (!isFinite(n)) n = 0;
+return "R$ " + n.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+function num(n, digits) {
+if (!isFinite(n)) n = 0;
+return n.toLocaleString("pt-BR", { minimumFractionDigits: digits || 0, maximumFractionDigits: digits || 2 });
+}
+
+const recipeNameEl = document.getElementById("recipeName");
+const invBody = document.getElementById("invBody");
+const recBody = document.getElementById("recBody");
+const pkgBody = document.getElementById("pkgBody");
+const weightPerPotEl = document.getElementById("weightPerPot");
+const profitPctEl = document.getElementById("profitPct");
+
+recipeNameEl.value = state.recipeName || "Minha Receita";
+weightPerPotEl.value = state.weightPerPot > 0 ? state.weightPerPot : 500;
+profitPctEl.value = state.profitPct;
+
+recipeNameEl.addEventListener("input", function () {
+state.recipeName = recipeNameEl.value;
+saveState();
+});
+
+weightPerPotEl.addEventListener("input", function () {
+const value = parseFloat(weightPerPotEl.value);
+state.weightPerPot = isFinite(value) && value > 0 ? value : 0;
+saveState();
+render();
+});
+
+profitPctEl.addEventListener("input", function () {
+let value = parseFloat(profitPctEl.value);
+if (!isFinite(value)) value = 0;
+value = Math.max(0, Math.min(value, 99.99));
+state.profitPct = value;
+saveState();
+render();
+});
+
+const tabBtns = document.querySelectorAll(".tab-btn");
+const tabContents = {
+tab0: document.getElementById("tab0"),
+tab1: document.getElementById("tab1"),
+tab2: document.getElementById("tab2"),
+tab3: document.getElementById("tab3"),
+};
+
+tabBtns.forEach(function (btn) {
+btn.addEventListener("click", function (e) {
+e.preventDefault();
+tabBtns.forEach(function (b) { b.classList.remove("active"); });
+this.classList.add("active");
+Object.values(tabContents).forEach(function (tc) { tc.classList.remove("active"); });
+const target = document.getElementById(this.dataset.tab);
+if (target) target.classList.add("active");
+});
+});
+
+/* ========================================================= INVENTÁRIO ========================================================= */
+function invRow(item, idx) {
+const tr = document.createElement("tr");
+tr.innerHTML =
+"<td>" + '<input class="cell" data-f="name" placeholder="Produto" inputmode="text">' + "</td>" +
+"<td>" + '<input class="cell num" data-f="total" type="number" step="any" inputmode="decimal" min="0" placeholder="500">' + "</td>" +
+"<td>" + '<input class="cell num" data-f="value" type="number" step="any" inputmode="decimal" min="0" placeholder="0,00">' + "</td>" +
+"<td>" + '<button class="rm-btn" title="remover">✕</button>' + "</td>";
+
+const inputs = tr.querySelectorAll("input");
+inputs[0].value = item.name;
+inputs[1].value = item.total;
+inputs[2].value = item.value;
+
+inputs.forEach(function (inp) {
+inp.addEventListener("input", function () {
+const f = inp.dataset.f;
+const v = inp.value;
+if (f === "total" || f === "value") {
+const numVal = parseFloat(v);
+state.inventory[idx][f] = isFinite(numVal) && numVal >= 0 ? numVal : 0;
+} else {
+state.inventory[idx][f] = v;
+}
+saveState();
+renderRecipe();
+render();
+});
+});
+
+tr.querySelector(".rm-btn").addEventListener("click", function () {
+state.inventory.splice(idx, 1);
+state.recipe = state.recipe.filter(r => r.invIndex !== idx);
+state.recipe.forEach(r => { if (r.invIndex > idx) r.invIndex--; });
+saveState();
+renderInventory();
+renderRecipe();
+render();
+});
+
+return tr;
+}
+
+function renderInventory() {
+invBody.innerHTML = "";
+state.inventory.forEach(function (item, idx) {
+invBody.appendChild(invRow(item, idx));
+});
+let total = 0;
+state.inventory.forEach(i => total += (parseFloat(i.value) || 0));
+document.getElementById("invTotalValue").textContent = brl(total);
+}
+
+document.getElementById("addInv").addEventListener("click", function () {
+state.inventory.push({ name: "", total: 0, value: 0 });
+saveState();
+renderInventory();
+renderRecipe();
+render();
+});
+
+/* ========================================================= RECEITA ========================================================= */
+function getIngredientCost(invIndex, qty) {
+const inv = state.inventory[invIndex];
+if (!inv) return 0;
+const total = parseFloat(inv.total) || 0;
+const value = parseFloat(inv.value) || 0;
+if (total <= 0 || value <= 0) return 0;
+const q = parseFloat(qty) || 0;
+return (q / total) * value;
+}
+
+function recRow(item, idx) {
+const tr = document.createElement("tr");
+tr.innerHTML =
+"<td>" +
+'<select class="cell" data-f="invIndex">' +
+state.inventory.map((inv, i) =>
+`<option value="${i}">${inv.name || `Produto ${i+1}`}</option>`
+).join("") +
+"</select>" +
+"</td>" +
+"<td>" + '<input class="cell num" data-f="qty" type="number" step="any" inputmode="decimal" min="0">' + "</td>" +
+"<td>" + '<input class="cell" data-f="unit" placeholder="g/ml" inputmode="text">' + "</td>" +
+"<td class=\"num\" data-f=\"cost\">R$ 0,00</td>" +
+"<td>" + '<button class="rm-btn" title="remover">✕</button>' + "</td>";
+
+const select = tr.querySelector("select");
+const qtyInput = tr.querySelectorAll("input")[0];
+const unitInput = tr.querySelectorAll("input")[1];
+const costCell = tr.querySelector("td[data-f=\"cost\"]");
+
+select.value = item.invIndex;
+qtyInput.value = item.qty;
+unitInput.value = item.unit;
+
+function updateCost() {
+const invIdx = parseInt(select.value);
+const qty = parseFloat(qtyInput.value) || 0;
+const cost = getIngredientCost(invIdx, qty);
+costCell.textContent = brl(cost);
+}
+
+select.addEventListener("change", function () {
+state.recipe[idx].invIndex = parseInt(select.value);
+saveState();
+updateCost();
+render();
+});
+
+qtyInput.addEventListener("input", function () {
+const v = parseFloat(qtyInput.value);
+state.recipe[idx].qty = isFinite(v) && v >= 0 ? v : 0;
+saveState();
+updateCost();
+render();
+});
+
+unitInput.addEventListener("input", function () {
+state.recipe[idx].unit = unitInput.value;
+saveState();
+});
+
+tr.querySelector(".rm-btn").addEventListener("click", function () {
+state.recipe.splice(idx, 1);
+saveState();
+renderRecipe();
+render();
+});
+
+updateCost();
+return tr;
+}
+
+function renderRecipe() {
+recBody.innerHTML = "";
+if (state.inventory.length === 0) {
+recBody.innerHTML =
+`<tr><td colspan="5" style="text-align:center;color:var(--text-muted);padding:20px 0;">
+⚠️ Adicione produtos no estoque primeiro.
+</td></tr>`;
+return;
+}
+state.recipe.forEach(function (item, idx) {
+recBody.appendChild(recRow(item, idx));
+});
+}
+
+document.getElementById("addRec").addEventListener("click", function () {
+if (state.inventory.length === 0) {
+showModal({
+icon: "⚠️",
+title: "Estoque vazio",
+message: "Adicione produtos no estoque antes de criar a receita.",
+confirmText: "Entendi",
+onlyOk: true,
+});
+return;
+}
+state.recipe.push({ invIndex: 0, qty: 0, unit: "g" });
+saveState();
+renderRecipe();
+render();
+});
+
+/* ========================================================= EMBALAGEM ========================================================= */
+function pkgRow(item, idx) {
+const tr = document.createElement("tr");
+tr.innerHTML =
+"<td>" + '<input class="cell" data-f="name" placeholder="nome" inputmode="text">' + "</td>" +
+"<td>" + '<input class="cell num" data-f="qty" type="number" step="any" inputmode="decimal" min="0">' + "</td>" +
+"<td>" + '<input class="cell" data-f="unit" placeholder="un" inputmode="text">' + "</td>" +
+"<td>" + '<input class="cell num" data-f="value" type="number" step="any" inputmode="decimal" min="0">' + "</td>" +
+"<td>" + '<button class="rm-btn" title="remover">✕</button>' + "</td>";
+
+const inputs = tr.querySelectorAll("input");
+inputs[0].value = item.name;
+inputs[1].value = item.qty;
+inputs[2].value = item.unit;
+inputs[3].value = item.value;
+
+inputs.forEach(function (inp) {
+inp.addEventListener("input", function () {
+const f = inp.dataset.f;
+const v = inp.value;
+if (f === "qty" || f === "value") {
+const numVal = parseFloat(v);
+state.packaging[idx][f] = isFinite(numVal) && numVal >= 0 ? numVal : 0;
+} else {
+state.packaging[idx][f] = v;
+}
+saveState();
+render();
+});
+});
+
+tr.querySelector(".rm-btn").addEventListener("click", function () {
+state.packaging.splice(idx, 1);
+saveState();
+renderPackaging();
+render();
+});
+
+return tr;
+}
+
+function renderPackaging() {
+pkgBody.innerHTML = "";
+state.packaging.forEach(function (item, idx) {
+pkgBody.appendChild(pkgRow(item, idx));
+});
+}
+
+document.getElementById("addPkg").addEventListener("click", function () {
+state.packaging.push({ name: "", qty: 1, unit: "un", value: 0 });
+saveState();
+renderPackaging();
+render();
+});
+
+/* ========================================================= MODAL ========================================================= */
+const modalOverlay = document.getElementById("modalOverlay");
+const modalIcon = document.getElementById("modalIcon");
+const modalTitle = document.getElementById("modalTitle");
+const modalMsg = document.getElementById("modalMsg");
+const modalCancelBtn = document.getElementById("modalCancelBtn");
+const modalConfirmBtn = document.getElementById("modalConfirmBtn");
+
+function closeModal() {
+modalOverlay.classList.remove("open");
+}
+
+function showModal(options, onConfirm) {
+modalIcon.textContent = options.icon || "⚠️";
+modalTitle.textContent = options.title || "";
+modalMsg.textContent = options.message || "";
+modalConfirmBtn.textContent = options.confirmText || "OK";
+modalConfirmBtn.className = "modal-btn primary" + (options.danger ? "" : " neutral");
+if (options.onlyOk) {
+modalCancelBtn.style.display = "none";
+} else {
+modalCancelBtn.style.display = "";
+modalCancelBtn.textContent = options.cancelText || "Cancelar";
+}
+modalOverlay.classList.add("open");
+modalConfirmBtn.onclick = function () {
+closeModal();
+if (typeof onConfirm === "function") onConfirm();
+};
+modalCancelBtn.onclick = function () {
+closeModal();
+};
+}
+
+modalOverlay.addEventListener("click", function (e) {
+if (e.target === modalOverlay) closeModal();
+});
+
+/* ========================================================= RESET ========================================================= */
+document.getElementById("resetBtn").addEventListener("click", function () {
+showModal({
+icon: "↺",
+title: "Restaurar exemplo?",
+message: "Isso vai substituir os dados atuais pelos dados de exemplo. Essa ação não pode ser desfeita.",
+confirmText: "Restaurar",
+cancelText: "Cancelar",
+danger: true,
+}, function () {
+state = JSON.parse(JSON.stringify(DEFAULT_STATE));
+recipeNameEl.value = state.recipeName;
+weightPerPotEl.value = state.weightPerPot;
+profitPctEl.value = state.profitPct;
+saveState();
+renderInventory();
+renderRecipe();
+renderPackaging();
+render();
+});
+});
+
+/* ========================================================= JAR SVG ========================================================= */
+const jarSvg = document.getElementById("jar");
+const jarLegend = document.getElementById("jarLegend");
+const jarPrice = document.getElementById("jarPrice");
+const jarPots = document.getElementById("jarPots");
+
+const JAR_TOP = 34;
+const JAR_BOTTOM = 208;
+const JAR_H = JAR_BOTTOM - JAR_TOP;
+
+function buildJarShell() {
+return (
+"<defs>" +
+'<clipPath id="jarClip">' +
+'<path d="' +
+"M46,20 L114,20 L114,40 Q136,50 136,80 L136,196 Q136,212 118,212 L42,212 Q24,212 24,196 L24,80 Q24,50 46,40 Z" +
+'"/>' +
+"</defs>" +
+'<path d="' +
+"M46,20 L114,20 L114,40 Q136,50 136,80 L136,196 Q136,212 118,212 L42,212 Q24,212 24,196 L24,80 Q24,50 46,40 Z" +
+'" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>' +
+'<rect x="50" y="8" width="60" height="16" rx="4" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>'
+);
+}
+
+/* ========================================================= RENDER PRINCIPAL ========================================================= */
+function render() {
+let recW = 0;
+let recV = 0;
+state.recipe.forEach(function (r) {
+const qty = parseFloat(r.qty) || 0;
+recW += qty;
+recV += getIngredientCost(r.invIndex, qty);
+});
+
+document.getElementById("recSubW").textContent = num(recW, 0) + " g";
+document.getElementById("recSubV").textContent = brl(recV);
+
+let pkgV = 0;
+state.packaging.forEach(function (i) {
+pkgV += (parseFloat(i.qty) || 0) * (parseFloat(i.value) || 0);
+});
+document.getElementById("pkgSubV").textContent = brl(pkgV);
+
+const weightPerPotVal = parseFloat(state.weightPerPot);
+const weightPerPot = isFinite(weightPerPotVal) && weightPerPotVal > 0 ? weightPerPotVal : 500;
+const numPots = weightPerPot > 0 ? Math.floor(recW / weightPerPot) : 0;
+const leftoverWeight = Math.max(0, recW - (numPots * weightPerPot));
+
+document.getElementById("totalWeight").textContent = num(recW, 0) + " g";
+document.getElementById("numPots").textContent = numPots + (numPots === 1 ? " pote" : " potes");
+document.getElementById("leftoverWeight").textContent = num(leftoverWeight, 0) + " g";
+
+const warningEl = document.getElementById("insufficientWarning");
+const warningPotSize = document.getElementById("warningPotSize");
+if (numPots === 0 && recW > 0) {
+warningPotSize.textContent = num(weightPerPot, 0);
+warningEl.classList.add("visible");
+} else {
+warningEl.classList.remove("visible");
+}
+
+let costIngPot;
+if (numPots > 0) {
+costIngPot = recV / numPots;
+} else if (recW > 0) {
+costIngPot = recV;
+} else {
+costIngPot = 0;
+}
+const costPkgPot = pkgV;
+const costTotalPot = costIngPot + costPkgPot;
+
+document.getElementById("costIngPot").textContent = brl(costIngPot);
+document.getElementById("costPkgPot").textContent = brl(costPkgPot);
+document.getElementById("costTotalPot").textContent = brl(costTotalPot);
+
+const profitPct = Math.max(0, Math.min(parseFloat(state.profitPct) || 0, 99.99));
+const margin = profitPct / 100;
+const price = margin < 1 ? costTotalPot / (1 - margin) : 0;
+const profitValue = Math.max(0, price - costTotalPot);
+const markup = costTotalPot > 0 ? price / costTotalPot : 0;
+
+document.getElementById("priceCost").textContent = brl(costTotalPot);
+document.getElementById("markup").textContent = "×" + markup.toFixed(2).replace(".", ",");
+document.getElementById("finalPrice").textContent = brl(price);
+
+jarPrice.textContent = brl(price);
+jarPots.textContent = numPots + (numPots === 1 ? " pote" : " potes");
+
+const segments = [
+{ label: "Ingredientes", value: costIngPot, color: "#6bcb8a" },
+{ label: "Embalagem", value: costPkgPot, color: "#6ab0e8" },
+{ label: "Lucro", value: profitValue, color: "#f7c948" },
+];
+
+const total = price > 0 ? price : 1;
+let svgParts = [buildJarShell()];
+let yCursor = JAR_BOTTOM;
+svgParts.push('<g clip-path="url(#jarClip)">');
+segments.forEach(function (seg) {
+let h = JAR_H * (seg.value / total);
+if (h < 0) h = 0;
+const yTop = yCursor - h;
+svgParts.push(
+'<rect x="20" y="' + yTop.toFixed(1) + '" width="120" height="' + (h + 2).toFixed(1) + '" fill="' + seg.color + '" opacity="0.85"/>'
+);
+yCursor = yTop;
+});
+svgParts.push("</g>");
+jarSvg.innerHTML = svgParts.join("");
+
+jarLegend.innerHTML = segments
+.map(function (seg) {
+const pct = total > 0 ? Math.round((seg.value / total) * 100) : 0;
+return (
+"<div>" +
+'<span class="lab">' +
+'<span class="sw" style="background:' + seg.color + '"></span>' +
+seg.label +
+"</span>" +
+'<span class="val">' + pct + "%" + "</span>" +
+"</div>"
+);
+})
+.join("");
+
+let invTotal = 0;
+state.inventory.forEach(i => invTotal += (parseFloat(i.value) || 0));
+document.getElementById("invTotalValue").textContent = brl(invTotal);
+}
+
+renderInventory();
+renderRecipe();
+renderPackaging();
+render();
+
+if ("serviceWorker" in navigator) {
+let refreshing = false;
+navigator.serviceWorker.addEventListener("controllerchange", function () {
+if (refreshing) return;
+refreshing = true;
+window.location.reload();
+});
+window.addEventListener("load", function () {
+navigator.serviceWorker.register("sw.js").catch(function () {});
+});
+}
+})();
+</script>
+</body>
+</html>
