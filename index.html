@@ -504,18 +504,18 @@ table-layout: fixed !important;
 }
 #tab1 th:first-child,
 #tab1 td:first-child {
-width: 44% !important; /* AUMENTOU de 42% para 44% */
+width: calc(44% + 5px) !important; /* AUMENTOU 5px */
 min-width: 0 !important;
 }
 #tab1 th:nth-child(2),
 #tab1 td:nth-child(2) {
-width: 16% !important; /* DIMINUIU de 18% para 16% */
+width: 16% !important;
 min-width: 0 !important;
 text-align: right;
 }
 #tab1 th:nth-child(3),
 #tab1 td:nth-child(3) {
-width: 14% !important; /* DIMINUIU de 16% para 14% */
+width: calc(14% - 5px) !important; /* DIMINUIU 5px */
 min-width: 0 !important;
 }
 #tab1 th:nth-child(4),
