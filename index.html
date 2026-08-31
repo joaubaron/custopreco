@@ -14,1506 +14,1506 @@
 
 <style>
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  -webkit-tap-highlight-color: transparent;
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+-webkit-tap-highlight-color: transparent;
 }
 
 :root {
-  --bg-primary: #0f0e1a;
-  --bg-secondary: #1a1a2e;
-  --bg-card: #232341;
-  --bg-card-hover: #2a2a4a;
-  --bg-input: #2d2d50;
+--bg-primary: #0f0e1a;
+--bg-secondary: #1a1a2e;
+--bg-card: #232341;
+--bg-card-hover: #2a2a4a;
+--bg-input: #2d2d50;
 
-  --text-primary: #f0ede8;
-  --text-secondary: #b8b5c4;
-  --text-muted: #7a7790;
+--text-primary: #f0ede8;
+--text-secondary: #b8b5c4;
+--text-muted: #7a7790;
 
-  --gold: #ffd84d;
-  --gold-strong: #ffe16b;
-  --gold-soft: rgba(255,216,77,.12);
-  --gold-border: rgba(255,216,77,.34);
+--gold: #ffd84d;
+--gold-strong: #ffe16b;
+--gold-soft: rgba(255,216,77,.12);
+--gold-border: rgba(255,216,77,.34);
 
-  --green: #6bcb8a;
-  --green-dim: #6bcb8a22;
+--green: #6bcb8a;
+--green-dim: #6bcb8a22;
 
-  --red: #e86a6a;
-  --red-dim: #e86a6a22;
+--red: #e86a6a;
+--red-dim: #e86a6a22;
 
-  --blue: #6ab0e8;
-  --blue-dim: #6ab0e822;
+--blue: #6ab0e8;
+--blue-dim: #6ab0e822;
 
-  --orange: #f5a84a;
-  --orange-dim: #f5a84a22;
+--orange: #f5a84a;
+--orange-dim: #f5a84a22;
 
-  --border: #3a3a5a;
-  --border-light: #4a4a6a;
+--border: #3a3a5a;
+--border-light: #4a4a6a;
 
-  --radius: 16px;
-  --shadow: 0 8px 32px rgba(0,0,0,.5);
+--radius: 16px;
+--shadow: 0 8px 32px rgba(0,0,0,.5);
 
-  --transition: all .25s cubic-bezier(.4,0,.2,1);
+--transition: all .25s cubic-bezier(.4,0,.2,1);
 
-  --font-body: "Inter",-apple-system,"Segoe UI",Roboto,system-ui,sans-serif;
-  --font-display: "Plus Jakarta Sans","Inter",-apple-system,sans-serif;
+--font-body: "Inter",-apple-system,"Segoe UI",Roboto,system-ui,sans-serif;
+--font-display: "Plus Jakarta Sans","Inter",-apple-system,sans-serif;
 }
 
 body {
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: var(--font-body);
-  min-height: 100vh;
-  padding: 16px 12px 80px;
-  -webkit-font-smoothing: antialiased;
+background: var(--bg-primary);
+color: var(--text-primary);
+font-family: var(--font-body);
+min-height: 100vh;
+padding: 16px 12px 80px;
+-webkit-font-smoothing: antialiased;
 
-  background-image:
-    radial-gradient(ellipse at 20% 50%,#2a1f4a 0%,transparent 60%),
-    radial-gradient(ellipse at 80% 20%,#1a2a3a 0%,transparent 50%),
-    radial-gradient(ellipse at 50% 80%,#2a1a2a 0%,transparent 50%);
+background-image:
+radial-gradient(ellipse at 20% 50%,#2a1f4a 0%,transparent 60%),
+radial-gradient(ellipse at 80% 20%,#1a2a3a 0%,transparent 50%),
+radial-gradient(ellipse at 50% 80%,#2a1a2a 0%,transparent 50%);
 }
 
 .wrap {
-  max-width: 1040px;
-  margin: 0 auto;
+max-width: 1040px;
+margin: 0 auto;
 }
 
 header {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+display: flex;
+gap: 12px;
+align-items: center;
+justify-content: space-between;
+flex-wrap: wrap;
 
-  margin-bottom: 24px;
-  padding: 16px 20px;
+margin-bottom: 24px;
+padding: 16px 20px;
 
-  background: var(--bg-secondary);
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
+background: var(--bg-secondary);
+border-radius: var(--radius);
+border: 1px solid var(--border);
 
-  backdrop-filter: blur(10px);
+backdrop-filter: blur(10px);
 }
 
 .header-left {
-  flex: 1;
-  min-width: 150px;
+flex: 1;
+min-width: 150px;
 }
 
 .eyebrow {
-  text-transform: uppercase;
-  letter-spacing: .15em;
-  font-size: 8px;
-  color: var(--gold);
-  opacity: .7;
-  margin: 0 0 2px;
-  font-weight: 600;
+text-transform: uppercase;
+letter-spacing: .15em;
+font-size: 8px;
+color: var(--gold);
+opacity: .7;
+margin: 0 0 2px;
+font-weight: 600;
 }
 
 h1 {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(20px,5vw,34px);
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -.02em;
+margin: 0;
+font-family: var(--font-display);
+font-size: clamp(20px,5vw,34px);
+font-weight: 800;
+line-height: 1.1;
+letter-spacing: -.02em;
 }
 
 #recipeName {
-  background: transparent;
-  border: none;
-  color: var(--text-primary);
+background: transparent;
+border: none;
+color: var(--text-primary);
 
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(20px,5vw,34px);
+font-family: var(--font-display);
+font-weight: 800;
+font-size: clamp(20px,5vw,34px);
 
-  line-height: 1.1;
-  letter-spacing: -.02em;
+line-height: 1.1;
+letter-spacing: -.02em;
 
-  padding: 4px 8px;
-  border-radius: 8px;
-  width: 100%;
+padding: 4px 8px;
+border-radius: 8px;
+width: 100%;
 
-  transition: var(--transition);
-  -webkit-appearance: none;
+transition: var(--transition);
+-webkit-appearance: none;
 }
 
 #recipeName:focus {
-  outline: 2px solid var(--gold);
-  outline-offset: 2px;
-  background: var(--gold-soft);
+outline: 2px solid var(--gold);
+outline-offset: 2px;
+background: var(--gold-soft);
 }
 
 #recipeName::placeholder {
-  color: var(--text-muted);
+color: var(--text-muted);
 }
 
 .reset-btn {
-  font-size: 10px;
-  font-weight: 500;
+font-size: 10px;
+font-weight: 500;
 
-  background: var(--bg-input);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
+background: var(--bg-input);
+border: 1px solid var(--border);
+color: var(--text-secondary);
 
-  padding: 9px 16px;
-  border-radius: 999px;
+padding: 9px 16px;
+border-radius: 999px;
 
-  cursor: pointer;
-  white-space: nowrap;
+cursor: pointer;
+white-space: nowrap;
 
-  transition: var(--transition);
-  touch-action: manipulation;
+transition: var(--transition);
+touch-action: manipulation;
 
-  min-height: 42px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+min-height: 42px;
+display: inline-flex;
+align-items: center;
+gap: 6px;
 }
 
 .reset-btn:active {
-  transform: scale(.95);
+transform: scale(.95);
 }
 
 .reset-btn:hover {
-  border-color: var(--red);
-  color: var(--red);
-  background: var(--red-dim);
+border-color: var(--red);
+color: var(--red);
+background: var(--red-dim);
 }
 
 /* =========================================================
-   ABAS
+ABAS
 ========================================================= */
 
 .tabs {
-  display: flex;
-  gap: 8px;
+display: flex;
+gap: 8px;
 
-  margin-bottom: 24px;
+margin-bottom: 24px;
 
-  background: var(--bg-secondary);
-  padding: 7px;
+background: var(--bg-secondary);
+padding: 7px;
 
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,.10);
+border-radius: 14px;
+border: 1px solid rgba(255,255,255,.10);
 
-  overflow-x: auto;
-  scrollbar-width: none;
+overflow-x: auto;
+scrollbar-width: none;
 
-  position: sticky;
-  top: 0;
-  z-index: 10;
+position: sticky;
+top: 0;
+z-index: 10;
 
-  backdrop-filter: blur(12px);
+backdrop-filter: blur(12px);
 }
 
 .tabs::-webkit-scrollbar {
-  display: none;
+display: none;
 }
 
 .tab-btn {
-  flex: 1;
+flex: 1;
 
-  min-width: 112px;
-  min-height: 48px;
+min-width: 112px;
+min-height: 48px;
 
-  padding: 10px 14px;
+padding: 10px 14px;
 
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: 10px;
+background: transparent;
+border: 1px solid transparent;
+border-radius: 10px;
 
-  color: var(--text-muted);
+color: var(--text-muted);
 
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 700;
+font-family: var(--font-body);
+font-size: 11px;
+font-weight: 700;
 
-  cursor: pointer;
-  transition: var(--transition);
+cursor: pointer;
+transition: var(--transition);
 
-  white-space: nowrap;
+white-space: nowrap;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+display: flex;
+align-items: center;
+justify-content: center;
 
-  gap: 7px;
+gap: 7px;
 
-  touch-action: manipulation;
+touch-action: manipulation;
 }
 
 .tab-btn:active {
-  transform: scale(.96);
+transform: scale(.96);
 }
 
 .tab-btn:hover:not(.active) {
-  color: var(--gold);
-  background: var(--gold-soft);
-  border-color: var(--gold-border);
+color: var(--gold);
+background: var(--gold-soft);
+border-color: var(--gold-border);
 }
 
 .tab-btn.active,
 .tab-btn.active:hover {
-  background: linear-gradient(
-    180deg,
-    var(--gold-strong),
-    var(--gold)
-  );
+background: linear-gradient(
+180deg,
+var(--gold-strong),
+var(--gold)
+);
 
-  color: #17140a;
+color: #17140a;
 
-  border-color: rgba(255,255,255,.28);
+border-color: rgba(255,255,255,.28);
 
-  box-shadow:
-    0 5px 18px rgba(255,216,77,.30),
-    inset 0 1px 0 rgba(255,255,255,.45);
+box-shadow:
+0 5px 18px rgba(255,216,77,.30),
+inset 0 1px 0 rgba(255,255,255,.45);
 }
 
 .tab-btn .emoji {
-  font-size: 15px;
+font-size: 15px;
 }
 
 /* =========================================================
-   CONTEÚDO
+CONTEÚDO
 ========================================================= */
 
 .tab-content {
-  display: none;
-  animation: fadeUp .35s ease;
+display: none;
+animation: fadeUp .35s ease;
 }
 
 .tab-content.active {
-  display: block;
+display: block;
 }
 
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
+from {
+opacity: 0;
+transform: translateY(12px);
+}
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+to {
+opacity: 1;
+transform: translateY(0);
+}
 }
 
 section.card {
-  background: var(--bg-card);
-  border: 1px solid rgba(255,255,255,.10);
+background: var(--bg-card);
+border: 1px solid rgba(255,255,255,.10);
 
-  border-radius: var(--radius);
+border-radius: var(--radius);
 
-  padding: 22px 20px;
-  margin-bottom: 18px;
+padding: 22px 20px;
+margin-bottom: 18px;
 
-  box-shadow: 0 14px 38px rgba(0,0,0,.34);
+box-shadow: 0 14px 38px rgba(0,0,0,.34);
 
-  transition: var(--transition);
+transition: var(--transition);
 }
 
 section.card:hover {
-  border-color: var(--border-light);
+border-color: var(--border-light);
 }
 
 section.card h2 {
-  font-family: var(--font-display);
+font-family: var(--font-display);
 
-  font-size: 15px;
-  margin: 0 0 4px;
+font-size: 15px;
+margin: 0 0 4px;
 
-  font-weight: 700;
+font-weight: 700;
 
-  color: var(--text-primary);
+color: var(--text-primary);
 
-  display: flex;
-  align-items: center;
-  gap: 9px;
+display: flex;
+align-items: center;
+gap: 9px;
 
-  flex-wrap: wrap;
+flex-wrap: wrap;
 
-  letter-spacing: -.01em;
+letter-spacing: -.01em;
 }
 
 section.card .sub {
-  font-size: 10.5px;
-  color: var(--text-secondary);
+font-size: 10.5px;
+color: var(--text-secondary);
 
-  margin: 0 0 14px;
+margin: 0 0 14px;
 
-  line-height: 1.5;
+line-height: 1.5;
 }
 
 .badge {
-  font-size: 8px;
-  letter-spacing: .06em;
+font-size: 8px;
+letter-spacing: .06em;
 
-  background: var(--green);
-  color: var(--bg-primary);
+background: var(--green);
+color: var(--bg-primary);
 
-  padding: 3px 10px;
+padding: 3px 10px;
 
-  border-radius: 999px;
+border-radius: 999px;
 
-  font-weight: 700;
-  text-transform: uppercase;
+font-weight: 700;
+text-transform: uppercase;
 }
 
 /* =========================================================
-   TABELAS
+TABELAS
 ========================================================= */
 
 table {
-  width: 100%;
-  border-collapse: collapse;
+width: 100%;
+border-collapse: collapse;
 
-  font-family: var(--font-body);
+font-family: var(--font-body);
 
-  font-size: 11px;
+font-size: 11px;
 
-  table-layout: fixed;
+table-layout: fixed;
 }
 
 thead th {
-  text-align: left;
+text-align: left;
 
-  font-weight: 600;
+font-weight: 600;
 
-  color: var(--text-muted);
+color: var(--text-muted);
 
-  font-size: 8.5px;
+font-size: 8.5px;
 
-  text-transform: uppercase;
-  letter-spacing: .08em;
+text-transform: uppercase;
+letter-spacing: .08em;
 
-  padding: 0 6px 10px;
+padding: 0 6px 10px;
 
-  border-bottom: 1px solid var(--border);
+border-bottom: 1px solid var(--border);
 
-  white-space: nowrap;
+white-space: nowrap;
 }
 
 thead th.num,
 td.num {
-  text-align: right;
+text-align: right;
 }
 
 tbody td {
-  padding: 4px 5px;
+padding: 4px 5px;
 
-  border-bottom: 1px solid rgba(255,255,255,.04);
+border-bottom: 1px solid rgba(255,255,255,.04);
 
-  vertical-align: middle;
+vertical-align: middle;
 }
 
 tbody tr:hover {
-  background: var(--bg-card-hover);
+background: var(--bg-card-hover);
 }
 
 /* =========================================================
-   CAMPOS
+CAMPOS
 ========================================================= */
 
 input.cell,
 select.cell {
-  width: 100%;
+width: 100%;
 
-  background: var(--bg-input);
+background: var(--bg-input);
 
-  border: 1px solid rgba(255,255,255,.06);
+border: 1px solid rgba(255,255,255,.06);
 
-  color: var(--text-primary);
+color: var(--text-primary);
 
-  font-family: inherit;
+font-family: inherit;
 
-  font-size: 11px;
+font-size: 11px;
 
-  padding: 8px 9px;
+padding: 8px 9px;
 
-  border-radius: 8px;
+border-radius: 8px;
 
-  text-align: left;
+text-align: left;
 
-  transition: var(--transition);
+transition: var(--transition);
 
-  -webkit-appearance: none;
+-webkit-appearance: none;
 
-  min-height: 40px;
+min-height: 40px;
 
-  box-sizing: border-box;
+box-sizing: border-box;
 }
 
 input.cell.num {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
+text-align: right;
+font-variant-numeric: tabular-nums;
 }
 
 select.cell {
-  cursor: pointer;
+cursor: pointer;
 
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 0l6 8 6-8z' fill='%23b8b5c4'/%3E%3C/svg%3E");
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 0l6 8 6-8z' fill='%23b8b5c4'/%3E%3C/svg%3E");
 
-  background-repeat: no-repeat;
-  background-position: right 10px center;
+background-repeat: no-repeat;
+background-position: right 10px center;
 
-  padding-right: 28px;
+padding-right: 28px;
 }
 
 select.cell option {
-  background: var(--bg-secondary);
-  color: var(--text-primary);
+background: var(--bg-secondary);
+color: var(--text-primary);
 }
 
 input.cell:hover,
 select.cell:hover {
-  border-color: var(--border-light);
+border-color: var(--border-light);
 }
 
 input.cell:focus,
 select.cell:focus {
-  outline: none;
+outline: none;
 
-  border-color: var(--gold);
+border-color: var(--gold);
 
-  background: var(--gold-soft);
+background: var(--gold-soft);
 
-  box-shadow:
-    0 0 0 3px var(--gold-soft);
+box-shadow:
+0 0 0 3px var(--gold-soft);
 }
 
 /* =========================================================
-   BOTÃO REMOVER
+BOTÃO REMOVER
 ========================================================= */
 
 .rm-btn {
-  background: none;
-  border: none;
+background: none;
+border: none;
 
-  color: var(--text-muted);
+color: var(--text-muted);
 
-  cursor: pointer;
+cursor: pointer;
 
-  font-size: 13px;
+font-size: 13px;
 
-  line-height: 1;
+line-height: 1;
 
-  padding: 4px;
+padding: 4px;
 
-  border-radius: 8px;
+border-radius: 8px;
 
-  transition: var(--transition);
+transition: var(--transition);
 
-  min-height: 30px;
-  min-width: 26px;
+min-height: 30px;
+min-width: 26px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+display: flex;
+align-items: center;
+justify-content: center;
 }
 
 .rm-btn:hover {
-  color: var(--red);
-  background: var(--red-dim);
+color: var(--red);
+background: var(--red-dim);
 }
 
 /* =========================================================
-   MERCADO
+MERCADO
 ========================================================= */
 
 #tab0 table {
-  min-width: 0 !important;
-  width: 100% !important;
-  table-layout: fixed !important;
+min-width: 0 !important;
+width: 100% !important;
+table-layout: fixed !important;
 }
 
 #tab0 th:first-child,
 #tab0 td:first-child {
-  width: 44% !important;
+width: 44% !important;
 }
 
 #tab0 th:nth-child(2),
 #tab0 td:nth-child(2) {
-  width: 24% !important;
-  text-align: right;
+width: 24% !important;
+text-align: right;
 }
 
 #tab0 th:nth-child(3),
 #tab0 td:nth-child(3) {
-  width: 24% !important;
-  text-align: right;
+width: 24% !important;
+text-align: right;
 }
 
 #tab0 th:last-child,
 #tab0 td:last-child {
-  width: 8% !important;
+width: 8% !important;
 }
 
 /* =========================================================
-   RECEITA
-   SEM SELECT DE PRODUTO
+RECEITA
+SEM SELECT DE PRODUTO
 ========================================================= */
 
 #tab1 table {
-  min-width: 0 !important;
-  width: 100% !important;
-  table-layout: fixed !important;
+min-width: 0 !important;
+width: 100% !important;
+table-layout: fixed !important;
 }
 
 /*
-   Produto: 42%
-   Qtd:      18%
-   Un.:      13%
-   Custo:    19%
-   Remover:   8%
-   TOTAL:   100%
+Produto: 42%
+Qtd:      18%
+Un.:      13%
+Custo:    19%
+Remover:   8%
+TOTAL:   100%
 */
 
 #tab1 th:first-child,
 #tab1 td:first-child {
-  width: 42% !important;
+width: 42% !important;
 }
 
 #tab1 th:nth-child(2),
 #tab1 td:nth-child(2) {
-  width: 18% !important;
-  text-align: right;
+width: 18% !important;
+text-align: right;
 }
 
 #tab1 th:nth-child(3),
 #tab1 td:nth-child(3) {
-  width: 13% !important;
-  text-align: left;
+width: 13% !important;
+text-align: left;
 }
 
 #tab1 th:nth-child(4),
 #tab1 td:nth-child(4) {
-  width: 19% !important;
-  text-align: right;
+width: 19% !important;
+text-align: right;
 }
 
 #tab1 th:last-child,
 #tab1 td:last-child {
-  width: 8% !important;
+width: 8% !important;
 }
 
 #tab1 tbody td {
-  padding: 4px 5px !important;
+padding: 4px 5px !important;
 }
 
 /* Produto automático */
 #tab1 .product-display {
-  width: 100%;
+width: 100%;
 
-  min-height: 40px;
+min-height: 40px;
 
-  display: flex;
-  align-items: center;
+display: flex;
+align-items: center;
 
-  padding: 8px 9px;
+padding: 8px 9px;
 
-  background: var(--bg-input);
+background: var(--bg-input);
 
-  border: 1px solid rgba(255,255,255,.06);
+border: 1px solid rgba(255,255,255,.06);
 
-  border-radius: 8px;
+border-radius: 8px;
 
-  color: var(--text-primary);
+color: var(--text-primary);
 
-  font-size: 11px;
+font-size: 11px;
 
-  line-height: 1.2;
+line-height: 1.2;
 
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
 
-  box-sizing: border-box;
+box-sizing: border-box;
 }
 
 /* Custo */
 #tab1 .cost-display {
-  display: flex;
+display: flex;
 
-  align-items: center;
-  justify-content: flex-end;
+align-items: center;
+justify-content: flex-end;
 
-  width: 100%;
+width: 100%;
 
-  min-height: 40px;
+min-height: 40px;
 
-  background: var(--bg-input);
+background: var(--bg-input);
 
-  border: 1px solid transparent;
+border: 1px solid transparent;
 
-  color: var(--gold);
+color: var(--gold);
 
-  font-family: inherit;
+font-family: inherit;
 
-  font-size: 11px;
+font-size: 11px;
 
-  font-weight: 600;
+font-weight: 600;
 
-  padding: 8px 8px;
+padding: 8px 8px;
 
-  border-radius: 8px;
+border-radius: 8px;
 
-  font-variant-numeric: tabular-nums;
+font-variant-numeric: tabular-nums;
 
-  box-sizing: border-box;
+box-sizing: border-box;
 
-  white-space: nowrap;
+white-space: nowrap;
 }
 
 /* =========================================================
-   EMBALAGEM
+EMBALAGEM
 ========================================================= */
 
 #tab2 table {
-  min-width: 0 !important;
-  width: 100% !important;
-  table-layout: fixed !important;
+min-width: 0 !important;
+width: 100% !important;
+table-layout: fixed !important;
 }
 
 #tab2 th:first-child,
 #tab2 td:first-child {
-  width: 42% !important;
+width: 42% !important;
 }
 
 #tab2 th:nth-child(2),
 #tab2 td:nth-child(2) {
-  width: 17% !important;
-  text-align: right;
+width: 17% !important;
+text-align: right;
 }
 
 #tab2 th:nth-child(3),
 #tab2 td:nth-child(3) {
-  width: 15% !important;
+width: 15% !important;
 }
 
 #tab2 th:nth-child(4),
 #tab2 td:nth-child(4) {
-  width: 18% !important;
-  text-align: right;
+width: 18% !important;
+text-align: right;
 }
 
 #tab2 th:last-child,
 #tab2 td:last-child {
-  width: 8% !important;
+width: 8% !important;
 }
 
 /* =========================================================
-   RODAPÉS
+RODAPÉS
 ========================================================= */
 
 #tab0 tfoot .total-label,
 #tab1 tfoot .total-label,
 #tab2 tfoot .total-label {
-  color: var(--text-primary) !important;
+color: var(--text-primary) !important;
 
-  font-size: 12px !important;
+font-size: 12px !important;
 
-  font-weight: 700 !important;
+font-weight: 700 !important;
 }
 
 #invTotalValue,
 #recSubV,
 #pkgSubV {
-  color: var(--gold) !important;
+color: var(--gold) !important;
 
-  font-family: var(--font-display);
+font-family: var(--font-display);
 
-  font-size: 18px !important;
+font-size: 18px !important;
 
-  line-height: 1.1;
+line-height: 1.1;
 
-  font-weight: 800 !important;
+font-weight: 800 !important;
 
-  letter-spacing: -.02em;
+letter-spacing: -.02em;
 
-  white-space: nowrap;
+white-space: nowrap;
 }
 
 #tab0 tfoot tr,
 #tab1 tfoot tr,
 #tab2 tfoot tr {
-  background:
-    linear-gradient(
-      90deg,
-      rgba(255,216,77,.08),
-      rgba(255,216,77,.14)
-    );
+background:
+linear-gradient(
+90deg,
+rgba(255,216,77,.08),
+rgba(255,216,77,.14)
+);
 }
 
 #tab0 tfoot td,
 #tab1 tfoot td,
 #tab2 tfoot td {
-  padding-top: 15px;
-  padding-bottom: 13px;
+padding-top: 15px;
+padding-bottom: 13px;
 
-  border-top: 1px solid var(--gold-border);
+border-top: 1px solid var(--gold-border);
 }
 
 tfoot td {
-  font-weight: 600;
+font-weight: 600;
 }
 
 /* =========================================================
-   BOTÃO ADICIONAR
+BOTÃO ADICIONAR
 ========================================================= */
 
 .add-row-btn {
-  margin-top: 14px;
+margin-top: 14px;
 
-  font-family: var(--font-body);
+font-family: var(--font-body);
 
-  font-size: 10.5px;
+font-size: 10.5px;
 
-  font-weight: 500;
+font-weight: 500;
 
-  background: transparent;
+background: transparent;
 
-  border: 2px dashed var(--border);
+border: 2px dashed var(--border);
 
-  color: var(--text-muted);
+color: var(--text-muted);
 
-  padding: 11px 13px;
+padding: 11px 13px;
 
-  border-radius: 10px;
+border-radius: 10px;
 
-  cursor: pointer;
+cursor: pointer;
 
-  width: 100%;
+width: 100%;
 
-  text-align: center;
+text-align: center;
 
-  transition: var(--transition);
+transition: var(--transition);
 
-  min-height: 46px;
+min-height: 46px;
 }
 
 .add-row-btn:hover {
-  border-color: var(--green);
+border-color: var(--green);
 
-  color: var(--green);
+color: var(--green);
 
-  background: var(--green-dim);
+background: var(--green-dim);
 
-  border-style: solid;
+border-style: solid;
 }
 
 /* =========================================================
-   SCROLL
+SCROLL
 ========================================================= */
 
 .table-scroll {
-  width: 100%;
+width: 100%;
 
-  overflow-x: auto;
-  overflow-y: hidden;
+overflow-x: auto;
+overflow-y: hidden;
 
-  -webkit-overflow-scrolling: touch;
+-webkit-overflow-scrolling: touch;
 
-  scrollbar-width: thin;
+scrollbar-width: thin;
 
-  scrollbar-color:
-    var(--border-light)
-    transparent;
+scrollbar-color:
+var(--border-light)
+transparent;
 
-  padding-bottom: 3px;
+padding-bottom: 3px;
 }
 
 .table-scroll::-webkit-scrollbar {
-  height: 7px;
+height: 7px;
 }
 
 .table-scroll::-webkit-scrollbar-thumb {
-  background: var(--border-light);
-  border-radius: 999px;
+background: var(--border-light);
+border-radius: 999px;
 }
 
 /* =========================================================
-   KV GRID
+KV GRID
 ========================================================= */
 
 .kv-grid {
-  display: grid;
+display: grid;
 
-  grid-template-columns: 1fr auto;
+grid-template-columns: 1fr auto;
 
-  gap: 10px 16px;
+gap: 10px 16px;
 
-  font-family: var(--font-body);
+font-family: var(--font-body);
 
-  font-size: 12px;
+font-size: 12px;
 }
 
 .kv-grid .k {
-  color: var(--text-secondary);
-  align-self: center;
+color: var(--text-secondary);
+align-self: center;
 }
 
 .kv-grid .v {
-  font-variant-numeric: tabular-nums;
+font-variant-numeric: tabular-nums;
 
-  text-align: right;
+text-align: right;
 
-  align-self: center;
+align-self: center;
 
-  font-weight: 500;
+font-weight: 500;
 }
 
 .kv-grid .v.editable {
-  display: flex;
+display: flex;
 
-  align-items: center;
-  justify-content: flex-end;
+align-items: center;
+justify-content: flex-end;
 
-  gap: 8px;
+gap: 8px;
 }
 
 .kv-grid .v.editable input,
 .kv-grid .v.editable select {
-  width: 105px;
+width: 105px;
 
-  text-align: right;
+text-align: right;
 
-  background: var(--bg-input);
+background: var(--bg-input);
 
-  border: 1px solid var(--border);
+border: 1px solid var(--border);
 
-  color: var(--text-primary);
+color: var(--text-primary);
 
-  border-radius: 8px;
+border-radius: 8px;
 
-  padding: 7px 10px;
+padding: 7px 10px;
 
-  font-family: inherit;
+font-family: inherit;
 
-  font-size: 12px;
+font-size: 12px;
 
-  font-variant-numeric: tabular-nums;
+font-variant-numeric: tabular-nums;
 
-  min-height: 42px;
+min-height: 42px;
 }
 
 .kv-grid .v.editable .unit-suffix {
-  color: var(--text-muted);
-  font-size: 11px;
+color: var(--text-muted);
+font-size: 11px;
 }
 
 .kv-grid .total .k,
 .kv-grid .total .v {
-  font-weight: 700;
+font-weight: 700;
 
-  color: var(--text-primary);
+color: var(--text-primary);
 
-  padding-top: 10px;
+padding-top: 10px;
 
-  border-top: 2px solid var(--border);
+border-top: 2px solid var(--border);
 
-  margin-top: 4px;
+margin-top: 4px;
 }
 
 .kv-grid .divider {
-  grid-column: 1/-1;
+grid-column: 1/-1;
 
-  height: 1px;
+height: 1px;
 
-  background: var(--border);
+background: var(--border);
 
-  margin: 4px 0;
+margin: 4px 0;
 }
 
 /* =========================================================
-   PREÇO
+PREÇO
 ========================================================= */
 
 .jar-card-inline {
-  padding-bottom: 20px;
+padding-bottom: 20px;
 }
 
 .jar-inline-row {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+display: flex;
+align-items: center;
+gap: 20px;
 }
 
 .jar-inline-info {
-  flex: 1;
-  min-width: 0;
+flex: 1;
+min-width: 0;
 }
 
 .jar-legend {
-  display: flex;
-  flex-direction: column;
+display: flex;
+flex-direction: column;
 
-  gap: 6px;
+gap: 6px;
 
-  font-size: 10px;
+font-size: 10px;
 }
 
 .jar-legend div {
-  display: flex;
+display: flex;
 
-  align-items: center;
-  justify-content: space-between;
+align-items: center;
+justify-content: space-between;
 
-  gap: 8px;
+gap: 8px;
 
-  padding: 4px 8px;
+padding: 4px 8px;
 
-  border-radius: 6px;
+border-radius: 6px;
 
-  background: var(--bg-input);
+background: var(--bg-input);
 }
 
 .jar-legend .sw {
-  width: 9px;
-  height: 9px;
+width: 9px;
+height: 9px;
 
-  border-radius: 3px;
+border-radius: 3px;
 
-  display: inline-block;
+display: inline-block;
 
-  margin-right: 7px;
+margin-right: 7px;
 }
 
 .jar-legend .lab {
-  display: flex;
-  align-items: center;
+display: flex;
+align-items: center;
 
-  color: var(--text-secondary);
+color: var(--text-secondary);
 
-  font-weight: 500;
+font-weight: 500;
 }
 
 .jar-legend .val {
-  font-variant-numeric: tabular-nums;
+font-variant-numeric: tabular-nums;
 
-  color: var(--text-primary);
+color: var(--text-primary);
 
-  font-weight: 600;
+font-weight: 600;
 }
 
 .price-tag {
-  margin-top: 12px;
+margin-top: 12px;
 
-  padding-top: 12px;
+padding-top: 12px;
 
-  border-top: 1px solid var(--border);
+border-top: 1px solid var(--border);
 
-  text-align: left;
+text-align: left;
 }
 
 .price-tag .lbl {
-  font-size: 8px;
+font-size: 8px;
 
-  letter-spacing: .12em;
+letter-spacing: .12em;
 
-  text-transform: uppercase;
+text-transform: uppercase;
 
-  color: var(--gold);
+color: var(--gold);
 
-  font-weight: 600;
+font-weight: 600;
 }
 
 .price-tag .amt {
-  font-family: var(--font-display);
+font-family: var(--font-display);
 
-  font-size: 24px;
+font-size: 24px;
 
-  font-weight: 800;
+font-weight: 800;
 
-  color: var(--gold);
+color: var(--gold);
 
-  font-variant-numeric: tabular-nums;
+font-variant-numeric: tabular-nums;
 
-  margin-top: 2px;
+margin-top: 2px;
 
-  letter-spacing: -.02em;
+letter-spacing: -.02em;
 }
 
 .price-tag .per {
-  font-size: 9px;
-  color: var(--text-muted);
+font-size: 9px;
+color: var(--text-muted);
 }
 
 .warning-message {
-  font-size: 10.5px;
+font-size: 10.5px;
 
-  color: var(--orange);
+color: var(--orange);
 
-  background: var(--orange-dim);
+background: var(--orange-dim);
 
-  padding: 11px 14px;
+padding: 11px 14px;
 
-  border-radius: 10px;
+border-radius: 10px;
 
-  border-left: 4px solid var(--orange);
+border-left: 4px solid var(--orange);
 
-  margin: 8px 0 0;
+margin: 8px 0 0;
 
-  display: none;
+display: none;
 
-  line-height: 1.5;
+line-height: 1.5;
 }
 
 .warning-message.visible {
-  display: block;
+display: block;
 }
 
 .leftover-note {
-  color: var(--gold);
-  font-weight: 600;
+color: var(--gold);
+font-weight: 600;
 }
 
 .footer-note {
-  text-align: center;
+text-align: center;
 
-  font-size: 9px;
+font-size: 9px;
 
-  color: var(--text-muted);
+color: var(--text-muted);
 
-  margin-top: 40px;
+margin-top: 40px;
 
-  line-height: 1.8;
+line-height: 1.8;
 
-  padding: 0 10px;
+padding: 0 10px;
 
-  opacity: .6;
+opacity: .6;
 }
 
 /* =========================================================
-   MODAL
+MODAL
 ========================================================= */
 
 .modal-overlay {
-  position: fixed;
-  inset: 0;
+position: fixed;
+inset: 0;
 
-  background: rgba(0,0,0,.7);
+background: rgba(0,0,0,.7);
 
-  backdrop-filter: blur(6px);
+backdrop-filter: blur(6px);
 
-  display: flex;
+display: flex;
 
-  align-items: flex-end;
-  justify-content: center;
+align-items: flex-end;
+justify-content: center;
 
-  z-index: 100;
+z-index: 100;
 
-  opacity: 0;
+opacity: 0;
 
-  pointer-events: none;
+pointer-events: none;
 
-  transition: opacity .25s ease;
+transition: opacity .25s ease;
 }
 
 .modal-overlay.open {
-  opacity: 1;
-  pointer-events: auto;
+opacity: 1;
+pointer-events: auto;
 }
 
 .modal-box {
-  background: var(--bg-card);
+background: var(--bg-card);
 
-  border: 1px solid var(--border);
+border: 1px solid var(--border);
 
-  border-top-left-radius: 24px;
-  border-top-right-radius: 24px;
+border-top-left-radius: 24px;
+border-top-right-radius: 24px;
 
-  width: 100%;
+width: 100%;
 
-  max-width: 420px;
+max-width: 420px;
 
-  padding: 28px 24px
-    max(28px,env(safe-area-inset-bottom));
+padding: 28px 24px
+max(28px,env(safe-area-inset-bottom));
 
-  box-shadow:
-    0 -12px 48px rgba(0,0,0,.6);
+box-shadow:
+0 -12px 48px rgba(0,0,0,.6);
 
-  transform: translateY(20px);
+transform: translateY(20px);
 
-  transition:
-    transform .3s cubic-bezier(.4,0,.2,1);
+transition:
+transform .3s cubic-bezier(.4,0,.2,1);
 }
 
 .modal-overlay.open .modal-box {
-  transform: translateY(0);
+transform: translateY(0);
 }
 
 .modal-icon {
-  width: 48px;
-  height: 48px;
+width: 48px;
+height: 48px;
 
-  border-radius: 14px;
+border-radius: 14px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+display: flex;
+align-items: center;
+justify-content: center;
 
-  font-size: 22px;
+font-size: 22px;
 
-  background: var(--gold-soft);
+background: var(--gold-soft);
 
-  margin-bottom: 14px;
+margin-bottom: 14px;
 }
 
 .modal-title {
-  font-family: var(--font-display);
+font-family: var(--font-display);
 
-  font-size: 16px;
+font-size: 16px;
 
-  font-weight: 700;
+font-weight: 700;
 
-  color: var(--text-primary);
+color: var(--text-primary);
 
-  margin: 0 0 6px;
+margin: 0 0 6px;
 }
 
 .modal-msg {
-  font-size: 12px;
+font-size: 12px;
 
-  line-height: 1.6;
+line-height: 1.6;
 
-  color: var(--text-secondary);
+color: var(--text-secondary);
 
-  margin: 0 0 22px;
+margin: 0 0 22px;
 }
 
 .modal-actions {
-  display: flex;
-  gap: 10px;
+display: flex;
+gap: 10px;
 }
 
 .modal-btn {
-  flex: 1;
+flex: 1;
 
-  font-family: var(--font-body);
+font-family: var(--font-body);
 
-  font-size: 12px;
+font-size: 12px;
 
-  font-weight: 600;
+font-weight: 600;
 
-  padding: 13px 15px;
+padding: 13px 15px;
 
-  border-radius: 12px;
+border-radius: 12px;
 
-  cursor: pointer;
+cursor: pointer;
 
-  border: 1px solid var(--border);
+border: 1px solid var(--border);
 
-  background: transparent;
+background: transparent;
 
-  color: var(--text-secondary);
+color: var(--text-secondary);
 
-  min-height: 46px;
+min-height: 46px;
 }
 
 .modal-btn:hover {
-  background: var(--bg-input);
+background: var(--bg-input);
 }
 
 .modal-btn.primary {
-  background: var(--gold);
+background: var(--gold);
 
-  border-color: var(--gold);
+border-color: var(--gold);
 
-  color: var(--bg-primary);
+color: var(--bg-primary);
 }
 
 .modal-btn.primary.neutral {
-  background: var(--green);
+background: var(--green);
 
-  border-color: var(--green);
+border-color: var(--green);
 
-  color: var(--bg-primary);
+color: var(--bg-primary);
 }
 
 /* =========================================================
-   MOBILE
+MOBILE
 ========================================================= */
 
 @media screen and (max-width:600px) {
 
-  body {
-    padding-left: 8px;
-    padding-right: 8px;
-  }
+body {
+padding-left: 8px;
+padding-right: 8px;
+}
 
-  section.card {
-    padding: 16px 12px;
-  }
+section.card {
+padding: 16px 12px;
+}
 
-  /* 4 botões em uma única linha */
-  .tabs {
-    display: grid !important;
+/* 4 botões em uma única linha */
+.tabs {
+display: grid !important;
 
-    grid-template-columns:
-      repeat(4,minmax(0,1fr)) !important;
+grid-template-columns:
+repeat(4,minmax(0,1fr)) !important;
 
-    gap: 4px !important;
+gap: 4px !important;
 
-    padding: 5px !important;
+padding: 5px !important;
 
-    background: #171a2d !important;
+background: #171a2d !important;
 
-    border-color:
-      rgba(100,150,210,.22) !important;
-  }
+border-color:
+rgba(100,150,210,.22) !important;
+}
 
-  .tab-btn,
-  .tab-btn.active {
-    width: 100% !important;
+.tab-btn,
+.tab-btn.active {
+width: 100% !important;
 
-    min-width: 0 !important;
-    max-width: 100% !important;
+min-width: 0 !important;
+max-width: 100% !important;
 
-    min-height: 56px !important;
-    height: 56px !important;
+min-height: 56px !important;
+height: 56px !important;
 
-    padding: 5px 2px !important;
+padding: 5px 2px !important;
 
-    border-radius: 10px !important;
+border-radius: 10px !important;
 
-    display: flex !important;
+display: flex !important;
 
-    flex-direction: column !important;
+flex-direction: column !important;
 
-    align-items: center !important;
-    justify-content: center !important;
+align-items: center !important;
+justify-content: center !important;
 
-    gap: 2px !important;
+gap: 2px !important;
 
-    white-space: nowrap !important;
+white-space: nowrap !important;
 
-    overflow: hidden !important;
+overflow: hidden !important;
 
-    font-size: 9px !important;
+font-size: 9px !important;
 
-    line-height: 1.05 !important;
+line-height: 1.05 !important;
 
-    color: #9ca3bd !important;
+color: #9ca3bd !important;
 
-    background: transparent !important;
+background: transparent !important;
 
-    border-color: transparent !important;
+border-color: transparent !important;
 
-    box-shadow: none !important;
-  }
+box-shadow: none !important;
+}
 
-  .tab-btn .emoji {
-    display: block !important;
+.tab-btn .emoji {
+display: block !important;
 
-    flex: 0 0 auto;
+flex: 0 0 auto;
 
-    font-size: 18px !important;
+font-size: 18px !important;
 
-    line-height: 1 !important;
-  }
+line-height: 1 !important;
+}
 
-  .tab-btn.active,
-  .tab-btn.active:hover {
-    color: #fff !important;
+.tab-btn.active,
+.tab-btn.active:hover {
+color: #fff !important;
 
-    background: #315f91 !important;
+background: #315f91 !important;
 
-    border-color: #4d82b8 !important;
+border-color: #4d82b8 !important;
 
-    box-shadow:
-      0 4px 14px
-      rgba(49,95,145,.30) !important;
-  }
+box-shadow:
+0 4px 14px
+rgba(49,95,145,.30) !important;
+}
 
-  /* ===============================
-     MERCADO MOBILE
-  =============================== */
+/* ===============================
+MERCADO MOBILE
+=============================== */
 
-  #tab0 th:first-child,
-  #tab0 td:first-child {
-    width: 38% !important;
-  }
+#tab0 th:first-child,
+#tab0 td:first-child {
+width: 38% !important;
+}
 
-  #tab0 th:nth-child(2),
-  #tab0 td:nth-child(2) {
-    width: 26% !important;
-  }
-
-  #tab0 th:nth-child(3),
-  #tab0 td:nth-child(3) {
-    width: 26% !important;
-  }
-
-  #tab0 th:last-child,
-  #tab0 td:last-child {
-    width: 10% !important;
-  }
-
-  /* ===============================
-     RECEITA MOBILE
-
-     Produto 38%
-     Qtd     20%
-     Un      14%
-     Custo   18%
-     Remover 10%
-     = 100%
-  =============================== */
-
-  #tab1 th:first-child,
-  #tab1 td:first-child {
-    width: 38% !important;
-  }
-
-  #tab1 th:nth-child(2),
-  #tab1 td:nth-child(2) {
-    width: 20% !important;
-  }
-
-  #tab1 th:nth-child(3),
-  #tab1 td:nth-child(3) {
-    width: 14% !important;
-  }
-
-  #tab1 th:nth-child(4),
-  #tab1 td:nth-child(4) {
-    width: 18% !important;
-  }
-
-  #tab1 th:last-child,
-  #tab1 td:last-child {
-    width: 10% !important;
-  }
-
-  #tab1 .product-display {
-    font-size: 10px !important;
-
-    min-height: 38px !important;
-
-    padding: 7px 7px !important;
-  }
-
-  #tab1 .cost-display {
-    font-size: 10px !important;
-
-    min-height: 38px !important;
-
-    padding: 7px 5px !important;
-  }
-
-  /* ===============================
-     EMBALAGEM MOBILE
-  =============================== */
-
-  #tab2 th:first-child,
-  #tab2 td:first-child {
-    width: 38% !important;
-  }
-
-  #tab2 th:nth-child(2),
-  #tab2 td:nth-child(2) {
-    width: 20% !important;
-  }
-
-  #tab2 th:nth-child(3),
-  #tab2 td:nth-child(3) {
-    width: 14% !important;
-  }
-
-  #tab2 th:nth-child(4),
-  #tab2 td:nth-child(4) {
-    width: 18% !important;
-  }
-
-  #tab2 th:last-child,
-  #tab2 td:last-child {
-    width: 10% !important;
-  }
-
-  /* ===============================
-     FONTES DAS TABELAS
-  =============================== */
-
-  table {
-    font-size: 10px !important;
-  }
-
-  thead th {
-    font-size: 7.5px !important;
-
-    padding-left: 4px !important;
-    padding-right: 4px !important;
-  }
-
-  tbody td {
-    padding: 4px 4px !important;
-  }
-
-  input.cell,
-  select.cell {
-    font-size: 10.5px !important;
-
-    min-height: 38px !important;
-
-    padding: 7px 7px !important;
-  }
-
-  .add-row-btn {
-    font-size: 9.5px !important;
-  }
-
-  #invTotalValue,
-  #recSubV,
-  #pkgSubV,
-  #costTotalPot {
-    font-size: 18px !important;
-  }
-
-  #finalPrice {
-    font-size: 21px !important;
-  }
-
-  .kv-grid {
-    font-size: 11px;
-  }
-
-  .kv-grid .v.editable input {
-    font-size: 11px;
-  }
+#tab0 th:nth-child(2),
+#tab0 td:nth-child(2) {
+width: 26% !important;
+}
+
+#tab0 th:nth-child(3),
+#tab0 td:nth-child(3) {
+width: 26% !important;
+}
+
+#tab0 th:last-child,
+#tab0 td:last-child {
+width: 10% !important;
+}
+
+/* ===============================
+RECEITA MOBILE
+
+Produto 38%
+Qtd     20%
+Un      14%
+Custo   18%
+Remover 10%
+= 100%
+=============================== */
+
+#tab1 th:first-child,
+#tab1 td:first-child {
+width: 38% !important;
+}
+
+#tab1 th:nth-child(2),
+#tab1 td:nth-child(2) {
+width: 20% !important;
+}
+
+#tab1 th:nth-child(3),
+#tab1 td:nth-child(3) {
+width: 14% !important;
+}
+
+#tab1 th:nth-child(4),
+#tab1 td:nth-child(4) {
+width: 18% !important;
+}
+
+#tab1 th:last-child,
+#tab1 td:last-child {
+width: 10% !important;
+}
+
+#tab1 .product-display {
+font-size: 10px !important;
+
+min-height: 38px !important;
+
+padding: 7px 7px !important;
+}
+
+#tab1 .cost-display {
+font-size: 10px !important;
+
+min-height: 38px !important;
+
+padding: 7px 5px !important;
+}
+
+/* ===============================
+EMBALAGEM MOBILE
+=============================== */
+
+#tab2 th:first-child,
+#tab2 td:first-child {
+width: 38% !important;
+}
+
+#tab2 th:nth-child(2),
+#tab2 td:nth-child(2) {
+width: 20% !important;
+}
+
+#tab2 th:nth-child(3),
+#tab2 td:nth-child(3) {
+width: 14% !important;
+}
+
+#tab2 th:nth-child(4),
+#tab2 td:nth-child(4) {
+width: 18% !important;
+}
+
+#tab2 th:last-child,
+#tab2 td:last-child {
+width: 10% !important;
+}
+
+/* ===============================
+FONTES DAS TABELAS
+=============================== */
+
+table {
+font-size: 10px !important;
+}
+
+thead th {
+font-size: 7.5px !important;
+
+padding-left: 4px !important;
+padding-right: 4px !important;
+}
+
+tbody td {
+padding: 4px 4px !important;
+}
+
+input.cell,
+select.cell {
+font-size: 10.5px !important;
+
+min-height: 38px !important;
+
+padding: 7px 7px !important;
+}
+
+.add-row-btn {
+font-size: 9.5px !important;
+}
+
+#invTotalValue,
+#recSubV,
+#pkgSubV,
+#costTotalPot {
+font-size: 18px !important;
+}
+
+#finalPrice {
+font-size: 21px !important;
+}
+
+.kv-grid {
+font-size: 11px;
+}
+
+.kv-grid .v.editable input {
+font-size: 11px;
+}
 }
 
 @media (min-width:480px) {
-  .modal-overlay {
-    align-items: center;
-  }
+.modal-overlay {
+align-items: center;
+}
 
-  .modal-box {
-    border-radius: 24px;
+.modal-box {
+border-radius: 24px;
 
-    transform:
-      translateY(10px) scale(.98);
-  }
+transform:
+translateY(10px) scale(.98);
+}
 
-  .modal-overlay.open .modal-box {
-    transform:
-      translateY(0) scale(1);
-  }
+.modal-overlay.open .modal-box {
+transform:
+translateY(0) scale(1);
+}
 }
 
 @supports (padding:max(0px)) {
-  body {
-    padding-left:
-      max(16px,env(safe-area-inset-left));
+body {
+padding-left:
+max(16px,env(safe-area-inset-left));
 
-    padding-right:
-      max(16px,env(safe-area-inset-right));
+padding-right:
+max(16px,env(safe-area-inset-right));
 
-    padding-bottom:
-      max(80px,env(safe-area-inset-bottom));
-  }
+padding-bottom:
+max(80px,env(safe-area-inset-bottom));
+}
 }
 </style>
 </head>
@@ -1523,64 +1523,64 @@ tfoot td {
 <div class="wrap">
 
 <header>
-  <div class="header-left">
+<div class="header-left">
 
-    <p class="eyebrow">
-      🍽️ Calculadora de preço
-    </p>
+<p class="eyebrow">
+🍽️ Calculadora de preço
+</p>
 
-    <h1>
-      <input
-        id="recipeName"
-        spellcheck="false"
-        placeholder="Minha Receita"
-      />
-    </h1>
+<h1>
+<input
+id="recipeName"
+spellcheck="false"
+placeholder="Minha Receita"
+/>
+</h1>
 
-  </div>
+</div>
 
-  <button class="reset-btn" id="resetBtn">
-    ↺ Restaurar
-  </button>
+<button class="reset-btn" id="resetBtn">
+↺ Restaurar
+</button>
 </header>
 
 <!-- =====================================================
-     ABAS
+ABAS
 ===================================================== -->
 
 <div class="tabs" id="tabContainer">
 
-  <button
-    class="tab-btn active"
-    data-tab="tab0"
-  >
-    <span class="emoji">🛒</span>
-    Mercado
-  </button>
+<button
+class="tab-btn active"
+data-tab="tab0"
+>
+<span class="emoji">🛒</span>
+Mercado
+</button>
 
-  <button
-    class="tab-btn"
-    data-tab="tab1"
-  >
-    <span class="emoji">🧺</span>
-    Receita
-  </button>
+<button
+class="tab-btn"
+data-tab="tab1"
+>
+<span class="emoji">🧺</span>
+Receita
+</button>
 
-  <button
-    class="tab-btn"
-    data-tab="tab2"
-  >
-    <span class="emoji">📦</span>
-    Embalagem
-  </button>
+<button
+class="tab-btn"
+data-tab="tab2"
+>
+<span class="emoji">📦</span>
+Embalagem
+</button>
 
-  <button
-    class="tab-btn"
-    data-tab="tab3"
-  >
-    <span class="emoji">💰</span>
-    Preço
-  </button>
+<button
+class="tab-btn"
+data-tab="tab3"
+>
+<span class="emoji">💰</span>
+Preço
+</button>
 
 </div>
 
@@ -1589,7 +1589,7 @@ tfoot td {
 <div>
 
 <!-- =====================================================
-     TAB 0 — MERCADO
+TAB 0 — MERCADO
 ===================================================== -->
 
 <div class="tab-content active" id="tab0">
@@ -1608,10 +1608,10 @@ Cadastre os produtos que você compra e seus valores.
 
 <thead>
 <tr>
-  <th>Produto</th>
-  <th class="num">g ou ml</th>
-  <th class="num">R$</th>
-  <th></th>
+<th>Produto</th>
+<th class="num">g ou ml</th>
+<th class="num">R$</th>
+<th></th>
 </tr>
 </thead>
 
@@ -1622,16 +1622,16 @@ Cadastre os produtos que você compra e seus valores.
 <tr class="tfoot-total-row">
 
 <td class="total-label">
-  Total em estoque
+Total em estoque
 </td>
 
 <td></td>
 
 <td
-  class="total-value"
-  id="invTotalValue"
+class="total-value"
+id="invTotalValue"
 >
-  R$ 0,00
+R$ 0,00
 </td>
 
 <td></td>
@@ -1645,10 +1645,10 @@ Cadastre os produtos que você compra e seus valores.
 </div>
 
 <button
-  class="add-row-btn"
-  id="addInv"
+class="add-row-btn"
+id="addInv"
 >
-  + Adicionar produto
++ Adicionar produto
 </button>
 
 </section>
@@ -1656,7 +1656,7 @@ Cadastre os produtos que você compra e seus valores.
 </div>
 
 <!-- =====================================================
-     TAB 1 — RECEITA
+TAB 1 — RECEITA
 ===================================================== -->
 
 <div class="tab-content" id="tab1">
@@ -1676,11 +1676,11 @@ Os produtos aparecem automaticamente na ordem do Mercado.
 
 <thead>
 <tr>
-  <th>Produto</th>
-  <th class="num">Qtd.</th>
-  <th>Un.</th>
-  <th class="num">Custo (R$)</th>
-  <th></th>
+<th>Produto</th>
+<th class="num">Qtd.</th>
+<th>Un.</th>
+<th class="num">Custo (R$)</th>
+<th></th>
 </tr>
 </thead>
 
@@ -1691,17 +1691,17 @@ Os produtos aparecem automaticamente na ordem do Mercado.
 <tr>
 
 <td
-  class="total-label"
-  colspan="3"
+class="total-label"
+colspan="3"
 >
-  Subtotal receita
+Subtotal receita
 </td>
 
 <td
-  class="total-value"
-  id="recSubV"
+class="total-value"
+id="recSubV"
 >
-  R$ 0,00
+R$ 0,00
 </td>
 
 <td></td>
@@ -1715,10 +1715,10 @@ Os produtos aparecem automaticamente na ordem do Mercado.
 </div>
 
 <button
-  class="add-row-btn"
-  id="addRec"
+class="add-row-btn"
+id="addRec"
 >
-  + Adicionar ingrediente
++ Adicionar ingrediente
 </button>
 
 </section>
@@ -1726,7 +1726,7 @@ Os produtos aparecem automaticamente na ordem do Mercado.
 </div>
 
 <!-- =====================================================
-     TAB 2 — EMBALAGEM
+TAB 2 — EMBALAGEM
 ===================================================== -->
 
 <div class="tab-content" id="tab2">
@@ -1734,8 +1734,8 @@ Os produtos aparecem automaticamente na ordem do Mercado.
 <section class="card">
 
 <h2>
-  📦 Embalagem
-  <span class="badge">por pote</span>
+📦 Embalagem
+<span class="badge">por pote</span>
 </h2>
 
 <p class="sub">
@@ -1748,11 +1748,11 @@ Custo fixo de cada pote da receita.
 
 <thead>
 <tr>
-  <th>Item</th>
-  <th class="num">Qtd.</th>
-  <th>Un.</th>
-  <th class="num">R$</th>
-  <th></th>
+<th>Item</th>
+<th class="num">Qtd.</th>
+<th>Un.</th>
+<th class="num">R$</th>
+<th></th>
 </tr>
 </thead>
 
@@ -1763,17 +1763,17 @@ Custo fixo de cada pote da receita.
 <tr>
 
 <td
-  class="total-label"
-  colspan="3"
+class="total-label"
+colspan="3"
 >
-  Subtotal por pote
+Subtotal por pote
 </td>
 
 <td
-  class="total-value"
-  id="pkgSubV"
+class="total-value"
+id="pkgSubV"
 >
-  R$ 0,00
+R$ 0,00
 </td>
 
 <td></td>
@@ -1787,10 +1787,10 @@ Custo fixo de cada pote da receita.
 </div>
 
 <button
-  class="add-row-btn"
-  id="addPkg"
+class="add-row-btn"
+id="addPkg"
 >
-  + Adicionar item
++ Adicionar item
 </button>
 
 </section>
@@ -1798,7 +1798,7 @@ Custo fixo de cada pote da receita.
 </div>
 
 <!-- =====================================================
-     TAB 3 — PREÇO
+TAB 3 — PREÇO
 ===================================================== -->
 
 <div class="tab-content" id="tab3">
@@ -1812,28 +1812,28 @@ Custo fixo de cada pote da receita.
 <div class="jar-inline-info">
 
 <div
-  class="jar-legend"
-  id="jarLegend"
+class="jar-legend"
+id="jarLegend"
 ></div>
 
 <div class="price-tag">
 
 <div class="lbl">
-  Preço por pote
+Preço por pote
 </div>
 
 <div
-  class="amt"
-  id="jarPrice"
+class="amt"
+id="jarPrice"
 >
-  R$ 0,00
+R$ 0,00
 </div>
 
 <div
-  class="per"
-  id="jarPots"
+class="per"
+id="jarPots"
 >
-  — potes
+— potes
 </div>
 
 </div>
@@ -1853,31 +1853,31 @@ Custo fixo de cada pote da receita.
 <div class="kv-grid">
 
 <div class="k">
-  Peso total da receita
+Peso total da receita
 </div>
 
 <div
-  class="v"
-  id="totalWeight"
+class="v"
+id="totalWeight"
 ></div>
 
 <div class="k">
-  Tamanho do pote
+Tamanho do pote
 </div>
 
 <div class="v editable">
 
 <input
-  type="number"
-  id="weightPerPot"
-  min="1"
-  step="1"
-  inputmode="numeric"
-  value="500"
+type="number"
+id="weightPerPot"
+min="1"
+step="1"
+inputmode="numeric"
+value="500"
 />
 
 <span class="unit-suffix">
-  g
+g
 </span>
 
 </div>
@@ -1885,28 +1885,28 @@ Custo fixo de cada pote da receita.
 <div class="divider"></div>
 
 <div class="k total">
-  Número de potes
+Número de potes
 </div>
 
 <div
-  class="v total"
-  id="numPots"
+class="v total"
+id="numPots"
 ></div>
 
 <div class="k">
-  Sobra da receita
+Sobra da receita
 </div>
 
 <div
-  class="v leftover-note"
-  id="leftoverWeight"
+class="v leftover-note"
+id="leftoverWeight"
 ></div>
 
 </div>
 
 <div
-  class="warning-message"
-  id="insufficientWarning"
+class="warning-message"
+id="insufficientWarning"
 >
 ⚠️ Atenção: a receita não rende um pote completo de
 <span id="warningPotSize"></span> g.
@@ -1925,32 +1925,32 @@ toda a receita fosse usada em um único pote.
 <div class="kv-grid">
 
 <div class="k">
-  Ingredientes rateados
+Ingredientes rateados
 </div>
 
 <div
-  class="v"
-  id="costIngPot"
+class="v"
+id="costIngPot"
 ></div>
 
 <div class="k">
-  Embalagem por pote
+Embalagem por pote
 </div>
 
 <div
-  class="v"
-  id="costPkgPot"
+class="v"
+id="costPkgPot"
 ></div>
 
 <div class="divider"></div>
 
 <div class="k total">
-  Custo total por pote
+Custo total por pote
 </div>
 
 <div
-  class="v total"
-  id="costTotalPot"
+class="v total"
+id="costTotalPot"
 ></div>
 
 </div>
@@ -1962,57 +1962,57 @@ toda a receita fosse usada em um único pote.
 <section class="card">
 
 <h2>
-  🏷️ Preço de venda
-  <span class="badge">com markup</span>
+🏷️ Preço de venda
+<span class="badge">com markup</span>
 </h2>
 
 <div class="kv-grid">
 
 <div class="k">
-  Custo
+Custo
 </div>
 
 <div
-  class="v"
-  id="priceCost"
+class="v"
+id="priceCost"
 ></div>
 
 <div class="k">
-  Lucro desejado (%)
+Lucro desejado (%)
 </div>
 
 <div class="v editable">
 
 <input
-  type="number"
-  id="profitPct"
-  min="0"
-  max="99.99"
-  step="1"
-  inputmode="numeric"
-  value="35"
+type="number"
+id="profitPct"
+min="0"
+max="99.99"
+step="1"
+inputmode="numeric"
+value="35"
 />
 
 </div>
 
 <div class="k">
-  Markup
+Markup
 </div>
 
 <div
-  class="v"
-  id="markup"
+class="v"
+id="markup"
 ></div>
 
 <div class="divider"></div>
 
 <div class="k total">
-  Preço de venda por pote
+Preço de venda por pote
 </div>
 
 <div
-  class="v total"
-  id="finalPrice"
+class="v total"
+id="finalPrice"
 ></div>
 
 </div>
@@ -2032,54 +2032,54 @@ Funciona para qualquer receita — ajuste como quiser.
 </div>
 
 <!-- =====================================================
-     MODAL
+MODAL
 ===================================================== -->
 
 <div
-  class="modal-overlay"
-  id="modalOverlay"
+class="modal-overlay"
+id="modalOverlay"
 >
 
 <div class="modal-box">
 
 <div
-  class="modal-icon"
-  id="modalIcon"
+class="modal-icon"
+id="modalIcon"
 >
-  ⚠️
+⚠️
 </div>
 
 <p
-  class="modal-title"
-  id="modalTitle"
+class="modal-title"
+id="modalTitle"
 >
-  Título
+Título
 </p>
 
 <p
-  class="modal-msg"
-  id="modalMsg"
+class="modal-msg"
+id="modalMsg"
 >
-  Mensagem.
+Mensagem.
 </p>
 
 <div
-  class="modal-actions"
-  id="modalActions"
+class="modal-actions"
+id="modalActions"
 >
 
 <button
-  class="modal-btn"
-  id="modalCancelBtn"
+class="modal-btn"
+id="modalCancelBtn"
 >
-  Cancelar
+Cancelar
 </button>
 
 <button
-  class="modal-btn primary"
-  id="modalConfirmBtn"
+class="modal-btn primary"
+id="modalConfirmBtn"
 >
-  Confirmar
+Confirmar
 </button>
 
 </div>
@@ -2096,139 +2096,139 @@ Funciona para qualquer receita — ajuste como quiser.
 const STORAGE_KEY = "caponata-calc-v2";
 
 /* =========================================================
-   ESTADO PADRÃO
+ESTADO PADRÃO
 ========================================================= */
 
 const DEFAULT_STATE = {
 
-  recipeName: "Minha Receita",
+recipeName: "Minha Receita",
 
-  inventory: [
+inventory: [
 
-    {
-      name: "Azeite",
-      total: 500,
-      value: 27.90
-    },
+{
+name: "Azeite",
+total: 500,
+value: 27.90
+},
 
-    {
-      name: "Shoyu",
-      total: 500,
-      value: 18.90
-    },
+{
+name: "Shoyu",
+total: 500,
+value: 18.90
+},
 
-    {
-      name: "Vinagre",
-      total: 500,
-      value: 12.50
-    },
+{
+name: "Vinagre",
+total: 500,
+value: 12.50
+},
 
-    {
-      name: "Berinjela",
-      total: 1000,
-      value: 6.00
-    },
+{
+name: "Berinjela",
+total: 1000,
+value: 6.00
+},
 
-    {
-      name: "Abobrinha",
-      total: 1000,
-      value: 4.00
-    },
+{
+name: "Abobrinha",
+total: 1000,
+value: 4.00
+},
 
-    {
-      name: "Cebola",
-      total: 1000,
-      value: 4.50
-    },
+{
+name: "Cebola",
+total: 1000,
+value: 4.50
+},
 
-    {
-      name: "Pimentão ver.",
-      total: 500,
-      value: 6.00
-    },
+{
+name: "Pimentão ver.",
+total: 500,
+value: 6.00
+},
 
-    {
-      name: "Pimentão amar.",
-      total: 500,
-      value: 6.00
-    },
+{
+name: "Pimentão amar.",
+total: 500,
+value: 6.00
+},
 
-    {
-      name: "Tomate",
-      total: 1000,
-      value: 3.50
-    },
+{
+name: "Tomate",
+total: 1000,
+value: 3.50
+},
 
-    {
-      name: "Uva passa",
-      total: 200,
-      value: 15.78
-    },
+{
+name: "Uva passa",
+total: 200,
+value: 15.78
+},
 
-    {
-      name: "Manjericão",
-      total: 50,
-      value: 12.85
-    }
+{
+name: "Manjericão",
+total: 50,
+value: 12.85
+}
 
-  ],
+],
 
-  recipe: [
+recipe: [
 
-    { invIndex: 0, qty: 120, unit: "ml" },
-    { invIndex: 1, qty: 120, unit: "ml" },
-    { invIndex: 2, qty: 120, unit: "ml" },
-    { invIndex: 3, qty: 350, unit: "g" },
-    { invIndex: 4, qty: 300, unit: "g" },
-    { invIndex: 5, qty: 180, unit: "g" },
-    { invIndex: 6, qty: 100, unit: "g" },
-    { invIndex: 7, qty: 100, unit: "g" },
-    { invIndex: 8, qty: 300, unit: "g" },
-    { invIndex: 9, qty: 100, unit: "g" },
-    { invIndex: 10, qty: 6, unit: "g" }
+{ invIndex: 0, qty: 120, unit: "ml" },
+{ invIndex: 1, qty: 120, unit: "ml" },
+{ invIndex: 2, qty: 120, unit: "ml" },
+{ invIndex: 3, qty: 350, unit: "g" },
+{ invIndex: 4, qty: 300, unit: "g" },
+{ invIndex: 5, qty: 180, unit: "g" },
+{ invIndex: 6, qty: 100, unit: "g" },
+{ invIndex: 7, qty: 100, unit: "g" },
+{ invIndex: 8, qty: 300, unit: "g" },
+{ invIndex: 9, qty: 100, unit: "g" },
+{ invIndex: 10, qty: 6, unit: "g" }
 
-  ],
+],
 
-  packaging: [
+packaging: [
 
-    {
-      name: "Vidro/tampa",
-      qty: 1,
-      unit: "un",
-      value: 4.5
-    },
+{
+name: "Vidro/tampa",
+qty: 1,
+unit: "un",
+value: 4.5
+},
 
-    {
-      name: "Rótulo",
-      qty: 1,
-      unit: "un",
-      value: 1.5
-    },
+{
+name: "Rótulo",
+qty: 1,
+unit: "un",
+value: 1.5
+},
 
-    {
-      name: "Decoração",
-      qty: 1,
-      unit: "un",
-      value: 2
-    },
+{
+name: "Decoração",
+qty: 1,
+unit: "un",
+value: 2
+},
 
-    {
-      name: "Cordinha",
-      qty: 1,
-      unit: "un",
-      value: .8
-    }
+{
+name: "Cordinha",
+qty: 1,
+unit: "un",
+value: .8
+}
 
-  ],
+],
 
-  weightPerPot: 500,
+weightPerPot: 500,
 
-  profitPct: 35
+profitPct: 35
 
 };
 
 /* =========================================================
-   STORAGE
+STORAGE
 ========================================================= */
 
 let state = loadState();
@@ -2237,1564 +2237,1562 @@ let storageWarned = false;
 
 function loadState() {
 
-  try {
+try {
 
-    const raw =
-      localStorage.getItem(STORAGE_KEY);
+const raw =
+localStorage.getItem(STORAGE_KEY);
 
-    if (raw) {
+if (raw) {
 
-      const parsed =
-        JSON.parse(raw);
+const parsed =
+JSON.parse(raw);
 
-      if (
-        parsed &&
-        Array.isArray(parsed.inventory) &&
-        Array.isArray(parsed.recipe) &&
-        Array.isArray(parsed.packaging)
-      ) {
+if (
+parsed &&
+Array.isArray(parsed.inventory) &&
+Array.isArray(parsed.recipe) &&
+Array.isArray(parsed.packaging)
+) {
 
-        if (
-          !isFinite(parsed.weightPerPot) ||
-          parsed.weightPerPot <= 0
-        ) {
-          parsed.weightPerPot = 500;
-        }
+if (
+!isFinite(parsed.weightPerPot) ||
+parsed.weightPerPot <= 0
+) {
+parsed.weightPerPot = 500;
+}
 
-        if (
-          !isFinite(parsed.profitPct) ||
-          parsed.profitPct < 0 ||
-          parsed.profitPct > 99.99
-        ) {
-          parsed.profitPct = 35;
-        }
+if (
+!isFinite(parsed.profitPct) ||
+parsed.profitPct < 0 ||
+parsed.profitPct > 99.99
+) {
+parsed.profitPct = 35;
+}
 
-        return parsed;
-      }
-    }
+return parsed;
+}
+}
 
-  } catch (e) {}
+} catch (e) {}
 
-  return JSON.parse(
-    JSON.stringify(DEFAULT_STATE)
-  );
+return JSON.parse(
+JSON.stringify(DEFAULT_STATE)
+);
 }
 
 function saveState() {
 
-  try {
+try {
 
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify(state)
-    );
+localStorage.setItem(
+STORAGE_KEY,
+JSON.stringify(state)
+);
 
-  } catch (e) {
+} catch (e) {
 
-    if (!storageWarned) {
+if (!storageWarned) {
 
-      storageWarned = true;
+storageWarned = true;
 
-      showModal({
+showModal({
 
-        icon: "⚠️",
+icon: "⚠️",
 
-        title: "Não foi possível salvar",
+title: "Não foi possível salvar",
 
-        message:
-          "O navegador bloqueou o armazenamento local. " +
-          "Suas alterações funcionarão nesta sessão, " +
-          "mas podem se perder ao fechar.",
+message:
+"O navegador bloqueou o armazenamento local. " +
+"Suas alterações funcionarão nesta sessão, " +
+"mas podem se perder ao fechar.",
 
-        confirmText: "Entendi",
+confirmText: "Entendi",
 
-        onlyOk: true
+onlyOk: true
 
-      });
+});
 
-    }
-  }
+}
+}
 }
 
 /* =========================================================
-   FORMATADORES
+FORMATADORES
 ========================================================= */
 
 function brl(n) {
 
-  if (!isFinite(n)) n = 0;
+if (!isFinite(n)) n = 0;
 
-  return "R$ " +
-    n.toLocaleString(
-      "pt-BR",
-      {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-      }
-    );
+return "R$ " +
+n.toLocaleString(
+"pt-BR",
+{
+minimumFractionDigits: 2,
+maximumFractionDigits: 2
+}
+);
 }
 
 function num(n,digits) {
 
-  if (!isFinite(n)) n = 0;
+if (!isFinite(n)) n = 0;
 
-  return n.toLocaleString(
-    "pt-BR",
-    {
-      minimumFractionDigits: digits || 0,
-      maximumFractionDigits: digits || 2
-    }
-  );
+return n.toLocaleString(
+"pt-BR",
+{
+minimumFractionDigits: digits || 0,
+maximumFractionDigits: digits || 2
+}
+);
 }
 
 /* =========================================================
-   ELEMENTOS
+ELEMENTOS
 ========================================================= */
 
 const recipeNameEl =
-  document.getElementById("recipeName");
+document.getElementById("recipeName");
 
 const invBody =
-  document.getElementById("invBody");
+document.getElementById("invBody");
 
 const recBody =
-  document.getElementById("recBody");
+document.getElementById("recBody");
 
 const pkgBody =
-  document.getElementById("pkgBody");
+document.getElementById("pkgBody");
 
 const weightPerPotEl =
-  document.getElementById("weightPerPot");
+document.getElementById("weightPerPot");
 
 const profitPctEl =
-  document.getElementById("profitPct");
+document.getElementById("profitPct");
 
 recipeNameEl.value =
-  state.recipeName || "Minha Receita";
+state.recipeName || "Minha Receita";
 
 weightPerPotEl.value =
-  state.weightPerPot > 0
-    ? state.weightPerPot
-    : 500;
+state.weightPerPot > 0
+? state.weightPerPot
+: 500;
 
 profitPctEl.value =
-  state.profitPct;
+state.profitPct;
 
 /* =========================================================
-   CAMPOS GERAIS
+CAMPOS GERAIS
 ========================================================= */
 
 recipeNameEl.addEventListener(
-  "input",
-  function() {
+"input",
+function() {
 
-    state.recipeName =
-      recipeNameEl.value;
+state.recipeName =
+recipeNameEl.value;
 
-    saveState();
+saveState();
 
-  }
+}
 );
 
 weightPerPotEl.addEventListener(
-  "input",
-  function() {
+"input",
+function() {
 
-    const value =
-      parseFloat(
-        weightPerPotEl.value
-      );
+const value =
+parseFloat(
+weightPerPotEl.value
+);
 
-    state.weightPerPot =
-      isFinite(value) && value > 0
-        ? value
-        : 0;
+state.weightPerPot =
+isFinite(value) && value > 0
+? value
+: 0;
 
-    saveState();
+saveState();
 
-    render();
+render();
 
-  }
+}
 );
 
 profitPctEl.addEventListener(
-  "input",
-  function() {
+"input",
+function() {
 
-    let value =
-      parseFloat(
-        profitPctEl.value
-      );
+let value =
+parseFloat(
+profitPctEl.value
+);
 
-    if (!isFinite(value)) {
-      value = 0;
-    }
+if (!isFinite(value)) {
+value = 0;
+}
 
-    value =
-      Math.max(
-        0,
-        Math.min(value,99.99)
-      );
+value =
+Math.max(
+0,
+Math.min(value,99.99)
+);
 
-    state.profitPct = value;
+state.profitPct = value;
 
-    saveState();
+saveState();
 
-    render();
+render();
 
-  }
+}
 );
 
 /* =========================================================
-   ABAS
+ABAS
 ========================================================= */
 
 const tabBtns =
-  document.querySelectorAll(".tab-btn");
+document.querySelectorAll(".tab-btn");
 
 const tabContents = {
 
-  tab0:
-    document.getElementById("tab0"),
+tab0:
+document.getElementById("tab0"),
 
-  tab1:
-    document.getElementById("tab1"),
+tab1:
+document.getElementById("tab1"),
 
-  tab2:
-    document.getElementById("tab2"),
+tab2:
+document.getElementById("tab2"),
 
-  tab3:
-    document.getElementById("tab3")
+tab3:
+document.getElementById("tab3")
 
 };
 
 tabBtns.forEach(function(btn) {
 
-  btn.addEventListener(
-    "click",
-    function(e) {
+btn.addEventListener(
+"click",
+function(e) {
 
-      e.preventDefault();
+e.preventDefault();
 
-      tabBtns.forEach(
-        function(b) {
-          b.classList.remove("active");
-        }
-      );
+tabBtns.forEach(
+function(b) {
+b.classList.remove("active");
+}
+);
 
-      this.classList.add("active");
+this.classList.add("active");
 
-      Object.values(tabContents)
-        .forEach(
-          function(tc) {
-            tc.classList.remove("active");
-          }
-        );
+Object.values(tabContents)
+.forEach(
+function(tc) {
+tc.classList.remove("active");
+}
+);
 
-      const target =
-        document.getElementById(
-          this.dataset.tab
-        );
+const target =
+document.getElementById(
+this.dataset.tab
+);
 
-      if (target) {
-        target.classList.add("active");
-      }
+if (target) {
+target.classList.add("active");
+}
 
-    }
-  );
+}
+);
 
 });
 
 /* =========================================================
-   MERCADO
+MERCADO
 ========================================================= */
 
 function invRow(item,idx) {
 
-  const tr =
-    document.createElement("tr");
+const tr =
+document.createElement("tr");
 
-  tr.innerHTML =
+tr.innerHTML =
 
-    "<td>" +
+"<td>" +
 
-      '<input class="cell" ' +
-      'data-f="name" ' +
-      'placeholder="Produto" ' +
-      'inputmode="text">' +
+'<input class="cell" ' +
+'data-f="name" ' +
+'placeholder="Produto" ' +
+'inputmode="text">' +
 
-    "</td>" +
+"</td>" +
 
-    "<td>" +
+"<td>" +
 
-      '<input class="cell num" ' +
-      'data-f="total" ' +
-      'type="number" ' +
-      'step="any" ' +
-      'inputmode="decimal" ' +
-      'min="0" ' +
-      'placeholder="500">' +
+'<input class="cell num" ' +
+'data-f="total" ' +
+'type="number" ' +
+'step="any" ' +
+'inputmode="decimal" ' +
+'min="0" ' +
+'placeholder="500">' +
 
-    "</td>" +
+"</td>" +
 
-    "<td>" +
+"<td>" +
 
-      '<input class="cell num" ' +
-      'data-f="value" ' +
-      'type="number" ' +
-      'step="any" ' +
-      'inputmode="decimal" ' +
-      'min="0" ' +
-      'placeholder="0,00">' +
+'<input class="cell num" ' +
+'data-f="value" ' +
+'type="number" ' +
+'step="any" ' +
+'inputmode="decimal" ' +
+'min="0" ' +
+'placeholder="0,00">' +
 
-    "</td>" +
+"</td>" +
 
-    "<td>" +
+"<td>" +
 
-      '<button class="rm-btn" ' +
-      'title="remover">✕</button>' +
+'<button class="rm-btn" ' +
+'title="remover">✕</button>' +
 
-    "</td>";
+"</td>";
 
-  const inputs =
-    tr.querySelectorAll("input");
+const inputs =
+tr.querySelectorAll("input");
 
-  inputs[0].value =
-    item.name;
+inputs[0].value =
+item.name;
 
-  inputs[1].value =
-    item.total;
+inputs[1].value =
+item.total;
 
-  inputs[2].value =
-    item.value;
+inputs[2].value =
+item.value;
 
-  inputs.forEach(
-    function(inp) {
+inputs.forEach(
+function(inp) {
 
-      inp.addEventListener(
-        "input",
-        function() {
+inp.addEventListener(
+"input",
+function() {
 
-          const f =
-            inp.dataset.f;
+const f =
+inp.dataset.f;
 
-          const v =
-            inp.value;
+const v =
+inp.value;
 
-          if (
-            f === "total" ||
-            f === "value"
-          ) {
+if (
+f === "total" ||
+f === "value"
+) {
 
-            const numVal =
-              parseFloat(v);
+const numVal =
+parseFloat(v);
 
-            state.inventory[idx][f] =
-              isFinite(numVal) &&
-              numVal >= 0
-                ? numVal
-                : 0;
+state.inventory[idx][f] =
+isFinite(numVal) &&
+numVal >= 0
+? numVal
+: 0;
 
-          } else {
+} else {
 
-            state.inventory[idx][f] =
-              v;
+state.inventory[idx][f] =
+v;
 
-          }
+}
 
-          saveState();
+saveState();
 
-          renderRecipe();
+renderRecipe();
 
-          render();
+render();
 
-        }
-      );
+}
+);
 
-    }
-  );
+}
+);
 
-  tr.querySelector(".rm-btn")
-    .addEventListener(
-      "click",
-      function() {
+tr.querySelector(".rm-btn")
+.addEventListener(
+"click",
+function() {
 
-        state.inventory.splice(
-          idx,
-          1
-        );
+state.inventory.splice(
+idx,
+1
+);
 
-        state.recipe =
-          state.recipe.filter(
-            r =>
-              r.invIndex !== idx
-          );
+state.recipe =
+state.recipe.filter(
+r =>
+r.invIndex !== idx
+);
 
-        state.recipe.forEach(
-          r => {
+state.recipe.forEach(
+r => {
 
-            if (r.invIndex > idx) {
-              r.invIndex--;
-            }
+if (r.invIndex > idx) {
+r.invIndex--;
+}
 
-          }
-        );
+}
+);
 
-        saveState();
+saveState();
 
-        renderInventory();
+renderInventory();
 
-        renderRecipe();
+renderRecipe();
 
-        render();
+render();
 
-      }
-    );
+}
+);
 
-  return tr;
+return tr;
 }
 
 function renderInventory() {
 
-  invBody.innerHTML = "";
+invBody.innerHTML = "";
 
-  state.inventory.forEach(
-    function(item,idx) {
+state.inventory.forEach(
+function(item,idx) {
 
-      invBody.appendChild(
-        invRow(item,idx)
-      );
+invBody.appendChild(
+invRow(item,idx)
+);
 
-    }
-  );
+}
+);
 
-  let total = 0;
+let total = 0;
 
-  state.inventory.forEach(
-    i => {
+state.inventory.forEach(
+i => {
 
-      total +=
-        parseFloat(i.value) || 0;
+total +=
+parseFloat(i.value) || 0;
 
-    }
-  );
+}
+);
 
-  document.getElementById(
-    "invTotalValue"
-  ).textContent =
-    brl(total);
+document.getElementById(
+"invTotalValue"
+).textContent =
+brl(total);
 }
 
 document.getElementById("addInv")
-  .addEventListener(
-    "click",
-    function() {
+.addEventListener(
+"click",
+function() {
 
-      state.inventory.push({
+state.inventory.push({
 
-        name: "",
+name: "",
 
-        total: 0,
+total: 0,
 
-        value: 0
+value: 0
 
-      });
+});
 
-      saveState();
+saveState();
 
-      renderInventory();
+renderInventory();
 
-      renderRecipe();
+renderRecipe();
 
-      render();
+render();
 
-    }
-  );
+}
+);
 
 /* =========================================================
-   CUSTO INGREDIENTE
+CUSTO INGREDIENTE
 ========================================================= */
 
 function getIngredientCost(
-  invIndex,
-  qty
+invIndex,
+qty
 ) {
 
-  const inv =
-    state.inventory[invIndex];
+const inv =
+state.inventory[invIndex];
 
-  if (!inv) return 0;
+if (!inv) return 0;
 
-  const total =
-    parseFloat(inv.total) || 0;
+const total =
+parseFloat(inv.total) || 0;
 
-  const value =
-    parseFloat(inv.value) || 0;
+const value =
+parseFloat(inv.value) || 0;
 
-  if (
-    total <= 0 ||
-    value <= 0
-  ) {
-    return 0;
-  }
+if (
+total <= 0 ||
+value <= 0
+) {
+return 0;
+}
 
-  const q =
-    parseFloat(qty) || 0;
+const q =
+parseFloat(qty) || 0;
 
-  return (
-    q / total
-  ) * value;
+return (
+q / total
+) * value;
 }
 
 /* =========================================================
-   RECEITA
-   PRODUTO AUTOMÁTICO
+RECEITA
+PRODUTO AUTOMÁTICO
 ========================================================= */
 
 function recRow(item,idx) {
 
-  const tr =
-    document.createElement("tr");
+const tr =
+document.createElement("tr");
 
-  /*
-    NÃO EXISTE MAIS SELECT AQUI.
+/*
+NÃO EXISTE MAIS SELECT AQUI.
 
-    O produto é determinado automaticamente
-    pelo índice do ingrediente na lista.
-  */
+O produto é determinado automaticamente
+pelo índice do ingrediente na lista.
+*/
 
-  const inv =
-    state.inventory[item.invIndex];
+const inv =
+state.inventory[item.invIndex];
 
-  const productName =
-    inv
-      ? (
-          inv.name ||
-          "Produto " +
-          (item.invIndex + 1)
-        )
-      : "Produto";
+const productName =
+inv
+? (
+inv.name ||
+"Produto " +
+(item.invIndex + 1)
+)
+: "Produto";
 
-  tr.innerHTML =
+tr.innerHTML =
 
-    "<td>" +
+"<td>" +
 
-      '<div class="product-display">' +
+'<div class="product-display">' +
 
-        productName +
+productName +
 
-      "</div>" +
+"</div>" +
 
-    "</td>" +
+"</td>" +
 
-    "<td>" +
+"<td>" +
 
-      '<input class="cell num" ' +
-      'data-f="qty" ' +
-      'type="number" ' +
-      'step="any" ' +
-      'inputmode="decimal" ' +
-      'min="0">' +
+'<input class="cell num" ' +
+'data-f="qty" ' +
+'type="number" ' +
+'step="any" ' +
+'inputmode="decimal" ' +
+'min="0">' +
 
-    "</td>" +
+"</td>" +
 
-    "<td>" +
+"<td>" +
 
-      '<input class="cell" ' +
-      'data-f="unit" ' +
-      'placeholder="g/ml" ' +
-      'inputmode="text">' +
+'<input class="cell" ' +
+'data-f="unit" ' +
+'placeholder="g/ml" ' +
+'inputmode="text">' +
 
-    "</td>" +
+"</td>" +
 
-    '<td class="num">' +
+'<td class="num">' +
 
-      '<div class="cost-display" ' +
-      'data-f="cost">' +
+'<div class="cost-display" ' +
+'data-f="cost">' +
 
-        "R$ 0,00" +
+"0,00" +  // <-- AGORA SEM O R$
 
-      "</div>" +
+"</div>" +
 
-    "</td>" +
+"</td>" +
 
-    "<td>" +
+'<button class="rm-btn" ' +
+'title="remover">✕</button>' +
 
-      '<button class="rm-btn" ' +
-      'title="remover">✕</button>' +
+"</td>";
 
-    "</td>";
+const qtyInput =
+tr.querySelector(
+'input[data-f="qty"]'
+);
 
-  const qtyInput =
-    tr.querySelector(
-      'input[data-f="qty"]'
-    );
+const unitInput =
+tr.querySelector(
+'input[data-f="unit"]'
+);
 
-  const unitInput =
-    tr.querySelector(
-      'input[data-f="unit"]'
-    );
+const costCell =
+tr.querySelector(".cost-display");
 
-  const costCell =
-    tr.querySelector(".cost-display");
+qtyInput.value =
+item.qty;
 
-  qtyInput.value =
-    item.qty;
+unitInput.value =
+item.unit;
 
-  unitInput.value =
-    item.unit;
+function updateCost() {
 
-  function updateCost() {
+const cost =
+getIngredientCost(
+item.invIndex,
+qtyInput.value
+);
 
-    const cost =
-      getIngredientCost(
-        item.invIndex,
-        qtyInput.value
-      );
+costCell.textContent =
+brl(cost);
 
-    costCell.textContent =
-      brl(cost);
+}
 
-  }
+qtyInput.addEventListener(
+"input",
+function() {
 
-  qtyInput.addEventListener(
-    "input",
-    function() {
+const v =
+parseFloat(
+qtyInput.value
+);
 
-      const v =
-        parseFloat(
-          qtyInput.value
-        );
+state.recipe[idx].qty =
+isFinite(v) && v >= 0
+? v
+: 0;
 
-      state.recipe[idx].qty =
-        isFinite(v) && v >= 0
-          ? v
-          : 0;
+saveState();
 
-      saveState();
+updateCost();
 
-      updateCost();
+render();
 
-      render();
+}
+);
 
-    }
-  );
+unitInput.addEventListener(
+"input",
+function() {
 
-  unitInput.addEventListener(
-    "input",
-    function() {
+state.recipe[idx].unit =
+unitInput.value;
 
-      state.recipe[idx].unit =
-        unitInput.value;
+saveState();
 
-      saveState();
+}
+);
 
-    }
-  );
+tr.querySelector(".rm-btn")
+.addEventListener(
+"click",
+function() {
 
-  tr.querySelector(".rm-btn")
-    .addEventListener(
-      "click",
-      function() {
+state.recipe.splice(
+idx,
+1
+);
 
-        state.recipe.splice(
-          idx,
-          1
-        );
+saveState();
 
-        saveState();
+renderRecipe();
 
-        renderRecipe();
+render();
 
-        render();
+}
+);
 
-      }
-    );
+updateCost();
 
-  updateCost();
-
-  return tr;
+return tr;
 }
 
 function renderRecipe() {
 
-  recBody.innerHTML = "";
+recBody.innerHTML = "";
 
-  if (
-    state.inventory.length === 0
-  ) {
+if (
+state.inventory.length === 0
+) {
 
-    recBody.innerHTML =
+recBody.innerHTML =
 
-      `<tr>
-        <td
-          colspan="5"
-          style="
-            text-align:center;
-            color:var(--text-muted);
-            padding:20px 0;
-          "
-        >
-          ⚠️ Adicione produtos no estoque primeiro.
-        </td>
-      </tr>`;
+`<tr>
+<td
+colspan="5"
+style="
+text-align:center;
+color:var(--text-muted);
+padding:20px 0;
+"
+>
+⚠️ Adicione produtos no estoque primeiro.
+</td>
+</tr>`;
 
-    return;
-  }
+return;
+}
 
-  /*
-    Se houver mais ingredientes na receita
-    do que produtos no Mercado, limita às
-    posições existentes.
-  */
+/*
+Se houver mais ingredientes na receita
+do que produtos no Mercado, limita às
+posições existentes.
+*/
 
-  state.recipe =
-    state.recipe.filter(
-      item =>
-        item.invIndex >= 0 &&
-        item.invIndex <
-        state.inventory.length
-    );
+state.recipe =
+state.recipe.filter(
+item =>
+item.invIndex >= 0 &&
+item.invIndex <
+state.inventory.length
+);
 
-  state.recipe.forEach(
-    function(item,idx) {
+state.recipe.forEach(
+function(item,idx) {
 
-      recBody.appendChild(
-        recRow(item,idx)
-      );
+recBody.appendChild(
+recRow(item,idx)
+);
 
-    }
-  );
+}
+);
 
-  let recV = 0;
+let recV = 0;
 
-  state.recipe.forEach(
-    function(r) {
+state.recipe.forEach(
+function(r) {
 
-      recV +=
-        getIngredientCost(
-          r.invIndex,
-          r.qty
-        );
+recV +=
+getIngredientCost(
+r.invIndex,
+r.qty
+);
 
-    }
-  );
+}
+);
 
-  document.getElementById(
-    "recSubV"
-  ).textContent =
-    brl(recV);
+document.getElementById(
+"recSubV"
+).textContent =
+brl(recV);
 }
 
 /* =========================================================
-   ADICIONAR INGREDIENTE
+ADICIONAR INGREDIENTE
 ========================================================= */
 
 document.getElementById("addRec")
-  .addEventListener(
-    "click",
-    function() {
+.addEventListener(
+"click",
+function() {
 
-      if (
-        state.inventory.length === 0
-      ) {
+if (
+state.inventory.length === 0
+) {
 
-        showModal({
+showModal({
 
-          icon: "⚠️",
+icon: "⚠️",
 
-          title: "Estoque vazio",
+title: "Estoque vazio",
 
-          message:
-            "Adicione produtos no estoque " +
-            "antes de criar a receita.",
+message:
+"Adicione produtos no estoque " +
+"antes de criar a receita.",
 
-          confirmText: "Entendi",
+confirmText: "Entendi",
 
-          onlyOk: true
+onlyOk: true
 
-        });
+});
 
-        return;
-      }
+return;
+}
 
-      /*
-        NOVO COMPORTAMENTO:
+/*
+NOVO COMPORTAMENTO:
 
-        O próximo ingrediente recebe
-        automaticamente o próximo produto
-        do Mercado.
+O próximo ingrediente recebe
+automaticamente o próximo produto
+do Mercado.
 
-        Exemplo:
+Exemplo:
 
-        Mercado:
-        0 Azeite
-        1 Shoyu
-        2 Vinagre
+Mercado:
+0 Azeite
+1 Shoyu
+2 Vinagre
 
-        Receita:
-        ingrediente 0 → Azeite
-        ingrediente 1 → Shoyu
-        ingrediente 2 → Vinagre
-      */
+Receita:
+ingrediente 0 → Azeite
+ingrediente 1 → Shoyu
+ingrediente 2 → Vinagre
+*/
 
-      const nextIndex =
-        state.recipe.length;
+const nextIndex =
+state.recipe.length;
 
-      if (
-        nextIndex >=
-        state.inventory.length
-      ) {
+if (
+nextIndex >=
+state.inventory.length
+) {
 
-        showModal({
+showModal({
 
-          icon: "ℹ️",
+icon: "ℹ️",
 
-          title: "Todos os produtos já foram adicionados",
+title: "Todos os produtos já foram adicionados",
 
-          message:
-            "A lista da Receita já contém " +
-            "todos os produtos cadastrados no Mercado.",
+message:
+"A lista da Receita já contém " +
+"todos os produtos cadastrados no Mercado.",
 
-          confirmText: "Entendi",
+confirmText: "Entendi",
 
-          onlyOk: true
+onlyOk: true
 
-        });
+});
 
-        return;
-      }
+return;
+}
 
-      state.recipe.push({
+state.recipe.push({
 
-        invIndex: nextIndex,
+invIndex: nextIndex,
 
-        qty: 0,
+qty: 0,
 
-        unit: "g"
+unit: "g"
 
-      });
+});
 
-      saveState();
+saveState();
 
-      renderRecipe();
+renderRecipe();
 
-      render();
+render();
 
-    }
-  );
+}
+);
 
 /* =========================================================
-   EMBALAGEM
+EMBALAGEM
 ========================================================= */
 
 function pkgRow(item,idx) {
 
-  const tr =
-    document.createElement("tr");
+const tr =
+document.createElement("tr");
 
-  tr.innerHTML =
+tr.innerHTML =
 
-    "<td>" +
+"<td>" +
 
-      '<input class="cell" ' +
-      'data-f="name" ' +
-      'placeholder="nome" ' +
-      'inputmode="text">' +
+'<input class="cell" ' +
+'data-f="name" ' +
+'placeholder="nome" ' +
+'inputmode="text">' +
 
-    "</td>" +
+"</td>" +
 
-    "<td>" +
+"<td>" +
 
-      '<input class="cell num" ' +
-      'data-f="qty" ' +
-      'type="number" ' +
-      'step="any" ' +
-      'inputmode="decimal" ' +
-      'min="0">' +
+'<input class="cell num" ' +
+'data-f="qty" ' +
+'type="number" ' +
+'step="any" ' +
+'inputmode="decimal" ' +
+'min="0">' +
 
-    "</td>" +
+"</td>" +
 
-    "<td>" +
+"<td>" +
 
-      '<input class="cell" ' +
-      'data-f="unit" ' +
-      'placeholder="un" ' +
-      'inputmode="text">' +
+'<input class="cell" ' +
+'data-f="unit" ' +
+'placeholder="un" ' +
+'inputmode="text">' +
 
-    "</td>" +
+"</td>" +
 
-    "<td>" +
+"<td>" +
 
-      '<input class="cell num" ' +
-      'data-f="value" ' +
-      'type="number" ' +
-      'step="any" ' +
-      'inputmode="decimal" ' +
-      'min="0">' +
+'<input class="cell num" ' +
+'data-f="value" ' +
+'type="number" ' +
+'step="any" ' +
+'inputmode="decimal" ' +
+'min="0">' +
 
-    "</td>" +
+"</td>" +
 
-    "<td>" +
+"<td>" +
 
-      '<button class="rm-btn" ' +
-      'title="remover">✕</button>' +
+'<button class="rm-btn" ' +
+'title="remover">✕</button>' +
 
-    "</td>";
+"</td>";
 
-  const inputs =
-    tr.querySelectorAll("input");
+const inputs =
+tr.querySelectorAll("input");
 
-  inputs[0].value =
-    item.name;
+inputs[0].value =
+item.name;
 
-  inputs[1].value =
-    item.qty;
+inputs[1].value =
+item.qty;
 
-  inputs[2].value =
-    item.unit;
+inputs[2].value =
+item.unit;
 
-  inputs[3].value =
-    item.value;
+inputs[3].value =
+item.value;
 
-  inputs.forEach(
-    function(inp) {
+inputs.forEach(
+function(inp) {
 
-      inp.addEventListener(
-        "input",
-        function() {
+inp.addEventListener(
+"input",
+function() {
 
-          const f =
-            inp.dataset.f;
+const f =
+inp.dataset.f;
 
-          const v =
-            inp.value;
+const v =
+inp.value;
 
-          if (
-            f === "qty" ||
-            f === "value"
-          ) {
+if (
+f === "qty" ||
+f === "value"
+) {
 
-            const numVal =
-              parseFloat(v);
+const numVal =
+parseFloat(v);
 
-            state.packaging[idx][f] =
-              isFinite(numVal) &&
-              numVal >= 0
-                ? numVal
-                : 0;
+state.packaging[idx][f] =
+isFinite(numVal) &&
+numVal >= 0
+? numVal
+: 0;
 
-          } else {
+} else {
 
-            state.packaging[idx][f] =
-              v;
+state.packaging[idx][f] =
+v;
 
-          }
+}
 
-          saveState();
+saveState();
 
-          render();
+render();
 
-        }
-      );
+}
+);
 
-    }
-  );
+}
+);
 
-  tr.querySelector(".rm-btn")
-    .addEventListener(
-      "click",
-      function() {
+tr.querySelector(".rm-btn")
+.addEventListener(
+"click",
+function() {
 
-        state.packaging.splice(
-          idx,
-          1
-        );
+state.packaging.splice(
+idx,
+1
+);
 
-        saveState();
+saveState();
 
-        renderPackaging();
+renderPackaging();
 
-        render();
+render();
 
-      }
-    );
+}
+);
 
-  return tr;
+return tr;
 }
 
 function renderPackaging() {
 
-  pkgBody.innerHTML = "";
+pkgBody.innerHTML = "";
 
-  state.packaging.forEach(
-    function(item,idx) {
+state.packaging.forEach(
+function(item,idx) {
 
-      pkgBody.appendChild(
-        pkgRow(item,idx)
-      );
+pkgBody.appendChild(
+pkgRow(item,idx)
+);
 
-    }
-  );
+}
+);
 
-  let pkgV = 0;
+let pkgV = 0;
 
-  state.packaging.forEach(
-    function(i) {
+state.packaging.forEach(
+function(i) {
 
-      pkgV +=
-        (parseFloat(i.qty) || 0) *
-        (parseFloat(i.value) || 0);
+pkgV +=
+(parseFloat(i.qty) || 0) *
+(parseFloat(i.value) || 0);
 
-    }
-  );
+}
+);
 
-  document.getElementById(
-    "pkgSubV"
-  ).textContent =
-    brl(pkgV);
+document.getElementById(
+"pkgSubV"
+).textContent =
+brl(pkgV);
 }
 
 document.getElementById("addPkg")
-  .addEventListener(
-    "click",
-    function() {
+.addEventListener(
+"click",
+function() {
 
-      state.packaging.push({
+state.packaging.push({
 
-        name: "",
+name: "",
 
-        qty: 1,
+qty: 1,
 
-        unit: "un",
+unit: "un",
 
-        value: 0
+value: 0
 
-      });
+});
 
-      saveState();
+saveState();
 
-      renderPackaging();
+renderPackaging();
 
-      render();
+render();
 
-    }
-  );
-
-/* =========================================================
-   MODAL
-========================================================= */
-
-const modalOverlay =
-  document.getElementById(
-    "modalOverlay"
-  );
-
-const modalIcon =
-  document.getElementById(
-    "modalIcon"
-  );
-
-const modalTitle =
-  document.getElementById(
-    "modalTitle"
-  );
-
-const modalMsg =
-  document.getElementById(
-    "modalMsg"
-  );
-
-const modalCancelBtn =
-  document.getElementById(
-    "modalCancelBtn"
-  );
-
-const modalConfirmBtn =
-  document.getElementById(
-    "modalConfirmBtn"
-  );
-
-function closeModal() {
-
-  modalOverlay.classList.remove(
-    "open"
-  );
 }
-
-function showModal(
-  options,
-  onConfirm
-) {
-
-  modalIcon.textContent =
-    options.icon || "⚠️";
-
-  modalTitle.textContent =
-    options.title || "";
-
-  modalMsg.textContent =
-    options.message || "";
-
-  modalConfirmBtn.textContent =
-    options.confirmText || "OK";
-
-  modalConfirmBtn.className =
-    "modal-btn primary" +
-    (
-      options.danger
-        ? ""
-        : " neutral"
-    );
-
-  if (options.onlyOk) {
-
-    modalCancelBtn.style.display =
-      "none";
-
-  } else {
-
-    modalCancelBtn.style.display =
-      "";
-
-    modalCancelBtn.textContent =
-      options.cancelText ||
-      "Cancelar";
-  }
-
-  modalOverlay.classList.add(
-    "open"
-  );
-
-  modalConfirmBtn.onclick =
-    function() {
-
-      closeModal();
-
-      if (
-        typeof onConfirm ===
-        "function"
-      ) {
-        onConfirm();
-      }
-
-    };
-
-  modalCancelBtn.onclick =
-    function() {
-
-      closeModal();
-
-    };
-}
-
-modalOverlay.addEventListener(
-  "click",
-  function(e) {
-
-    if (
-      e.target ===
-      modalOverlay
-    ) {
-      closeModal();
-    }
-
-  }
 );
 
 /* =========================================================
-   RESTAURAR
+MODAL
+========================================================= */
+
+const modalOverlay =
+document.getElementById(
+"modalOverlay"
+);
+
+const modalIcon =
+document.getElementById(
+"modalIcon"
+);
+
+const modalTitle =
+document.getElementById(
+"modalTitle"
+);
+
+const modalMsg =
+document.getElementById(
+"modalMsg"
+);
+
+const modalCancelBtn =
+document.getElementById(
+"modalCancelBtn"
+);
+
+const modalConfirmBtn =
+document.getElementById(
+"modalConfirmBtn"
+);
+
+function closeModal() {
+
+modalOverlay.classList.remove(
+"open"
+);
+}
+
+function showModal(
+options,
+onConfirm
+) {
+
+modalIcon.textContent =
+options.icon || "⚠️";
+
+modalTitle.textContent =
+options.title || "";
+
+modalMsg.textContent =
+options.message || "";
+
+modalConfirmBtn.textContent =
+options.confirmText || "OK";
+
+modalConfirmBtn.className =
+"modal-btn primary" +
+(
+options.danger
+? ""
+: " neutral"
+);
+
+if (options.onlyOk) {
+
+modalCancelBtn.style.display =
+"none";
+
+} else {
+
+modalCancelBtn.style.display =
+"";
+
+modalCancelBtn.textContent =
+options.cancelText ||
+"Cancelar";
+}
+
+modalOverlay.classList.add(
+"open"
+);
+
+modalConfirmBtn.onclick =
+function() {
+
+closeModal();
+
+if (
+typeof onConfirm ===
+"function"
+) {
+onConfirm();
+}
+
+};
+
+modalCancelBtn.onclick =
+function() {
+
+closeModal();
+
+};
+}
+
+modalOverlay.addEventListener(
+"click",
+function(e) {
+
+if (
+e.target ===
+modalOverlay
+) {
+closeModal();
+}
+
+}
+);
+
+/* =========================================================
+RESTAURAR
 ========================================================= */
 
 document.getElementById("resetBtn")
-  .addEventListener(
-    "click",
-    function() {
+.addEventListener(
+"click",
+function() {
 
-      showModal({
+showModal({
 
-        icon: "↺",
+icon: "↺",
 
-        title: "Restaurar exemplo?",
+title: "Restaurar exemplo?",
 
-        message:
-          "Isso vai substituir os dados atuais " +
-          "pelos dados de exemplo. " +
-          "Essa ação não pode ser desfeita.",
+message:
+"Isso vai substituir os dados atuais " +
+"pelos dados de exemplo. " +
+"Essa ação não pode ser desfeita.",
 
-        confirmText: "Restaurar",
+confirmText: "Restaurar",
 
-        cancelText: "Cancelar",
+cancelText: "Cancelar",
 
-        danger: true
+danger: true
 
-      }, function() {
+}, function() {
 
-        state =
-          JSON.parse(
-            JSON.stringify(
-              DEFAULT_STATE
-            )
-          );
+state =
+JSON.parse(
+JSON.stringify(
+DEFAULT_STATE
+)
+);
 
-        recipeNameEl.value =
-          state.recipeName;
+recipeNameEl.value =
+state.recipeName;
 
-        weightPerPotEl.value =
-          state.weightPerPot;
+weightPerPotEl.value =
+state.weightPerPot;
 
-        profitPctEl.value =
-          state.profitPct;
+profitPctEl.value =
+state.profitPct;
 
-        saveState();
+saveState();
 
-        renderInventory();
+renderInventory();
 
-        renderRecipe();
+renderRecipe();
 
-        renderPackaging();
+renderPackaging();
 
-        render();
+render();
 
-      });
+});
 
-    }
-  );
+}
+);
 
 /* =========================================================
-   PREÇO
+PREÇO
 ========================================================= */
 
 const jarLegend =
-  document.getElementById(
-    "jarLegend"
-  );
+document.getElementById(
+"jarLegend"
+);
 
 const jarPrice =
-  document.getElementById(
-    "jarPrice"
-  );
+document.getElementById(
+"jarPrice"
+);
 
 const jarPots =
-  document.getElementById(
-    "jarPots"
-  );
+document.getElementById(
+"jarPots"
+);
 
 function render() {
 
-  let recW = 0;
-
-  let recV = 0;
-
-  state.recipe.forEach(
-    function(r) {
-
-      const qty =
-        parseFloat(r.qty) || 0;
-
-      recW += qty;
-
-      recV +=
-        getIngredientCost(
-          r.invIndex,
-          qty
-        );
-
-    }
-  );
-
-  document.getElementById(
-    "recSubV"
-  ).textContent =
-    brl(recV);
-
-  let pkgV = 0;
-
-  state.packaging.forEach(
-    function(i) {
-
-      pkgV +=
-        (parseFloat(i.qty) || 0) *
-        (parseFloat(i.value) || 0);
-
-    }
-  );
-
-  document.getElementById(
-    "pkgSubV"
-  ).textContent =
-    brl(pkgV);
+let recW = 0;
+
+let recV = 0;
+
+state.recipe.forEach(
+function(r) {
+
+const qty =
+parseFloat(r.qty) || 0;
+
+recW += qty;
+
+recV +=
+getIngredientCost(
+r.invIndex,
+qty
+);
+
+}
+);
+
+document.getElementById(
+"recSubV"
+).textContent =
+brl(recV);
+
+let pkgV = 0;
+
+state.packaging.forEach(
+function(i) {
+
+pkgV +=
+(parseFloat(i.qty) || 0) *
+(parseFloat(i.value) || 0);
+
+}
+);
+
+document.getElementById(
+"pkgSubV"
+).textContent =
+brl(pkgV);
 
-  const weightPerPotVal =
-    parseFloat(
-      state.weightPerPot
-    );
+const weightPerPotVal =
+parseFloat(
+state.weightPerPot
+);
 
-  const weightPerPot =
-    isFinite(weightPerPotVal) &&
-    weightPerPotVal > 0
-      ? weightPerPotVal
-      : 500;
+const weightPerPot =
+isFinite(weightPerPotVal) &&
+weightPerPotVal > 0
+? weightPerPotVal
+: 500;
 
-  const numPots =
-    weightPerPot > 0
-      ? Math.floor(
-          recW / weightPerPot
-        )
-      : 0;
+const numPots =
+weightPerPot > 0
+? Math.floor(
+recW / weightPerPot
+)
+: 0;
 
-  const leftoverWeight =
-    Math.max(
-      0,
-      recW -
-      (
-        numPots *
-        weightPerPot
-      )
-    );
-
-  document.getElementById(
-    "totalWeight"
-  ).textContent =
-    num(recW,0) + " g";
-
-  document.getElementById(
-    "numPots"
-  ).textContent =
-    numPots +
-    (
-      numPots === 1
-        ? " pote"
-        : " potes"
-    );
-
-  document.getElementById(
-    "leftoverWeight"
-  ).textContent =
-    num(leftoverWeight,0) +
-    " g";
-
-  const warningEl =
-    document.getElementById(
-      "insufficientWarning"
-    );
-
-  const warningPotSize =
-    document.getElementById(
-      "warningPotSize"
-    );
+const leftoverWeight =
+Math.max(
+0,
+recW -
+(
+numPots *
+weightPerPot
+)
+);
+
+document.getElementById(
+"totalWeight"
+).textContent =
+num(recW,0) + " g";
+
+document.getElementById(
+"numPots"
+).textContent =
+numPots +
+(
+numPots === 1
+? " pote"
+: " potes"
+);
+
+document.getElementById(
+"leftoverWeight"
+).textContent =
+num(leftoverWeight,0) +
+" g";
+
+const warningEl =
+document.getElementById(
+"insufficientWarning"
+);
+
+const warningPotSize =
+document.getElementById(
+"warningPotSize"
+);
 
-  if (
-    numPots === 0 &&
-    recW > 0
-  ) {
-
-    warningPotSize.textContent =
-      num(weightPerPot,0);
-
-    warningEl.classList.add(
-      "visible"
-    );
-
-  } else {
-
-    warningEl.classList.remove(
-      "visible"
-    );
-
-  }
-
-  let costIngPot;
-
-  if (numPots > 0) {
-
-    costIngPot =
-      recV / numPots;
-
-  } else if (recW > 0) {
-
-    costIngPot =
-      recV;
-
-  } else {
-
-    costIngPot = 0;
-
-  }
-
-  const costPkgPot =
-    pkgV;
-
-  const costTotalPot =
-    costIngPot +
-    costPkgPot;
-
-  document.getElementById(
-    "costIngPot"
-  ).textContent =
-    brl(costIngPot);
-
-  document.getElementById(
-    "costPkgPot"
-  ).textContent =
-    brl(costPkgPot);
-
-  document.getElementById(
-    "costTotalPot"
-  ).textContent =
-    brl(costTotalPot);
-
-  const profitPct =
-    Math.max(
-      0,
-      Math.min(
-        parseFloat(
-          state.profitPct
-        ) || 0,
-        99.99
-      )
-    );
-
-  const margin =
-    profitPct / 100;
-
-  const price =
-    margin < 1
-      ? costTotalPot /
-        (1 - margin)
-      : 0;
-
-  const profitValue =
-    Math.max(
-      0,
-      price -
-      costTotalPot
-    );
-
-  const markup =
-    costTotalPot > 0
-      ? price /
-        costTotalPot
-      : 0;
-
-  document.getElementById(
-    "priceCost"
-  ).textContent =
-    brl(costTotalPot);
+if (
+numPots === 0 &&
+recW > 0
+) {
+
+warningPotSize.textContent =
+num(weightPerPot,0);
+
+warningEl.classList.add(
+"visible"
+);
+
+} else {
+
+warningEl.classList.remove(
+"visible"
+);
+
+}
+
+let costIngPot;
+
+if (numPots > 0) {
+
+costIngPot =
+recV / numPots;
+
+} else if (recW > 0) {
+
+costIngPot =
+recV;
+
+} else {
+
+costIngPot = 0;
+
+}
+
+const costPkgPot =
+pkgV;
+
+const costTotalPot =
+costIngPot +
+costPkgPot;
+
+document.getElementById(
+"costIngPot"
+).textContent =
+brl(costIngPot);
+
+document.getElementById(
+"costPkgPot"
+).textContent =
+brl(costPkgPot);
+
+document.getElementById(
+"costTotalPot"
+).textContent =
+brl(costTotalPot);
+
+const profitPct =
+Math.max(
+0,
+Math.min(
+parseFloat(
+state.profitPct
+) || 0,
+99.99
+)
+);
+
+const margin =
+profitPct / 100;
+
+const price =
+margin < 1
+? costTotalPot /
+(1 - margin)
+: 0;
+
+const profitValue =
+Math.max(
+0,
+price -
+costTotalPot
+);
+
+const markup =
+costTotalPot > 0
+? price /
+costTotalPot
+: 0;
+
+document.getElementById(
+"priceCost"
+).textContent =
+brl(costTotalPot);
 
-  document.getElementById(
-    "markup"
-  ).textContent =
-    "×" +
-    markup
-      .toFixed(2)
-      .replace(".",",");
+document.getElementById(
+"markup"
+).textContent =
+"×" +
+markup
+.toFixed(2)
+.replace(".",",");
 
-  document.getElementById(
-    "finalPrice"
-  ).textContent =
-    brl(price);
-
-  jarPrice.textContent =
-    brl(price);
-
-  jarPots.textContent =
-    numPots +
-    (
-      numPots === 1
-        ? " pote"
-        : " potes"
-    );
-
-  const segments = [
-
-    {
-      label: "Ingredientes",
-      value: costIngPot,
-      color: "#6bcb8a"
-    },
-
-    {
-      label: "Embalagem",
-      value: costPkgPot,
-      color: "#6ab0e8"
-    },
-
-    {
-      label: "Lucro",
-      value: profitValue,
-      color: "#f7c948"
-    }
-
-  ];
-
-  const total =
-    price > 0
-      ? price
-      : 1;
-
-  jarLegend.innerHTML =
-    segments
-      .map(
-        function(seg) {
-
-          const pct =
-            total > 0
-              ? Math.round(
-                  (
-                    seg.value /
-                    total
-                  ) * 100
-                )
-              : 0;
-
-          return (
-
-            "<div>" +
-
-              '<span class="lab">' +
-
-                '<span class="sw" ' +
-                'style="background:' +
-                seg.color +
-                '"></span>' +
-
-                seg.label +
-
-              "</span>" +
-
-              '<span class="val">' +
-                pct +
-                "%" +
-              "</span>" +
-
-            "</div>"
-
-          );
-
-        }
-      )
-      .join("");
-
-  let invTotal = 0;
-
-  state.inventory.forEach(
-    function(i) {
-
-      invTotal +=
-        parseFloat(i.value) || 0;
-
-    }
-  );
-
-  document.getElementById(
-    "invTotalValue"
-  ).textContent =
-    brl(invTotal);
+document.getElementById(
+"finalPrice"
+).textContent =
+brl(price);
+
+jarPrice.textContent =
+brl(price);
+
+jarPots.textContent =
+numPots +
+(
+numPots === 1
+? " pote"
+: " potes"
+);
+
+const segments = [
+
+{
+label: "Ingredientes",
+value: costIngPot,
+color: "#6bcb8a"
+},
+
+{
+label: "Embalagem",
+value: costPkgPot,
+color: "#6ab0e8"
+},
+
+{
+label: "Lucro",
+value: profitValue,
+color: "#f7c948"
+}
+
+];
+
+const total =
+price > 0
+? price
+: 1;
+
+jarLegend.innerHTML =
+segments
+.map(
+function(seg) {
+
+const pct =
+total > 0
+? Math.round(
+(
+seg.value /
+total
+) * 100
+)
+: 0;
+
+return (
+
+"<div>" +
+
+'<span class="lab">' +
+
+'<span class="sw" ' +
+'style="background:' +
+seg.color +
+'"></span>' +
+
+seg.label +
+
+"</span>" +
+
+'<span class="val">' +
+pct +
+"%" +
+"</span>" +
+
+"</div>"
+
+);
+
+}
+)
+.join("");
+
+let invTotal = 0;
+
+state.inventory.forEach(
+function(i) {
+
+invTotal +=
+parseFloat(i.value) || 0;
+
+}
+);
+
+document.getElementById(
+"invTotalValue"
+).textContent =
+brl(invTotal);
 }
 
 /* =========================================================
-   INICIALIZAÇÃO
+INICIALIZAÇÃO
 ========================================================= */
 
 renderInventory();
@@ -3806,41 +3804,41 @@ renderPackaging();
 render();
 
 /* =========================================================
-   SERVICE WORKER
+SERVICE WORKER
 ========================================================= */
 
 if (
-  "serviceWorker" in navigator
+"serviceWorker" in navigator
 ) {
 
-  let refreshing = false;
+let refreshing = false;
 
-  navigator.serviceWorker
-    .addEventListener(
-      "controllerchange",
-      function() {
+navigator.serviceWorker
+.addEventListener(
+"controllerchange",
+function() {
 
-        if (refreshing) return;
+if (refreshing) return;
 
-        refreshing = true;
+refreshing = true;
 
-        window.location.reload();
+window.location.reload();
 
-      }
-    );
+}
+);
 
-  window.addEventListener(
-    "load",
-    function() {
+window.addEventListener(
+"load",
+function() {
 
-      navigator.serviceWorker
-        .register("sw.js")
-        .catch(
-          function() {}
-        );
+navigator.serviceWorker
+.register("sw.js")
+.catch(
+function() {}
+);
 
-    }
-  );
+}
+);
 }
 
 })();
