@@ -2,10 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8" />
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
-/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover, orientation=portrait">
 <title>Custo do Pote</title>
 <meta name="theme-color" content="#0f0e1a" />
 <link
@@ -1507,6 +1504,436 @@ tfoot td.subtotal-row {
   <meta property="og:image" content="https://bolt.new/static/og_default.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
+
+<style id="pwa-portrait-fix">
+html, body {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: hidden !important;
+}
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+  overscroll-behavior-x: none;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+img, svg, video, canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+input, select, textarea, button {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.container, main, header, section, .card, .panel, .tabs, .tab-content {
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* Tabelas podem rolar internamente, mas nunca empurram a tela inteira. */
+.table-container, .table-wrapper, .table-scroll, .overflow-auto {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Em retrato, textos longos quebram em vez de vazar. */
+td, th, .card, .result, .total, .price, .value, .label, .ingredient-name {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+/* PWA/celular em retrato */
+@media screen and (orientation: portrait) and (max-width: 600px) {
+  html, body {
+    width: 100vw;
+    max-width: 100vw;
+    overflow-x: hidden !important;
+  }
+
+  body {
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+  }
+
+  .container, main {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .tabs, .tab-buttons {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .tabs button, .tab-btn {
+    min-width: 0;
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  table {
+    max-width: none;
+  }
+}
+
+/* Caso alguma regra anterior tente criar uma largura fixa maior que o viewport. */
+@media screen and (max-width: 600px) {
+  .row, .grid, .form-row, .summary-row {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .grid > *, .row > *, .form-row > *, .summary-row > * {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+}
+</style>
+
+
+<style id="portrait-fit-final">
+/* =========================================================
+   POCO X5 PRO 5G — RETRATO
+   Tudo precisa caber na largura visível.
+   NÃO usar rolagem horizontal para tabelas no celular.
+   ========================================================= */
+
+html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden !important;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: hidden !important;
+}
+
+/* Nunca permitir um filho maior que o viewport */
+.wrap,
+header,
+.tabs,
+.layout,
+.tab-content,
+section.card,
+.table-scroll {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0 !important;
+}
+
+/* ---------- ABAS: 4 visíveis no retrato ---------- */
+@media screen and (max-width: 600px) {
+  .tabs {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+    overflow: hidden !important;
+    padding: 6px !important;
+  }
+
+  .tab-btn,
+  .tab-btn.active {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    padding: 11px 5px !important;
+    min-height: 48px !important;
+    font-size: 12px !important;
+    gap: 5px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .tab-btn .emoji {
+    flex: 0 0 auto;
+    font-size: 16px !important;
+  }
+
+  /* ---------- CARD ---------- */
+  section.card {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  /* ---------- TABELAS: CABEM INTEIRAS NO RETRATO ---------- */
+  .table-scroll {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+  }
+
+  .table-scroll table,
+  #tab0 table,
+  #tab1 table,
+  #tab2 table {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    table-layout: fixed !important;
+  }
+
+  /* Mercado: Produto | g/ml | R$ | excluir */
+  #tab0 table th:nth-child(1),
+  #tab0 table td:nth-child(1) {
+    width: 51% !important;
+    min-width: 0 !important;
+  }
+
+  #tab0 table th:nth-child(2),
+  #tab0 table td:nth-child(2) {
+    width: 22% !important;
+    min-width: 0 !important;
+  }
+
+  #tab0 table th:nth-child(3),
+  #tab0 table td:nth-child(3) {
+    width: 21% !important;
+    min-width: 0 !important;
+  }
+
+  #tab0 table th:nth-child(4),
+  #tab0 table td:nth-child(4) {
+    width: 6% !important;
+    min-width: 0 !important;
+  }
+
+  /* Receita: Produto | Qtd | Un | Custo | excluir */
+  #tab1 table th:nth-child(1),
+  #tab1 table td:nth-child(1) {
+    width: 43% !important;
+    min-width: 0 !important;
+  }
+
+  #tab1 table th:nth-child(2),
+  #tab1 table td:nth-child(2) {
+    width: 13% !important;
+    min-width: 0 !important;
+  }
+
+  #tab1 table th:nth-child(3),
+  #tab1 table td:nth-child(3) {
+    width: 13% !important;
+    min-width: 0 !important;
+  }
+
+  #tab1 table th:nth-child(4),
+  #tab1 table td:nth-child(4) {
+    width: 25% !important;
+    min-width: 0 !important;
+  }
+
+  #tab1 table th:nth-child(5),
+  #tab1 table td:nth-child(5) {
+    width: 6% !important;
+    min-width: 0 !important;
+  }
+
+  /* Embalagem: Item | Qtd | Un | R$ | excluir */
+  #tab2 table th:nth-child(1),
+  #tab2 table td:nth-child(1) {
+    width: 43% !important;
+    min-width: 0 !important;
+  }
+
+  #tab2 table th:nth-child(2),
+  #tab2 table td:nth-child(2) {
+    width: 13% !important;
+    min-width: 0 !important;
+  }
+
+  #tab2 table th:nth-child(3),
+  #tab2 table td:nth-child(3) {
+    width: 13% !important;
+    min-width: 0 !important;
+  }
+
+  #tab2 table th:nth-child(4),
+  #tab2 table td:nth-child(4) {
+    width: 25% !important;
+    min-width: 0 !important;
+  }
+
+  #tab2 table th:nth-child(5),
+  #tab2 table td:nth-child(5) {
+    width: 6% !important;
+    min-width: 0 !important;
+  }
+
+  /* Células e campos não podem criar largura extra */
+  .table-scroll th,
+  .table-scroll td {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    padding-left: 3px !important;
+    padding-right: 3px !important;
+  }
+
+  .table-scroll input.cell,
+  .table-scroll select.cell {
+    display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    min-height: 38px !important;
+    padding: 7px 7px !important;
+    font-size: 12px !important;
+  }
+
+  .table-scroll select.cell {
+    padding-right: 20px !important;
+    background-position: right 6px center !important;
+  }
+
+  .table-scroll thead th {
+    font-size: 9px !important;
+    padding: 0 3px 8px !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .table-scroll tbody td {
+    overflow: hidden !important;
+  }
+
+  .table-scroll .rm-btn {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 28px !important;
+    padding: 3px !important;
+    margin: 0 auto !important;
+  }
+
+  /* Totais também ficam dentro da largura */
+  #tab0 tfoot,
+  #tab1 tfoot,
+  #tab2 tfoot {
+    width: 100%;
+  }
+
+  #tab0 tfoot td,
+  #tab1 tfoot td,
+  #tab2 tfoot td {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  #invTotalValue,
+  #recSubV,
+  #pkgSubV {
+    font-size: 17px !important;
+    padding-left: 3px !important;
+    white-space: nowrap !important;
+  }
+
+  #tab0 tfoot .total-label,
+  #tab1 tfoot .total-label,
+  #tab2 tfoot .total-label,
+  #tab0 tfoot .pkg-label,
+  #tab1 tfoot .pkg-label,
+  #tab2 tfoot .pkg-label {
+    font-size: 12px !important;
+  }
+
+  /* ---------- PREÇO: nada pode ultrapassar ---------- */
+  #tab3 .kv-grid {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, auto) !important;
+  }
+
+  #tab3 .kv-grid .v,
+  #tab3 .kv-grid .v.editable {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  #tab3 .kv-grid .v.editable input,
+  #tab3 .kv-grid .v.editable select {
+    width: 82px !important;
+    max-width: 82px !important;
+  }
+
+  .jar-inline-row {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  svg#jar {
+    flex: 0 0 auto;
+    max-width: 82px;
+  }
+
+  .jar-inline-info {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .jar-legend div {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  /* Botões de adicionar */
+  .add-row-btn {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* Celulares muito estreitos */
+@media screen and (max-width: 380px) {
+  body {
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+  }
+
+  section.card {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  .tab-btn {
+    font-size: 11px !important;
+    padding-left: 3px !important;
+    padding-right: 3px !important;
+  }
+
+  .table-scroll input.cell,
+  .table-scroll select.cell {
+    font-size: 11px !important;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <div class="wrap">
