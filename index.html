@@ -416,40 +416,6 @@ color: var(--red);
 background: var(--red-dim);
 }
 
-.btn-suggest {
-background: var(--blue-dim);
-border: 1px solid var(--blue);
-color: var(--blue);
-padding: 4px 8px;
-border-radius: 6px;
-cursor: pointer;
-font-size: 12px;
-font-weight: 600;
-white-space: nowrap;
-transition: var(--transition);
-min-height: 32px;
-display: inline-flex;
-align-items: center;
-gap: 4px;
-touch-action: manipulation;
-flex-shrink: 0;
-}
-
-.btn-suggest:hover {
-background: var(--blue);
-color: #fff;
-}
-
-.inv-unit-select {
-width: 55px !important;
-flex-shrink: 0 !important;
-min-height: 40px !important;
-padding: 8px 20px 8px 9px !important;
-background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 0l6 8 6-8z' fill='%23b8b5c4'/%3E%3C/svg%3E") !important;
-background-repeat: no-repeat !important;
-background-position: right 8px center !important;
-}
-
 #tab0 table {
 min-width: 0 !important;
 width: 100% !important;
@@ -1005,7 +971,7 @@ width: 38% !important;
 
 #tab0 th:nth-child(2),
 #tab0 td:nth-child(2) {
-width: 28% !important;
+width: 26% !important;
 }
 
 #tab0 th:nth-child(3),
@@ -1015,7 +981,7 @@ width: 26% !important;
 
 #tab0 th:last-child,
 #tab0 td:last-child {
-width: 8% !important;
+width: 10% !important;
 }
 
 #tab1 th:first-child,
@@ -1124,19 +1090,6 @@ font-size: 12px;
 .kv-grid .v.editable input {
 font-size: 12px;
 }
-
-.btn-suggest {
-font-size: 10px !important;
-padding: 3px 6px !important;
-min-height: 28px !important;
-}
-
-.inv-unit-select {
-width: 48px !important;
-min-height: 34px !important;
-font-size: 10px !important;
-padding: 4px 18px 4px 6px !important;
-}
 }
 
 @media (min-width:480px) {
@@ -1204,7 +1157,7 @@ padding-bottom: max(80px, env(safe-area-inset-bottom));
 <section class="card">
 <h2>🛒 Mercado</h2>
 <p class="sub">
-Cadastre os produtos que você compra e seus valores. Clique em <strong>💡</strong> para sugerir o peso em gramas.
+Cadastre os produtos que você compra e seus valores
 </p>
 
 <div class="table-scroll">
@@ -1492,106 +1445,23 @@ Confirmar
 (function() {
 "use strict";
 
-// ============================================================
-// TABELA DE CONVERSÃO EMBUTIDA (OPÇÃO 3)
-// ============================================================
-const CONVERSION_TABLE = {
-  "ovo": { unit: "un", factor: 50 },
-  "ovos": { unit: "un", factor: 50 },
-  "azeite": { unit: "ml", factor: 0.92 },
-  "oleo": { unit: "ml", factor: 0.92 },
-  "óleo": { unit: "ml", factor: 0.92 },
-  "agua": { unit: "ml", factor: 1 },
-  "água": { unit: "ml", factor: 1 },
-  "leite": { unit: "ml", factor: 1 },
-  "vinagre": { unit: "ml", factor: 1 },
-  "shoyu": { unit: "ml", factor: 1 },
-  "molho": { unit: "ml", factor: 1 },
-  "farinha": { unit: "g", factor: 1 },
-  "acucar": { unit: "g", factor: 1 },
-  "açúcar": { unit: "g", factor: 1 },
-  "sal": { unit: "g", factor: 1 },
-  "mel": { unit: "ml", factor: 1.4 },
-  "leite condensado": { unit: "ml", factor: 1.4 },
-  "creme de leite": { unit: "ml", factor: 1 },
-  "manteiga": { unit: "g", factor: 1 },
-  "margarina": { unit: "g", factor: 1 },
-  "fermento": { unit: "g", factor: 1 },
-  "chocolate": { unit: "g", factor: 1 },
-  "cacau": { unit: "g", factor: 1 },
-  "castanha": { unit: "g", factor: 1 },
-  "amendoim": { unit: "g", factor: 1 },
-  "noz": { unit: "g", factor: 1 },
-  "nozes": { unit: "g", factor: 1 },
-  "passa": { unit: "g", factor: 1 },
-  "uva passa": { unit: "g", factor: 1 },
-  "manjericao": { unit: "g", factor: 1 },
-  "manjericão": { unit: "g", factor: 1 },
-  "orégano": { unit: "g", factor: 1 },
-  "oregano": { unit: "g", factor: 1 },
-  "alho": { unit: "g", factor: 1 },
-  "cebola": { unit: "g", factor: 1 },
-  "cenoura": { unit: "g", factor: 1 },
-  "batata": { unit: "g", factor: 1 },
-  "tomate": { unit: "g", factor: 1 },
-  "pimentao": { unit: "g", factor: 1 },
-  "pimentão": { unit: "g", factor: 1 },
-  "abobrinha": { unit: "g", factor: 1 },
-  "berinjela": { unit: "g", factor: 1 },
-  "milho": { unit: "g", factor: 1 },
-  "ervilha": { unit: "g", factor: 1 },
-  "feijao": { unit: "g", factor: 1 },
-  "feijão": { unit: "g", factor: 1 },
-  "arroz": { unit: "g", factor: 1 },
-  "macarrao": { unit: "g", factor: 1 },
-  "macarrão": { unit: "g", factor: 1 },
-  "carne": { unit: "g", factor: 1 },
-  "frango": { unit: "g", factor: 1 },
-  "peixe": { unit: "g", factor: 1 }
-};
-
-function normalizeText(text) {
-  return text.toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .trim();
-}
-
-function getConversion(productName) {
-  const key = normalizeText(productName);
-  
-  if (CONVERSION_TABLE[key]) {
-    return CONVERSION_TABLE[key];
-  }
-  
-  for (const [k, v] of Object.entries(CONVERSION_TABLE)) {
-    if (key.includes(k) || k.includes(key)) {
-      return v;
-    }
-  }
-  
-  return null;
-}
-
-// ============================================================
-
-const STORAGE_KEY = "caponata-calc-v3";
+const STORAGE_KEY = "caponata-calc-v2";
 
 const DEFAULT_STATE = {
 recipeName: "Minha Receita",
 
 inventory: [
-{ name: "Azeite oliva", unit: "ml", total: 500, value: 27.90 },
-{ name: "Shoyu", unit: "ml", total: 500, value: 18.90 },
-{ name: "Vinagre arroz", unit: "ml", total: 500, value: 12.50 },
-{ name: "Berinjela", unit: "g", total: 1000, value: 6.00 },
-{ name: "Abobrinha italiana", unit: "g", total: 1000, value: 4.00 },
-{ name: "Cebola", unit: "g", total: 1000, value: 4.50 },
-{ name: "Pimentão vermelho", unit: "g", total: 500, value: 6.00 },
-{ name: "Pimentão amarelo", unit: "g", total: 500, value: 6.00 },
-{ name: "Tomate", unit: "g", total: 1000, value: 3.50 },
-{ name: "Uva passa", unit: "g", total: 200, value: 15.78 },
-{ name: "Manjericão seco", unit: "g", total: 50, value: 12.85 }
+{ name: "Azeite oliva", total: 500, value: 27.90 },
+{ name: "Shoyu", total: 500, value: 18.90 },
+{ name: "Vinagre arroz", total: 500, value: 12.50 },
+{ name: "Berinjela", total: 1000, value: 6.00 },
+{ name: "Abobrinha italiana", total: 1000, value: 4.00 },
+{ name: "Cebola", total: 1000, value: 4.50 },
+{ name: "Pimentão vermelho", total: 500, value: 6.00 },
+{ name: "Pimentão amarelo", total: 500, value: 6.00 },
+{ name: "Tomate", total: 1000, value: 3.50 },
+{ name: "Uva passa", total: 200, value: 15.78 },
+{ name: "Manjericão seco", total: 50, value: 12.85 }
 ],
 
 recipe: [
@@ -1636,13 +1506,6 @@ Array.isArray(parsed.inventory) &&
 Array.isArray(parsed.recipe) &&
 Array.isArray(parsed.packaging)
 ) {
-parsed.inventory = parsed.inventory.map(function(item) {
-if (!item.unit) {
-item.unit = "g";
-}
-return item;
-});
-
 if (
 !isFinite(parsed.weightPerPot) ||
 parsed.weightPerPot <= 0
@@ -1829,186 +1692,63 @@ tr.innerHTML =
 "</td>" +
 
 "<td>" +
-"<div style='display:flex;align-items:center;gap:4px;'>" +
 "<input class='cell num' data-f='total' " +
 "type='number' step='any' " +
 "inputmode='decimal' min='0' " +
-"placeholder='500' style='flex:1;min-width:0;'>" +
-"<button class='btn-suggest' data-idx='" + idx + "' " +
-"title='Converter para gramas'>💡</button>" +
-"</div>" +
+"placeholder='500'>" +
 "</td>" +
 
 "<td>" +
-"<div style='display:flex;align-items:center;gap:4px;'>" +
 "<input class='cell num' data-f='value' " +
 "type='number' step='any' " +
 "inputmode='decimal' min='0' " +
-"placeholder='0,00' style='flex:1;min-width:0;'>" +
-"<select class='cell inv-unit-select' data-f='unit'>" +
-"<option value='g'>g</option>" +
-"<option value='ml'>ml</option>" +
-"<option value='un'>un</option>" +
-"<option value='L'>L</option>" +
-"<option value='kg'>kg</option>" +
-"</select>" +
-"</div>" +
+"placeholder='0,00'>" +
 "</td>" +
 
 "<td>" +
 "<button class='rm-btn' title='remover'>✕</button>" +
 "</td>";
 
-const nameInput =
-tr.querySelector('input[data-f="name"]');
+const inputs =
+tr.querySelectorAll("input");
 
-const totalInput =
-tr.querySelector('input[data-f="total"]');
+inputs[0].value =
+item.name;
 
-const valueInput =
-tr.querySelector('input[data-f="value"]');
+inputs[1].value =
+item.total;
 
-const unitSelect =
-tr.querySelector('select[data-f="unit"]');
+inputs[2].value =
+item.value;
 
-const suggestBtn =
-tr.querySelector('.btn-suggest');
+inputs.forEach(function(inp) {
+inp.addEventListener("input", function() {
+const f =
+inp.dataset.f;
 
-nameInput.value =
-item.name || "";
+const v =
+inp.value;
 
-totalInput.value =
-item.total || 0;
+if (
+f === "total" ||
+f === "value"
+) {
+const numVal =
+parseFloat(v);
 
-valueInput.value =
-item.value || 0;
-
-unitSelect.value =
-item.unit || "g";
-
-function updateInventory() {
-state.inventory[idx].name =
-nameInput.value;
-
-state.inventory[idx].total =
-isFinite(parseFloat(totalInput.value)) &&
-parseFloat(totalInput.value) >= 0
-? parseFloat(totalInput.value)
+state.inventory[idx][f] =
+isFinite(numVal) &&
+numVal >= 0
+? numVal
 : 0;
-
-state.inventory[idx].value =
-isFinite(parseFloat(valueInput.value)) &&
-parseFloat(valueInput.value) >= 0
-? parseFloat(valueInput.value)
-: 0;
-
-state.inventory[idx].unit =
-unitSelect.value;
+} else {
+state.inventory[idx][f] =
+v;
+}
 
 saveState();
 renderRecipe();
 render();
-}
-
-[nameInput, totalInput, valueInput, unitSelect].forEach(
-function(inp) {
-inp.addEventListener("input", updateInventory);
-inp.addEventListener("change", updateInventory);
-}
-);
-
-suggestBtn.addEventListener("click", function(e) {
-e.preventDefault();
-
-const productName = nameInput.value.trim();
-const unit = unitSelect.value;
-const qty = parseFloat(totalInput.value) || 0;
-
-if (!productName) {
-showModal({
-icon: "ℹ️",
-title: "Digite o nome do produto",
-message: "Digite o nome do produto primeiro para usar a sugestão de peso.",
-confirmText: "Entendi",
-onlyOk: true
-});
-return;
-}
-
-if (qty <= 0) {
-showModal({
-icon: "ℹ️",
-title: "Digite a quantidade",
-message: "Digite a quantidade do produto primeiro para usar a sugestão de peso.",
-confirmText: "Entendi",
-onlyOk: true
-});
-return;
-}
-
-const conv = getConversion(productName);
-
-if (!conv) {
-showModal({
-icon: "ℹ️",
-title: "Produto não encontrado",
-message: "Não temos uma sugestão de peso para \"" + productName + "\".\n\n" +
-"Você pode:\n" +
-"• Usar uma balança para pesar\n" +
-"• Verificar o peso na embalagem\n" +
-"• Pesquisar no Google: 'peso de 1 " + productName + "'",
-confirmText: "Entendi",
-onlyOk: true
-});
-return;
-}
-
-const compatibleUnits = ["g", "ml", "un", "L", "kg"];
-if (!compatibleUnits.includes(unit)) {
-showModal({
-icon: "⚠️",
-title: "Unidade não reconhecida",
-message: "A unidade \"" + unit + "\" não é suportada para conversão. Use g, ml, un, L ou kg.",
-confirmText: "Entendi",
-onlyOk: true
-});
-return;
-}
-
-let weightInGrams = qty;
-
-if (unit === "g") {
-weightInGrams = qty;
-} else if (unit === "ml") {
-weightInGrams = qty * conv.factor;
-} else if (unit === "un") {
-weightInGrams = qty * conv.factor;
-} else if (unit === "L") {
-weightInGrams = qty * 1000 * conv.factor;
-} else if (unit === "kg") {
-weightInGrams = qty * 1000;
-}
-
-weightInGrams = Math.round(weightInGrams);
-
-totalInput.value = weightInGrams;
-state.inventory[idx].total = weightInGrams;
-
-unitSelect.value = "g";
-state.inventory[idx].unit = "g";
-
-saveState();
-renderRecipe();
-render();
-
-showModal({
-icon: "✅",
-title: "Peso sugerido aplicado!",
-message: "Para \"" + productName + "\":\n" +
-qty + " " + unit + " = " + weightInGrams + " g\n\n" +
-"O campo foi atualizado automaticamente.",
-confirmText: "Ótimo!",
-onlyOk: true
 });
 });
 
@@ -2067,7 +1807,6 @@ document.getElementById(
 
 state.inventory.push({
 name: "",
-unit: "g",
 total: 0,
 value: 0
 });
@@ -2738,6 +2477,7 @@ leftoverWeight,
 ) +
 " g";
 
+// Aviso quando não existe pote completo
 const warningEl =
 document.getElementById(
 "insufficientWarning"
