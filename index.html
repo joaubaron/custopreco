@@ -928,6 +928,163 @@ color: var(--blue);
 font-weight: 700;
 }
 
+/* Estilos para Minhas Receitas */
+.recipe-list-container {
+margin-top: 12px;
+border-top: 1px solid var(--border);
+padding-top: 16px;
+}
+
+.recipe-list-container .recipe-list-title {
+font-size: 12px;
+font-weight: 600;
+color: var(--text-secondary);
+margin-bottom: 10px;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+
+.recipe-list-container .recipe-list-title .count {
+font-size: 10px;
+color: var(--text-muted);
+font-weight: 400;
+}
+
+.recipe-list {
+display: flex;
+flex-direction: column;
+gap: 4px;
+margin-bottom: 12px;
+max-height: 300px;
+overflow-y: auto;
+}
+
+.recipe-list .recipe-item {
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 8px 12px;
+background: var(--bg-input);
+border-radius: 8px;
+border: 1px solid transparent;
+transition: var(--transition);
+cursor: pointer;
+gap: 8px;
+}
+
+.recipe-list .recipe-item:hover {
+border-color: var(--gold-border);
+background: var(--bg-card-hover);
+}
+
+.recipe-list .recipe-item .recipe-name {
+font-size: 13px;
+color: var(--text-primary);
+flex: 1;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+
+.recipe-list .recipe-item .recipe-actions {
+display: flex;
+gap: 4px;
+flex-shrink: 0;
+}
+
+.recipe-list .recipe-item .recipe-actions button {
+background: none;
+border: none;
+color: var(--text-muted);
+cursor: pointer;
+padding: 4px 8px;
+border-radius: 6px;
+font-size: 12px;
+transition: var(--transition);
+}
+
+.recipe-list .recipe-item .recipe-actions .load-btn:hover {
+color: var(--gold);
+background: var(--gold-soft);
+}
+
+.recipe-list .recipe-item .recipe-actions .del-btn:hover {
+color: var(--red);
+background: var(--red-dim);
+}
+
+.recipe-list-empty {
+color: var(--text-muted);
+font-size: 12px;
+text-align: center;
+padding: 20px 0;
+}
+
+.recipe-actions-bar {
+display: flex;
+gap: 8px;
+flex-wrap: wrap;
+margin-top: 8px;
+}
+
+.recipe-actions-bar .action-btn {
+font-size: 11px;
+font-weight: 500;
+background: var(--bg-input);
+border: 1px solid var(--border);
+color: var(--text-secondary);
+padding: 9px 16px;
+border-radius: 999px;
+cursor: pointer;
+transition: var(--transition);
+touch-action: manipulation;
+min-height: 38px;
+display: inline-flex;
+align-items: center;
+gap: 6px;
+}
+
+.recipe-actions-bar .action-btn:active {
+transform: scale(.95);
+}
+
+.recipe-actions-bar .action-btn.save-btn:hover {
+border-color: var(--green);
+color: var(--green);
+background: var(--green-dim);
+}
+
+.recipe-actions-bar .action-btn.delete-btn:hover {
+border-color: var(--red);
+color: var(--red);
+background: var(--red-dim);
+}
+
+.footer-receitas-link {
+text-align: center;
+margin-top: 18px;
+padding-top: 14px;
+border-top: 1px solid var(--border);
+}
+
+.footer-receitas-link a {
+color: var(--gold);
+text-decoration: none;
+font-size: 12px;
+font-weight: 600;
+cursor: pointer;
+transition: var(--transition);
+display: inline-flex;
+align-items: center;
+gap: 6px;
+}
+
+.footer-receitas-link a:hover {
+color: var(--gold-strong);
+opacity: 0.8;
+}
+
 @media screen and (max-width:600px) {
 body {
 padding-left: 8px;
@@ -1140,6 +1297,8 @@ padding-left: max(16px, env(safe-area-inset-left));
 padding-right: max(16px, env(safe-area-inset-right));
 padding-bottom: max(80px, env(safe-area-inset-bottom));
 }
+}
+
 </style>
 
 </head>
@@ -1423,6 +1582,28 @@ R$ 0,00
 </div>
 
 <div class="jar-legend" id="jarLegend"></div>
+
+<!-- RECEITAS SALVAS -->
+<div class="recipe-list-container">
+<div class="recipe-list-title">
+📋 Minhas Receitas
+<span class="count" id="recipeCount">(0)</span>
+</div>
+
+<div class="recipe-list" id="recipeList">
+<div class="recipe-list-empty">Nenhuma receita salva ainda</div>
+</div>
+
+<div class="recipe-actions-bar">
+<button class="action-btn save-btn" id="saveRecipeBtn">💾 Salvar receita</button>
+<button class="action-btn delete-btn" id="deleteCurrentRecipeBtn">🗑️ Apagar esta receita</button>
+</div>
+
+<div class="footer-receitas-link">
+<a id="toggleRecipeListLink">📖 Ver minhas receitas</a>
+</div>
+</div>
+
 </section>
 
 </div>
@@ -1474,6 +1655,7 @@ Confirmar
 "use strict";
 
 const STORAGE_KEY = "caponata-calc-v2";
+const RECIPES_STORAGE_KEY = "caponata-recipes-list";
 
 const DEFAULT_STATE = {
 recipeName: "Minha Receita",
@@ -1520,6 +1702,8 @@ profitPct: 35
 
 let state = loadState();
 let storageWarned = false;
+let currentRecipeId = null;
+let recipesList = loadRecipesList();
 
 function getDensityByName(name) {
 const n = String(name || "")
@@ -1674,6 +1858,133 @@ onlyOk: true
 
 }
 
+}
+}
+
+function loadRecipesList() {
+try {
+const raw = localStorage.getItem(RECIPES_STORAGE_KEY);
+if (raw) {
+const parsed = JSON.parse(raw);
+if (Array.isArray(parsed)) {
+return parsed;
+}
+}
+} catch (e) {}
+return [];
+}
+
+function saveRecipesList() {
+try {
+localStorage.setItem(RECIPES_STORAGE_KEY, JSON.stringify(recipesList));
+} catch (e) {}
+}
+
+function getRecipeData() {
+return {
+recipeName: state.recipeName,
+inventory: state.inventory,
+recipe: state.recipe,
+packaging: state.packaging,
+weightPerPot: state.weightPerPot,
+profitPct: state.profitPct
+};
+}
+
+function loadRecipeData(data) {
+state.recipeName = data.recipeName || "Minha Receita";
+state.inventory = data.inventory || [];
+state.recipe = data.recipe || [];
+state.packaging = data.packaging || [];
+state.weightPerPot = data.weightPerPot || 500;
+state.profitPct = data.profitPct || 35;
+
+recipeNameEl.value = state.recipeName;
+weightPerPotEl.value = state.weightPerPot;
+profitPctEl.value = state.profitPct;
+
+saveState();
+renderAll();
+}
+
+function saveCurrentRecipe() {
+const name = state.recipeName.trim() || "Receita sem nome";
+
+// Check if already exists
+const existing = recipesList.find(r => r.id === currentRecipeId);
+
+if (existing) {
+// Update existing
+existing.name = name;
+existing.data = getRecipeData();
+existing.updatedAt = Date.now();
+} else {
+// Create new
+const newRecipe = {
+id: 'recipe_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6),
+name: name,
+data: getRecipeData(),
+createdAt: Date.now(),
+updatedAt: Date.now()
+};
+recipesList.push(newRecipe);
+currentRecipeId = newRecipe.id;
+}
+
+saveRecipesList();
+renderRecipeList();
+
+showModal({
+icon: "💾",
+title: "Receita salva!",
+message: `"${name}" foi salva com sucesso.`,
+confirmText: "OK",
+onlyOk: true
+});
+}
+
+function deleteCurrentRecipe() {
+if (!currentRecipeId) {
+showModal({
+icon: "ℹ️",
+title: "Nenhuma receita selecionada",
+message: "Não há uma receita salva para apagar.",
+confirmText: "OK",
+onlyOk: true
+});
+return;
+}
+
+showModal({
+icon: "🗑️",
+title: "Apagar receita?",
+message: `Tem certeza que deseja apagar "${state.recipeName}"? Esta ação não pode ser desfeita.`,
+confirmText: "Apagar",
+cancelText: "Cancelar",
+danger: true
+}, function() {
+recipesList = recipesList.filter(r => r.id !== currentRecipeId);
+currentRecipeId = null;
+saveRecipesList();
+renderRecipeList();
+
+showModal({
+icon: "🗑️",
+title: "Receita apagada",
+message: "A receita foi removida com sucesso.",
+confirmText: "OK",
+onlyOk: true
+});
+});
+}
+
+function loadRecipeFromList(recipeId) {
+const recipe = recipesList.find(r => r.id === recipeId);
+if (recipe) {
+currentRecipeId = recipe.id;
+loadRecipeData(recipe.data);
+// Highlight the loaded recipe in the list
+renderRecipeList();
 }
 }
 
@@ -2845,6 +3156,8 @@ DEFAULT_STATE
 )
 );
 
+currentRecipeId = null;
+
 recipeNameEl.value =
 state.recipeName;
 
@@ -2862,9 +3175,119 @@ renderPackaging();
 render();
 
 });
-
 }
+
 );
+
+// Recipes List UI
+
+function renderRecipeList() {
+const container = document.getElementById('recipeList');
+const countEl = document.getElementById('recipeCount');
+
+countEl.textContent = `(${recipesList.length})`;
+
+if (recipesList.length === 0) {
+container.innerHTML = `<div class="recipe-list-empty">Nenhuma receita salva ainda</div>`;
+return;
+}
+
+// Sort by updatedAt descending (most recent first)
+const sorted = [...recipesList].sort((a, b) => b.updatedAt - a.updatedAt);
+
+container.innerHTML = sorted.map(recipe => `
+<div class="recipe-item" data-id="${recipe.id}">
+<span class="recipe-name">${recipe.name}</span>
+<div class="recipe-actions">
+<button class="load-btn" data-id="${recipe.id}" title="Carregar">📂</button>
+<button class="del-btn" data-id="${recipe.id}" title="Apagar">✕</button>
+</div>
+</div>
+`).join('');
+
+// Event listeners for load buttons
+container.querySelectorAll('.load-btn').forEach(btn => {
+btn.addEventListener('click', function(e) {
+e.stopPropagation();
+const id = this.dataset.id;
+loadRecipeFromList(id);
+});
+});
+
+// Event listeners for delete buttons
+container.querySelectorAll('.del-btn').forEach(btn => {
+btn.addEventListener('click', function(e) {
+e.stopPropagation();
+const id = this.dataset.id;
+const recipe = recipesList.find(r => r.id === id);
+if (recipe) {
+showModal({
+icon: "🗑️",
+title: "Apagar receita?",
+message: `Tem certeza que deseja apagar "${recipe.name}"?`,
+confirmText: "Apagar",
+cancelText: "Cancelar",
+danger: true
+}, function() {
+recipesList = recipesList.filter(r => r.id !== id);
+if (currentRecipeId === id) {
+currentRecipeId = null;
+}
+saveRecipesList();
+renderRecipeList();
+});
+}
+});
+});
+
+// Click on the whole item to load
+container.querySelectorAll('.recipe-item').forEach(item => {
+item.addEventListener('click', function() {
+const id = this.dataset.id;
+loadRecipeFromList(id);
+});
+});
+
+// Highlight current recipe
+if (currentRecipeId) {
+container.querySelectorAll('.recipe-item').forEach(item => {
+if (item.dataset.id === currentRecipeId) {
+item.style.borderColor = 'var(--gold)';
+item.style.background = 'var(--gold-soft)';
+}
+});
+}
+}
+
+// Save recipe button
+document.getElementById('saveRecipeBtn').addEventListener('click', saveCurrentRecipe);
+
+// Delete current recipe button
+document.getElementById('deleteCurrentRecipeBtn').addEventListener('click', deleteCurrentRecipe);
+
+// Toggle recipe list link
+document.getElementById('toggleRecipeListLink').addEventListener('click', function(e) {
+e.preventDefault();
+const container = document.querySelector('.recipe-list-container');
+const list = document.getElementById('recipeList');
+const isHidden = list.style.display === 'none';
+
+if (list.style.display === 'none') {
+list.style.display = 'flex';
+this.textContent = '📖 Ver minhas receitas';
+} else {
+list.style.display = 'none';
+this.textContent = '📖 Ver minhas receitas';
+}
+// Toggle visibility
+if (list.style.display === 'none') {
+list.style.display = 'flex';
+this.textContent = '📕 Esconder receitas';
+} else {
+list.style.display = 'none';
+this.textContent = '📖 Ver minhas receitas';
+}
+});
 
 // Render price
 
@@ -3234,12 +3657,34 @@ brl(invTotal);
 
 }
 
-// Init
-
+function renderAll() {
 renderInventory();
 renderRecipe();
 renderPackaging();
 render();
+renderRecipeList();
+}
+
+// Init
+
+renderAll();
+
+// Try to find if there's a current recipe in the list
+if (recipesList.length > 0) {
+// Check if current state matches any saved recipe
+const matching = recipesList.find(r => {
+const data = r.data;
+return data &&
+data.recipeName === state.recipeName &&
+JSON.stringify(data.inventory) === JSON.stringify(state.inventory) &&
+JSON.stringify(data.recipe) === JSON.stringify(state.recipe);
+});
+if (matching) {
+currentRecipeId = matching.id;
+}
+}
+
+renderRecipeList();
 
 // Service Worker
 
