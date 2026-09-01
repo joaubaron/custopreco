@@ -592,20 +592,12 @@
     .jar-card-inline {
       padding-bottom: 20px;
     }
-    .jar-inline-row {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-    .jar-inline-info {
-      flex: 1;
-      min-width: 0;
-    }
     .jar-legend {
       display: flex;
       flex-direction: column;
       gap: 6px;
       font-size: 11px;
+      margin-top: 16px;
     }
     .jar-legend div {
       display: flex;
@@ -635,9 +627,6 @@
       font-weight: 600;
     }
     .price-tag {
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 1px solid var(--border);
       text-align: left;
     }
     .price-tag .lbl {
@@ -649,7 +638,7 @@
     }
     .price-tag .amt {
       font-family: var(--font-display);
-      font-size: 25px;
+      font-size: 34px;
       font-weight: 800;
       color: var(--gold);
       font-variant-numeric: tabular-nums;
@@ -911,14 +900,11 @@
       .add-row-btn {
         font-size: 10.5px !important;
       }
-      #invTotalValue,
-      #recSubV,
-      #pkgSubV,
       #costTotalPot {
         font-size: 19px !important;
       }
-      #finalPrice {
-        font-size: 22px !important;
+      .price-tag .amt {
+        font-size: 27px !important;
       }
       .kv-grid {
         font-size: 12px;
@@ -1043,17 +1029,12 @@
         <!-- Preço -->
         <div class="tab-content" id="tab3">
           <section class="card jar-card-inline">
-            <h2>🏷️ Composição do preço</h2>
-            <div class="jar-inline-row">
-              <div class="jar-inline-info">
-                <div class="jar-legend" id="jarLegend"></div>
-                <div class="price-tag">
-                  <div class="lbl">Preço por pote</div>
-                  <div class="amt" id="jarPrice">R$ 0,00</div>
-                  <div class="per" id="jarPots">— potes</div>
-                </div>
-              </div>
+            <div class="price-tag">
+              <div class="lbl">Preço de venda por pote</div>
+              <div class="amt" id="finalPrice">R$ 0,00</div>
+              <div class="per" id="jarPots">— potes</div>
             </div>
+            <div class="jar-legend" id="jarLegend"></div>
           </section>
 
           <section class="card">
@@ -1073,37 +1054,26 @@
               <div class="v leftover-note" id="leftoverWeight"></div>
             </div>
             <div class="warning-message" id="insufficientWarning">
-              ⚠️ Atenção: a receita não rende um pote completo de <span id="warningPotSize"></span> g. O custo dos ingredientes está sendo calculated como se toda a receita fosse usada em um único pote.
+              ⚠️ Atenção: a receita não rende um pote completo de <span id="warningPotSize"></span> g. O custo dos ingredientes está sendo calculado como se toda a receita fosse usada em um único pote.
             </div>
           </section>
 
           <section class="card">
-            <h2>💰 Custo por pote</h2>
+            <h2>💰 Custo &amp; Lucro <span class="badge">por pote</span></h2>
             <div class="kv-grid">
               <div class="k">Ingredientes rateados</div>
               <div class="v" id="costIngPot"></div>
-              <div class="k">Embalagem por pote</div>
+              <div class="k">Embalagem</div>
               <div class="v" id="costPkgPot"></div>
               <div class="divider"></div>
-              <div class="k total">Custo total por pote</div>
+              <div class="k total">Custo total</div>
               <div class="v total" id="costTotalPot"></div>
-            </div>
-          </section>
-
-          <section class="card">
-            <h2>🏷️ Preço de venda <span class="badge">com markup</span></h2>
-            <div class="kv-grid">
-              <div class="k">Custo</div>
-              <div class="v" id="priceCost"></div>
               <div class="k">Lucro desejado (%)</div>
               <div class="v editable">
                 <input type="number" id="profitPct" min="0" max="99.99" step="1" inputmode="numeric" value="35" />
               </div>
               <div class="k">Markup</div>
               <div class="v" id="markup"></div>
-              <div class="divider"></div>
-              <div class="k total">Preço de venda por pote</div>
-              <div class="v total" id="finalPrice"></div>
             </div>
           </section>
         </div>
@@ -1542,7 +1512,6 @@
 
       // Render price
       const jarLegend = document.getElementById("jarLegend");
-      const jarPrice = document.getElementById("jarPrice");
       const jarPots = document.getElementById("jarPots");
 
       function render() {
@@ -1601,11 +1570,8 @@
         const profitValue = Math.max(0, price - costTotalPot);
         const markup = costTotalPot > 0 ? price / costTotalPot : 0;
 
-        document.getElementById("priceCost").textContent = brl(costTotalPot);
         document.getElementById("markup").textContent = "×" + markup.toFixed(2).replace(".", ",");
         document.getElementById("finalPrice").textContent = brl(price);
-
-        jarPrice.textContent = brl(price);
         jarPots.textContent = numPots + (numPots === 1 ? " pote" : " potes");
 
         const segments = [
