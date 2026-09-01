@@ -1,3 +1,5 @@
+https://joaubaron.github.io/custoprecoreceita/
+
 🫙 Custo do Pote — Calculadora de Preço de Receitas
 
 Uma aplicação web completa para calcular o custo e preço de venda de receitas em porções (potes). Permite cadastrar ingredientes, montar a receita, adicionar custos de embalagem e definir margem de lucro.
