@@ -1191,11 +1191,11 @@ Cadastre os produtos que você compra e seus valores
 <table>
 <thead>
 <tr>
-  <th>Produto</th>
-  <th class="num">Qtd. Total</th>
-  <th>Un.</th>
-  <th class="num">R$</th>
-  <th></th>
+<th>Produto</th>
+<th class="num">Qtd. Total</th>
+<th>Un.</th>
+<th class="num">R$</th>
+<th></th>
 </tr>
 </thead>
 
@@ -1203,10 +1203,10 @@ Cadastre os produtos que você compra e seus valores
 
 <tfoot>
 <tr class="tfoot-total-row">
-  <td class="total-label" colspan="2">Total em estoque</td>
-  <td></td>
-  <td class="total-value" id="invTotalValue">R$ 0,00</td>
-  <td></td>
+<td class="total-label" colspan="2">Total em estoque</td>
+<td></td>
+<td class="total-value" id="invTotalValue">R$ 0,00</td>
+<td></td>
 </tr>
 </tfoot>
 </table>
@@ -1235,11 +1235,11 @@ Ajusta automaticamente peso e volume para calcular o custo corretamente.
 <table>
 <thead>
 <tr>
-  <th>Produto</th>
-  <th class="num">Qtd.</th>
-  <th>Un.</th>
-  <th class="num">Custo (R$)</th>
-  <th></th>
+<th>Produto</th>
+<th class="num">Qtd.</th>
+<th>Un.</th>
+<th class="num">Custo (R$)</th>
+<th></th>
 </tr>
 </thead>
 
@@ -1247,15 +1247,15 @@ Ajusta automaticamente peso e volume para calcular o custo corretamente.
 
 <tfoot>
 <tr>
-  <td class="total-label" colspan="3">
-    Subtotal receita
-  </td>
+<td class="total-label" colspan="3">
+Subtotal receita
+</td>
 
-  <td class="total-value" id="recSubV">
-    R$ 0,00
-  </td>
+<td class="total-value" id="recSubV">
+R$ 0,00
+</td>
 
-  <td></td>
+<td></td>
 </tr>
 </tfoot>
 </table>
@@ -1282,11 +1282,11 @@ Custo fixo de cada pote da receita
 <table>
 <thead>
 <tr>
-  <th>Item</th>
-  <th class="num">Qtd.</th>
-  <th>Un.</th>
-  <th class="num">R$</th>
-  <th></th>
+<th>Item</th>
+<th class="num">Qtd.</th>
+<th>Un.</th>
+<th class="num">R$</th>
+<th></th>
 </tr>
 </thead>
 
@@ -1294,15 +1294,15 @@ Custo fixo de cada pote da receita
 
 <tfoot>
 <tr>
-  <td class="total-label" colspan="3">
-    Subtotal por pote
-  </td>
+<td class="total-label" colspan="3">
+Subtotal por pote
+</td>
 
-  <td class="total-value" id="pkgSubV">
-    R$ 0,00
-  </td>
+<td class="total-value" id="pkgSubV">
+R$ 0,00
+</td>
 
-  <td></td>
+<td></td>
 </tr>
 </tfoot>
 </table>
@@ -1540,16 +1540,6 @@ if (n.includes("agua") || n.includes("água")) return 1.00;
 return 1.00;
 }
 
-/*
- * Converte qualquer unidade de massa/volume para gramas.
- *
- * g  -> g
- * kg -> g
- * ml -> ml × densidade
- * L  -> 1000 ml × densidade
- *
- * "un" e outras unidades não são convertidas para massa.
- */
 function toGrams(qty, unit, inv) {
 const q = parseFloat(qty) || 0;
 const u = String(unit || "").trim().toLowerCase();
@@ -1608,6 +1598,7 @@ Array.isArray(parsed.inventory) &&
 Array.isArray(parsed.recipe) &&
 Array.isArray(parsed.packaging)
 ) {
+
 if (
 !isFinite(parsed.weightPerPot) ||
 parsed.weightPerPot <= 0
@@ -1624,6 +1615,7 @@ parsed.profitPct = 35;
 }
 
 parsed.inventory.forEach(function(item) {
+
 if (
 item &&
 (
@@ -1631,7 +1623,9 @@ String(item.unit || "").trim().toLowerCase() === "ml" ||
 String(item.unit || "").trim().toLowerCase() === "l"
 )
 ) {
-const detected = getDensityByName(item.name);
+
+const detected =
+getDensityByName(item.name);
 
 if (
 !isFinite(parseFloat(item.density)) ||
@@ -1639,25 +1633,34 @@ parseFloat(item.density) <= 0
 ) {
 item.density = detected;
 }
+
 }
+
 });
 
 return parsed;
 }
 }
+
 } catch (e) {}
 
-return JSON.parse(JSON.stringify(DEFAULT_STATE));
+return JSON.parse(
+JSON.stringify(DEFAULT_STATE)
+);
 }
 
 function saveState() {
 try {
+
 localStorage.setItem(
 STORAGE_KEY,
 JSON.stringify(state)
 );
+
 } catch (e) {
+
 if (!storageWarned) {
+
 storageWarned = true;
 
 showModal({
@@ -1669,11 +1672,14 @@ message:
 confirmText: "Entendi",
 onlyOk: true
 });
+
 }
+
 }
 }
 
 function brl(n) {
+
 if (!isFinite(n)) n = 0;
 
 return "R$ " +
@@ -1681,18 +1687,22 @@ n.toLocaleString("pt-BR", {
 minimumFractionDigits: 2,
 maximumFractionDigits: 2
 });
+
 }
 
 function num(n, digits) {
+
 if (!isFinite(n)) n = 0;
 
 return n.toLocaleString("pt-BR", {
 minimumFractionDigits: digits || 0,
 maximumFractionDigits: digits || 2
 });
+
 }
 
 // Elements
+
 const recipeNameEl =
 document.getElementById("recipeName");
 
@@ -1722,14 +1732,26 @@ state.weightPerPot > 0
 profitPctEl.value =
 state.profitPct;
 
-recipeNameEl.addEventListener("input", function() {
+recipeNameEl.addEventListener(
+"input",
+function() {
+
 state.recipeName =
 recipeNameEl.value;
 
 saveState();
-});
 
-weightPerPotEl.addEventListener("input", function() {
+}
+);
+
+/*
+ * Campo de tamanho do pote:
+ * não recria nenhum elemento enquanto o usuário digita.
+ */
+weightPerPotEl.addEventListener(
+"input",
+function() {
+
 const value =
 parseFloat(weightPerPotEl.value);
 
@@ -1739,10 +1761,20 @@ isFinite(value) && value > 0
 : 0;
 
 saveState();
-render();
-});
 
-profitPctEl.addEventListener("input", function() {
+render();
+
+}
+);
+
+/*
+ * Campo de margem:
+ * mantém o foco e permite digitar o valor completo.
+ */
+profitPctEl.addEventListener(
+"input",
+function() {
+
 let value =
 parseFloat(profitPctEl.value);
 
@@ -1759,10 +1791,14 @@ Math.min(value, 99.99)
 state.profitPct = value;
 
 saveState();
+
 render();
-});
+
+}
+);
 
 // Tabs
+
 const tabBtns =
 document.querySelectorAll(".tab-btn");
 
@@ -1774,7 +1810,11 @@ tab3: document.getElementById("tab3")
 };
 
 tabBtns.forEach(function(btn) {
-btn.addEventListener("click", function(e) {
+
+btn.addEventListener(
+"click",
+function(e) {
+
 e.preventDefault();
 
 tabBtns.forEach(function(b) {
@@ -1797,11 +1837,16 @@ this.dataset.tab
 if (target) {
 target.classList.add("active");
 }
-});
+
+}
+);
+
 });
 
 // Inventory
+
 function invRow(item, idx) {
+
 const tr =
 document.createElement("tr");
 
@@ -1847,13 +1892,13 @@ inputs[0].value =
 item.name || "";
 
 inputs[1].value =
-item.total || 0;
+item.total ?? "";
 
 inputs[2].value =
 item.unit || "g";
 
 inputs[3].value =
-item.value || 0;
+item.value ?? "";
 
 inputs.forEach(function(inp) {
 
@@ -1883,6 +1928,7 @@ numVal >= 0
 
 state.inventory[idx][f] =
 v;
+
 }
 
 if (
@@ -1908,28 +1954,76 @@ state.inventory[idx].name
 );
 
 }
+
 }
 
 saveState();
 
-renderInventory();
-renderRecipe();
 render();
+
 }
 
+/*
+ * IMPORTANTE:
+ *
+ * Não existe mais renderInventory() aqui.
+ *
+ * Assim o DOM não é recriado a cada tecla.
+ * O usuário pode digitar livremente.
+ */
 inp.addEventListener(
 "input",
 updateInventoryField
 );
 
+/*
+ * Enter confirma o campo sem recriá-lo.
+ */
+inp.addEventListener(
+"keydown",
+function(e) {
+
+if (e.key === "Enter") {
+
+e.preventDefault();
+
+inp.blur();
+
+}
+
+}
+);
+
+/*
+ * Ao sair do campo, atualiza normalmente.
+ */
+inp.addEventListener(
+"blur",
+function() {
+
+updateInventoryField();
+
+}
+);
+
+/*
+ * Para select, change também funciona.
+ */
 inp.addEventListener(
 "change",
-updateInventoryField
+function() {
+
+updateInventoryField();
+
+}
 );
+
 });
 
 tr.querySelector(".rm-btn")
-.addEventListener("click", function() {
+.addEventListener(
+"click",
+function() {
 
 state.inventory.splice(idx, 1);
 
@@ -1939,9 +2033,11 @@ r => r.invIndex !== idx
 );
 
 state.recipe.forEach(function(r) {
+
 if (r.invIndex > idx) {
 r.invIndex--;
 }
+
 });
 
 saveState();
@@ -1949,37 +2045,50 @@ saveState();
 renderInventory();
 renderRecipe();
 render();
-});
+
+}
+);
 
 return tr;
 }
 
 function renderInventory() {
+
 invBody.innerHTML = "";
 
 state.inventory.forEach(
 function(item, idx) {
+
 invBody.appendChild(
 invRow(item, idx)
 );
+
 }
 );
 
 let total = 0;
 
-state.inventory.forEach(function(i) {
+state.inventory.forEach(
+function(i) {
+
 total +=
 parseFloat(i.value) || 0;
-});
+
+}
+);
 
 document.getElementById(
 "invTotalValue"
-).textContent = brl(total);
+).textContent =
+brl(total);
+
 }
 
 document.getElementById(
 "addInv"
-).addEventListener("click", function() {
+).addEventListener(
+"click",
+function() {
 
 state.inventory.push({
 name: "",
@@ -1994,30 +2103,12 @@ saveState();
 renderInventory();
 renderRecipe();
 render();
-});
+
+}
+);
 
 /*
- * CÁLCULO CORRIGIDO DO CUSTO
- *
- * Primeiro transforma a quantidade comprada e a quantidade
- * usada na receita para a mesma base física.
- *
- * Massa:
- *   g  = g
- *   kg = kg × 1000
- *
- * Volume:
- *   ml = ml × densidade
- *   L  = L × 1000 × densidade
- *
- * Assim funciona corretamente:
- *
- * Mercado 1 kg  → Receita 120 g
- * Mercado 1 kg  → Receita 120 ml
- * Mercado 1 L   → Receita 120 ml
- * Mercado 1 L   → Receita 120 g
- *
- * quando a densidade do produto estiver disponível.
+ * CÁLCULO DO CUSTO
  */
 function getIngredientCost(
 invIndex,
@@ -2061,10 +2152,6 @@ recipeUnit || inv.unit || ""
 .trim()
 .toLowerCase();
 
-/*
- * Unidades contáveis somente podem ser comparadas
- * com unidades contáveis.
- */
 if (
 inventoryUnit === "un" ||
 inventoryUnit === "pote"
@@ -2081,9 +2168,6 @@ q / total
 ) * value;
 }
 
-/*
- * Converte ambos para gramas.
- */
 const totalGrams =
 toGrams(
 total,
@@ -2098,10 +2182,6 @@ usedUnit,
 inv
 );
 
-/*
- * Se uma das unidades não puder ser convertida,
- * não inventa uma proporção.
- */
 if (
 totalGrams === null ||
 usedGrams === null ||
@@ -2118,7 +2198,9 @@ totalGrams
 }
 
 // Recipe
+
 function recRow(item, idx) {
+
 const tr =
 document.createElement("tr");
 
@@ -2177,10 +2259,10 @@ const costCell =
 tr.querySelector(".cost-display");
 
 qtyInput.value =
-item.qty;
+item.qty ?? "";
 
 unitInput.value =
-item.unit;
+item.unit ?? "";
 
 function updateCost() {
 
@@ -2196,6 +2278,7 @@ cost.toLocaleString("pt-BR", {
 minimumFractionDigits: 2,
 maximumFractionDigits: 2
 });
+
 }
 
 qtyInput.addEventListener(
@@ -2216,6 +2299,7 @@ saveState();
 
 updateCost();
 render();
+
 }
 );
 
@@ -2230,6 +2314,41 @@ saveState();
 
 updateCost();
 render();
+
+}
+);
+
+/*
+ * Enter apenas tira o foco.
+ * O campo continua intacto.
+ */
+qtyInput.addEventListener(
+"keydown",
+function(e) {
+
+if (e.key === "Enter") {
+
+e.preventDefault();
+
+qtyInput.blur();
+
+}
+
+}
+);
+
+unitInput.addEventListener(
+"keydown",
+function(e) {
+
+if (e.key === "Enter") {
+
+e.preventDefault();
+
+unitInput.blur();
+
+}
+
 }
 );
 
@@ -2247,6 +2366,7 @@ saveState();
 
 renderRecipe();
 render();
+
 }
 );
 
@@ -2313,11 +2433,14 @@ document.getElementById(
 "recSubV"
 ).textContent =
 brl(recV);
+
 }
 
 document.getElementById(
 "addRec"
-).addEventListener("click", function() {
+).addEventListener(
+"click",
+function() {
 
 if (
 state.inventory.length === 0
@@ -2371,9 +2494,12 @@ saveState();
 
 renderRecipe();
 render();
-});
+
+}
+);
 
 // Packaging
+
 function pkgRow(item, idx) {
 
 const tr =
@@ -2412,22 +2538,20 @@ const inputs =
 tr.querySelectorAll("input");
 
 inputs[0].value =
-item.name;
+item.name ?? "";
 
 inputs[1].value =
-item.qty;
+item.qty ?? "";
 
 inputs[2].value =
-item.unit;
+item.unit ?? "";
 
 inputs[3].value =
-item.value;
+item.value ?? "";
 
 inputs.forEach(function(inp) {
 
-inp.addEventListener(
-"input",
-function() {
+function updatePackagingField() {
 
 const f =
 inp.dataset.f;
@@ -2457,7 +2581,39 @@ v;
 }
 
 saveState();
+
 render();
+
+}
+
+inp.addEventListener(
+"input",
+updatePackagingField
+);
+
+/*
+ * Enter não destrói/recria o campo.
+ */
+inp.addEventListener(
+"keydown",
+function(e) {
+
+if (e.key === "Enter") {
+
+e.preventDefault();
+
+inp.blur();
+
+}
+
+}
+);
+
+inp.addEventListener(
+"blur",
+function() {
+
+updatePackagingField();
 
 }
 );
@@ -2515,11 +2671,14 @@ document.getElementById(
 "pkgSubV"
 ).textContent =
 brl(pkgV);
+
 }
 
 document.getElementById(
 "addPkg"
-).addEventListener("click", function() {
+).addEventListener(
+"click",
+function() {
 
 state.packaging.push({
 name: "",
@@ -2532,9 +2691,12 @@ saveState();
 
 renderPackaging();
 render();
-});
+
+}
+);
 
 // Modal
+
 const modalOverlay =
 document.getElementById(
 "modalOverlay"
@@ -2566,9 +2728,11 @@ document.getElementById(
 );
 
 function closeModal() {
+
 modalOverlay.classList.remove(
 "open"
 );
+
 }
 
 function showModal(
@@ -2656,6 +2820,7 @@ closeModal();
 );
 
 // Reset
+
 document.getElementById(
 "resetBtn"
 ).addEventListener(
@@ -2703,6 +2868,7 @@ render();
 );
 
 // Render price
+
 const jarLegend =
 document.getElementById(
 "jarLegend"
@@ -2828,7 +2994,6 @@ leftoverWeight,
 ) +
 " g";
 
-// Aviso quando não existe pote completo
 const warningEl =
 document.getElementById(
 "insufficientWarning"
@@ -3071,12 +3236,14 @@ brl(invTotal);
 }
 
 // Init
+
 renderInventory();
 renderRecipe();
 renderPackaging();
 render();
 
 // Service Worker
+
 if ("serviceWorker" in navigator) {
 
 let refreshing = false;
