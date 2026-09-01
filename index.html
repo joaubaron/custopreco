@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 
 <html lang="pt-BR">
@@ -423,14 +424,15 @@ width: 100% !important;
 table-layout: fixed !important;
 }
 
+/* MERCADO — Produto +5px / Qtd. Total -5px */
 #tab0 th:first-child,
 #tab0 td:first-child {
-width: 38% !important;
+width: calc(38% + 5px) !important;
 }
 
 #tab0 th:nth-child(2),
 #tab0 td:nth-child(2) {
-width: 20% !important;
+width: calc(20% - 5px) !important;
 text-align: right;
 }
 
@@ -929,6 +931,7 @@ font-weight: 700;
 }
 
 @media screen and (max-width:600px) {
+
 body {
 padding-left: 8px;
 padding-right: 8px;
@@ -986,14 +989,15 @@ border-color: #4d82b8 !important;
 box-shadow: 0 4px 14px rgba(49, 95, 145, .30) !important;
 }
 
+/* MERCADO — Produto +5px / Qtd. Total -5px */
 #tab0 th:first-child,
 #tab0 td:first-child {
-width: 36% !important;
+width: calc(36% + 5px) !important;
 }
 
 #tab0 th:nth-child(2),
 #tab0 td:nth-child(2) {
-width: 20% !important;
+width: calc(20% - 5px) !important;
 }
 
 #tab0 th:nth-child(3),
@@ -1120,6 +1124,7 @@ font-size: 12px;
 }
 
 @media (min-width:480px) {
+
 .modal-overlay {
 align-items: center;
 }
@@ -1132,34 +1137,46 @@ transform: translateY(10px) scale(.98);
 .modal-overlay.open .modal-box {
 transform: translateY(0) scale(1);
 }
+
 }
 
 @supports (padding:max(0px)) {
+
 body {
 padding-left: max(16px, env(safe-area-inset-left));
 padding-right: max(16px, env(safe-area-inset-right));
 padding-bottom: max(80px, env(safe-area-inset-bottom));
+}
+
 }
 </style>
 
 </head>
 
 <body>
+
 <div class="wrap">
 
 <header>
+
 <div class="header-left">
+
 <p class="eyebrow">💲 Calculadora de preço</p>
+
 <h1>
 <input id="recipeName" spellcheck="false" placeholder="Minha Receita" />
 </h1>
+
 </div>
 
-<button class="reset-btn" id="resetBtn">↺ Restaurar</button>
+<button class="reset-btn" id="resetBtn">
+↺ Restaurar
+</button>
 
 </header>
 
 <div class="tabs" id="tabContainer">
+
 <button class="tab-btn active" data-tab="tab0">
 <span class="emoji">🛒</span> Mercado
 </button>
@@ -1175,21 +1192,29 @@ padding-bottom: max(80px, env(safe-area-inset-bottom));
 <button class="tab-btn" data-tab="tab3">
 <span class="emoji">💰</span> Preço
 </button>
+
 </div>
 
 <div class="layout">
+
 <div>
 
 <div class="tab-content active" id="tab0">
+
 <section class="card">
+
 <h2>🛒 Mercado</h2>
+
 <p class="sub">
 Cadastre os produtos que você compra e seus valores
 </p>
 
 <div class="table-scroll">
+
 <table>
+
 <thead>
+
 <tr>
 <th>Produto</th>
 <th class="num">Qtd. Total</th>
@@ -1197,29 +1222,47 @@ Cadastre os produtos que você compra e seus valores
 <th class="num">R$</th>
 <th></th>
 </tr>
+
 </thead>
 
 <tbody id="invBody"></tbody>
 
 <tfoot>
+
 <tr class="tfoot-total-row">
-<td class="total-label" colspan="2">Total em estoque</td>
+
+<td class="total-label" colspan="2">
+Total em estoque
+</td>
+
 <td></td>
-<td class="total-value" id="invTotalValue">R$ 0,00</td>
+
+<td class="total-value" id="invTotalValue">
+R$ 0,00
+</td>
+
 <td></td>
+
 </tr>
+
 </tfoot>
+
 </table>
+
 </div>
 
 <button class="add-row-btn" id="addInv">
 + Adicionar produto
 </button>
+
 </section>
+
 </div>
 
 <div class="tab-content" id="tab1">
+
 <section class="card">
+
 <h2>🧺 Receita</h2>
 
 <p class="sub">
@@ -1227,13 +1270,18 @@ Informe somente a quantidade usada na receita
 </p>
 
 <div class="conversion-note">
+
 ⚠️ <strong>Conversão g ↔ ml</strong><br>
 Ajusta automaticamente peso e volume
+
 </div>
 
 <div class="table-scroll">
+
 <table>
+
 <thead>
+
 <tr>
 <th>Produto</th>
 <th class="num">Qtd.</th>
@@ -1241,12 +1289,15 @@ Ajusta automaticamente peso e volume
 <th class="num">Custo (R$)</th>
 <th></th>
 </tr>
+
 </thead>
 
 <tbody id="recBody"></tbody>
 
 <tfoot>
+
 <tr>
+
 <td class="total-label" colspan="3">
 Subtotal receita
 </td>
@@ -1256,19 +1307,27 @@ R$ 0,00
 </td>
 
 <td></td>
+
 </tr>
+
 </tfoot>
+
 </table>
+
 </div>
 
 <button class="add-row-btn" id="addRec">
 + Adicionar ingrediente
 </button>
+
 </section>
+
 </div>
 
 <div class="tab-content" id="tab2">
+
 <section class="card">
+
 <h2>
 📦 Embalagem
 <span class="badge">por pote</span>
@@ -1279,8 +1338,11 @@ Custo fixo de cada pote da receita
 </p>
 
 <div class="table-scroll">
+
 <table>
+
 <thead>
+
 <tr>
 <th>Item</th>
 <th class="num">Qtd.</th>
@@ -1288,12 +1350,15 @@ Custo fixo de cada pote da receita
 <th class="num">R$</th>
 <th></th>
 </tr>
+
 </thead>
 
 <tbody id="pkgBody"></tbody>
 
 <tfoot>
+
 <tr>
+
 <td class="total-label" colspan="3">
 Subtotal por pote
 </td>
@@ -1303,20 +1368,27 @@ R$ 0,00
 </td>
 
 <td></td>
+
 </tr>
+
 </tfoot>
+
 </table>
+
 </div>
 
 <button class="add-row-btn" id="addPkg">
 + Adicionar item
 </button>
+
 </section>
+
 </div>
 
 <div class="tab-content" id="tab3">
 
 <section class="card">
+
 <h2>🫙 Rendimento</h2>
 
 <div class="kv-grid">
@@ -1327,6 +1399,7 @@ R$ 0,00
 <div class="k">Tamanho do pote</div>
 
 <div class="v editable">
+
 <input
 type="number"
 id="weightPerPot"
@@ -1335,7 +1408,9 @@ step="1"
 inputmode="numeric"
 value="500"
 />
+
 <span class="unit-suffix">g</span>
+
 </div>
 
 <div class="divider"></div>
@@ -1349,15 +1424,21 @@ value="500"
 </div>
 
 <div class="warning-message" id="insufficientWarning">
+
 ⚠️ A receita não rende um pote completo de
 <span id="warningPotSize"></span> g.
+
 <br />
+
 Reduza o tamanho do pote ou aumente a quantidade da receita
 para obter pelo menos 1 pote completo.
+
 </div>
+
 </section>
 
 <section class="card">
+
 <h2>
 💰 Custo &amp; Lucro
 <span class="badge">por pote</span>
@@ -1381,6 +1462,7 @@ Margem de lucro desejada (%)
 </div>
 
 <div class="v editable">
+
 <input
 type="number"
 id="profitPct"
@@ -1390,6 +1472,7 @@ step="1"
 inputmode="numeric"
 value="35"
 />
+
 </div>
 
 <div class="k">
@@ -1404,9 +1487,11 @@ Markup equivalente
 A margem de lucro é calculada sobre o preço de venda.
 Ex.: 35% de margem significa que 35% do preço final é lucro.
 </p>
+
 </section>
 
 <section class="card jar-card-inline">
+
 <div class="price-tag">
 
 <div class="lbl">
@@ -1424,16 +1509,20 @@ R$ 0,00
 </div>
 
 <div class="jar-legend" id="jarLegend"></div>
+
 </section>
 
 </div>
 
 </div>
+
 </div>
 
 <p class="footer-note">
+
 ✨ Tudo fica salvo neste dispositivo.<br />
 Funciona para qualquer receita — ajuste como quiser.
+
 </p>
 
 </div>
@@ -1471,29 +1560,45 @@ Confirmar
 </div>
 
 <script>
+
 (function() {
+
 "use strict";
 
 const STORAGE_KEY = "caponata-calc-v2";
 
 const DEFAULT_STATE = {
+
 recipeName: "Minha Receita",
 
 inventory: [
+
 { name: "Azeite oliva", total: 500, unit: "ml", value: 27.90, density: 0.91 },
+
 { name: "Shoyu", total: 500, unit: "ml", value: 18.90, density: 1.18 },
+
 { name: "Vinagre arroz", total: 500, unit: "ml", value: 12.50, density: 1.01 },
+
 { name: "Berinjela", total: 1, unit: "kg", value: 6.00 },
+
 { name: "Abobrinha italiana", total: 1, unit: "kg", value: 4.00 },
+
 { name: "Cebola", total: 1, unit: "kg", value: 4.50 },
+
 { name: "Pimentão vermelho", total: 500, unit: "g", value: 6.00 },
+
 { name: "Pimentão amarelo", total: 500, unit: "g", value: 6.00 },
+
 { name: "Tomate", total: 1, unit: "kg", value: 3.50 },
+
 { name: "Uva passa", total: 200, unit: "g", value: 15.78 },
+
 { name: "Manjericão seco", total: 50, unit: "g", value: 12.85 }
+
 ],
 
 recipe: [
+
 { invIndex: 0, qty: 120, unit: "ml" },
 { invIndex: 1, qty: 120, unit: "ml" },
 { invIndex: 2, qty: 120, unit: "ml" },
@@ -1505,24 +1610,30 @@ recipe: [
 { invIndex: 8, qty: 300, unit: "g" },
 { invIndex: 9, qty: 100, unit: "g" },
 { invIndex: 10, qty: 6, unit: "g" }
+
 ],
 
 packaging: [
+
 { name: "🫙 Vidro/tampa", qty: 1, unit: "un", value: 4.5 },
 { name: "🏷️ Rótulo", qty: 1, unit: "un", value: 1.5 },
 { name: "🎀 Decoração", qty: 1, unit: "un", value: 2 },
 { name: "🧵 Cordinha", qty: 1, unit: "un", value: .8 },
 { name: "⚡ Gás/energia", qty: 1, unit: "pote", value: 0.50 }
+
 ],
 
 weightPerPot: 500,
 profitPct: 35
+
 };
 
 let state = loadState();
+
 let storageWarned = false;
 
 function getDensityByName(name) {
+
 const n = String(name || "")
 .toLowerCase()
 .normalize("NFD")
@@ -1538,58 +1649,69 @@ if (n.includes("creme de leite")) return 1.01;
 if (n.includes("agua") || n.includes("água")) return 1.00;
 
 return 1.00;
+
 }
 
 function toGrams(qty, unit, inv) {
+
 const q = parseFloat(qty) || 0;
+
 const u = String(unit || "").trim().toLowerCase();
 
 if (q < 0) return 0;
 
-if (u === "g") {
-return q;
-}
+if (u === "g") return q;
 
-if (u === "kg") {
-return q * 1000;
-}
+if (u === "kg") return q * 1000;
 
 if (u === "ml") {
+
 let density = parseFloat(inv && inv.density);
 
 if (!isFinite(density) || density <= 0) {
+
 density = getDensityByName(inv ? inv.name : "");
+
 }
 
 return q * density;
+
 }
 
 if (u === "l") {
+
 let density = parseFloat(inv && inv.density);
 
 if (!isFinite(density) || density <= 0) {
+
 density = getDensityByName(inv ? inv.name : "");
+
 }
 
 return q * 1000 * density;
+
 }
 
 return null;
+
 }
 
 function getRecipeWeight(qty, unit, inv) {
+
 const grams = toGrams(qty, unit, inv);
 
-return grams === null
-? 0
-: grams;
+return grams === null ? 0 : grams;
+
 }
 
 function loadState() {
+
 try {
+
 const raw = localStorage.getItem(STORAGE_KEY);
 
 if (raw) {
+
 const parsed = JSON.parse(raw);
 
 if (
@@ -1603,7 +1725,9 @@ if (
 !isFinite(parsed.weightPerPot) ||
 parsed.weightPerPot <= 0
 ) {
+
 parsed.weightPerPot = 500;
+
 }
 
 if (
@@ -1611,7 +1735,9 @@ if (
 parsed.profitPct < 0 ||
 parsed.profitPct > 99.99
 ) {
+
 parsed.profitPct = 35;
+
 }
 
 parsed.inventory.forEach(function(item) {
@@ -1631,7 +1757,9 @@ if (
 !isFinite(parseFloat(item.density)) ||
 parseFloat(item.density) <= 0
 ) {
+
 item.density = detected;
+
 }
 
 }
@@ -1639,7 +1767,9 @@ item.density = detected;
 });
 
 return parsed;
+
 }
+
 }
 
 } catch (e) {}
@@ -1647,9 +1777,11 @@ return parsed;
 return JSON.parse(
 JSON.stringify(DEFAULT_STATE)
 );
+
 }
 
 function saveState() {
+
 try {
 
 localStorage.setItem(
@@ -1664,18 +1796,25 @@ if (!storageWarned) {
 storageWarned = true;
 
 showModal({
+
 icon: "⚠️",
+
 title: "Não foi possível salvar",
+
 message:
 "O navegador bloqueou o armazenamento local. " +
 "Suas alterações funcionarão nesta sessão, mas podem se perder ao fechar.",
+
 confirmText: "Entendi",
+
 onlyOk: true
+
 });
 
 }
 
 }
+
 }
 
 function brl(n) {
@@ -1700,8 +1839,6 @@ maximumFractionDigits: digits || 2
 });
 
 }
-
-// Elements
 
 const recipeNameEl =
 document.getElementById("recipeName");
@@ -1744,10 +1881,6 @@ saveState();
 }
 );
 
-/*
- * Campo de tamanho do pote:
- * não recria nenhum elemento enquanto o usuário digita.
- */
 weightPerPotEl.addEventListener(
 "input",
 function() {
@@ -1767,10 +1900,6 @@ render();
 }
 );
 
-/*
- * Campo de margem:
- * mantém o foco e permite digitar o valor completo.
- */
 profitPctEl.addEventListener(
 "input",
 function() {
@@ -1797,16 +1926,16 @@ render();
 }
 );
 
-// Tabs
-
 const tabBtns =
 document.querySelectorAll(".tab-btn");
 
 const tabContents = {
+
 tab0: document.getElementById("tab0"),
 tab1: document.getElementById("tab1"),
 tab2: document.getElementById("tab2"),
 tab3: document.getElementById("tab3")
+
 };
 
 tabBtns.forEach(function(btn) {
@@ -1843,14 +1972,13 @@ target.classList.add("active");
 
 });
 
-// Inventory
-
 function invRow(item, idx) {
 
 const tr =
 document.createElement("tr");
 
 tr.innerHTML =
+
 "<td>" +
 "<input class='cell' data-f='name' " +
 "placeholder='Produto' " +
@@ -1963,22 +2091,11 @@ render();
 
 }
 
-/*
- * IMPORTANTE:
- *
- * Não existe mais renderInventory() aqui.
- *
- * Assim o DOM não é recriado a cada tecla.
- * O usuário pode digitar livremente.
- */
 inp.addEventListener(
 "input",
 updateInventoryField
 );
 
-/*
- * Enter confirma o campo sem recriá-lo.
- */
 inp.addEventListener(
 "keydown",
 function(e) {
@@ -1994,9 +2111,6 @@ inp.blur();
 }
 );
 
-/*
- * Ao sair do campo, atualiza normalmente.
- */
 inp.addEventListener(
 "blur",
 function() {
@@ -2006,9 +2120,6 @@ updateInventoryField();
 }
 );
 
-/*
- * Para select, change também funciona.
- */
 inp.addEventListener(
 "change",
 function() {
@@ -2050,6 +2161,7 @@ render();
 );
 
 return tr;
+
 }
 
 function renderInventory() {
@@ -2107,9 +2219,6 @@ render();
 }
 );
 
-/*
- * CÁLCULO DO CUSTO
- */
 function getIngredientCost(
 invIndex,
 qty,
@@ -2166,6 +2275,7 @@ return 0;
 return (
 q / total
 ) * value;
+
 }
 
 const totalGrams =
@@ -2195,9 +2305,8 @@ return (
 usedGrams /
 totalGrams
 ) * value;
-}
 
-// Recipe
+}
 
 function recRow(item, idx) {
 
@@ -2217,6 +2326,7 @@ inv.name ||
 : "Produto";
 
 tr.innerHTML =
+
 "<td>" +
 "<div class='product-display'>" +
 productName +
@@ -2318,10 +2428,6 @@ render();
 }
 );
 
-/*
- * Enter apenas tira o foco.
- * O campo continua intacto.
- */
 qtyInput.addEventListener(
 "keydown",
 function(e) {
@@ -2373,6 +2479,7 @@ render();
 updateCost();
 
 return tr;
+
 }
 
 function renderRecipe() {
@@ -2394,6 +2501,7 @@ recBody.innerHTML =
 "</tr>";
 
 return;
+
 }
 
 state.recipe =
@@ -2447,15 +2555,22 @@ state.inventory.length === 0
 ) {
 
 showModal({
+
 icon: "⚠️",
+
 title: "Estoque vazio",
+
 message:
 "Adicione produtos no estoque antes de criar a receita.",
+
 confirmText: "Entendi",
+
 onlyOk: true
+
 });
 
 return;
+
 }
 
 const nextIndex =
@@ -2467,27 +2582,36 @@ state.inventory.length
 ) {
 
 showModal({
+
 icon: "ℹ️",
+
 title:
 "Todos os produtos já foram adicionados",
+
 message:
 "A lista da Receita já contém todos os produtos cadastrados no Mercado.",
+
 confirmText: "Entendi",
+
 onlyOk: true
+
 });
 
 return;
+
 }
 
 const defaultInv =
 state.inventory[nextIndex];
 
 state.recipe.push({
+
 invIndex: nextIndex,
 qty: 0,
 unit: defaultInv
 ? defaultInv.unit
 : "g"
+
 });
 
 saveState();
@@ -2498,14 +2622,13 @@ render();
 }
 );
 
-// Packaging
-
 function pkgRow(item, idx) {
 
 const tr =
 document.createElement("tr");
 
 tr.innerHTML =
+
 "<td>" +
 "<input class='cell' data-f='name' " +
 "placeholder='nome' " +
@@ -2591,9 +2714,6 @@ inp.addEventListener(
 updatePackagingField
 );
 
-/*
- * Enter não destrói/recria o campo.
- */
 inp.addEventListener(
 "keydown",
 function(e) {
@@ -2639,6 +2759,7 @@ render();
 );
 
 return tr;
+
 }
 
 function renderPackaging() {
@@ -2681,10 +2802,12 @@ document.getElementById(
 function() {
 
 state.packaging.push({
+
 name: "",
 qty: 1,
 unit: "un",
 value: 0
+
 });
 
 saveState();
@@ -2694,8 +2817,6 @@ render();
 
 }
 );
-
-// Modal
 
 const modalOverlay =
 document.getElementById(
@@ -2819,8 +2940,6 @@ closeModal();
 }
 );
 
-// Reset
-
 document.getElementById(
 "resetBtn"
 ).addEventListener(
@@ -2830,11 +2949,16 @@ function() {
 showModal({
 
 icon: "↺",
+
 title: "Restaurar exemplo?",
+
 message:
 "Isso vai substituir os dados atuais pelos dados de exemplo. Essa ação não pode ser desfeita.",
+
 confirmText: "Restaurar",
+
 cancelText: "Cancelar",
+
 danger: true
 
 }, function() {
@@ -2866,8 +2990,6 @@ render();
 
 }
 );
-
-// Render price
 
 const jarLegend =
 document.getElementById(
@@ -3152,21 +3274,25 @@ numPots === 1
 if (price > 0) {
 
 const segments = [
+
 {
 label: "Ingredientes",
 value: costIngPot,
 color: "#6bcb8a"
 },
+
 {
 label: "Embalagem",
 value: costPkgPot,
 color: "#6ab0e8"
 },
+
 {
 label: "Lucro",
 value: profitValue,
 color: "#f7c948"
 }
+
 ];
 
 const total =
@@ -3186,20 +3312,27 @@ total) *
 : 0;
 
 return (
+
 "<div>" +
+
 "<span class='lab'>" +
+
 "<span class='sw' " +
 "style='background:" +
 seg.color +
 "'></span>" +
+
 seg.label +
+
 "</span>" +
 
 "<span class='val'>" +
 pct +
 "%" +
 "</span>" +
+
 "</div>"
+
 );
 
 }
@@ -3235,14 +3368,10 @@ brl(invTotal);
 
 }
 
-// Init
-
 renderInventory();
 renderRecipe();
 renderPackaging();
 render();
-
-// Service Worker
 
 if ("serviceWorker" in navigator) {
 
@@ -3257,6 +3386,7 @@ return;
 }
 
 refreshing = true;
+
 window.location.reload();
 
 }
@@ -3276,7 +3406,9 @@ navigator.serviceWorker
 }
 
 })();
+
 </script>
 
 </body>
 </html>
+```
