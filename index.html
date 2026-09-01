@@ -1885,7 +1885,7 @@
 
           "<td class='num'>" +
             "<div class='cost-display' data-f='cost'>" +
-              "R$ 0,00" +
+              "0,00" +
             "</div>" +
           "</td>" +
 
@@ -1920,7 +1920,10 @@
             );
 
           costCell.textContent =
-            brl(cost);
+            cost.toLocaleString("pt-BR", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2
+            });
         }
 
         qtyInput.addEventListener(
@@ -2503,28 +2506,11 @@
           );
         }
 
-        /*
-         * CORREÇÃO Nº 1
-         *
-         * Não existe "custo por pote" quando
-         * a receita não rende sequer 1 pote.
-         *
-         * Antes:
-         * costIngPot = recV
-         *
-         * Agora:
-         * costIngPot = 0 quando numPots === 0.
-         */
         const costIngPot =
           numPots > 0
             ? recV / numPots
             : 0;
 
-        /*
-         * A embalagem continua sendo calculada
-         * normalmente, pois é o custo cadastrado
-         * para UM pote.
-         */
         const costPkgPot =
           pkgV;
 
@@ -2554,19 +2540,6 @@
             ? brl(costTotalPot)
             : "—";
 
-        /*
-         * CORREÇÃO Nº 3
-         *
-         * profitPct representa MARGEM sobre o
-         * preço final:
-         *
-         * preço = custo / (1 - margem)
-         *
-         * Exemplo:
-         * custo = 10
-         * margem = 35%
-         * preço = 10 / 0,65 = 15,38
-         */
         const profitPct =
           Math.max(
             0,
@@ -2615,12 +2588,6 @@
                 .replace(".", ",")
             : "—";
 
-        /*
-         * CORREÇÃO Nº 1
-         *
-         * Quando não há pote completo,
-         * não mostramos um preço fictício.
-         */
         const finalPriceEl =
           document.getElementById(
             "finalPrice"
@@ -2660,12 +2627,6 @@
             );
         }
 
-        /*
-         * Composição do preço.
-         *
-         * Quando não existe preço,
-         * não há composição para exibir.
-         */
         if (price > 0) {
 
           const segments = [
