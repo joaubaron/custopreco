@@ -425,13 +425,13 @@ table-layout: fixed !important;
 
 #tab0 th:first-child,
 #tab0 td:first-child {
-  width: 39% !important;
+width: 39% !important;
 }
 
 #tab0 th:nth-child(2),
 #tab0 td:nth-child(2) {
-  width: 19% !important;
-  text-align: right;
+width: 19% !important;
+text-align: right;
 }
 
 #tab0 th:nth-child(3),
@@ -988,12 +988,12 @@ box-shadow: 0 4px 14px rgba(49, 95, 145, .30) !important;
 
 #tab0 th:first-child,
 #tab0 td:first-child {
-  width: 36% !important;
+width: 37% !important;
 }
 
 #tab0 th:nth-child(2),
 #tab0 td:nth-child(2) {
-  width: 20% !important;
+width: 19% !important;
 }
 
 #tab0 th:nth-child(3),
@@ -1745,9 +1745,9 @@ saveState();
 );
 
 /*
- * Campo de tamanho do pote:
- * não recria nenhum elemento enquanto o usuário digita.
- */
+* Campo de tamanho do pote:
+* não recria nenhum elemento enquanto o usuário digita.
+*/
 weightPerPotEl.addEventListener(
 "input",
 function() {
@@ -1768,9 +1768,9 @@ render();
 );
 
 /*
- * Campo de margem:
- * mantém o foco e permite digitar o valor completo.
- */
+* Campo de margem:
+* mantém o foco e permite digitar o valor completo.
+*/
 profitPctEl.addEventListener(
 "input",
 function() {
@@ -1964,21 +1964,21 @@ render();
 }
 
 /*
- * IMPORTANTE:
- *
- * Não existe mais renderInventory() aqui.
- *
- * Assim o DOM não é recriado a cada tecla.
- * O usuário pode digitar livremente.
- */
+* IMPORTANTE:
+*
+* Não existe mais renderInventory() aqui.
+*
+* Assim o DOM não é recriado a cada tecla.
+* O usuário pode digitar livremente.
+*/
 inp.addEventListener(
 "input",
 updateInventoryField
 );
 
 /*
- * Enter confirma o campo sem recriá-lo.
- */
+* Enter confirma o campo sem recriá-lo.
+*/
 inp.addEventListener(
 "keydown",
 function(e) {
@@ -1995,8 +1995,8 @@ inp.blur();
 );
 
 /*
- * Ao sair do campo, atualiza normalmente.
- */
+* Ao sair do campo, atualiza normalmente.
+*/
 inp.addEventListener(
 "blur",
 function() {
@@ -2007,8 +2007,8 @@ updateInventoryField();
 );
 
 /*
- * Para select, change também funciona.
- */
+* Para select, change também funciona.
+*/
 inp.addEventListener(
 "change",
 function() {
@@ -2108,8 +2108,8 @@ render();
 );
 
 /*
- * CÁLCULO DO CUSTO
- */
+* CÁLCULO DO CUSTO
+*/
 function getIngredientCost(
 invIndex,
 qty,
@@ -2319,9 +2319,9 @@ render();
 );
 
 /*
- * Enter apenas tira o foco.
- * O campo continua intacto.
- */
+* Enter apenas tira o foco.
+* O campo continua intacto.
+*/
 qtyInput.addEventListener(
 "keydown",
 function(e) {
@@ -2592,8 +2592,8 @@ updatePackagingField
 );
 
 /*
- * Enter não destrói/recria o campo.
- */
+* Enter não destrói/recria o campo.
+*/
 inp.addEventListener(
 "keydown",
 function(e) {
