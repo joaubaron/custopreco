@@ -248,7 +248,6 @@ from {
 opacity: 0;
 transform: translateY(12px);
 }
-
 to {
 opacity: 1;
 transform: translateY(0);
@@ -1133,12 +1132,6 @@ color: var(--green);
 background: var(--green-dim);
 }
 
-.price-tab-footer .save-row .delete-btn:hover {
-border-color: var(--red);
-color: var(--red);
-background: var(--red-dim);
-}
-
 .price-tab-footer .link-to-recipes {
 text-align: center;
 }
@@ -1158,6 +1151,43 @@ gap: 6px;
 .price-tab-footer .link-to-recipes a:hover {
 color: var(--gold-strong);
 opacity: 0.8;
+}
+
+/* Badge de receita carregada */
+.loaded-badge {
+display: inline-flex;
+align-items: center;
+gap: 6px;
+font-size: 10px;
+font-weight: 600;
+background: var(--green-dim);
+color: var(--green);
+padding: 4px 12px;
+border-radius: 999px;
+border: 1px solid rgba(107, 203, 138, 0.3);
+white-space: nowrap;
+}
+
+.loaded-badge .recipe-name-display {
+max-width: 120px;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+
+.current-recipe-indicator {
+font-size: 11px;
+color: var(--text-secondary);
+display: flex;
+align-items: center;
+gap: 8px;
+flex-wrap: wrap;
+margin-top: 6px;
+}
+
+.current-recipe-indicator .label {
+color: var(--text-muted);
+font-weight: 400;
 }
 
 @media screen and (max-width:600px) {
@@ -1372,6 +1402,10 @@ font-size: 11px;
 padding: 8px 14px;
 min-height: 36px;
 }
+
+.loaded-badge .recipe-name-display {
+max-width: 80px;
+}
 }
 
 @media (min-width:480px) {
@@ -1575,6 +1609,7 @@ R$ 0,00
 </section>
 </div>
 
+<!-- ==================== ABA PREÇO ==================== -->
 <div class="tab-content" id="tab3">
 
 <section class="card">
@@ -1685,12 +1720,19 @@ R$ 0,00
 
 <div class="jar-legend" id="jarLegend"></div>
 
-<!-- Rodapé da aba Preço -->
+<!-- Rodapé da aba Preço - APENAS Salvar e Ver receitas -->
 <div class="price-tab-footer">
-<div class="save-row">
-<button class="action-btn save-btn" id="saveRecipeBtn">💾 Salvar esta receita</button>
-<button class="action-btn delete-btn" id="deleteCurrentRecipeBtn">🗑️ Apagar esta receita</button>
+
+<!-- Indicador de receita carregada -->
+<div class="current-recipe-indicator" id="priceTabLoadedIndicator">
+<span class="label">📌 Receita carregada:</span>
+<span id="priceTabLoadedName" style="color:var(--gold);font-weight:600;">Nenhuma</span>
 </div>
+
+<div class="save-row">
+<button class="action-btn save-btn" id="saveRecipeBtn">💾 Salvar receita</button>
+</div>
+
 <div class="link-to-recipes">
 <a id="goToRecipesTab">📚 Ver minhas receitas salvas →</a>
 </div>
@@ -1700,13 +1742,19 @@ R$ 0,00
 
 </div>
 
-<!-- ABA RECEITAS -->
+<!-- ==================== ABA RECEITAS ==================== -->
 <div class="tab-content" id="tab4">
 <section class="card">
 <h2>📚 Minhas Receitas</h2>
 <p class="sub">
 Gerencie todas as suas receitas salvas. Clique em uma para carregar e editar.
 </p>
+
+<!-- Indicador de receita carregada -->
+<div class="current-recipe-indicator" style="margin-bottom:16px;">
+<span class="label">📌 Receita atual:</span>
+<span id="recipesTabLoadedName" style="color:var(--gold);font-weight:600;">Nenhuma</span>
+</div>
 
 <div class="recipe-list-container">
 <div class="recipe-list-title">
@@ -2071,6 +2119,7 @@ onlyOk: true
 
 saveRecipesList();
 renderRecipeList();
+updateLoadedIndicators();
 }
 
 function deleteCurrentRecipe() {
@@ -2100,6 +2149,7 @@ recipesList = recipesList.filter(r => r.id !== currentRecipeId);
 currentRecipeId = null;
 saveRecipesList();
 renderRecipeList();
+updateLoadedIndicators();
 
 showModal({
 icon: "🗑️",
@@ -2117,6 +2167,7 @@ if (recipe) {
 currentRecipeId = recipe.id;
 loadRecipeData(recipe.data);
 renderRecipeList();
+updateLoadedIndicators();
 
 // Switch to Preço tab
 switchTab('tab3');
@@ -2129,6 +2180,17 @@ confirmText: "OK",
 onlyOk: true
 });
 }
+}
+
+function updateLoadedIndicators() {
+const recipe = recipesList.find(r => r.id === currentRecipeId);
+const name = recipe ? recipe.name : "Nenhuma";
+
+// Atualiza indicador na aba Preço
+document.getElementById('priceTabLoadedName').textContent = name;
+
+// Atualiza indicador na aba Receitas
+document.getElementById('recipesTabLoadedName').textContent = name;
 }
 
 function switchTab(tabId) {
@@ -3390,6 +3452,7 @@ currentRecipeId = null;
 }
 saveRecipesList();
 renderRecipeList();
+updateLoadedIndicators();
 });
 }
 });
@@ -3424,8 +3487,7 @@ switchTab('tab4');
 document.getElementById('saveRecipeBtn').addEventListener('click', handleSaveRecipe);
 document.getElementById('saveRecipeBtnTab4').addEventListener('click', handleSaveRecipe);
 
-// Delete buttons
-document.getElementById('deleteCurrentRecipeBtn').addEventListener('click', handleDeleteRecipe);
+// Delete buttons (only in Receitas tab now)
 document.getElementById('deleteCurrentRecipeBtnTab4').addEventListener('click', handleDeleteRecipe);
 
 // Render price
@@ -3802,6 +3864,7 @@ renderRecipe();
 renderPackaging();
 render();
 renderRecipeList();
+updateLoadedIndicators();
 }
 
 // Init
@@ -3825,6 +3888,7 @@ currentRecipeId = matching.id;
 }
 
 renderRecipeList();
+updateLoadedIndicators();
 
 // Service Worker
 
