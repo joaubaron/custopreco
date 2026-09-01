@@ -423,20 +423,31 @@ color: var(--blue);
 padding: 4px 8px;
 border-radius: 6px;
 cursor: pointer;
-font-size: 10px;
+font-size: 12px;
 font-weight: 600;
 white-space: nowrap;
 transition: var(--transition);
-min-height: 28px;
+min-height: 32px;
 display: inline-flex;
 align-items: center;
 gap: 4px;
 touch-action: manipulation;
+flex-shrink: 0;
 }
 
 .btn-suggest:hover {
 background: var(--blue);
 color: #fff;
+}
+
+.inv-unit-select {
+width: 55px !important;
+flex-shrink: 0 !important;
+min-height: 40px !important;
+padding: 8px 20px 8px 9px !important;
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 0l6 8 6-8z' fill='%23b8b5c4'/%3E%3C/svg%3E") !important;
+background-repeat: no-repeat !important;
+background-position: right 8px center !important;
 }
 
 #tab0 table {
@@ -447,45 +458,24 @@ table-layout: fixed !important;
 
 #tab0 th:first-child,
 #tab0 td:first-child {
-width: 30% !important;
+width: 44% !important;
 }
 
 #tab0 th:nth-child(2),
 #tab0 td:nth-child(2) {
-width: 16% !important;
-text-align: left;
+width: 24% !important;
+text-align: right;
 }
 
 #tab0 th:nth-child(3),
 #tab0 td:nth-child(3) {
-width: 16% !important;
-text-align: right;
-}
-
-#tab0 th:nth-child(4),
-#tab0 td:nth-child(4) {
-width: 20% !important;
+width: 24% !important;
 text-align: right;
 }
 
 #tab0 th:last-child,
 #tab0 td:last-child {
-width: 18% !important;
-}
-
-#tab0 td .suggest-cell {
-display: flex;
-align-items: center;
-gap: 4px;
-}
-
-#tab0 td .suggest-cell select {
-flex: 1;
-min-width: 40px;
-}
-
-#tab0 td .suggest-cell .btn-suggest {
-flex-shrink: 0;
+width: 8% !important;
 }
 
 #tab1 table {
@@ -1010,27 +1000,22 @@ box-shadow: 0 4px 14px rgba(49, 95, 145, .30) !important;
 
 #tab0 th:first-child,
 #tab0 td:first-child {
-width: 28% !important;
+width: 38% !important;
 }
 
 #tab0 th:nth-child(2),
 #tab0 td:nth-child(2) {
-width: 14% !important;
+width: 28% !important;
 }
 
 #tab0 th:nth-child(3),
 #tab0 td:nth-child(3) {
-width: 14% !important;
-}
-
-#tab0 th:nth-child(4),
-#tab0 td:nth-child(4) {
-width: 24% !important;
+width: 26% !important;
 }
 
 #tab0 th:last-child,
 #tab0 td:last-child {
-width: 20% !important;
+width: 8% !important;
 }
 
 #tab1 th:first-child,
@@ -1141,9 +1126,16 @@ font-size: 12px;
 }
 
 .btn-suggest {
-font-size: 9px !important;
+font-size: 10px !important;
 padding: 3px 6px !important;
-min-height: 24px !important;
+min-height: 28px !important;
+}
+
+.inv-unit-select {
+width: 48px !important;
+min-height: 34px !important;
+font-size: 10px !important;
+padding: 4px 18px 4px 6px !important;
 }
 }
 
@@ -1212,7 +1204,7 @@ padding-bottom: max(80px, env(safe-area-inset-bottom));
 <section class="card">
 <h2>🛒 Mercado</h2>
 <p class="sub">
-Cadastre os produtos que você compra e seus valores. Selecione a unidade e clique em <strong>💡 Sugerir</strong> para converter automaticamente para gramas.
+Cadastre os produtos que você compra e seus valores. Clique em <strong>💡</strong> para sugerir o peso em gramas.
 </p>
 
 <div class="table-scroll">
@@ -1220,8 +1212,7 @@ Cadastre os produtos que você compra e seus valores. Selecione a unidade e cliq
 <thead>
 <tr>
   <th>Produto</th>
-  <th class="num">Un.</th>
-  <th class="num">Qtd.</th>
+  <th class="num">g ou ml</th>
   <th class="num">R$</th>
   <th></th>
 </tr>
@@ -1232,7 +1223,6 @@ Cadastre os produtos que você compra e seus valores. Selecione a unidade e cliq
 <tfoot>
 <tr class="tfoot-total-row">
   <td class="total-label">Total em estoque</td>
-  <td></td>
   <td></td>
   <td class="total-value" id="invTotalValue">R$ 0,00</td>
   <td></td>
@@ -1506,8 +1496,6 @@ Confirmar
 // TABELA DE CONVERSÃO EMBUTIDA (OPÇÃO 3)
 // ============================================================
 const CONVERSION_TABLE = {
-  // Chave: nome do produto (minúsculo, sem acentos)
-  // Valor: { unit: unidade padrão, factor: fator de conversão para gramas }
   "ovo": { unit: "un", factor: 50 },
   "ovos": { unit: "un", factor: 50 },
   "azeite": { unit: "ml", factor: 0.92 },
@@ -1562,7 +1550,6 @@ const CONVERSION_TABLE = {
   "peixe": { unit: "g", factor: 1 }
 };
 
-// Normaliza texto para busca na tabela
 function normalizeText(text) {
   return text.toLowerCase()
     .normalize('NFD')
@@ -1573,12 +1560,10 @@ function normalizeText(text) {
 function getConversion(productName) {
   const key = normalizeText(productName);
   
-  // Busca exata
   if (CONVERSION_TABLE[key]) {
     return CONVERSION_TABLE[key];
   }
   
-  // Busca parcial (contém a palavra)
   for (const [k, v] of Object.entries(CONVERSION_TABLE)) {
     if (key.includes(k) || k.includes(key)) {
       return v;
@@ -1651,7 +1636,6 @@ Array.isArray(parsed.inventory) &&
 Array.isArray(parsed.recipe) &&
 Array.isArray(parsed.packaging)
 ) {
-// Converter inventário antigo (sem unit) para novo formato
 parsed.inventory = parsed.inventory.map(function(item) {
 if (!item.unit) {
 item.unit = "g";
@@ -1840,35 +1824,34 @@ document.createElement("tr");
 tr.innerHTML =
 "<td>" +
 "<input class='cell' data-f='name' " +
-"placeholder='Ex: Ovo, Azeite, Farinha' " +
+"placeholder='Produto' " +
 "inputmode='text'>" +
 "</td>" +
 
 "<td>" +
-"<select class='cell' data-f='unit'>" +
+"<div style='display:flex;align-items:center;gap:4px;'>" +
+"<input class='cell num' data-f='total' " +
+"type='number' step='any' " +
+"inputmode='decimal' min='0' " +
+"placeholder='500' style='flex:1;min-width:0;'>" +
+"<button class='btn-suggest' data-idx='" + idx + "' " +
+"title='Converter para gramas'>💡</button>" +
+"</div>" +
+"</td>" +
+
+"<td>" +
+"<div style='display:flex;align-items:center;gap:4px;'>" +
+"<input class='cell num' data-f='value' " +
+"type='number' step='any' " +
+"inputmode='decimal' min='0' " +
+"placeholder='0,00' style='flex:1;min-width:0;'>" +
+"<select class='cell inv-unit-select' data-f='unit'>" +
 "<option value='g'>g</option>" +
 "<option value='ml'>ml</option>" +
 "<option value='un'>un</option>" +
 "<option value='L'>L</option>" +
 "<option value='kg'>kg</option>" +
 "</select>" +
-"</td>" +
-
-"<td>" +
-"<input class='cell num' data-f='total' " +
-"type='number' step='any' " +
-"inputmode='decimal' min='0' " +
-"placeholder='500'>" +
-"</td>" +
-
-"<td>" +
-"<div class='suggest-cell'>" +
-"<input class='cell num' data-f='value' " +
-"type='number' step='any' " +
-"inputmode='decimal' min='0' " +
-"placeholder='0,00' style='flex:1;'>" +
-"<button class='btn-suggest' data-idx='" + idx + "' " +
-"title='Converter para gramas'>💡</button>" +
 "</div>" +
 "</td>" +
 
@@ -1879,14 +1862,14 @@ tr.innerHTML =
 const nameInput =
 tr.querySelector('input[data-f="name"]');
 
-const unitSelect =
-tr.querySelector('select[data-f="unit"]');
-
 const totalInput =
 tr.querySelector('input[data-f="total"]');
 
 const valueInput =
 tr.querySelector('input[data-f="value"]');
+
+const unitSelect =
+tr.querySelector('select[data-f="unit"]');
 
 const suggestBtn =
 tr.querySelector('.btn-suggest');
@@ -1894,21 +1877,18 @@ tr.querySelector('.btn-suggest');
 nameInput.value =
 item.name || "";
 
-unitSelect.value =
-item.unit || "g";
-
 totalInput.value =
 item.total || 0;
 
 valueInput.value =
 item.value || 0;
 
+unitSelect.value =
+item.unit || "g";
+
 function updateInventory() {
 state.inventory[idx].name =
 nameInput.value;
-
-state.inventory[idx].unit =
-unitSelect.value;
 
 state.inventory[idx].total =
 isFinite(parseFloat(totalInput.value)) &&
@@ -1922,19 +1902,21 @@ parseFloat(valueInput.value) >= 0
 ? parseFloat(valueInput.value)
 : 0;
 
+state.inventory[idx].unit =
+unitSelect.value;
+
 saveState();
 renderRecipe();
 render();
 }
 
-[nameInput, unitSelect, totalInput, valueInput].forEach(
+[nameInput, totalInput, valueInput, unitSelect].forEach(
 function(inp) {
 inp.addEventListener("input", updateInventory);
 inp.addEventListener("change", updateInventory);
 }
 );
 
-// Botão Sugerir
 suggestBtn.addEventListener("click", function(e) {
 e.preventDefault();
 
@@ -1981,7 +1963,6 @@ onlyOk: true
 return;
 }
 
-// Se a unidade não for compatível, mostrar aviso
 const compatibleUnits = ["g", "ml", "un", "L", "kg"];
 if (!compatibleUnits.includes(unit)) {
 showModal({
@@ -1994,7 +1975,6 @@ onlyOk: true
 return;
 }
 
-// Calcular o peso em gramas
 let weightInGrams = qty;
 
 if (unit === "g") {
@@ -2009,14 +1989,11 @@ weightInGrams = qty * 1000 * conv.factor;
 weightInGrams = qty * 1000;
 }
 
-// Arredondar para inteiro
 weightInGrams = Math.round(weightInGrams);
 
-// Atualizar o campo "g ou ml" (total) com o peso sugerido
 totalInput.value = weightInGrams;
 state.inventory[idx].total = weightInGrams;
 
-// Mudar a unidade para g automaticamente
 unitSelect.value = "g";
 state.inventory[idx].unit = "g";
 
@@ -2113,7 +2090,6 @@ if (!inv) {
 return 0;
 }
 
-// Usar o total em gramas (já convertido)
 const total =
 parseFloat(inv.total) || 0;
 
@@ -2680,8 +2656,6 @@ function(r) {
 const qty =
 parseFloat(r.qty) || 0;
 
-// O peso em gramas é obtido do inventário (já convertido)
-// Usamos a quantidade da receita como está, pois o inventário já está em gramas
 recW += qty;
 
 recV +=
@@ -2764,7 +2738,6 @@ leftoverWeight,
 ) +
 " g";
 
-// Aviso quando não existe pote completo
 const warningEl =
 document.getElementById(
 "insufficientWarning"
