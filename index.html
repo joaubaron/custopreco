@@ -456,30 +456,30 @@ table-layout: fixed !important;
 
 #tab1 th:first-child,
 #tab1 td:first-child {
-width: 38% !important;
+width: 34% !important;
 }
 
 #tab1 th:nth-child(2),
 #tab1 td:nth-child(2) {
-width: 16% !important;
+width: 14% !important;
 text-align: right;
 }
 
 #tab1 th:nth-child(3),
 #tab1 td:nth-child(3) {
-width: 18% !important;
+width: 16% !important;
 text-align: left;
 }
 
 #tab1 th:nth-child(4),
 #tab1 td:nth-child(4) {
-width: 20% !important;
+width: 26% !important;
 text-align: right;
 }
 
 #tab1 th:last-child,
 #tab1 td:last-child {
-width: 8% !important;
+width: 10% !important;
 }
 
 #tab1 tbody td {
@@ -521,19 +521,23 @@ border-radius: 8px;
 font-variant-numeric: tabular-nums;
 box-sizing: border-box;
 white-space: nowrap;
+overflow: visible;
 }
 
 #tab1 .cost-display.invalid {
 color: var(--red);
 border-color: var(--red);
 background: var(--red-dim);
+font-size: 10px;
+white-space: nowrap;
+overflow: visible;
 }
 
 #tab1 .cost-display .hint {
 font-weight: 400;
 font-size: 10px;
 color: var(--text-muted);
-margin-left: 6px;
+margin-left: 4px;
 }
 
 #tab1 .cost-display .hint .correct-unit {
@@ -1292,27 +1296,27 @@ width: 10% !important;
 
 #tab1 th:first-child,
 #tab1 td:first-child {
-width: 36% !important;
+width: 30% !important;
 }
 
 #tab1 th:nth-child(2),
 #tab1 td:nth-child(2) {
-width: 16% !important;
+width: 14% !important;
 }
 
 #tab1 th:nth-child(3),
 #tab1 td:nth-child(3) {
-width: 18% !important;
+width: 16% !important;
 }
 
 #tab1 th:nth-child(4),
 #tab1 td:nth-child(4) {
-width: 20% !important;
+width: 28% !important;
 }
 
 #tab1 th:last-child,
 #tab1 td:last-child {
-width: 10% !important;
+width: 12% !important;
 }
 
 #tab1 .product-display {
@@ -1322,9 +1326,17 @@ padding: 7px 7px !important;
 }
 
 #tab1 .cost-display {
-font-size: 11px !important;
+font-size: 10px !important;
 min-height: 38px !important;
-padding: 7px 5px !important;
+padding: 7px 4px !important;
+}
+
+#tab1 .cost-display.invalid {
+font-size: 9px !important;
+}
+
+#tab1 .cost-display .hint {
+font-size: 9px !important;
 }
 
 #tab2 th:first-child,
