@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8" />
@@ -911,6 +912,22 @@ border-color: var(--green);
 color: var(--bg-primary);
 }
 
+.conversion-note {
+font-size: 11.5px;
+color: var(--text-secondary);
+background: var(--blue-dim);
+border-left: 4px solid var(--blue);
+padding: 11px 14px;
+border-radius: 10px;
+margin: 8px 0 14px;
+line-height: 1.5;
+}
+
+.conversion-note strong {
+color: var(--blue);
+font-weight: 700;
+}
+
 @media screen and (max-width:600px) {
 body {
 padding-left: 8px;
@@ -1123,8 +1140,8 @@ padding-left: max(16px, env(safe-area-inset-left));
 padding-right: max(16px, env(safe-area-inset-right));
 padding-bottom: max(80px, env(safe-area-inset-bottom));
 }
-}
 </style>
+
 </head>
 
 <body>
@@ -1139,6 +1156,7 @@ padding-bottom: max(80px, env(safe-area-inset-bottom));
 </div>
 
 <button class="reset-btn" id="resetBtn">↺ Restaurar</button>
+
 </header>
 
 <div class="tabs" id="tabContainer">
@@ -1207,6 +1225,11 @@ Cadastre os produtos que você compra e seus valores
 <p class="sub">
 Informe somente a quantidade usada na receita
 </p>
+
+<div class="conversion-note">
+⚠️ <strong>Conversão g ↔ ml</strong><br>
+Ajusta automaticamente peso e volume para calcular o custo corretamente.
+</div>
 
 <div class="table-scroll">
 <table>
@@ -1457,9 +1480,9 @@ const DEFAULT_STATE = {
 recipeName: "Minha Receita",
 
 inventory: [
-{ name: "Azeite oliva", total: 500, unit: "ml", value: 27.90 },
-{ name: "Shoyu", total: 500, unit: "ml", value: 18.90 },
-{ name: "Vinagre arroz", total: 500, unit: "ml", value: 12.50 },
+{ name: "Azeite oliva", total: 500, unit: "ml", value: 27.90, density: 0.91 },
+{ name: "Shoyu", total: 500, unit: "ml", value: 18.90, density: 1.18 },
+{ name: "Vinagre arroz", total: 500, unit: "ml", value: 12.50, density: 1.01 },
 { name: "Berinjela", total: 1, unit: "kg", value: 6.00 },
 { name: "Abobrinha italiana", total: 1, unit: "kg", value: 4.00 },
 { name: "Cebola", total: 1, unit: "kg", value: 4.50 },
@@ -1499,6 +1522,79 @@ profitPct: 35
 let state = loadState();
 let storageWarned = false;
 
+function getDensityByName(name) {
+const n = String(name || "")
+.toLowerCase()
+.normalize("NFD")
+.replace(/[\u0300-\u036f]/g, "");
+
+if (n.includes("azeite")) return 0.91;
+if (n.includes("shoyu") || n.includes("molho de soja")) return 1.18;
+if (n.includes("vinagre")) return 1.01;
+if (n.includes("mel")) return 1.42;
+if (n.includes("oleo") || n.includes("óleo")) return 0.92;
+if (n.includes("leite")) return 1.03;
+if (n.includes("creme de leite")) return 1.01;
+if (n.includes("agua") || n.includes("água")) return 1.00;
+
+return 1.00;
+}
+
+/*
+ * Converte qualquer unidade de massa/volume para gramas.
+ *
+ * g  -> g
+ * kg -> g
+ * ml -> ml × densidade
+ * L  -> 1000 ml × densidade
+ *
+ * "un" e outras unidades não são convertidas para massa.
+ */
+function toGrams(qty, unit, inv) {
+const q = parseFloat(qty) || 0;
+const u = String(unit || "").trim().toLowerCase();
+
+if (q < 0) return 0;
+
+if (u === "g") {
+return q;
+}
+
+if (u === "kg") {
+return q * 1000;
+}
+
+if (u === "ml") {
+let density = parseFloat(inv && inv.density);
+
+if (!isFinite(density) || density <= 0) {
+density = getDensityByName(inv ? inv.name : "");
+}
+
+return q * density;
+}
+
+if (u === "l") {
+let density = parseFloat(inv && inv.density);
+
+if (!isFinite(density) || density <= 0) {
+density = getDensityByName(inv ? inv.name : "");
+}
+
+return q * 1000 * density;
+}
+
+return null;
+}
+
+function getRecipeWeight(qty, unit, inv) {
+const grams = toGrams(qty, unit, inv);
+
+return grams === null
+? 0
+: grams;
+}
+
 function loadState() {
 try {
 const raw = localStorage.getItem(STORAGE_KEY);
@@ -1526,6 +1622,25 @@ parsed.profitPct > 99.99
 ) {
 parsed.profitPct = 35;
 }
+
+parsed.inventory.forEach(function(item) {
+if (
+item &&
+(
+String(item.unit || "").trim().toLowerCase() === "ml" ||
+String(item.unit || "").trim().toLowerCase() === "l"
+)
+) {
+const detected = getDensityByName(item.name);
+
+if (
+!isFinite(parseFloat(item.density)) ||
+parseFloat(item.density) <= 0
+) {
+item.density = detected;
+}
+}
+});
 
 return parsed;
 }
@@ -1575,16 +1690,6 @@ return n.toLocaleString("pt-BR", {
 minimumFractionDigits: digits || 0,
 maximumFractionDigits: digits || 2
 });
-}
-
-function getBaseFactor(unit) {
-switch (unit) {
-case "kg":
-case "L":
-return 1000;
-default:
-return 1;
-}
 }
 
 // Elements
@@ -1751,7 +1856,9 @@ inputs[3].value =
 item.value || 0;
 
 inputs.forEach(function(inp) {
-inp.addEventListener("input", function() {
+
+function updateInventoryField() {
+
 const f =
 inp.dataset.f;
 
@@ -1762,6 +1869,7 @@ if (
 f === "total" ||
 f === "value"
 ) {
+
 const numVal =
 parseFloat(v);
 
@@ -1770,15 +1878,54 @@ isFinite(numVal) &&
 numVal >= 0
 ? numVal
 : 0;
+
 } else {
+
 state.inventory[idx][f] =
 v;
 }
 
+if (
+f === "name" ||
+f === "unit"
+) {
+
+const currentUnit =
+String(
+state.inventory[idx].unit || ""
+)
+.trim()
+.toLowerCase();
+
+if (
+currentUnit === "ml" ||
+currentUnit === "l"
+) {
+
+state.inventory[idx].density =
+getDensityByName(
+state.inventory[idx].name
+);
+
+}
+}
+
 saveState();
+
+renderInventory();
 renderRecipe();
 render();
-});
+}
+
+inp.addEventListener(
+"input",
+updateInventoryField
+);
+
+inp.addEventListener(
+"change",
+updateInventoryField
+);
 });
 
 tr.querySelector(".rm-btn")
@@ -1838,7 +1985,8 @@ state.inventory.push({
 name: "",
 total: 0,
 unit: "g",
-value: 0
+value: 0,
+density: 1.00
 });
 
 saveState();
@@ -1848,11 +1996,35 @@ renderRecipe();
 render();
 });
 
+/*
+ * CÁLCULO CORRIGIDO DO CUSTO
+ *
+ * Primeiro transforma a quantidade comprada e a quantidade
+ * usada na receita para a mesma base física.
+ *
+ * Massa:
+ *   g  = g
+ *   kg = kg × 1000
+ *
+ * Volume:
+ *   ml = ml × densidade
+ *   L  = L × 1000 × densidade
+ *
+ * Assim funciona corretamente:
+ *
+ * Mercado 1 kg  → Receita 120 g
+ * Mercado 1 kg  → Receita 120 ml
+ * Mercado 1 L   → Receita 120 ml
+ * Mercado 1 L   → Receita 120 g
+ *
+ * quando a densidade do produto estiver disponível.
+ */
 function getIngredientCost(
 invIndex,
 qty,
 recipeUnit
 ) {
+
 const inv =
 state.inventory[invIndex];
 
@@ -1866,20 +2038,83 @@ parseFloat(inv.total) || 0;
 const value =
 parseFloat(inv.value) || 0;
 
+const q =
+parseFloat(qty) || 0;
+
 if (
 total <= 0 ||
-value <= 0
+value <= 0 ||
+q <= 0
 ) {
 return 0;
 }
 
-const q =
-parseFloat(qty) || 0;
+const inventoryUnit =
+String(inv.unit || "")
+.trim()
+.toLowerCase();
 
-const totalBase = total * getBaseFactor(inv.unit);
-const qtyBase = q * getBaseFactor(recipeUnit || inv.unit);
+const usedUnit =
+String(
+recipeUnit || inv.unit || ""
+)
+.trim()
+.toLowerCase();
 
-return (qtyBase / totalBase) * value;
+/*
+ * Unidades contáveis somente podem ser comparadas
+ * com unidades contáveis.
+ */
+if (
+inventoryUnit === "un" ||
+inventoryUnit === "pote"
+) {
+
+if (
+usedUnit !== inventoryUnit
+) {
+return 0;
+}
+
+return (
+q / total
+) * value;
+}
+
+/*
+ * Converte ambos para gramas.
+ */
+const totalGrams =
+toGrams(
+total,
+inventoryUnit,
+inv
+);
+
+const usedGrams =
+toGrams(
+q,
+usedUnit,
+inv
+);
+
+/*
+ * Se uma das unidades não puder ser convertida,
+ * não inventa uma proporção.
+ */
+if (
+totalGrams === null ||
+usedGrams === null ||
+totalGrams <= 0 ||
+usedGrams < 0
+) {
+return 0;
+}
+
+return (
+usedGrams /
+totalGrams
+) * value;
 }
 
 // Recipe
@@ -1948,6 +2183,7 @@ unitInput.value =
 item.unit;
 
 function updateCost() {
+
 const cost =
 getIngredientCost(
 item.invIndex,
@@ -1965,6 +2201,7 @@ maximumFractionDigits: 2
 qtyInput.addEventListener(
 "input",
 function() {
+
 const v =
 parseFloat(
 qtyInput.value
@@ -1985,10 +2222,12 @@ render();
 unitInput.addEventListener(
 "input",
 function() {
+
 state.recipe[idx].unit =
 unitInput.value;
 
 saveState();
+
 updateCost();
 render();
 }
@@ -1998,6 +2237,7 @@ tr.querySelector(".rm-btn")
 .addEventListener(
 "click",
 function() {
+
 state.recipe.splice(
 idx,
 1
@@ -2016,9 +2256,13 @@ return tr;
 }
 
 function renderRecipe() {
+
 recBody.innerHTML = "";
 
-if (state.inventory.length === 0) {
+if (
+state.inventory.length === 0
+) {
+
 recBody.innerHTML =
 "<tr>" +
 "<td colspan='5' " +
@@ -2042,9 +2286,11 @@ state.inventory.length
 
 state.recipe.forEach(
 function(item, idx) {
+
 recBody.appendChild(
 recRow(item, idx)
 );
+
 }
 );
 
@@ -2052,12 +2298,14 @@ let recV = 0;
 
 state.recipe.forEach(
 function(r) {
+
 recV +=
 getIngredientCost(
 r.invIndex,
 r.qty,
 r.unit
 );
+
 }
 );
 
@@ -2071,7 +2319,10 @@ document.getElementById(
 "addRec"
 ).addEventListener("click", function() {
 
-if (state.inventory.length === 0) {
+if (
+state.inventory.length === 0
+) {
+
 showModal({
 icon: "⚠️",
 title: "Estoque vazio",
@@ -2091,6 +2342,7 @@ if (
 nextIndex >=
 state.inventory.length
 ) {
+
 showModal({
 icon: "ℹ️",
 title:
@@ -2104,12 +2356,15 @@ onlyOk: true
 return;
 }
 
-const defaultInv = state.inventory[nextIndex];
+const defaultInv =
+state.inventory[nextIndex];
 
 state.recipe.push({
 invIndex: nextIndex,
 qty: 0,
-unit: defaultInv ? defaultInv.unit : "g"
+unit: defaultInv
+? defaultInv.unit
+: "g"
 });
 
 saveState();
@@ -2120,6 +2375,7 @@ render();
 
 // Packaging
 function pkgRow(item, idx) {
+
 const tr =
 document.createElement("tr");
 
@@ -2168,6 +2424,7 @@ inputs[3].value =
 item.value;
 
 inputs.forEach(function(inp) {
+
 inp.addEventListener(
 "input",
 function() {
@@ -2182,23 +2439,29 @@ if (
 f === "qty" ||
 f === "value"
 ) {
+
 const numVal =
 parseFloat(v);
 
 state.packaging[idx][f] =
 isFinite(numVal) &&
 numVal >= 0
-  ? numVal
-  : 0;
+? numVal
+: 0;
+
 } else {
+
 state.packaging[idx][f] =
 v;
+
 }
 
 saveState();
 render();
+
 }
 );
+
 });
 
 tr.querySelector(".rm-btn")
@@ -2215,6 +2478,7 @@ saveState();
 
 renderPackaging();
 render();
+
 }
 );
 
@@ -2222,13 +2486,16 @@ return tr;
 }
 
 function renderPackaging() {
+
 pkgBody.innerHTML = "";
 
 state.packaging.forEach(
 function(item, idx) {
+
 pkgBody.appendChild(
 pkgRow(item, idx)
 );
+
 }
 );
 
@@ -2236,9 +2503,11 @@ let pkgV = 0;
 
 state.packaging.forEach(
 function(i) {
+
 pkgV +=
 (parseFloat(i.qty) || 0) *
 (parseFloat(i.value) || 0);
+
 }
 );
 
@@ -2306,6 +2575,7 @@ function showModal(
 options,
 onConfirm
 ) {
+
 modalIcon.textContent =
 options.icon || "⚠️";
 
@@ -2325,15 +2595,19 @@ modalConfirmBtn.className =
 : " neutral");
 
 if (options.onlyOk) {
+
 modalCancelBtn.style.display =
 "none";
+
 } else {
+
 modalCancelBtn.style.display =
 "";
 
 modalCancelBtn.textContent =
 options.cancelText ||
 "Cancelar";
+
 }
 
 modalOverlay.classList.add(
@@ -2342,31 +2616,42 @@ modalOverlay.classList.add(
 
 modalConfirmBtn.onclick =
 function() {
+
 closeModal();
 
 if (
 typeof onConfirm ===
 "function"
 ) {
+
 onConfirm();
+
 }
+
 };
 
 modalCancelBtn.onclick =
 function() {
+
 closeModal();
+
 };
+
 }
 
 modalOverlay.addEventListener(
 "click",
 function(e) {
+
 if (
 e.target ===
 modalOverlay
 ) {
+
 closeModal();
+
 }
+
 }
 );
 
@@ -2378,6 +2663,7 @@ document.getElementById(
 function() {
 
 showModal({
+
 icon: "↺",
 title: "Restaurar exemplo?",
 message:
@@ -2385,6 +2671,7 @@ message:
 confirmText: "Restaurar",
 cancelText: "Cancelar",
 danger: true
+
 }, function() {
 
 state =
@@ -2409,7 +2696,9 @@ renderInventory();
 renderRecipe();
 renderPackaging();
 render();
+
 });
+
 }
 );
 
@@ -2435,21 +2724,31 @@ function(r) {
 const qty =
 parseFloat(r.qty) || 0;
 
-const inv = state.inventory[r.invIndex];
-const unit = r.unit || (inv ? inv.unit : "g");
+const inv =
+state.inventory[r.invIndex];
 
-if (unit === "g" || unit === "ml") {
-  recW += qty;
-} else if (unit === "kg" || unit === "L") {
-  recW += qty * 1000;
-}
+const unit =
+r.unit ||
+(
+inv
+? inv.unit
+: "g"
+);
+
+recW +=
+getRecipeWeight(
+qty,
+unit,
+inv
+);
 
 recV +=
 getIngredientCost(
 r.invIndex,
 qty,
-r.unit
+unit
 );
+
 }
 );
 
@@ -2466,6 +2765,7 @@ function(i) {
 pkgV +=
 (parseFloat(i.qty) || 0) *
 (parseFloat(i.value) || 0);
+
 }
 );
 
@@ -2497,7 +2797,10 @@ const leftoverWeight =
 Math.max(
 0,
 recW -
-(numPots * weightPerPot)
+(
+numPots *
+weightPerPot
+)
 );
 
 document.getElementById(
@@ -2540,6 +2843,7 @@ if (
 numPots === 0 &&
 recW > 0
 ) {
+
 warningPotSize.textContent =
 num(
 weightPerPot,
@@ -2549,10 +2853,13 @@ weightPerPot,
 warningEl.classList.add(
 "visible"
 );
+
 } else {
+
 warningEl.classList.remove(
 "visible"
 );
+
 }
 
 const costIngPot =
@@ -2674,6 +2981,7 @@ numPots === 1
 ? " pote"
 : " potes"
 );
+
 }
 
 if (price > 0) {
@@ -2705,29 +3013,30 @@ function(seg) {
 
 const pct =
 total > 0
-  ? Math.round(
-      (seg.value /
-        total) *
-      100
-    )
-  : 0;
+? Math.round(
+(seg.value /
+total) *
+100
+)
+: 0;
 
 return (
 "<div>" +
-  "<span class='lab'>" +
-    "<span class='sw' " +
-    "style='background:" +
-    seg.color +
-    "'></span>" +
-    seg.label +
-  "</span>" +
+"<span class='lab'>" +
+"<span class='sw' " +
+"style='background:" +
+seg.color +
+"'></span>" +
+seg.label +
+"</span>" +
 
-  "<span class='val'>" +
-    pct +
-    "%" +
-  "</span>" +
+"<span class='val'>" +
+pct +
+"%" +
+"</span>" +
 "</div>"
 );
+
 }
 ).join("");
 
@@ -2740,14 +3049,17 @@ jarLegend.innerHTML =
 "quando houver pelo menos 1 pote completo." +
 "</span>" +
 "</div>";
+
 }
 
 let invTotal = 0;
 
 state.inventory.forEach(
 function(i) {
+
 invTotal +=
 parseFloat(i.value) || 0;
+
 }
 );
 
@@ -2755,6 +3067,7 @@ document.getElementById(
 "invTotalValue"
 ).textContent =
 brl(invTotal);
+
 }
 
 // Init
@@ -2778,6 +3091,7 @@ return;
 
 refreshing = true;
 window.location.reload();
+
 }
 );
 
@@ -2791,9 +3105,11 @@ navigator.serviceWorker
 
 }
 );
+
 }
 
 })();
 </script>
+
 </body>
 </html>
