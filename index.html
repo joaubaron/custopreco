@@ -424,18 +424,23 @@ table-layout: fixed !important;
 
 #tab0 th:first-child,
 #tab0 td:first-child {
-width: 44% !important;
+width: 38% !important;
 }
 
 #tab0 th:nth-child(2),
 #tab0 td:nth-child(2) {
-width: 24% !important;
+width: 20% !important;
 text-align: right;
 }
 
 #tab0 th:nth-child(3),
 #tab0 td:nth-child(3) {
-width: 24% !important;
+width: 16% !important;
+}
+
+#tab0 th:nth-child(4),
+#tab0 td:nth-child(4) {
+width: 18% !important;
 text-align: right;
 }
 
@@ -966,17 +971,22 @@ box-shadow: 0 4px 14px rgba(49, 95, 145, .30) !important;
 
 #tab0 th:first-child,
 #tab0 td:first-child {
-width: 38% !important;
+width: 36% !important;
 }
 
 #tab0 th:nth-child(2),
 #tab0 td:nth-child(2) {
-width: 26% !important;
+width: 20% !important;
 }
 
 #tab0 th:nth-child(3),
 #tab0 td:nth-child(3) {
-width: 26% !important;
+width: 16% !important;
+}
+
+#tab0 th:nth-child(4),
+#tab0 td:nth-child(4) {
+width: 18% !important;
 }
 
 #tab0 th:last-child,
@@ -1152,7 +1162,6 @@ padding-bottom: max(80px, env(safe-area-inset-bottom));
 <div class="layout">
 <div>
 
-<!-- Mercado -->
 <div class="tab-content active" id="tab0">
 <section class="card">
 <h2>🛒 Mercado</h2>
@@ -1165,7 +1174,8 @@ Cadastre os produtos que você compra e seus valores
 <thead>
 <tr>
   <th>Produto</th>
-  <th class="num">g ou ml</th>
+  <th class="num">Qtd. Total</th>
+  <th>Un.</th>
   <th class="num">R$</th>
   <th></th>
 </tr>
@@ -1175,7 +1185,7 @@ Cadastre os produtos que você compra e seus valores
 
 <tfoot>
 <tr class="tfoot-total-row">
-  <td class="total-label">Total em estoque</td>
+  <td class="total-label" colspan="2">Total em estoque</td>
   <td></td>
   <td class="total-value" id="invTotalValue">R$ 0,00</td>
   <td></td>
@@ -1190,7 +1200,6 @@ Cadastre os produtos que você compra e seus valores
 </section>
 </div>
 
-<!-- Receita -->
 <div class="tab-content" id="tab1">
 <section class="card">
 <h2>🧺 Receita</h2>
@@ -1235,7 +1244,6 @@ Informe somente a quantidade usada na receita
 </section>
 </div>
 
-<!-- Embalagem -->
 <div class="tab-content" id="tab2">
 <section class="card">
 <h2>
@@ -1283,7 +1291,6 @@ Custo fixo de cada pote da receita
 </section>
 </div>
 
-<!-- Preço -->
 <div class="tab-content" id="tab3">
 
 <section class="card">
@@ -1408,7 +1415,6 @@ Funciona para qualquer receita — ajuste como quiser.
 
 </div>
 
-<!-- Modal -->
 <div class="modal-overlay" id="modalOverlay">
 
 <div class="modal-box">
@@ -1451,17 +1457,17 @@ const DEFAULT_STATE = {
 recipeName: "Minha Receita",
 
 inventory: [
-{ name: "Azeite oliva", total: 500, value: 27.90 },
-{ name: "Shoyu", total: 500, value: 18.90 },
-{ name: "Vinagre arroz", total: 500, value: 12.50 },
-{ name: "Berinjela", total: 1000, value: 6.00 },
-{ name: "Abobrinha italiana", total: 1000, value: 4.00 },
-{ name: "Cebola", total: 1000, value: 4.50 },
-{ name: "Pimentão vermelho", total: 500, value: 6.00 },
-{ name: "Pimentão amarelo", total: 500, value: 6.00 },
-{ name: "Tomate", total: 1000, value: 3.50 },
-{ name: "Uva passa", total: 200, value: 15.78 },
-{ name: "Manjericão seco", total: 50, value: 12.85 }
+{ name: "Azeite oliva", total: 500, unit: "ml", value: 27.90 },
+{ name: "Shoyu", total: 500, unit: "ml", value: 18.90 },
+{ name: "Vinagre arroz", total: 500, unit: "ml", value: 12.50 },
+{ name: "Berinjela", total: 1, unit: "kg", value: 6.00 },
+{ name: "Abobrinha italiana", total: 1, unit: "kg", value: 4.00 },
+{ name: "Cebola", total: 1, unit: "kg", value: 4.50 },
+{ name: "Pimentão vermelho", total: 500, unit: "g", value: 6.00 },
+{ name: "Pimentão amarelo", total: 500, unit: "g", value: 6.00 },
+{ name: "Tomate", total: 1, unit: "kg", value: 3.50 },
+{ name: "Uva passa", total: 200, unit: "g", value: 15.78 },
+{ name: "Manjericão seco", total: 50, unit: "g", value: 12.85 }
 ],
 
 recipe: [
@@ -1569,6 +1575,16 @@ return n.toLocaleString("pt-BR", {
 minimumFractionDigits: digits || 0,
 maximumFractionDigits: digits || 2
 });
+}
+
+function getBaseFactor(unit) {
+switch (unit) {
+case "kg":
+case "L":
+return 1000;
+default:
+return 1;
+}
 }
 
 // Elements
@@ -1699,6 +1715,16 @@ tr.innerHTML =
 "</td>" +
 
 "<td>" +
+"<select class='cell' data-f='unit'>" +
+"<option value='g'>g</option>" +
+"<option value='ml'>ml</option>" +
+"<option value='kg'>kg</option>" +
+"<option value='L'>L</option>" +
+"<option value='un'>un</option>" +
+"</select>" +
+"</td>" +
+
+"<td>" +
 "<input class='cell num' data-f='value' " +
 "type='number' step='any' " +
 "inputmode='decimal' min='0' " +
@@ -1710,16 +1736,19 @@ tr.innerHTML =
 "</td>";
 
 const inputs =
-tr.querySelectorAll("input");
+tr.querySelectorAll("input, select");
 
 inputs[0].value =
-item.name;
+item.name || "";
 
 inputs[1].value =
-item.total;
+item.total || 0;
 
 inputs[2].value =
-item.value;
+item.unit || "g";
+
+inputs[3].value =
+item.value || 0;
 
 inputs.forEach(function(inp) {
 inp.addEventListener("input", function() {
@@ -1808,6 +1837,7 @@ document.getElementById(
 state.inventory.push({
 name: "",
 total: 0,
+unit: "g",
 value: 0
 });
 
@@ -1820,7 +1850,8 @@ render();
 
 function getIngredientCost(
 invIndex,
-qty
+qty,
+recipeUnit
 ) {
 const inv =
 state.inventory[invIndex];
@@ -1845,7 +1876,10 @@ return 0;
 const q =
 parseFloat(qty) || 0;
 
-return (q / total) * value;
+const totalBase = total * getBaseFactor(inv.unit);
+const qtyBase = q * getBaseFactor(recipeUnit || inv.unit);
+
+return (qtyBase / totalBase) * value;
 }
 
 // Recipe
@@ -1917,7 +1951,8 @@ function updateCost() {
 const cost =
 getIngredientCost(
 item.invIndex,
-qtyInput.value
+qtyInput.value,
+unitInput.value
 );
 
 costCell.textContent =
@@ -1954,6 +1989,8 @@ state.recipe[idx].unit =
 unitInput.value;
 
 saveState();
+updateCost();
+render();
 }
 );
 
@@ -2018,7 +2055,8 @@ function(r) {
 recV +=
 getIngredientCost(
 r.invIndex,
-r.qty
+r.qty,
+r.unit
 );
 }
 );
@@ -2066,10 +2104,12 @@ onlyOk: true
 return;
 }
 
+const defaultInv = state.inventory[nextIndex];
+
 state.recipe.push({
 invIndex: nextIndex,
 qty: 0,
-unit: "g"
+unit: defaultInv ? defaultInv.unit : "g"
 });
 
 saveState();
@@ -2395,12 +2435,20 @@ function(r) {
 const qty =
 parseFloat(r.qty) || 0;
 
-recW += qty;
+const inv = state.inventory[r.invIndex];
+const unit = r.unit || (inv ? inv.unit : "g");
+
+if (unit === "g" || unit === "ml") {
+  recW += qty;
+} else if (unit === "kg" || unit === "L") {
+  recW += qty * 1000;
+}
 
 recV +=
 getIngredientCost(
 r.invIndex,
-qty
+qty,
+r.unit
 );
 }
 );
