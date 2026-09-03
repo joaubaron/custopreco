@@ -2758,9 +2758,13 @@ productName +
 "</td>" +
 
 "<td>" +
-"<input class='cell' data-f='unit' " +
-"placeholder='g/ml' " +
-"inputmode='text'>" +
+"<select class='cell' data-f='unit'>" +
+"<option value='g'>g</option>" +
+"<option value='ml'>ml</option>" +
+"<option value='kg'>kg</option>" +
+"<option value='L'>L</option>" +
+"<option value='un'>un</option>" +
+"</select>" +
 "</td>" +
 
 "<td class='num'>" +
@@ -2780,7 +2784,7 @@ tr.querySelector(
 
 const unitInput =
 tr.querySelector(
-'input[data-f="unit"]'
+'[data-f="unit"]'
 );
 
 const costCell =
@@ -2834,15 +2838,10 @@ render();
 unitInput.addEventListener(
 "input",
 function() {
-
-state.recipe[idx].unit =
-unitInput.value;
-
+state.recipe[idx].unit = unitInput.value;
 saveState();
-
 updateCost();
 render();
-
 }
 );
 
