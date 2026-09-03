@@ -390,6 +390,12 @@ font-weight: 700 !important;
 color: var(--text-secondary);
 }
 
+/* Coluna de valor (R$) do Mercado e da Embalagem também em dourado, igual ao Custo da Receita */
+table:not(.operational-table) td:nth-child(4) input.cell.num {
+color: var(--gold) !important;
+font-weight: 700 !important;
+}
+
 .rm-btn {
 background: transparent;
 border: none;
