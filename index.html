@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -318,9 +319,8 @@ font-weight: 600;
 }
 #costIngPot,
 #costPkgPot,
-#costOpPot,
 #costTotalPot,
-#opSubV {
+#operationalTotal {
 color: var(--gold);
 }
 select.cell {
@@ -365,51 +365,59 @@ justify-content: center;
 color: var(--red);
 background: var(--red-dim);
 }
-#tab0 table,
-#tab1 table,
-#tab2 table {
+#tab0 table {
 min-width: 0 !important;
 width: 100% !important;
 table-layout: fixed !important;
 }
-#tab0 th:first-child, #tab0 td:first-child,
-#tab2 th:first-child, #tab2 td:first-child {
-width: 42% !important;
+#tab0 th:first-child,
+#tab0 td:first-child {
+width: 40% !important;
 }
-#tab0 th:nth-child(2), #tab0 td:nth-child(2),
-#tab2 th:nth-child(2), #tab2 td:nth-child(2) {
-width: 17% !important;
-text-align: right;
-}
-#tab0 th:nth-child(3), #tab0 td:nth-child(3),
-#tab2 th:nth-child(3), #tab2 td:nth-child(3) {
-width: 15% !important;
-}
-#tab0 th:nth-child(4), #tab0 td:nth-child(4),
-#tab2 th:nth-child(4), #tab2 td:nth-child(4) {
+#tab0 th:nth-child(2),
+#tab0 td:nth-child(2) {
 width: 18% !important;
 text-align: right;
 }
-#tab0 th:last-child, #tab0 td:last-child,
-#tab2 th:last-child, #tab2 td:last-child {
+#tab0 th:nth-child(3),
+#tab0 td:nth-child(3) {
+width: 16% !important;
+}
+#tab0 th:nth-child(4),
+#tab0 td:nth-child(4) {
+width: 18% !important;
+text-align: right;
+}
+#tab0 th:last-child,
+#tab0 td:last-child {
 width: 8% !important;
 }
-#tab1 th:first-child, #tab1 td:first-child {
+#tab1 table {
+min-width: 0 !important;
+width: 100% !important;
+table-layout: fixed !important;
+}
+#tab1 th:first-child,
+#tab1 td:first-child {
 width: 42% !important;
 }
-#tab1 th:nth-child(2), #tab1 td:nth-child(2) {
+#tab1 th:nth-child(2),
+#tab1 td:nth-child(2) {
 width: 16% !important;
 text-align: right;
 }
-#tab1 th:nth-child(3), #tab1 td:nth-child(3) {
+#tab1 th:nth-child(3),
+#tab1 td:nth-child(3) {
 width: 15% !important;
 text-align: left;
 }
-#tab1 th:nth-child(4), #tab1 td:nth-child(4) {
+#tab1 th:nth-child(4),
+#tab1 td:nth-child(4) {
 width: 19% !important;
 text-align: right;
 }
-#tab1 th:last-child, #tab1 td:last-child {
+#tab1 th:last-child,
+#tab1 td:last-child {
 width: 8% !important;
 }
 #tab1 tbody td {
@@ -450,6 +458,91 @@ font-variant-numeric: tabular-nums;
 box-sizing: border-box;
 white-space: nowrap;
 }
+#tab2 table {
+min-width: 0 !important;
+width: 100% !important;
+table-layout: fixed !important;
+}
+#tab2 th:first-child,
+#tab2 td:first-child {
+width: 42% !important;
+}
+#tab2 th:nth-child(2),
+#tab2 td:nth-child(2) {
+width: 17% !important;
+text-align: right;
+}
+#tab2 th:nth-child(3),
+#tab2 td:nth-child(3) {
+width: 15% !important;
+}
+#tab2 th:nth-child(4),
+#tab2 td:nth-child(4) {
+width: 18% !important;
+text-align: right;
+}
+#tab2 th:last-child,
+#tab2 td:last-child {
+width: 8% !important;
+}
+#tab2 .operational-table th:first-child,
+#tab2 .operational-table td:first-child {
+width: 50% !important;
+}
+#tab2 .operational-table th:nth-child(2),
+#tab2 .operational-table td:nth-child(2) {
+width: 32% !important;
+text-align: right;
+}
+#tab2 .operational-table th:last-child,
+#tab2 .operational-table td:last-child {
+width: 18% !important;
+}
+#tab2 .operational-table tbody td {
+padding: 4px 5px !important;
+}
+#tab2 .operational-table input[type="number"] {
+width: 100%;
+background: var(--bg-input);
+border: 1px solid rgba(255, 255, 255, .06);
+color: var(--text-primary);
+font-family: inherit;
+font-size: 11.5px;
+padding: 7px 7px;
+border-radius: 8px;
+text-align: right;
+transition: var(--transition);
+min-height: 38px;
+box-sizing: border-box;
+font-variant-numeric: tabular-nums;
+}
+#tab2 .operational-table input[type="number"]:focus {
+outline: none;
+border-color: var(--gold);
+background: var(--gold-soft);
+box-shadow: 0 0 0 3px var(--gold-soft);
+}
+#tab2 .operational-table tbody td:nth-child(3) {
+color: var(--text-muted);
+}
+#tab2 .operational-table tfoot td {
+padding-top: 15px;
+padding-bottom: 13px;
+border-top: 1px solid var(--gold-border);
+}
+#tab2 .operational-table tfoot tr {
+background: linear-gradient(90deg, rgba(255, 216, 77, .08), rgba(255, 216, 77, .14));
+}
+#tab2 .operational-table .total-value {
+color: var(--gold) !important;
+font-family: var(--font-display);
+font-size: 19px !important;
+line-height: 1.1;
+font-weight: 800 !important;
+letter-spacing: -.02em;
+white-space: nowrap;
+text-align: right;
+}
 #tab0 tfoot .total-label,
 #tab1 tfoot .total-label,
 #tab2 tfoot .total-label {
@@ -459,8 +552,7 @@ font-weight: 700 !important;
 }
 #invTotalValue,
 #recSubV,
-#pkgSubV,
-#opSubV {
+#pkgSubV {
 color: var(--gold) !important;
 font-family: var(--font-display);
 font-size: 19px !important;
@@ -528,7 +620,7 @@ border-radius: 999px;
 }
 .kv-grid {
 display: grid;
-grid-template-columns: 160px 1fr;
+grid-template-columns: 160px 1fr; /* ← primeira coluna fixa */
 gap: 10px 16px;
 font-family: var(--font-body);
 font-size: 13px;
@@ -774,6 +866,7 @@ line-height: 1.5;
 color: var(--blue);
 font-weight: 700;
 }
+/* Estilos para a aba Receitas */
 .recipe-list-container {
 margin-top: 4px;
 }
@@ -914,6 +1007,7 @@ border-color: var(--red);
 color: var(--red);
 background: var(--red-dim);
 }
+/* Estilos para o rodapé da aba Preço */
 .price-tab-footer {
 margin-top: 18px;
 padding-top: 16px;
@@ -969,6 +1063,7 @@ gap: 6px;
 color: var(--gold-strong);
 opacity: 0.8;
 }
+/* Badge de receita carregada */
 .loaded-badge {
 display: inline-flex;
 align-items: center;
@@ -1053,39 +1148,44 @@ background: #315f91 !important;
 border-color: #4d82b8 !important;
 box-shadow: 0 4px 14px rgba(49, 95, 145, .30) !important;
 }
-#tab0 th:first-child, #tab0 td:first-child,
-#tab2 th:first-child, #tab2 td:first-child {
+#tab0 th:first-child,
+#tab0 td:first-child {
 width: 38% !important;
 }
-#tab0 th:nth-child(2), #tab0 td:nth-child(2),
-#tab2 th:nth-child(2), #tab2 td:nth-child(2) {
-width: 20% !important;
-}
-#tab0 th:nth-child(3), #tab0 td:nth-child(3),
-#tab2 th:nth-child(3), #tab2 td:nth-child(3) {
-width: 14% !important;
-}
-#tab0 th:nth-child(4), #tab0 td:nth-child(4),
-#tab2 th:nth-child(4), #tab2 td:nth-child(4) {
+#tab0 th:nth-child(2),
+#tab0 td:nth-child(2) {
 width: 18% !important;
 }
-#tab0 th:last-child, #tab0 td:last-child,
-#tab2 th:last-child, #tab2 td:last-child {
-width: 10% !important;
-}
-#tab1 th:first-child, #tab1 td:first-child {
-width: 38% !important;
-}
-#tab1 th:nth-child(2), #tab1 td:nth-child(2) {
-width: 18% !important;
-}
-#tab1 th:nth-child(3), #tab1 td:nth-child(3) {
+#tab0 th:nth-child(3),
+#tab0 td:nth-child(3) {
 width: 16% !important;
 }
-#tab1 th:nth-child(4), #tab1 td:nth-child(4) {
+#tab0 th:nth-child(4),
+#tab0 td:nth-child(4) {
 width: 18% !important;
 }
-#tab1 th:last-child, #tab1 td:last-child {
+#tab0 th:last-child,
+#tab0 td:last-child {
+width: 10% !important;
+}
+#tab1 th:first-child,
+#tab1 td:first-child {
+width: 38% !important;
+}
+#tab1 th:nth-child(2),
+#tab1 td:nth-child(2) {
+width: 18% !important;
+}
+#tab1 th:nth-child(3),
+#tab1 td:nth-child(3) {
+width: 16% !important;
+}
+#tab1 th:nth-child(4),
+#tab1 td:nth-child(4) {
+width: 18% !important;
+}
+#tab1 th:last-child,
+#tab1 td:last-child {
 width: 10% !important;
 }
 #tab1 .product-display {
@@ -1097,6 +1197,26 @@ padding: 7px 7px !important;
 font-size: 11px !important;
 min-height: 38px !important;
 padding: 7px 5px !important;
+}
+#tab2 th:first-child,
+#tab2 td:first-child {
+width: 38% !important;
+}
+#tab2 th:nth-child(2),
+#tab2 td:nth-child(2) {
+width: 20% !important;
+}
+#tab2 th:nth-child(3),
+#tab2 td:nth-child(3) {
+width: 14% !important;
+}
+#tab2 th:nth-child(4),
+#tab2 td:nth-child(4) {
+width: 18% !important;
+}
+#tab2 th:last-child,
+#tab2 td:last-child {
+width: 10% !important;
 }
 table {
 font-size: 11px !important;
@@ -1328,33 +1448,39 @@ R$ 0,00
 Inclui mão de obra, energia, água e estrutura
 </p>
 <div class="table-scroll">
-<table>
+<table class="operational-table">
 <thead>
 <tr>
 <th>Item</th>
-<th class="num">Qtd.</th>
+<th class="num">Valor</th>
 <th>Un.</th>
-<th class="num">R$</th>
-<th></th>
 </tr>
 </thead>
-<tbody id="opBody"></tbody>
+<tbody>
+<tr>
+<td>Mão de obra/hora</td>
+<td class="num"><input type="number" id="laborHourly" step="0.50" value="8" /></td>
+<td>R$</td>
+</tr>
+<tr>
+<td>Tempo preparo</td>
+<td class="num"><input type="number" id="prepTime" step="5" value="60" /></td>
+<td>min</td>
+</tr>
+<tr>
+<td>Energia e água/lote</td>
+<td class="num"><input type="number" id="utilitiesCost" step="0.50" value="2" /></td>
+<td>R$</td>
+</tr>
+</tbody>
 <tfoot>
 <tr>
-<td class="total-label" colspan="3">
-Subtotal operacional
-</td>
-<td class="total-value" id="opSubV">
-R$ 0,00
-</td>
-<td></td>
+<td class="total-label">Custo operacional (por pote)</td>
+<td class="total-value" id="operationalTotal" colspan="2">R$ 0,00</td>
 </tr>
 </tfoot>
 </table>
 </div>
-<button class="add-row-btn" id="addOp">
-+ Adicionar custo
-</button>
 </section>
 </div>
 <!-- ==================== ABA PREÇO ==================== -->
@@ -1554,12 +1680,12 @@ packaging: [
 { name: "Decoração", qty: 1, unit: "un", value: 2 },
 { name: "Cordinha", qty: 1, unit: "un", value: .8 }
 ],
-operational: [
-{ name: "Mão de obra", qty: 1, unit: "un", value: 1.50 },
-{ name: "Energia e água", qty: 1, unit: "un", value: 0.80 }
-],
 weightPerPot: 500,
-profitPct: 35
+profitPct: 35,
+// Campos operacionais simplificados
+laborHourly: 8,
+prepTime: 60,
+utilitiesCost: 2
 };
 let state = loadState();
 let storageWarned = false;
@@ -1658,9 +1784,10 @@ item.density = detected;
 }
 }
 });
-if (!Array.isArray(parsed.operational)) {
-parsed.operational = JSON.parse(JSON.stringify(DEFAULT_STATE.operational));
-}
+// Ensure simplified operational fields exist
+if (!('laborHourly' in parsed)) parsed.laborHourly = 8;
+if (!('prepTime' in parsed)) parsed.prepTime = 60;
+if (!('utilitiesCost' in parsed)) parsed.utilitiesCost = 2;
 return parsed;
 }
 }
@@ -1717,9 +1844,11 @@ recipeName: state.recipeName,
 inventory: state.inventory,
 recipe: state.recipe,
 packaging: state.packaging,
-operational: state.operational,
 weightPerPot: state.weightPerPot,
-profitPct: state.profitPct
+profitPct: state.profitPct,
+laborHourly: state.laborHourly,
+prepTime: state.prepTime,
+utilitiesCost: state.utilitiesCost
 };
 }
 
@@ -1728,13 +1857,20 @@ state.recipeName = data.recipeName || "Minha Receita";
 state.inventory = data.inventory || [];
 state.recipe = data.recipe || [];
 state.packaging = data.packaging || [];
-state.operational = data.operational || [];
 state.weightPerPot = data.weightPerPot || 500;
 state.profitPct = data.profitPct || 35;
+state.laborHourly = data.laborHourly || 8;
+state.prepTime = data.prepTime || 60;
+state.utilitiesCost = data.utilitiesCost || 2;
 
 recipeNameEl.value = state.recipeName;
 weightPerPotEl.value = state.weightPerPot;
 profitPctEl.value = state.profitPct;
+
+// Atualiza campos operacionais
+document.getElementById('laborHourly').value = state.laborHourly;
+document.getElementById('prepTime').value = state.prepTime;
+document.getElementById('utilitiesCost').value = state.utilitiesCost;
 
 saveState();
 renderAll();
@@ -1889,8 +2025,6 @@ const recBody =
 document.getElementById("recBody");
 const pkgBody =
 document.getElementById("pkgBody");
-const opBody =
-document.getElementById("opBody");
 const weightPerPotEl =
 document.getElementById("weightPerPot");
 const profitPctEl =
@@ -2593,90 +2727,6 @@ render();
 }
 );
 
-// Operational Costs
-function opRow(item, idx) {
-const tr = document.createElement("tr");
-tr.innerHTML =
-"<td>" +
-"<input class='cell' data-f='name' placeholder='nome' inputmode='text'>" +
-"</td>" +
-"<td>" +
-"<input class='cell num' data-f='qty' type='number' step='any' inputmode='decimal' min='0'>" +
-"</td>" +
-"<td>" +
-"<input class='cell' data-f='unit' placeholder='un' inputmode='text'>" +
-"</td>" +
-"<td>" +
-"<input class='cell num' data-f='value' type='number' step='any' inputmode='decimal' min='0'>" +
-"</td>" +
-"<td>" +
-"<button class='rm-btn' title='remover'>✕</button>" +
-"</td>";
-
-const inputs = tr.querySelectorAll("input");
-inputs[0].value = item.name ?? "";
-inputs[1].value = item.qty ?? "";
-inputs[2].value = item.unit ?? "";
-inputs[3].value = item.value ?? "";
-
-inputs.forEach(function(inp) {
-function updateOpField() {
-const f = inp.dataset.f;
-const v = inp.value;
-if (f === "qty" || f === "value") {
-const numVal = parseFloat(v);
-state.operational[idx][f] = isFinite(numVal) && numVal >= 0 ? numVal : 0;
-} else {
-state.operational[idx][f] = v;
-}
-saveState();
-render();
-}
-inp.addEventListener("input", updateOpField);
-inp.addEventListener("keydown", function(e) {
-if (e.key === "Enter") {
-e.preventDefault();
-inp.blur();
-}
-});
-inp.addEventListener("blur", updateOpField);
-});
-
-tr.querySelector(".rm-btn").addEventListener("click", function() {
-state.operational.splice(idx, 1);
-saveState();
-renderOperational();
-render();
-});
-return tr;
-}
-
-function renderOperational() {
-opBody.innerHTML = "";
-if (!Array.isArray(state.operational)) state.operational = [];
-state.operational.forEach(function(item, idx) {
-opBody.appendChild(opRow(item, idx));
-});
-let opV = 0;
-state.operational.forEach(function(i) {
-opV += (parseFloat(i.qty) || 0) * (parseFloat(i.value) || 0);
-});
-document.getElementById("opSubV").textContent = brl(opV);
-}
-
-document.getElementById("addOp").addEventListener("click", function() {
-if (!Array.isArray(state.operational)) state.operational = [];
-state.operational.push({
-name: "",
-qty: 1,
-unit: "un",
-value: 0
-});
-saveState();
-renderOperational();
-render();
-});
-
 // Modal
 const modalOverlay =
 document.getElementById(
@@ -2895,6 +2945,32 @@ document.getElementById(
 "jarPots"
 );
 
+function calculateOperationalCost(numPots) {
+// CAMPOS SIMPLIFICADOS
+const laborHourly = parseFloat(document.getElementById('laborHourly').value) || 0;
+const prepTime = parseFloat(document.getElementById('prepTime').value) || 0;
+const utilitiesCost = parseFloat(document.getElementById('utilitiesCost').value) || 0;
+
+// Salva no state
+state.laborHourly = laborHourly;
+state.prepTime = prepTime;
+state.utilitiesCost = utilitiesCost;
+
+// Cálculos simplificados
+const laborPerPot = (laborHourly * (prepTime / 60)) / (numPots || 1);
+const utilitiesPerPot = utilitiesCost / (numPots || 1);
+
+const totalOperational = laborPerPot + utilitiesPerPot;
+
+document.getElementById('operationalTotal').textContent = brl(totalOperational);
+
+return {
+total: totalOperational,
+labor: laborPerPot,
+utilities: utilitiesPerPot
+};
+}
+
 function render() {
 let recW = 0;
 let recV = 0;
@@ -2942,21 +3018,6 @@ document.getElementById(
 "pkgSubV"
 ).textContent =
 brl(pkgV);
-
-let opV = 0;
-if (Array.isArray(state.operational)) {
-state.operational.forEach(
-function(i) {
-opV +=
-(parseFloat(i.qty) || 0) *
-(parseFloat(i.value) || 0);
-}
-);
-}
-document.getElementById(
-"opSubV"
-).textContent =
-brl(opV);
 
 const weightPerPotVal =
 parseFloat(
@@ -3039,12 +3100,15 @@ const costIngPot =
 numPots > 0
 ? recV / numPots
 : 0;
-const costPkgPot = pkgV;
-const costOpPot = opV;
+const costPkgPot =
+pkgV;
+
+// Calcula custos operacionais simplificados
+const operational = calculateOperationalCost(numPots || 1);
 
 const costTotalPot =
 numPots > 0
-? costIngPot + costPkgPot + costOpPot
+? costIngPot + costPkgPot + operational.total
 : 0;
 
 document.getElementById(
@@ -3063,7 +3127,7 @@ document.getElementById(
 "costOpPot"
 ).textContent =
 numPots > 0
-? brl(costOpPot)
+? brl(operational.total)
 : "—";
 document.getElementById(
 "costTotalPot"
@@ -3163,16 +3227,17 @@ color: "#6ab0e8"
 },
 {
 label: "Operacional",
-value: costOpPot,
-color: "#e86a6a"
+value: operational.total,
+color: "#e74c3c"
 },
 {
 label: "Lucro",
 value: profitValue,
-color: "#ffd84d"
+color: "#f7c948"
 }
 ];
-const total = price;
+const total =
+price;
 jarLegend.innerHTML =
 segments.map(
 function(seg) {
@@ -3228,7 +3293,6 @@ function renderAll() {
 renderInventory();
 renderRecipe();
 renderPackaging();
-renderOperational();
 render();
 renderRecipeList();
 updateLoadedIndicators();
@@ -3244,8 +3308,7 @@ return data &&
 data.recipeName === state.recipeName &&
 JSON.stringify(data.inventory) === JSON.stringify(state.inventory) &&
 JSON.stringify(data.recipe) === JSON.stringify(state.recipe) &&
-JSON.stringify(data.packaging) === JSON.stringify(state.packaging) &&
-JSON.stringify(data.operational) === JSON.stringify(state.operational);
+JSON.stringify(data.packaging) === JSON.stringify(state.packaging);
 });
 if (matching) {
 currentRecipeId = matching.id;
@@ -3253,6 +3316,15 @@ currentRecipeId = matching.id;
 }
 renderRecipeList();
 updateLoadedIndicators();
+
+// Configurar listeners dos campos operacionais simplificados
+const opFields = ['laborHourly', 'prepTime', 'utilitiesCost'];
+opFields.forEach(function(field) {
+document.getElementById(field).addEventListener('input', function() {
+saveState();
+render();
+});
+});
 
 if ("serviceWorker" in navigator) {
 let refreshing = false;
