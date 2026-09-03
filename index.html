@@ -19,37 +19,34 @@
 }
 
 :root {
-  /* CORES BASE */
   --bg-primary: #0b0a14;
   --bg-secondary: #131224;
   --bg-card: #1c1b33;
   --bg-card-hover: #242342;
   --bg-input: #262545;
   
-  /* TEXTO */
   --text-primary: #f8f9fa;
   --text-secondary: #a9a7c0;
   --text-muted: #6e6b8a;
   
-  /* CORES DE MARCA E SINALIZAÇÃO PADRONIZADAS */
   --gold: #ffd84d;
   --gold-strong: #ffe16b;
   --gold-soft: rgba(255, 216, 77, 0.12);
   --gold-border: rgba(255, 216, 77, 0.30);
   
-  --green: #6bcb8a;         /* Ingredientes & Sucesso */
+  --green: #6bcb8a;
   --green-dim: rgba(107, 203, 138, 0.12);
   --green-border: rgba(107, 203, 138, 0.30);
   
-  --blue: #6ab0e8;          /* Embalagem & Informativo */
+  --blue: #6ab0e8;
   --blue-dim: rgba(106, 176, 232, 0.12);
   --blue-border: rgba(106, 176, 232, 0.30);
   
-  --red: #e86a6a;           /* Operacional & Remover/Erro */
+  --red: #e86a6a;
   --red-dim: rgba(232, 106, 106, 0.12);
   --red-border: rgba(232, 106, 106, 0.30);
   
-  --orange: #f5a84a;        /* Alertas */
+  --orange: #f5a84a;
   --orange-dim: rgba(245, 168, 74, 0.12);
   
   --border: rgba(255, 255, 255, 0.08);
@@ -84,7 +81,6 @@ body {
   margin: 0 auto;
 }
 
-/* HEADER PADRÃO */
 header {
   display: flex;
   gap: 12px;
@@ -157,7 +153,6 @@ header {
   background: var(--red-dim);
 }
 
-/* NAVEGAÇÃO DE ABAS */
 .tabs {
   display: flex;
   gap: 6px;
@@ -230,7 +225,6 @@ header {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* CARDS PADRONIZADOS */
 section.card {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -270,7 +264,6 @@ section.card .sub {
   text-transform: uppercase;
 }
 
-/* PADRONIZAÇÃO RÍGIDA DE TABELAS E COLUNAS */
 .table-scroll {
   width: 100%;
   overflow-x: auto;
@@ -313,14 +306,12 @@ tbody tr:last-child td {
   border-bottom: none;
 }
 
-/* LARGURA FIXA UNIFICADA PARA TODAS AS TABELAS DO PWA */
 table th:nth-child(1), table td:nth-child(1) { width: 40% !important; }
 table th:nth-child(2), table td:nth-child(2) { width: 18% !important; }
 table th:nth-child(3), table td:nth-child(3) { width: 16% !important; }
 table th:nth-child(4), table td:nth-child(4) { width: 18% !important; }
 table th:nth-child(5), table td:nth-child(5) { width: 8% !important; }
 
-/* INPUTS DE CÉLULAS E EXIBIÇÕES PADRONIZADAS */
 input.cell, select.cell, .product-display, .cost-display {
   width: 100%;
   height: 40px;
@@ -370,7 +361,6 @@ input.cell:focus, select.cell:focus {
   border: none;
 }
 
-/* BOTÃO REMOVER PADRONIZADO */
 .rm-btn {
   background: transparent;
   border: none;
@@ -392,7 +382,6 @@ input.cell:focus, select.cell:focus {
   background: var(--red-dim);
 }
 
-/* RODAPÉ DE TABELAS */
 tfoot tr {
   background: rgba(0, 0, 0, 0.25);
 }
@@ -417,9 +406,9 @@ tfoot td {
   font-weight: 800 !important;
   text-align: right;
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
-/* BOTÃO ADICIONAR PADRONIZADO */
 .add-row-btn {
   margin-top: 12px;
   font-family: var(--font-body);
@@ -443,7 +432,6 @@ tfoot td {
   border-style: solid;
 }
 
-/* CORES PADRONIZADAS ESPECÍFICAS PARA CADA SEÇÃO DA TABELA OPERACIONAL */
 #tab2 .operational-table th:nth-child(1), #tab2 .operational-table td:nth-child(1) { width: 50% !important; }
 #tab2 .operational-table th:nth-child(2), #tab2 .operational-table td:nth-child(2) { width: 30% !important; }
 #tab2 .operational-table th:nth-child(3), #tab2 .operational-table td:nth-child(3) { width: 20% !important; }
@@ -468,7 +456,6 @@ tfoot td {
   box-shadow: 0 0 0 2px var(--red-dim);
 }
 
-/* ESTRUTURA CHAVE-VALOR (KV-GRID) PADRONIZADA */
 .kv-grid {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -533,13 +520,11 @@ tfoot td {
   font-size: 15px;
 }
 
-/* DESTAQUES DA ABA PREÇO COM CORES PADRONIZADAS DE ACORDO COM O TIPO */
 #costIngPot { color: var(--green) !important; font-weight: 700; }
 #costPkgPot { color: var(--blue) !important; font-weight: 700; }
 #costOpPot { color: var(--red) !important; font-weight: 700; }
 #costTotalPot { color: var(--gold) !important; font-weight: 800; }
 
-/* TAG DE PREÇO FINAL DE VENDA */
 .price-tag {
   background: var(--bg-secondary);
   border: 1px solid var(--gold-border);
@@ -571,7 +556,6 @@ tfoot td {
   color: var(--text-muted);
 }
 
-/* COMPOSIÇÃO DE CORES DA LEGENDA DO POTE (PADRONIZAÇÃO COMPLETA) */
 .jar-legend {
   display: flex;
   flex-direction: column;
@@ -612,7 +596,6 @@ tfoot td {
   font-size: 13px;
 }
 
-/* MENSAGENS DE AVISO E NOTAS */
 .warning-message {
   font-size: 12px;
   color: var(--orange);
@@ -640,7 +623,6 @@ tfoot td {
   line-height: 1.4;
 }
 
-/* LISTA DE RECEITAS SALVAS */
 .recipe-list {
   display: flex;
   flex-direction: column;
@@ -757,7 +739,6 @@ tfoot td {
   margin-bottom: 8px;
 }
 
-/* MODAL SWIPE/POPUP */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -868,7 +849,6 @@ tfoot td {
   
   .tab-btn .emoji { font-size: 16px; }
   
-  /* MANTER AS LARGURAS EXATAS DAS COLUNAS TAMBÉM NO MOBILE */
   table th:nth-child(1), table td:nth-child(1) { width: 38% !important; }
   table th:nth-child(2), table td:nth-child(2) { width: 20% !important; }
   table th:nth-child(3), table td:nth-child(3) { width: 14% !important; }
@@ -1030,7 +1010,6 @@ R$ 0,00
 </button>
 </section>
 
-<!-- ===== SEÇÃO: CUSTOS OPERACIONAIS ===== -->
 <section class="card">
 <h2>
 ⚙️ Custos Operacionais
@@ -1079,7 +1058,6 @@ R$ 0,00
 </div>
 </section>
 </div>
-<!-- ==================== ABA PREÇO ==================== -->
 <div class="tab-content" id="tab3">
 <section class="card">
 <h2>🫙 Rendimento</h2>
@@ -1163,9 +1141,7 @@ R$ 0,00
 </div>
 </div>
 <div class="jar-legend" id="jarLegend"></div>
-<!-- Rodapé da aba Preço - APENAS Salvar e Ver receitas -->
 <div class="price-tab-footer">
-<!-- Indicador de receita carregada -->
 <div class="current-recipe-indicator" id="priceTabLoadedIndicator">
 <span class="label">📌 Receita carregada:</span>
 <span id="priceTabLoadedName" style="color:var(--gold);font-weight:600;">Nenhuma</span>
@@ -1179,14 +1155,12 @@ R$ 0,00
 </div>
 </section>
 </div>
-<!-- ==================== ABA RECEITAS ==================== -->
 <div class="tab-content" id="tab4">
 <section class="card">
 <h2>💾 Minhas Receitas</h2>
 <p class="sub">
 Gerencie suas receitas. Clique para carregar e editar
 </p>
-<!-- Indicador de receita carregada -->
 <div class="current-recipe-indicator" style="margin-bottom:16px;">
 <span class="label">📌 Receita atual:</span>
 <span id="recipesTabLoadedName" style="color:var(--gold);font-weight:600;">Nenhuma</span>
@@ -1278,7 +1252,6 @@ packaging: [
 ],
 weightPerPot: 500,
 profitPct: 35,
-// Campos operacionais simplificados
 laborHourly: 8,
 prepTime: 60,
 utilitiesCost: 2
@@ -1380,7 +1353,6 @@ item.density = detected;
 }
 }
 });
-// Ensure simplified operational fields exist
 if (!('laborHourly' in parsed)) parsed.laborHourly = 8;
 if (!('prepTime' in parsed)) parsed.prepTime = 60;
 if (!('utilitiesCost' in parsed)) parsed.utilitiesCost = 2;
@@ -1463,7 +1435,6 @@ recipeNameEl.value = state.recipeName;
 weightPerPotEl.value = state.weightPerPot;
 profitPctEl.value = state.profitPct;
 
-// Atualiza campos operacionais
 document.getElementById('laborHourly').value = state.laborHourly;
 document.getElementById('prepTime').value = state.prepTime;
 document.getElementById('utilitiesCost').value = state.utilitiesCost;
@@ -1612,7 +1583,6 @@ maximumFractionDigits: digits || 2
 });
 }
 
-// Elements
 const recipeNameEl =
 document.getElementById("recipeName");
 const invBody =
@@ -1677,7 +1647,6 @@ render();
 }
 );
 
-// Tabs
 const tabBtns =
 document.querySelectorAll(".tab-btn");
 const tabContents = {
@@ -1712,7 +1681,6 @@ target.classList.add("active");
 );
 });
 
-// Inventory
 function invRow(item, idx) {
 const tr =
 document.createElement("tr");
@@ -1962,7 +1930,6 @@ totalGrams
 ) * value;
 }
 
-// Recipe
 function recRow(item, idx) {
 const tr =
 document.createElement("tr");
@@ -2185,7 +2152,6 @@ render();
 }
 );
 
-// Packaging
 function pkgRow(item, idx) {
 const tr =
 document.createElement("tr");
@@ -2323,7 +2289,6 @@ render();
 }
 );
 
-// Modal
 const modalOverlay =
 document.getElementById(
 "modalOverlay"
@@ -2413,7 +2378,6 @@ closeModal();
 }
 );
 
-// Reset
 document.getElementById(
 "resetBtn"
 ).addEventListener(
@@ -2447,7 +2411,6 @@ renderAll();
 }
 );
 
-// Recipes List UI
 function renderRecipeList() {
 const container = document.getElementById('recipeList');
 const countEl = document.getElementById('recipeCount');
@@ -2531,7 +2494,6 @@ document.getElementById('saveRecipeBtn').addEventListener('click', handleSaveRec
 document.getElementById('saveRecipeBtnTab4').addEventListener('click', handleSaveRecipe);
 document.getElementById('deleteCurrentRecipeBtnTab4').addEventListener('click', handleDeleteRecipe);
 
-// Render price
 const jarLegend =
 document.getElementById(
 "jarLegend"
@@ -2542,17 +2504,14 @@ document.getElementById(
 );
 
 function calculateOperationalCost(numPots) {
-// CAMPOS SIMPLIFICADOS
 const laborHourly = parseFloat(document.getElementById('laborHourly').value) || 0;
 const prepTime = parseFloat(document.getElementById('prepTime').value) || 0;
 const utilitiesCost = parseFloat(document.getElementById('utilitiesCost').value) || 0;
 
-// Salva no state
 state.laborHourly = laborHourly;
 state.prepTime = prepTime;
 state.utilitiesCost = utilitiesCost;
 
-// Cálculos simplificados
 const laborPerPot = (laborHourly * (prepTime / 60)) / (numPots || 1);
 const utilitiesPerPot = utilitiesCost / (numPots || 1);
 
@@ -2699,7 +2658,6 @@ numPots > 0
 const costPkgPot =
 pkgV;
 
-// Calcula custos operacionais simplificados
 const operational = calculateOperationalCost(numPots || 1);
 
 const costTotalPot =
@@ -2894,7 +2852,6 @@ renderRecipeList();
 updateLoadedIndicators();
 }
 
-// Init
 renderAll();
 
 if (recipesList.length > 0) {
@@ -2913,7 +2870,6 @@ currentRecipeId = matching.id;
 renderRecipeList();
 updateLoadedIndicators();
 
-// Configurar listeners dos campos operacionais simplificados
 const opFields = ['laborHourly', 'prepTime', 'utilitiesCost'];
 opFields.forEach(function(field) {
 document.getElementById(field).addEventListener('input', function() {
