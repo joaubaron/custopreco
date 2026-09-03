@@ -1379,123 +1379,42 @@ R$ 0,00
 </button>
 </section>
 
-<!-- ===== SEÇÃO: CUSTOS OPERACIONAIS ===== -->
+<!-- ===== SEÇÃO: CUSTOS OPERACIONAIS SIMPLIFICADA ===== -->
 <section class="card">
 <h2>
 ⚙️ Custos Operacionais
-<span class="badge">rateados</span>
+<span class="badge">por pote</span>
 </h2>
 <p class="sub">
-Custos fixos e variáveis rateados por pote
+Inclui mão de obra, energia, água e estrutura
 </p>
 
-<!-- Custos fixos mensais -->
-<div style="background:var(--bg-input);padding:12px 14px;border-radius:10px;margin-bottom:14px;">
-<p style="font-size:11px;color:var(--text-muted);margin-bottom:10px;">📆 Custos fixos mensais</p>
-<div class="kv-grid" style="font-size:12px;">
-<div class="k">🏠 Aluguel/estrutura</div>
+<div style="background:var(--bg-input);padding:14px 16px;border-radius:10px;">
+<div class="kv-grid" style="font-size:13px;">
+<div class="k">👨‍🍳 Mão de obra (por hora)</div>
 <div class="v editable">
-<input type="number" id="rentCost" step="0.01" value="0" />
+<input type="number" id="laborHourly" step="0.50" value="8" />
 <span class="unit-suffix">R$</span>
 </div>
-<div class="k">📊 % destinado à produção</div>
+<div class="k">⏱️ Tempo de preparo (min)</div>
 <div class="v editable">
-<input type="number" id="rentPct" step="1" value="30" />
-<span class="unit-suffix">%</span>
-</div>
-<div class="k">📦 Potes produzidos/mês</div>
-<div class="v editable">
-<input type="number" id="monthlyPots" step="1" value="100" />
-<span class="unit-suffix">un</span>
-</div>
-</div>
-</div>
-
-<!-- Custos variáveis -->
-<div style="background:var(--bg-input);padding:12px 14px;border-radius:10px;margin-bottom:14px;">
-<p style="font-size:11px;color:var(--text-muted);margin-bottom:10px;">⚡ Custos variáveis (por lote)</p>
-<div class="kv-grid" style="font-size:12px;">
-<div class="k">⚡ Custo kWh</div>
-<div class="v editable">
-<input type="number" id="kwhCost" step="0.01" value="0.85" />
-<span class="unit-suffix">R$</span>
-</div>
-<div class="k">💡 Potência total</div>
-<div class="v editable">
-<input type="number" id="totalPower" step="100" value="1500" />
-<span class="unit-suffix">W</span>
-</div>
-<div class="k">⏱️ Tempo de uso</div>
-<div class="v editable">
-<input type="number" id="energyTime" step="1" value="120" />
+<input type="number" id="prepTime" step="5" value="60" />
 <span class="unit-suffix">min</span>
 </div>
-<div class="k">💧 Custo m³ água</div>
+<div class="k">⚡ Energia + água (por lote)</div>
 <div class="v editable">
-<input type="number" id="waterCost" step="0.01" value="8.00" />
+<input type="number" id="utilitiesCost" step="0.50" value="2" />
 <span class="unit-suffix">R$</span>
-</div>
-<div class="k">💧 Consumo de água</div>
-<div class="v editable">
-<input type="number" id="waterUsage" step="1" value="10" />
-<span class="unit-suffix">L</span>
-</div>
-</div>
-</div>
-
-<!-- Mão de obra -->
-<div style="background:var(--bg-input);padding:12px 14px;border-radius:10px;margin-bottom:14px;">
-<p style="font-size:11px;color:var(--text-muted);margin-bottom:10px;">👨‍🍳 Mão de obra</p>
-<div class="kv-grid" style="font-size:12px;">
-<div class="k">Salário/hora</div>
-<div class="v editable">
-<input type="number" id="laborHourly" step="0.01" value="20" />
-<span class="unit-suffix">R$</span>
-</div>
-<div class="k">Tempo de preparo</div>
-<div class="v editable">
-<input type="number" id="prepTime" step="1" value="120" />
-<span class="unit-suffix">min</span>
-</div>
-</div>
-</div>
-
-<!-- Taxas e frete -->
-<div style="background:var(--bg-input);padding:12px 14px;border-radius:10px;">
-<p style="font-size:11px;color:var(--text-muted);margin-bottom:10px;">💳 Taxas e frete</p>
-<div class="kv-grid" style="font-size:12px;">
-<div class="k">💳 Taxa plataforma</div>
-<div class="v editable">
-<input type="number" id="platformFee" step="0.1" value="0" />
-<span class="unit-suffix">%</span>
-</div>
-<div class="k">📝 Impostos (MEI)</div>
-<div class="v editable">
-<input type="number" id="taxRate" step="0.1" value="0" />
-<span class="unit-suffix">%</span>
-</div>
-<div class="k">📦 Frete/entrega</div>
-<div class="v editable">
-<input type="number" id="shippingCost" step="0.01" value="0" />
-<span class="unit-suffix">R$</span>
-</div>
-<div class="k">📦 Média potes/entrega</div>
-<div class="v editable">
-<input type="number" id="potsPerDelivery" step="1" value="1" />
-<span class="unit-suffix">un</span>
 </div>
 </div>
 </div>
 
 <!-- TOTAL OPERACIONAL -->
-<div style="margin-top:16px;padding:14px 16px;background:linear-gradient(90deg,rgba(255,216,77,0.08),rgba(255,216,77,0.14));border-radius:10px;border:1px solid var(--gold-border);">
+<div style="margin-top:14px;padding:12px 16px;background:linear-gradient(90deg,rgba(255,216,77,0.08),rgba(255,216,77,0.14));border-radius:10px;border:1px solid var(--gold-border);">
 <div class="kv-grid" style="font-size:14px;">
-<div class="k total" style="font-size:15px;">💰 Custo operacional total (por pote)</div>
-<div class="v total" id="operationalTotal" style="font-size:18px;color:var(--gold);">R$ 0,00</div>
+<div class="k total" style="font-size:14px;">💰 Custo operacional (por pote)</div>
+<div class="v total" id="operationalTotal" style="font-size:17px;color:var(--gold);">R$ 0,00</div>
 </div>
-<p style="font-size:10px;color:var(--text-muted);margin-top:6px;text-align:right;">
-Inclui: aluguel, energia, água, mão de obra, frete, taxas e impostos
-</p>
 </div>
 </section>
 </div>
@@ -1660,7 +1579,7 @@ Confirmar
 <script>
 (function() {
 "use strict";
-const STORAGE_KEY = "caponata-calc-v3";
+const STORAGE_KEY = "caponata-calc-v4";
 const RECIPES_STORAGE_KEY = "caponata-recipes-list";
 const DEFAULT_STATE = {
 recipeName: "Minha Receita",
@@ -1699,21 +1618,10 @@ packaging: [
 ],
 weightPerPot: 500,
 profitPct: 35,
-// Campos operacionais
-rentCost: 0,
-rentPct: 30,
-monthlyPots: 100,
-kwhCost: 0.85,
-totalPower: 1500,
-energyTime: 120,
-waterCost: 8.00,
-waterUsage: 10,
-laborHourly: 20,
-prepTime: 120,
-platformFee: 0,
-taxRate: 0,
-shippingCost: 0,
-potsPerDelivery: 1
+// Campos operacionais simplificados
+laborHourly: 8,
+prepTime: 60,
+utilitiesCost: 2
 };
 let state = loadState();
 let storageWarned = false;
@@ -1812,21 +1720,10 @@ item.density = detected;
 }
 }
 });
-// Ensure operational fields exist
-if (!('rentCost' in parsed)) parsed.rentCost = 0;
-if (!('rentPct' in parsed)) parsed.rentPct = 30;
-if (!('monthlyPots' in parsed)) parsed.monthlyPots = 100;
-if (!('kwhCost' in parsed)) parsed.kwhCost = 0.85;
-if (!('totalPower' in parsed)) parsed.totalPower = 1500;
-if (!('energyTime' in parsed)) parsed.energyTime = 120;
-if (!('waterCost' in parsed)) parsed.waterCost = 8.00;
-if (!('waterUsage' in parsed)) parsed.waterUsage = 10;
-if (!('laborHourly' in parsed)) parsed.laborHourly = 20;
-if (!('prepTime' in parsed)) parsed.prepTime = 120;
-if (!('platformFee' in parsed)) parsed.platformFee = 0;
-if (!('taxRate' in parsed)) parsed.taxRate = 0;
-if (!('shippingCost' in parsed)) parsed.shippingCost = 0;
-if (!('potsPerDelivery' in parsed)) parsed.potsPerDelivery = 1;
+// Ensure simplified operational fields exist
+if (!('laborHourly' in parsed)) parsed.laborHourly = 8;
+if (!('prepTime' in parsed)) parsed.prepTime = 60;
+if (!('utilitiesCost' in parsed)) parsed.utilitiesCost = 2;
 return parsed;
 }
 }
@@ -1885,20 +1782,9 @@ recipe: state.recipe,
 packaging: state.packaging,
 weightPerPot: state.weightPerPot,
 profitPct: state.profitPct,
-rentCost: state.rentCost,
-rentPct: state.rentPct,
-monthlyPots: state.monthlyPots,
-kwhCost: state.kwhCost,
-totalPower: state.totalPower,
-energyTime: state.energyTime,
-waterCost: state.waterCost,
-waterUsage: state.waterUsage,
 laborHourly: state.laborHourly,
 prepTime: state.prepTime,
-platformFee: state.platformFee,
-taxRate: state.taxRate,
-shippingCost: state.shippingCost,
-potsPerDelivery: state.potsPerDelivery
+utilitiesCost: state.utilitiesCost
 };
 }
 
@@ -1909,40 +1795,18 @@ state.recipe = data.recipe || [];
 state.packaging = data.packaging || [];
 state.weightPerPot = data.weightPerPot || 500;
 state.profitPct = data.profitPct || 35;
-state.rentCost = data.rentCost || 0;
-state.rentPct = data.rentPct || 30;
-state.monthlyPots = data.monthlyPots || 100;
-state.kwhCost = data.kwhCost || 0.85;
-state.totalPower = data.totalPower || 1500;
-state.energyTime = data.energyTime || 120;
-state.waterCost = data.waterCost || 8.00;
-state.waterUsage = data.waterUsage || 10;
-state.laborHourly = data.laborHourly || 20;
-state.prepTime = data.prepTime || 120;
-state.platformFee = data.platformFee || 0;
-state.taxRate = data.taxRate || 0;
-state.shippingCost = data.shippingCost || 0;
-state.potsPerDelivery = data.potsPerDelivery || 1;
+state.laborHourly = data.laborHourly || 8;
+state.prepTime = data.prepTime || 60;
+state.utilitiesCost = data.utilitiesCost || 2;
 
 recipeNameEl.value = state.recipeName;
 weightPerPotEl.value = state.weightPerPot;
 profitPctEl.value = state.profitPct;
 
 // Atualiza campos operacionais
-document.getElementById('rentCost').value = state.rentCost;
-document.getElementById('rentPct').value = state.rentPct;
-document.getElementById('monthlyPots').value = state.monthlyPots;
-document.getElementById('kwhCost').value = state.kwhCost;
-document.getElementById('totalPower').value = state.totalPower;
-document.getElementById('energyTime').value = state.energyTime;
-document.getElementById('waterCost').value = state.waterCost;
-document.getElementById('waterUsage').value = state.waterUsage;
 document.getElementById('laborHourly').value = state.laborHourly;
 document.getElementById('prepTime').value = state.prepTime;
-document.getElementById('platformFee').value = state.platformFee;
-document.getElementById('taxRate').value = state.taxRate;
-document.getElementById('shippingCost').value = state.shippingCost;
-document.getElementById('potsPerDelivery').value = state.potsPerDelivery;
+document.getElementById('utilitiesCost').value = state.utilitiesCost;
 
 saveState();
 renderAll();
@@ -3018,59 +2882,28 @@ document.getElementById(
 );
 
 function calculateOperationalCost(numPots) {
-const rent = parseFloat(document.getElementById('rentCost').value) || 0;
-const rentPct = parseFloat(document.getElementById('rentPct').value) || 0;
-const monthlyPots = parseFloat(document.getElementById('monthlyPots').value) || 1;
-const kwhCost = parseFloat(document.getElementById('kwhCost').value) || 0;
-const totalPower = parseFloat(document.getElementById('totalPower').value) || 0;
-const energyTime = parseFloat(document.getElementById('energyTime').value) || 0;
-const waterCost = parseFloat(document.getElementById('waterCost').value) || 0;
-const waterUsage = parseFloat(document.getElementById('waterUsage').value) || 0;
+// CAMPOS SIMPLIFICADOS
 const laborHourly = parseFloat(document.getElementById('laborHourly').value) || 0;
 const prepTime = parseFloat(document.getElementById('prepTime').value) || 0;
-const platformFee = parseFloat(document.getElementById('platformFee').value) || 0;
-const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
-const shippingCost = parseFloat(document.getElementById('shippingCost').value) || 0;
-const potsPerDelivery = parseFloat(document.getElementById('potsPerDelivery').value) || 1;
+const utilitiesCost = parseFloat(document.getElementById('utilitiesCost').value) || 0;
 
 // Salva no state
-state.rentCost = rent;
-state.rentPct = rentPct;
-state.monthlyPots = monthlyPots;
-state.kwhCost = kwhCost;
-state.totalPower = totalPower;
-state.energyTime = energyTime;
-state.waterCost = waterCost;
-state.waterUsage = waterUsage;
 state.laborHourly = laborHourly;
 state.prepTime = prepTime;
-state.platformFee = platformFee;
-state.taxRate = taxRate;
-state.shippingCost = shippingCost;
-state.potsPerDelivery = potsPerDelivery;
+state.utilitiesCost = utilitiesCost;
 
-// Cálculos
-const rentPerPot = (rent * (rentPct / 100)) / (monthlyPots || 1);
-const energyKwh = (totalPower / 1000) * (energyTime / 60);
-const energyPerPot = (energyKwh * kwhCost) / (numPots || 1);
-const waterM3 = waterUsage / 1000;
-const waterPerPot = (waterM3 * waterCost) / (numPots || 1);
+// Cálculos simplificados
 const laborPerPot = (laborHourly * (prepTime / 60)) / (numPots || 1);
-const shippingPerPot = shippingCost / (potsPerDelivery || 1);
+const utilitiesPerPot = utilitiesCost / (numPots || 1);
 
-const totalOperational = rentPerPot + energyPerPot + waterPerPot + laborPerPot + shippingPerPot;
+const totalOperational = laborPerPot + utilitiesPerPot;
 
 document.getElementById('operationalTotal').textContent = brl(totalOperational);
 
 return {
 total: totalOperational,
-rent: rentPerPot,
-energy: energyPerPot,
-water: waterPerPot,
 labor: laborPerPot,
-shipping: shippingPerPot,
-platformFee: platformFee,
-taxRate: taxRate
+utilities: utilitiesPerPot
 };
 }
 
@@ -3206,7 +3039,7 @@ numPots > 0
 const costPkgPot =
 pkgV;
 
-// Calcula custos operacionais
+// Calcula custos operacionais simplificados
 const operational = calculateOperationalCost(numPots || 1);
 
 const costTotalPot =
@@ -3252,14 +3085,11 @@ state.profitPct
 const margin =
 profitPct / 100;
 
-const platformFeePct = operational.platformFee / 100;
-const taxPct = operational.taxRate / 100;
-
 const price =
 numPots > 0 &&
 margin < 1 &&
 costTotalPot > 0
-? costTotalPot / ((1 - margin) * (1 + platformFeePct) * (1 + taxPct))
+? costTotalPot / (1 - margin)
 : 0;
 
 const profitValue =
@@ -3423,8 +3253,8 @@ currentRecipeId = matching.id;
 renderRecipeList();
 updateLoadedIndicators();
 
-// Configurar listeners dos campos operacionais
-const opFields = ['rentCost', 'rentPct', 'monthlyPots', 'kwhCost', 'totalPower', 'energyTime', 'waterCost', 'waterUsage', 'laborHourly', 'prepTime', 'platformFee', 'taxRate', 'shippingCost', 'potsPerDelivery'];
+// Configurar listeners dos campos operacionais simplificados
+const opFields = ['laborHourly', 'prepTime', 'utilitiesCost'];
 opFields.forEach(function(field) {
 document.getElementById(field).addEventListener('input', function() {
 saveState();
