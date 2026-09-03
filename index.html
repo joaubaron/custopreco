@@ -306,11 +306,11 @@ tbody tr:last-child td {
   border-bottom: none;
 }
 
-/* --- MERCADO & RECEITA: PADRÃO UNIFICADO --- */
-/* Coluna Produto: 38% | QTD: 20% (comporta 4 dígitos) | UN: 16% | R$/Custo: 18% | Ação: 8% */
+/* MERCADO & RECEITA PADRONIZADOS */
+/* QTD: 17% (20% -3px) | UN: 19% (16% +3px) */
 table th:nth-child(1), table td:nth-child(1) { width: 38% !important; }
-table th:nth-child(2), table td:nth-child(2) { width: 20% !important; }
-table th:nth-child(3), table td:nth-child(3) { width: 16% !important; }
+table th:nth-child(2), table td:nth-child(2) { width: 17% !important; }
+table th:nth-child(3), table td:nth-child(3) { width: 19% !important; }
 table th:nth-child(4), table td:nth-child(4) { width: 18% !important; }
 table th:nth-child(5), table td:nth-child(5) { width: 8% !important; }
 
@@ -354,10 +354,11 @@ input.cell:focus, select.cell:focus {
   box-shadow: 0 0 0 2px var(--gold-soft);
 }
 
+/* PADRONIZAÇÃO DE COR: CUSTO NA COR DOURADA IGUAL AO MERCADO */
 .cost-display {
   justify-content: flex-end;
-  color: var(--green);
-  font-weight: 600;
+  color: var(--gold) !important;
+  font-weight: 700 !important;
   font-variant-numeric: tabular-nums;
   background: transparent;
   border: none;
@@ -852,8 +853,8 @@ tfoot td {
   .tab-btn .emoji { font-size: 16px; }
   
   table th:nth-child(1), table td:nth-child(1) { width: 36% !important; }
-  table th:nth-child(2), table td:nth-child(2) { width: 22% !important; }
-  table th:nth-child(3), table td:nth-child(3) { width: 16% !important; }
+  table th:nth-child(2), table td:nth-child(2) { width: 19% !important; }
+  table th:nth-child(3), table td:nth-child(3) { width: 19% !important; }
   table th:nth-child(4), table td:nth-child(4) { width: 18% !important; }
   table th:nth-child(5), table td:nth-child(5) { width: 8% !important; }
   
