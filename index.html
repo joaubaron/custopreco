@@ -318,7 +318,8 @@ font-weight: 600;
 }
 #costIngPot,
 #costPkgPot,
-#costTotalPot {
+#costTotalPot,
+#operationalTotal {
 color: var(--gold);
 }
 select.cell {
@@ -1363,7 +1364,7 @@ Custo fixo de cada pote da receita
 <tfoot>
 <tr>
 <td class="total-label" colspan="3">
-Subtotal por pote
+Subtotal embalagem
 </td>
 <td class="total-value" id="pkgSubV">
 R$ 0,00
@@ -1376,6 +1377,126 @@ R$ 0,00
 <button class="add-row-btn" id="addPkg">
 + Adicionar item
 </button>
+</section>
+
+<!-- ===== SEÇÃO: CUSTOS OPERACIONAIS ===== -->
+<section class="card">
+<h2>
+⚙️ Custos Operacionais
+<span class="badge">rateados</span>
+</h2>
+<p class="sub">
+Custos fixos e variáveis rateados por pote
+</p>
+
+<!-- Custos fixos mensais -->
+<div style="background:var(--bg-input);padding:12px 14px;border-radius:10px;margin-bottom:14px;">
+<p style="font-size:11px;color:var(--text-muted);margin-bottom:10px;">📆 Custos fixos mensais</p>
+<div class="kv-grid" style="font-size:12px;">
+<div class="k">🏠 Aluguel/estrutura</div>
+<div class="v editable">
+<input type="number" id="rentCost" step="0.01" value="0" />
+<span class="unit-suffix">R$</span>
+</div>
+<div class="k">📊 % destinado à produção</div>
+<div class="v editable">
+<input type="number" id="rentPct" step="1" value="30" />
+<span class="unit-suffix">%</span>
+</div>
+<div class="k">📦 Potes produzidos/mês</div>
+<div class="v editable">
+<input type="number" id="monthlyPots" step="1" value="100" />
+<span class="unit-suffix">un</span>
+</div>
+</div>
+</div>
+
+<!-- Custos variáveis -->
+<div style="background:var(--bg-input);padding:12px 14px;border-radius:10px;margin-bottom:14px;">
+<p style="font-size:11px;color:var(--text-muted);margin-bottom:10px;">⚡ Custos variáveis (por lote)</p>
+<div class="kv-grid" style="font-size:12px;">
+<div class="k">⚡ Custo kWh</div>
+<div class="v editable">
+<input type="number" id="kwhCost" step="0.01" value="0.85" />
+<span class="unit-suffix">R$</span>
+</div>
+<div class="k">💡 Potência total</div>
+<div class="v editable">
+<input type="number" id="totalPower" step="100" value="1500" />
+<span class="unit-suffix">W</span>
+</div>
+<div class="k">⏱️ Tempo de uso</div>
+<div class="v editable">
+<input type="number" id="energyTime" step="1" value="120" />
+<span class="unit-suffix">min</span>
+</div>
+<div class="k">💧 Custo m³ água</div>
+<div class="v editable">
+<input type="number" id="waterCost" step="0.01" value="8.00" />
+<span class="unit-suffix">R$</span>
+</div>
+<div class="k">💧 Consumo de água</div>
+<div class="v editable">
+<input type="number" id="waterUsage" step="1" value="10" />
+<span class="unit-suffix">L</span>
+</div>
+</div>
+</div>
+
+<!-- Mão de obra -->
+<div style="background:var(--bg-input);padding:12px 14px;border-radius:10px;margin-bottom:14px;">
+<p style="font-size:11px;color:var(--text-muted);margin-bottom:10px;">👨‍🍳 Mão de obra</p>
+<div class="kv-grid" style="font-size:12px;">
+<div class="k">Salário/hora</div>
+<div class="v editable">
+<input type="number" id="laborHourly" step="0.01" value="20" />
+<span class="unit-suffix">R$</span>
+</div>
+<div class="k">Tempo de preparo</div>
+<div class="v editable">
+<input type="number" id="prepTime" step="1" value="120" />
+<span class="unit-suffix">min</span>
+</div>
+</div>
+</div>
+
+<!-- Taxas e frete -->
+<div style="background:var(--bg-input);padding:12px 14px;border-radius:10px;">
+<p style="font-size:11px;color:var(--text-muted);margin-bottom:10px;">💳 Taxas e frete</p>
+<div class="kv-grid" style="font-size:12px;">
+<div class="k">💳 Taxa plataforma</div>
+<div class="v editable">
+<input type="number" id="platformFee" step="0.1" value="0" />
+<span class="unit-suffix">%</span>
+</div>
+<div class="k">📝 Impostos (MEI)</div>
+<div class="v editable">
+<input type="number" id="taxRate" step="0.1" value="0" />
+<span class="unit-suffix">%</span>
+</div>
+<div class="k">📦 Frete/entrega</div>
+<div class="v editable">
+<input type="number" id="shippingCost" step="0.01" value="0" />
+<span class="unit-suffix">R$</span>
+</div>
+<div class="k">📦 Média potes/entrega</div>
+<div class="v editable">
+<input type="number" id="potsPerDelivery" step="1" value="1" />
+<span class="unit-suffix">un</span>
+</div>
+</div>
+</div>
+
+<!-- TOTAL OPERACIONAL -->
+<div style="margin-top:16px;padding:14px 16px;background:linear-gradient(90deg,rgba(255,216,77,0.08),rgba(255,216,77,0.14));border-radius:10px;border:1px solid var(--gold-border);">
+<div class="kv-grid" style="font-size:14px;">
+<div class="k total" style="font-size:15px;">💰 Custo operacional total (por pote)</div>
+<div class="v total" id="operationalTotal" style="font-size:18px;color:var(--gold);">R$ 0,00</div>
+</div>
+<p style="font-size:10px;color:var(--text-muted);margin-top:6px;text-align:right;">
+Inclui: aluguel, energia, água, mão de obra, frete, taxas e impostos
+</p>
+</div>
 </section>
 </div>
 <!-- ==================== ABA PREÇO ==================== -->
@@ -1421,6 +1542,8 @@ para obter pelo menos 1 pote completo.
 <div class="v" id="costIngPot"></div>
 <div class="k">Embalagem</div>
 <div class="v" id="costPkgPot"></div>
+<div class="k">Custos operacionais</div>
+<div class="v" id="costOpPot"></div>
 <div class="divider"></div>
 <div class="k total">Custo total</div>
 <div class="v total" id="costTotalPot"></div>
@@ -1537,7 +1660,7 @@ Confirmar
 <script>
 (function() {
 "use strict";
-const STORAGE_KEY = "caponata-calc-v2";
+const STORAGE_KEY = "caponata-calc-v3";
 const RECIPES_STORAGE_KEY = "caponata-recipes-list";
 const DEFAULT_STATE = {
 recipeName: "Minha Receita",
@@ -1575,12 +1698,28 @@ packaging: [
 { name: "⚡ Gás/energia", qty: 1, unit: "pote", value: 0.50 }
 ],
 weightPerPot: 500,
-profitPct: 35
+profitPct: 35,
+// Campos operacionais
+rentCost: 0,
+rentPct: 30,
+monthlyPots: 100,
+kwhCost: 0.85,
+totalPower: 1500,
+energyTime: 120,
+waterCost: 8.00,
+waterUsage: 10,
+laborHourly: 20,
+prepTime: 120,
+platformFee: 0,
+taxRate: 0,
+shippingCost: 0,
+potsPerDelivery: 1
 };
 let state = loadState();
 let storageWarned = false;
 let currentRecipeId = null;
 let recipesList = loadRecipesList();
+
 function getDensityByName(name) {
 const n = String(name || "")
 .toLowerCase()
@@ -1596,6 +1735,7 @@ if (n.includes("creme de leite")) return 1.01;
 if (n.includes("agua") || n.includes("água")) return 1.00;
 return 1.00;
 }
+
 function toGrams(qty, unit, inv) {
 const q = parseFloat(qty) || 0;
 const u = String(unit || "").trim().toLowerCase();
@@ -1622,12 +1762,14 @@ return q * 1000 * density;
 }
 return null;
 }
+
 function getRecipeWeight(qty, unit, inv) {
 const grams = toGrams(qty, unit, inv);
 return grams === null
 ? 0
 : grams;
 }
+
 function loadState() {
 try {
 const raw = localStorage.getItem(STORAGE_KEY);
@@ -1670,6 +1812,21 @@ item.density = detected;
 }
 }
 });
+// Ensure operational fields exist
+if (!('rentCost' in parsed)) parsed.rentCost = 0;
+if (!('rentPct' in parsed)) parsed.rentPct = 30;
+if (!('monthlyPots' in parsed)) parsed.monthlyPots = 100;
+if (!('kwhCost' in parsed)) parsed.kwhCost = 0.85;
+if (!('totalPower' in parsed)) parsed.totalPower = 1500;
+if (!('energyTime' in parsed)) parsed.energyTime = 120;
+if (!('waterCost' in parsed)) parsed.waterCost = 8.00;
+if (!('waterUsage' in parsed)) parsed.waterUsage = 10;
+if (!('laborHourly' in parsed)) parsed.laborHourly = 20;
+if (!('prepTime' in parsed)) parsed.prepTime = 120;
+if (!('platformFee' in parsed)) parsed.platformFee = 0;
+if (!('taxRate' in parsed)) parsed.taxRate = 0;
+if (!('shippingCost' in parsed)) parsed.shippingCost = 0;
+if (!('potsPerDelivery' in parsed)) parsed.potsPerDelivery = 1;
 return parsed;
 }
 }
@@ -1678,6 +1835,7 @@ return JSON.parse(
 JSON.stringify(DEFAULT_STATE)
 );
 }
+
 function saveState() {
 try {
 localStorage.setItem(
@@ -1699,6 +1857,7 @@ onlyOk: true
 }
 }
 }
+
 function loadRecipesList() {
 try {
 const raw = localStorage.getItem(RECIPES_STORAGE_KEY);
@@ -1711,11 +1870,13 @@ return parsed;
 } catch (e) {}
 return [];
 }
+
 function saveRecipesList() {
 try {
 localStorage.setItem(RECIPES_STORAGE_KEY, JSON.stringify(recipesList));
 } catch (e) {}
 }
+
 function getRecipeData() {
 return {
 recipeName: state.recipeName,
@@ -1723,9 +1884,24 @@ inventory: state.inventory,
 recipe: state.recipe,
 packaging: state.packaging,
 weightPerPot: state.weightPerPot,
-profitPct: state.profitPct
+profitPct: state.profitPct,
+rentCost: state.rentCost,
+rentPct: state.rentPct,
+monthlyPots: state.monthlyPots,
+kwhCost: state.kwhCost,
+totalPower: state.totalPower,
+energyTime: state.energyTime,
+waterCost: state.waterCost,
+waterUsage: state.waterUsage,
+laborHourly: state.laborHourly,
+prepTime: state.prepTime,
+platformFee: state.platformFee,
+taxRate: state.taxRate,
+shippingCost: state.shippingCost,
+potsPerDelivery: state.potsPerDelivery
 };
 }
+
 function loadRecipeData(data) {
 state.recipeName = data.recipeName || "Minha Receita";
 state.inventory = data.inventory || [];
@@ -1733,18 +1909,49 @@ state.recipe = data.recipe || [];
 state.packaging = data.packaging || [];
 state.weightPerPot = data.weightPerPot || 500;
 state.profitPct = data.profitPct || 35;
+state.rentCost = data.rentCost || 0;
+state.rentPct = data.rentPct || 30;
+state.monthlyPots = data.monthlyPots || 100;
+state.kwhCost = data.kwhCost || 0.85;
+state.totalPower = data.totalPower || 1500;
+state.energyTime = data.energyTime || 120;
+state.waterCost = data.waterCost || 8.00;
+state.waterUsage = data.waterUsage || 10;
+state.laborHourly = data.laborHourly || 20;
+state.prepTime = data.prepTime || 120;
+state.platformFee = data.platformFee || 0;
+state.taxRate = data.taxRate || 0;
+state.shippingCost = data.shippingCost || 0;
+state.potsPerDelivery = data.potsPerDelivery || 1;
+
 recipeNameEl.value = state.recipeName;
 weightPerPotEl.value = state.weightPerPot;
 profitPctEl.value = state.profitPct;
+
+// Atualiza campos operacionais
+document.getElementById('rentCost').value = state.rentCost;
+document.getElementById('rentPct').value = state.rentPct;
+document.getElementById('monthlyPots').value = state.monthlyPots;
+document.getElementById('kwhCost').value = state.kwhCost;
+document.getElementById('totalPower').value = state.totalPower;
+document.getElementById('energyTime').value = state.energyTime;
+document.getElementById('waterCost').value = state.waterCost;
+document.getElementById('waterUsage').value = state.waterUsage;
+document.getElementById('laborHourly').value = state.laborHourly;
+document.getElementById('prepTime').value = state.prepTime;
+document.getElementById('platformFee').value = state.platformFee;
+document.getElementById('taxRate').value = state.taxRate;
+document.getElementById('shippingCost').value = state.shippingCost;
+document.getElementById('potsPerDelivery').value = state.potsPerDelivery;
+
 saveState();
 renderAll();
 }
+
 function saveCurrentRecipe() {
 const name = state.recipeName.trim() || "Receita sem nome";
-// Check if already exists
 const existing = recipesList.find(r => r.id === currentRecipeId);
 if (existing) {
-// Update existing
 existing.name = name;
 existing.data = getRecipeData();
 existing.updatedAt = Date.now();
@@ -1756,7 +1963,6 @@ confirmText: "OK",
 onlyOk: true
 });
 } else {
-// Create new
 const newRecipe = {
 id: 'recipe_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6),
 name: name,
@@ -1778,6 +1984,7 @@ saveRecipesList();
 renderRecipeList();
 updateLoadedIndicators();
 }
+
 function deleteCurrentRecipe() {
 if (!currentRecipeId) {
 showModal({
@@ -1813,6 +2020,7 @@ onlyOk: true
 });
 });
 }
+
 function loadRecipeFromList(recipeId) {
 const recipe = recipesList.find(r => r.id === recipeId);
 if (recipe) {
@@ -1820,7 +2028,6 @@ currentRecipeId = recipe.id;
 loadRecipeData(recipe.data);
 renderRecipeList();
 updateLoadedIndicators();
-// Switch to Preço tab
 switchTab('tab3');
 showModal({
 icon: "📂",
@@ -1831,14 +2038,14 @@ onlyOk: true
 });
 }
 }
+
 function updateLoadedIndicators() {
 const recipe = recipesList.find(r => r.id === currentRecipeId);
 const name = recipe ? recipe.name : "Nenhuma";
-// Atualiza indicador na aba Preço
 document.getElementById('priceTabLoadedName').textContent = name;
-// Atualiza indicador na aba Receitas
 document.getElementById('recipesTabLoadedName').textContent = name;
 }
+
 function switchTab(tabId) {
 const tabBtns = document.querySelectorAll('.tab-btn');
 const tabContents = {
@@ -1863,6 +2070,7 @@ if (targetContent) {
 targetContent.classList.add("active");
 }
 }
+
 function brl(n) {
 if (!isFinite(n)) n = 0;
 return "R$ " +
@@ -1871,6 +2079,7 @@ minimumFractionDigits: 2,
 maximumFractionDigits: 2
 });
 }
+
 function num(n, digits) {
 if (!isFinite(n)) n = 0;
 return n.toLocaleString("pt-BR", {
@@ -1878,6 +2087,7 @@ minimumFractionDigits: digits || 0,
 maximumFractionDigits: digits || 2
 });
 }
+
 // Elements
 const recipeNameEl =
 document.getElementById("recipeName");
@@ -1891,6 +2101,7 @@ const weightPerPotEl =
 document.getElementById("weightPerPot");
 const profitPctEl =
 document.getElementById("profitPct");
+
 recipeNameEl.value =
 state.recipeName || "Minha Receita";
 weightPerPotEl.value =
@@ -1899,6 +2110,7 @@ state.weightPerPot > 0
 : 500;
 profitPctEl.value =
 state.profitPct;
+
 recipeNameEl.addEventListener(
 "input",
 function() {
@@ -1907,10 +2119,7 @@ recipeNameEl.value;
 saveState();
 }
 );
-/*
-* Campo de tamanho do pote:
-* não recria nenhum elemento enquanto o usuário digita.
-*/
+
 weightPerPotEl.addEventListener(
 "input",
 function() {
@@ -1924,10 +2133,7 @@ saveState();
 render();
 }
 );
-/*
-* Campo de margem:
-* mantém o foco e permite digitar o valor completo.
-*/
+
 profitPctEl.addEventListener(
 "input",
 function() {
@@ -1946,6 +2152,7 @@ saveState();
 render();
 }
 );
+
 // Tabs
 const tabBtns =
 document.querySelectorAll(".tab-btn");
@@ -1980,6 +2187,7 @@ target.classList.add("active");
 }
 );
 });
+
 // Inventory
 function invRow(item, idx) {
 const tr =
@@ -2116,6 +2324,7 @@ render();
 );
 return tr;
 }
+
 function renderInventory() {
 invBody.innerHTML = "";
 state.inventory.forEach(
@@ -2137,6 +2346,7 @@ document.getElementById(
 ).textContent =
 brl(total);
 }
+
 document.getElementById(
 "addInv"
 ).addEventListener(
@@ -2155,9 +2365,7 @@ renderRecipe();
 render();
 }
 );
-/*
-* CÁLCULO DO CUSTO
-*/
+
 function getIngredientCost(
 invIndex,
 qty,
@@ -2229,6 +2437,7 @@ usedGrams /
 totalGrams
 ) * value;
 }
+
 // Recipe
 function recRow(item, idx) {
 const tr =
@@ -2354,6 +2563,7 @@ render();
 updateCost();
 return tr;
 }
+
 function renderRecipe() {
 recBody.innerHTML = "";
 if (
@@ -2400,6 +2610,7 @@ document.getElementById(
 ).textContent =
 brl(recV);
 }
+
 document.getElementById(
 "addRec"
 ).addEventListener(
@@ -2449,6 +2660,7 @@ renderRecipe();
 render();
 }
 );
+
 // Packaging
 function pkgRow(item, idx) {
 const tr =
@@ -2546,6 +2758,7 @@ render();
 );
 return tr;
 }
+
 function renderPackaging() {
 pkgBody.innerHTML = "";
 state.packaging.forEach(
@@ -2568,6 +2781,7 @@ document.getElementById(
 ).textContent =
 brl(pkgV);
 }
+
 document.getElementById(
 "addPkg"
 ).addEventListener(
@@ -2584,6 +2798,7 @@ renderPackaging();
 render();
 }
 );
+
 // Modal
 const modalOverlay =
 document.getElementById(
@@ -2609,11 +2824,13 @@ const modalConfirmBtn =
 document.getElementById(
 "modalConfirmBtn"
 );
+
 function closeModal() {
 modalOverlay.classList.remove(
 "open"
 );
 }
+
 function showModal(
 options,
 onConfirm
@@ -2659,6 +2876,7 @@ function() {
 closeModal();
 };
 }
+
 modalOverlay.addEventListener(
 "click",
 function(e) {
@@ -2670,6 +2888,7 @@ closeModal();
 }
 }
 );
+
 // Reset
 document.getElementById(
 "resetBtn"
@@ -2703,6 +2922,7 @@ renderAll();
 });
 }
 );
+
 // Recipes List UI
 function renderRecipeList() {
 const container = document.getElementById('recipeList');
@@ -2712,7 +2932,6 @@ if (recipesList.length === 0) {
 container.innerHTML = `<div class="recipe-list-empty">Nenhuma receita salva ainda</div>`;
 return;
 }
-// Sort by updatedAt descending (most recent first)
 const sorted = [...recipesList].sort((a, b) => b.updatedAt - a.updatedAt);
 container.innerHTML = sorted.map(function(recipe) {
 const isActive = recipe.id === currentRecipeId ? 'active' : '';
@@ -2731,7 +2950,6 @@ return `
 </div>
 `;
 }).join('');
-// Event listeners for load buttons
 container.querySelectorAll('.load-btn').forEach(function(btn) {
 btn.addEventListener('click', function(e) {
 e.stopPropagation();
@@ -2739,7 +2957,6 @@ const id = this.dataset.id;
 loadRecipeFromList(id);
 });
 });
-// Event listeners for delete buttons
 container.querySelectorAll('.del-btn').forEach(function(btn) {
 btn.addEventListener('click', function(e) {
 e.stopPropagation();
@@ -2765,7 +2982,6 @@ updateLoadedIndicators();
 }
 });
 });
-// Click on the whole item to load
 container.querySelectorAll('.recipe-item').forEach(function(item) {
 item.addEventListener('click', function() {
 const id = this.dataset.id;
@@ -2773,24 +2989,24 @@ loadRecipeFromList(id);
 });
 });
 }
-// Save recipe button (both locations)
+
 function handleSaveRecipe() {
 saveCurrentRecipe();
 }
-// Delete current recipe button (both locations)
+
 function handleDeleteRecipe() {
 deleteCurrentRecipe();
 }
-// Go to recipes tab
+
 document.getElementById('goToRecipesTab').addEventListener('click', function(e) {
 e.preventDefault();
 switchTab('tab4');
 });
-// Save buttons
+
 document.getElementById('saveRecipeBtn').addEventListener('click', handleSaveRecipe);
 document.getElementById('saveRecipeBtnTab4').addEventListener('click', handleSaveRecipe);
-// Delete buttons (only in Receitas tab now)
 document.getElementById('deleteCurrentRecipeBtnTab4').addEventListener('click', handleDeleteRecipe);
+
 // Render price
 const jarLegend =
 document.getElementById(
@@ -2800,6 +3016,64 @@ const jarPots =
 document.getElementById(
 "jarPots"
 );
+
+function calculateOperationalCost(numPots) {
+const rent = parseFloat(document.getElementById('rentCost').value) || 0;
+const rentPct = parseFloat(document.getElementById('rentPct').value) || 0;
+const monthlyPots = parseFloat(document.getElementById('monthlyPots').value) || 1;
+const kwhCost = parseFloat(document.getElementById('kwhCost').value) || 0;
+const totalPower = parseFloat(document.getElementById('totalPower').value) || 0;
+const energyTime = parseFloat(document.getElementById('energyTime').value) || 0;
+const waterCost = parseFloat(document.getElementById('waterCost').value) || 0;
+const waterUsage = parseFloat(document.getElementById('waterUsage').value) || 0;
+const laborHourly = parseFloat(document.getElementById('laborHourly').value) || 0;
+const prepTime = parseFloat(document.getElementById('prepTime').value) || 0;
+const platformFee = parseFloat(document.getElementById('platformFee').value) || 0;
+const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
+const shippingCost = parseFloat(document.getElementById('shippingCost').value) || 0;
+const potsPerDelivery = parseFloat(document.getElementById('potsPerDelivery').value) || 1;
+
+// Salva no state
+state.rentCost = rent;
+state.rentPct = rentPct;
+state.monthlyPots = monthlyPots;
+state.kwhCost = kwhCost;
+state.totalPower = totalPower;
+state.energyTime = energyTime;
+state.waterCost = waterCost;
+state.waterUsage = waterUsage;
+state.laborHourly = laborHourly;
+state.prepTime = prepTime;
+state.platformFee = platformFee;
+state.taxRate = taxRate;
+state.shippingCost = shippingCost;
+state.potsPerDelivery = potsPerDelivery;
+
+// Cálculos
+const rentPerPot = (rent * (rentPct / 100)) / (monthlyPots || 1);
+const energyKwh = (totalPower / 1000) * (energyTime / 60);
+const energyPerPot = (energyKwh * kwhCost) / (numPots || 1);
+const waterM3 = waterUsage / 1000;
+const waterPerPot = (waterM3 * waterCost) / (numPots || 1);
+const laborPerPot = (laborHourly * (prepTime / 60)) / (numPots || 1);
+const shippingPerPot = shippingCost / (potsPerDelivery || 1);
+
+const totalOperational = rentPerPot + energyPerPot + waterPerPot + laborPerPot + shippingPerPot;
+
+document.getElementById('operationalTotal').textContent = brl(totalOperational);
+
+return {
+total: totalOperational,
+rent: rentPerPot,
+energy: energyPerPot,
+water: waterPerPot,
+labor: laborPerPot,
+shipping: shippingPerPot,
+platformFee: platformFee,
+taxRate: taxRate
+};
+}
+
 function render() {
 let recW = 0;
 let recV = 0;
@@ -2834,6 +3108,7 @@ document.getElementById(
 "recSubV"
 ).textContent =
 brl(recV);
+
 let pkgV = 0;
 state.packaging.forEach(
 function(i) {
@@ -2846,6 +3121,7 @@ document.getElementById(
 "pkgSubV"
 ).textContent =
 brl(pkgV);
+
 const weightPerPotVal =
 parseFloat(
 state.weightPerPot
@@ -2855,6 +3131,7 @@ isFinite(weightPerPotVal) &&
 weightPerPotVal > 0
 ? weightPerPotVal
 : 500;
+
 const numPots =
 weightPerPot > 0
 ? Math.floor(
@@ -2862,6 +3139,7 @@ recW /
 weightPerPot
 )
 : 0;
+
 const leftoverWeight =
 Math.max(
 0,
@@ -2871,6 +3149,7 @@ numPots *
 weightPerPot
 )
 );
+
 document.getElementById(
 "totalWeight"
 ).textContent =
@@ -2893,6 +3172,7 @@ leftoverWeight,
 0
 ) +
 " g";
+
 const warningEl =
 document.getElementById(
 "insufficientWarning"
@@ -2918,16 +3198,22 @@ warningEl.classList.remove(
 "visible"
 );
 }
+
 const costIngPot =
 numPots > 0
 ? recV / numPots
 : 0;
 const costPkgPot =
 pkgV;
+
+// Calcula custos operacionais
+const operational = calculateOperationalCost(numPots || 1);
+
 const costTotalPot =
 numPots > 0
-? costIngPot + costPkgPot
+? costIngPot + costPkgPot + operational.total
 : 0;
+
 document.getElementById(
 "costIngPot"
 ).textContent =
@@ -2941,11 +3227,18 @@ numPots > 0
 ? brl(costPkgPot)
 : "—";
 document.getElementById(
+"costOpPot"
+).textContent =
+numPots > 0
+? brl(operational.total)
+: "—";
+document.getElementById(
 "costTotalPot"
 ).textContent =
 numPots > 0
 ? brl(costTotalPot)
 : "—";
+
 const profitPct =
 Math.max(
 0,
@@ -2958,13 +3251,17 @@ state.profitPct
 );
 const margin =
 profitPct / 100;
+
+const platformFeePct = operational.platformFee / 100;
+const taxPct = operational.taxRate / 100;
+
 const price =
 numPots > 0 &&
 margin < 1 &&
 costTotalPot > 0
-? costTotalPot /
-(1 - margin)
+? costTotalPot / ((1 - margin) * (1 + platformFeePct) * (1 + taxPct))
 : 0;
+
 const profitValue =
 price > 0
 ? Math.max(
@@ -2973,12 +3270,14 @@ price -
 costTotalPot
 )
 : 0;
+
 const markup =
 costTotalPot > 0 &&
 price > 0
 ? price /
 costTotalPot
 : 0;
+
 document.getElementById(
 "markup"
 ).textContent =
@@ -2988,6 +3287,7 @@ markup
 .toFixed(2)
 .replace(".", ",")
 : "—";
+
 const finalPriceEl =
 document.getElementById(
 "finalPrice"
@@ -3018,6 +3318,7 @@ numPots === 1
 : " potes"
 );
 }
+
 if (price > 0) {
 const segments = [
 {
@@ -3029,6 +3330,11 @@ color: "#6bcb8a"
 label: "Embalagem",
 value: costPkgPot,
 color: "#6ab0e8"
+},
+{
+label: "Operacional",
+value: operational.total,
+color: "#f5a84a"
 },
 {
 label: "Lucro",
@@ -3075,6 +3381,7 @@ jarLegend.innerHTML =
 "</span>" +
 "</div>";
 }
+
 let invTotal = 0;
 state.inventory.forEach(
 function(i) {
@@ -3087,6 +3394,7 @@ document.getElementById(
 ).textContent =
 brl(invTotal);
 }
+
 function renderAll() {
 renderInventory();
 renderRecipe();
@@ -3095,11 +3403,11 @@ render();
 renderRecipeList();
 updateLoadedIndicators();
 }
+
 // Init
 renderAll();
-// Try to find if there's a current recipe in the list
+
 if (recipesList.length > 0) {
-// Check if current state matches any saved recipe
 const matching = recipesList.find(function(r) {
 const data = r.data;
 return data &&
@@ -3114,7 +3422,16 @@ currentRecipeId = matching.id;
 }
 renderRecipeList();
 updateLoadedIndicators();
-// Service Worker
+
+// Configurar listeners dos campos operacionais
+const opFields = ['rentCost', 'rentPct', 'monthlyPots', 'kwhCost', 'totalPower', 'energyTime', 'waterCost', 'waterUsage', 'laborHourly', 'prepTime', 'platformFee', 'taxRate', 'shippingCost', 'potsPerDelivery'];
+opFields.forEach(function(field) {
+document.getElementById(field).addEventListener('input', function() {
+saveState();
+render();
+});
+});
+
 if ("serviceWorker" in navigator) {
 let refreshing = false;
 navigator.serviceWorker.addEventListener(
