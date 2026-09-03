@@ -326,19 +326,18 @@ tbody tr:last-child td {
 border-bottom: none;
 }
 
-/* MERCADO, RECEITA E EMBALAGEM PADRONIZADOS - AJUSTADO */
-table th:nth-child(1), table td:nth-child(1) { width: 32% !important; }
-table th:nth-child(2), table td:nth-child(2) { width: 15% !important; }
-table th:nth-child(3), table td:nth-child(3) { width: 15% !important; }
-table th:nth-child(4), table td:nth-child(4) { width: 30% !important; }
+/* MERCADO, RECEITA E EMBALAGEM PADRONIZADOS - AJUSTADO para caber o valor */
+table th:nth-child(1), table td:nth-child(1) { width: 30% !important; }
+table th:nth-child(2), table td:nth-child(2) { width: 14% !important; }
+table th:nth-child(3), table td:nth-child(3) { width: 14% !important; }
+table th:nth-child(4), table td:nth-child(4) { width: 34% !important; }
 table th:nth-child(5), table td:nth-child(5) { width: 8% !important; }
 
-/* Ajuste específico para o total na aba Mercado */
+/* Ajuste específico para o total na aba Mercado - SEM diminuir a fonte */
 #tab0 .total-value {
     white-space: normal !important;
     overflow: visible !important;
     text-overflow: clip !important;
-    font-size: 14px !important;
     padding-right: 8px !important;
 }
 
@@ -924,16 +923,15 @@ font-size: 10px;
 
 .tab-btn .emoji { font-size: 16px; }
 
-/* MERCADO, RECEITA E EMBALAGEM PADRONIZADOS - AJUSTADO MOBILE */
-table th:nth-child(1), table td:nth-child(1) { width: 30% !important; }
-table th:nth-child(2), table td:nth-child(2) { width: 16% !important; }
-table th:nth-child(3), table td:nth-child(3) { width: 15% !important; }
-table th:nth-child(4), table td:nth-child(4) { width: 31% !important; }
+/* MERCADO, RECEITA E EMBALAGEM PADRONIZADOS - AJUSTADO MOBILE para caber o valor */
+table th:nth-child(1), table td:nth-child(1) { width: 28% !important; }
+table th:nth-child(2), table td:nth-child(2) { width: 15% !important; }
+table th:nth-child(3), table td:nth-child(3) { width: 14% !important; }
+table th:nth-child(4), table td:nth-child(4) { width: 35% !important; }
 table th:nth-child(5), table td:nth-child(5) { width: 8% !important; }
 
-/* Ajuste mobile para o total */
+/* Ajuste mobile para o total - SEM diminuir a fonte */
 #tab0 .total-value {
-    font-size: 12px !important;
     padding-right: 4px !important;
 }
 
@@ -1227,8 +1225,7 @@ Margem de lucro calculada sobre o preço de venda
 Preço de venda por pote
 </div>
 <div class="amt" id="finalPrice">
-R$ 0,00
-</div>
+R$ 0,00</div>
 <div class="per" id="jarPots">
 — potes
 </div>
