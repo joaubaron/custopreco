@@ -327,20 +327,101 @@ border-bottom: none;
 }
 
 /* MERCADO, RECEITA E EMBALAGEM - COLUNAS AJUSTADAS */
-/* Qtd +5px (14% → 19%), R$ -5px (19% → 14%) */
+/* Qtd 19%, Un 17%, R$ 14% */
 table th:nth-child(1), table td:nth-child(1) { width: 42% !important; }
 table th:nth-child(2), table td:nth-child(2) { width: 19% !important; }
 table th:nth-child(3), table td:nth-child(3) { width: 17% !important; }
 table th:nth-child(4), table td:nth-child(4) { width: 14% !important; }
 table th:nth-child(5), table td:nth-child(5) { width: 8% !important; }
 
-/* Ajuste específico para o total na aba Mercado - SEM CORTAR */
-#tab0 .total-value {
-    white-space: normal !important;
+/* Ajuste específico para os 4 TOTAIS - 2 colunas, sem quebra */
+#tab0 .tfoot-total-row td,
+#tab1 tfoot tr td,
+#tab2 .card:first-child tfoot tr td,
+#tab2 .card:last-child tfoot tr td {
+    white-space: nowrap !important;
+}
+
+/* Total em estoque - 2 colunas */
+#tab0 .tfoot-total-row td:first-child {
+    width: 78% !important;
+}
+#tab0 .tfoot-total-row td:nth-child(4) {
+    width: 22% !important;
+    text-align: right !important;
+    white-space: nowrap !important;
     overflow: visible !important;
     text-overflow: clip !important;
-    padding-right: 4px !important;
-    font-size: 15px !important;
+}
+#tab0 .tfoot-total-row td:nth-child(2),
+#tab0 .tfoot-total-row td:nth-child(3),
+#tab0 .tfoot-total-row td:nth-child(5) {
+    display: none !important;
+}
+
+/* Subtotal receita - 2 colunas */
+#tab1 tfoot tr td:first-child {
+    width: 78% !important;
+}
+#tab1 tfoot tr td:nth-child(4) {
+    width: 22% !important;
+    text-align: right !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+}
+#tab1 tfoot tr td:nth-child(2),
+#tab1 tfoot tr td:nth-child(3),
+#tab1 tfoot tr td:nth-child(5) {
+    display: none !important;
+}
+
+/* Subtotal embalagem - 2 colunas */
+#tab2 .card:first-child tfoot tr td:first-child {
+    width: 78% !important;
+}
+#tab2 .card:first-child tfoot tr td:nth-child(4) {
+    width: 22% !important;
+    text-align: right !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+}
+#tab2 .card:first-child tfoot tr td:nth-child(2),
+#tab2 .card:first-child tfoot tr td:nth-child(3),
+#tab2 .card:first-child tfoot tr td:nth-child(5) {
+    display: none !important;
+}
+
+/* Custo operacional - 2 colunas */
+#tab2 .card:last-child tfoot tr td:first-child {
+    width: 78% !important;
+}
+#tab2 .card:last-child tfoot tr td:nth-child(3) {
+    width: 22% !important;
+    text-align: right !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+}
+#tab2 .card:last-child tfoot tr td:nth-child(2) {
+    display: none !important;
+}
+
+/* Ajuste mobile para os 4 TOTAIS */
+@media screen and (max-width:600px) {
+    #tab0 .tfoot-total-row td:first-child,
+    #tab1 tfoot tr td:first-child,
+    #tab2 .card:first-child tfoot tr td:first-child,
+    #tab2 .card:last-child tfoot tr td:first-child {
+        width: 70% !important;
+    }
+    #tab0 .tfoot-total-row td:nth-child(4),
+    #tab1 tfoot tr td:nth-child(4),
+    #tab2 .card:first-child tfoot tr td:nth-child(4),
+    #tab2 .card:last-child tfoot tr td:nth-child(3) {
+        width: 30% !important;
+    }
 }
 
 /* Colunas de valor com visual padronizado */
@@ -925,18 +1006,12 @@ font-size: 10px;
 
 .tab-btn .emoji { font-size: 16px; }
 
-/* MOBILE - Qtd +5px (15% → 20%), R$ -5px (22% → 17%) */
+/* MOBILE - Qtd 20%, Un 17%, R$ 17% */
 table th:nth-child(1), table td:nth-child(1) { width: 38% !important; }
 table th:nth-child(2), table td:nth-child(2) { width: 20% !important; }
 table th:nth-child(3), table td:nth-child(3) { width: 17% !important; }
 table th:nth-child(4), table td:nth-child(4) { width: 17% !important; }
 table th:nth-child(5), table td:nth-child(5) { width: 8% !important; }
-
-/* Ajuste mobile para o total - SEM CORTAR */
-#tab0 .total-value {
-    padding-right: 4px !important;
-    font-size: 14px !important;
-}
 
 input.cell, select.cell, .product-display, .cost-display {
 font-size: 11px !important;
