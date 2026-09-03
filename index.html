@@ -560,11 +560,11 @@ background: var(--border-light);
 border-radius: 999px;
 }
 .kv-grid {
-display: grid;
-grid-template-columns: 1fr auto;
-gap: 10px 16px;
-font-family: var(--font-body);
-font-size: 13px;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* ← colunas iguais */
+  gap: 10px 16px;
+  font-family: var(--font-body);
+  font-size: 13px;
 }
 .kv-grid .k {
 color: var(--text-secondary);
@@ -1391,17 +1391,17 @@ Inclui mão de obra, energia, água e estrutura
 
 <div style="background:var(--bg-input);padding:14px 16px;border-radius:10px;">
 <div class="kv-grid" style="font-size:13px;">
-<div class="k">👨‍🍳 Mão de obra/hora</div>
+<div class="k">Mão de obra/hora</div>
 <div class="v editable">
 <input type="number" id="laborHourly" step="0.50" value="8" />
 <span class="unit-suffix">R$</span>
 </div>
-<div class="k">⏱️ Tempo de preparo</div>
+<div class="k">Tempo preparo</div>
 <div class="v editable">
 <input type="number" id="prepTime" step="5" value="60" />
 <span class="unit-suffix">min</span>
 </div>
-<div class="k">⚡ Energia + água/lote</div>
+<div class="k">Energia e água/lote</div>
 <div class="v editable">
 <input type="number" id="utilitiesCost" step="0.50" value="2" />
 <span class="unit-suffix">R$</span>
