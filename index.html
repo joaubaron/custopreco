@@ -280,6 +280,7 @@ font-weight: 600;
 text-transform: uppercase;
 }
 
+/* TABELAS - SEM QUEBRA DE TEXTO */
 .table-scroll {
 width: 100%;
 max-width: 100%;
@@ -288,70 +289,65 @@ overflow-x: auto;
 border-radius: var(--radius-sm);
 border: 1px solid var(--border);
 background: var(--bg-secondary);
+display: block;
 }
 
 table {
 width: 100% !important;
 border-collapse: collapse;
 font-family: var(--font-body);
-font-size: 13px;
+font-size: 12px;
 table-layout: fixed !important;
+min-width: 0;
 }
 
-thead th {
-text-align: left;
-font-weight: 700;
-color: var(--text-muted);
-font-size: 10px;
-text-transform: uppercase;
-letter-spacing: .08em;
-padding: 12px 10px;
-background: rgba(0, 0, 0, 0.2);
-border-bottom: 1px solid var(--border);
+/* LARGURAS DAS COLUNAS - COMPACTAS */
+table th:nth-child(1), table td:nth-child(1) { 
+width: 30% !important; 
+}
+table th:nth-child(2), table td:nth-child(2) { 
+width: 18% !important; 
+}
+table th:nth-child(3), table td:nth-child(3) { 
+width: 16% !important; 
+}
+table th:nth-child(4), table td:nth-child(4) { 
+width: 26% !important; 
+}
+table th:nth-child(5), table td:nth-child(5) { 
+width: 10% !important; 
 }
 
-thead th.num, td.num {
-text-align: right;
-}
-
-tbody td {
-padding: 6px 8px;
-border-bottom: 1px solid var(--border);
-vertical-align: middle;
-max-width: 0;
+thead th, tbody td {
+white-space: nowrap !important;
 overflow: hidden;
+text-overflow: ellipsis;
+padding: 6px 4px !important;
 }
 
-tbody tr:last-child td {
-border-bottom: none;
+table th, table td {
+box-sizing: border-box;
 }
 
-/* MERCADO & RECEITA PADRONIZADOS */
-/* QTD: 17% (20% -3px) | UN: 19% (16% +3px) */
-table th:nth-child(1), table td:nth-child(1) { width: 38% !important; }
-table th:nth-child(2), table td:nth-child(2) { width: 17% !important; }
-table th:nth-child(3), table td:nth-child(3) { width: 19% !important; }
-table th:nth-child(4), table td:nth-child(4) { width: 18% !important; }
-table th:nth-child(5), table td:nth-child(5) { width: 8% !important; }
-
-/* Colunas de valor (Mercado R$ e Receita Custo) com a MESMA aparência visual */
+/* INPUTS E SELECTS */
 input.cell, select.cell, .product-display, .cost-display {
 width: 100%;
 max-width: 100%;
-height: 40px;
+min-width: 0;
+box-sizing: border-box;
+height: 34px;
 background: var(--bg-input);
 border: 1px solid var(--border);
 color: var(--text-primary);
 font-family: inherit;
-font-size: 13px;
-padding: 0 10px;
-border-radius: 8px;
-transition: var(--transition);
+font-size: 11px;
+padding: 0 4px;
+border-radius: 4px;
 display: flex;
 align-items: center;
 overflow: hidden;
 text-overflow: ellipsis;
-white-space: nowrap;
+white-space: nowrap !important;
 }
 
 input.cell.num, .cost-display {
@@ -363,37 +359,11 @@ justify-content: flex-end;
 select.cell {
 cursor: pointer;
 -webkit-appearance: none;
-background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 0l6 8 6-8z' fill='%23a9a7c0'/%3E%3C/svg%3E");
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23a9a7c0'/%3E%3C/svg%3E");
 background-repeat: no-repeat;
-background-position: right 10px center;
-padding-right: 26px;
-}
-
-select.cell option {
-background: var(--bg-secondary);
-color: var(--text-primary);
-}
-
-input.cell:focus, select.cell:focus {
-outline: none;
-border-color: var(--gold);
-box-shadow: 0 0 0 2px var(--gold-soft);
-}
-
-/* Custo (Receita) usa o MESMO fundo/borda do Mercado — só o número em destaque dourado */
-.cost-display {
-color: var(--gold) !important;
-font-weight: 700 !important;
-}
-
-.product-display {
-color: var(--text-secondary);
-}
-
-/* Coluna de valor (R$) do Mercado e da Embalagem também em dourado, igual ao Custo da Receita */
-table:not(.operational-table) td:nth-child(4) input.cell.num {
-color: var(--gold) !important;
-font-weight: 700 !important;
+background-position: right 4px center;
+padding-right: 18px;
+font-size: 11px;
 }
 
 .rm-btn {
@@ -401,73 +371,90 @@ background: transparent;
 border: none;
 color: var(--text-muted);
 cursor: pointer;
-font-size: 16px;
-height: 36px;
-width: 36px;
+font-size: 14px;
+height: 30px;
+width: 30px;
 flex-shrink: 0;
-border-radius: 8px;
+border-radius: 6px;
 transition: var(--transition);
 display: flex;
 align-items: center;
 justify-content: center;
 margin: 0 auto;
+padding: 0;
 }
 
-.rm-btn:hover {
-color: var(--red);
-background: var(--red-dim);
+/* TELA PEQUENA - ANDROID */
+@media screen and (max-width: 600px) {
+body {
+padding: 8px 4px 80px;
 }
 
-tfoot tr {
-background: rgba(0, 0, 0, 0.25);
+section.card {
+padding: 10px 4px;
 }
 
-tfoot td {
-padding: 12px 10px;
-border-top: 1px solid var(--border);
+.table-scroll {
+border-radius: 4px;
+margin: 0 -2px;
 }
 
-.total-label {
-color: var(--text-secondary) !important;
-font-size: 12px !important;
-font-weight: 600 !important;
-text-transform: uppercase;
-letter-spacing: .05em;
+table {
+font-size: 10px !important;
+}
+
+/* COLUNAS MAIS COMPACTAS */
+table th:nth-child(1), table td:nth-child(1) { 
+width: 28% !important; 
+}
+table th:nth-child(2), table td:nth-child(2) { 
+width: 20% !important; 
+}
+table th:nth-child(3), table td:nth-child(3) { 
+width: 16% !important; 
+}
+table th:nth-child(4), table td:nth-child(4) { 
+width: 26% !important; 
+}
+table th:nth-child(5), table td:nth-child(5) { 
+width: 10% !important; 
+}
+
+thead th {
+font-size: 8px !important;
+padding: 4px 2px !important;
+}
+
+tbody td {
+padding: 3px 2px !important;
+}
+
+input.cell, select.cell, .product-display, .cost-display {
+font-size: 9px !important;
+padding: 0 2px !important;
+height: 28px !important;
+border-radius: 3px;
+}
+
+select.cell {
+padding-right: 14px;
+background-size: 8px 5px;
+background-position: right 2px center;
+}
+
+.rm-btn {
+height: 24px;
+width: 24px;
+font-size: 11px;
 }
 
 .total-value {
-color: var(--gold) !important;
-font-family: var(--font-display);
-font-size: 16px !important;
-font-weight: 800 !important;
-text-align: right;
-font-variant-numeric: tabular-nums;
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
+font-size: 11px !important;
 }
 
-.add-row-btn {
-margin-top: 12px;
-font-family: var(--font-body);
-font-size: 12px;
-font-weight: 600;
-background: transparent;
-border: 1px dashed var(--border-light);
-color: var(--text-secondary);
-padding: 10px;
-border-radius: var(--radius-sm);
-cursor: pointer;
-width: 100%;
-text-align: center;
-transition: var(--transition);
+.total-label {
+font-size: 9px !important;
 }
-
-.add-row-btn:hover {
-border-color: var(--gold);
-color: var(--gold);
-background: var(--gold-soft);
-border-style: solid;
 }
 
 #tab2 .operational-table th:nth-child(1), #tab2 .operational-table td:nth-child(1) { width: 50% !important; }
@@ -917,23 +904,6 @@ font-size: 10px;
 }
 
 .tab-btn .emoji { font-size: 16px; }
-
-table th:nth-child(1), table td:nth-child(1) { width: 36% !important; }
-table th:nth-child(2), table td:nth-child(2) { width: 19% !important; }
-table th:nth-child(3), table td:nth-child(3) { width: 19% !important; }
-table th:nth-child(4), table td:nth-child(4) { width: 18% !important; }
-table th:nth-child(5), table td:nth-child(5) { width: 8% !important; }
-
-input.cell, select.cell, .product-display, .cost-display {
-font-size: 11px !important;
-padding: 0 4px !important;
-height: 36px !important;
-}
-
-thead th {
-font-size: 8px !important;
-padding: 8px 4px !important;
-}
 }
 </style>
 </head>
