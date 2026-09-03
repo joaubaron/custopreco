@@ -487,16 +487,25 @@ width: 8% !important;
 }
 #tab2 .operational-table th:first-child,
 #tab2 .operational-table td:first-child {
-width: 50% !important;
+width: 42% !important;
 }
 #tab2 .operational-table th:nth-child(2),
 #tab2 .operational-table td:nth-child(2) {
-width: 32% !important;
+width: 17% !important;
+text-align: right;
+}
+#tab2 .operational-table th:nth-child(3),
+#tab2 .operational-table td:nth-child(3) {
+width: 15% !important;
+}
+#tab2 .operational-table th:nth-child(4),
+#tab2 .operational-table td:nth-child(4) {
+width: 18% !important;
 text-align: right;
 }
 #tab2 .operational-table th:last-child,
 #tab2 .operational-table td:last-child {
-width: 18% !important;
+width: 8% !important;
 }
 #tab2 .operational-table tbody td {
 padding: 4px 5px !important;
@@ -1475,8 +1484,13 @@ Inclui mão de obra, energia, água e estrutura
 </tbody>
 <tfoot>
 <tr>
-<td class="total-label">Custo operacional (por pote)</td>
-<td class="total-value" id="operationalTotal" colspan="2">R$ 0,00</td>
+<td class="total-label" colspan="3">
+Custo operacional (por pote)
+</td>
+<td class="total-value" id="operationalTotal">
+R$ 0,00
+</td>
+<td></td>
 </tr>
 </tfoot>
 </table>
