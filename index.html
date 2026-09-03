@@ -1389,49 +1389,32 @@ R$ 0,00
 Inclui mão de obra, energia, água e estrutura
 </p>
 
-<div class="table-scroll">
-<table>
-<thead>
-<tr>
-<th>Item</th>
-<th class="num">Valor</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>👨‍🍳 Mão de obra/hora</td>
-<td class="num">
-<input type="number" id="laborHourly" step="0.50" value="8" class="cell num" style="width:80px;display:inline-block;" />
-<span style="color:var(--text-muted);font-size:11px;margin-left:4px;">R$</span>
-</td>
-<td></td>
-</tr>
-<tr>
-<td>⏱️ Tempo de preparo</td>
-<td class="num">
-<input type="number" id="prepTime" step="5" value="60" class="cell num" style="width:80px;display:inline-block;" />
-<span style="color:var(--text-muted);font-size:11px;margin-left:4px;">min</span>
-</td>
-<td></td>
-</tr>
-<tr>
-<td>⚡ Energia + água/lote</td>
-<td class="num">
-<input type="number" id="utilitiesCost" step="0.50" value="2" class="cell num" style="width:80px;display:inline-block;" />
-<span style="color:var(--text-muted);font-size:11px;margin-left:4px;">R$</span>
-</td>
-<td></td>
-</tr>
-</tbody>
-<tfoot>
-<tr>
-<td class="total-label">💰 Custo operacional (por pote)</td>
-<td class="total-value" id="operationalTotal" style="color:var(--gold) !important;font-family:var(--font-display);font-size:19px !important;font-weight:800 !important;text-align:right;">R$ 0,00</td>
-<td></td>
-</tr>
-</tfoot>
-</table>
+<div style="background:var(--bg-input);padding:14px 16px;border-radius:10px;">
+<div class="kv-grid" style="font-size:13px;">
+<div class="k">👨‍🍳 Mão de obra/hora</div>
+<div class="v editable">
+<input type="number" id="laborHourly" step="0.50" value="8" />
+<span class="unit-suffix">R$</span>
+</div>
+<div class="k">⏱️ Tempo de preparo</div>
+<div class="v editable">
+<input type="number" id="prepTime" step="5" value="60" />
+<span class="unit-suffix">min</span>
+</div>
+<div class="k">⚡ Energia + água/lote</div>
+<div class="v editable">
+<input type="number" id="utilitiesCost" step="0.50" value="2" />
+<span class="unit-suffix">R$</span>
+</div>
+</div>
+</div>
+
+<!-- TOTAL OPERACIONAL -->
+<div style="margin-top:14px;padding:12px 16px;background:linear-gradient(90deg,rgba(255,216,77,0.08),rgba(255,216,77,0.14));border-radius:10px;border:1px solid var(--gold-border);">
+<div class="kv-grid" style="font-size:14px;">
+<div class="k total" style="font-size:14px;">💰 Custo operacional (por pote)</div>
+<div class="v total" id="operationalTotal" style="font-size:17px;color:var(--gold);">R$ 0,00</div>
+</div>
 </div>
 </section>
 </div>
