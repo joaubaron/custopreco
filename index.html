@@ -326,15 +326,20 @@ tbody tr:last-child td {
 border-bottom: none;
 }
 
-/* MERCADO, RECEITA E EMBALAGEM - COLUNAS AJUSTADAS */
-/* Qtd +5px (14% → 19%), R$ -5px (19% → 14%) */
+tr.excess-warning {
+background: rgba(245, 168, 74, 0.08);
+}
+
+tr.excess-warning input.cell {
+border-color: rgba(245, 168, 74, 0.4);
+}
+
 table th:nth-child(1), table td:nth-child(1) { width: 42% !important; }
 table th:nth-child(2), table td:nth-child(2) { width: 19% !important; }
 table th:nth-child(3), table td:nth-child(3) { width: 17% !important; }
 table th:nth-child(4), table td:nth-child(4) { width: 14% !important; }
 table th:nth-child(5), table td:nth-child(5) { width: 8% !important; }
 
-/* Linhas de total (rodapé) - texto e valor numa única linha, sem cortar */
 .total-line {
 display: flex;
 align-items: baseline;
@@ -343,7 +348,6 @@ gap: 10px;
 width: 100%;
 }
 
-/* Colunas de valor com visual padronizado */
 input.cell, select.cell, .product-display, .cost-display {
 width: 100%;
 max-width: 100%;
@@ -538,9 +542,7 @@ justify-content: flex-end;
 gap: 6px;
 }
 
-.kv-grid .v.editable input {
-width: 90px;
-max-width: 100%;
+.kv-grid .v.editable input, .kv-grid .v select.cell-select {
 height: 38px;
 text-align: right;
 background: var(--bg-input);
@@ -549,11 +551,16 @@ color: var(--text-primary);
 border-radius: 8px;
 padding: 0 8px;
 font-family: inherit;
-font-size: 13px;
+font-size: 12px;
 font-weight: 600;
 }
 
-.kv-grid .v.editable input:focus {
+.kv-grid .v.editable input {
+width: 90px;
+max-width: 100%;
+}
+
+.kv-grid .v.editable input:focus, .kv-grid .v select.cell-select:focus {
 outline: none;
 border-color: var(--gold);
 }
@@ -942,7 +949,6 @@ font-size: 10px;
 
 .tab-btn .emoji { font-size: 16px; }
 
-/* MOBILE - Qtd +5px (15% → 20%), R$ -5px (22% → 17%) */
 table th:nth-child(1), table td:nth-child(1) { width: 38% !important; }
 table th:nth-child(2), table td:nth-child(2) { width: 20% !important; }
 table th:nth-child(3), table td:nth-child(3) { width: 17% !important; }
@@ -1052,8 +1058,8 @@ Cadastre os produtos que você compra e seus valores
 Informe somente a quantidade usada na receita
 </p>
 <div class="conversion-note">
-⚠️ <strong>Conversão g ↔ ml</strong><br>
-Ajusta automaticamente peso e volume
+⚠️ <strong>Conversão g ↔ ml e Alertas de Insumo</strong><br>
+Ajusta automático o peso e sinaliza se a receita usa mais que o lote cadastrado.
 </div>
 <div class="table-scroll">
 <table>
@@ -1195,6 +1201,14 @@ Inclui mão de obra, energia, água e estrutura
             
             <div class="k">Sobra da receita</div>
             <div class="v leftover-note" id="leftoverWeight"></div>
+
+            <div class="k">Aproveitamento da sobra</div>
+            <div class="v">
+                <select id="leftoverCosting" class="cell-select">
+                    <option value="absorb">Absorver sobra na venda</option>
+                    <option value="proportional">Aproveitar sobra (Proporcional ao peso)</option>
+                </select>
+            </div>
         </div>
         
         <div class="warning-message" id="insufficientWarning">
@@ -1375,7 +1389,8 @@ weightPerPot: 500,
 profitPct: 35,
 laborHourly: 8,
 prepTime: 60,
-utilitiesCost: 2
+utilitiesCost: 2,
+leftoverCosting: "absorb"
 };
 let state = loadState();
 let storageWarned = false;
@@ -1495,6 +1510,7 @@ item.density = detected;
 if (!('laborHourly' in parsed)) parsed.laborHourly = 8;
 if (!('prepTime' in parsed)) parsed.prepTime = 60;
 if (!('utilitiesCost' in parsed)) parsed.utilitiesCost = 2;
+if (!('leftoverCosting' in parsed)) parsed.leftoverCosting = "absorb";
 parsed.recipe.forEach(function(r) {
 if (!r) return;
 const ru =
@@ -1567,7 +1583,8 @@ weightPerPot: state.weightPerPot,
 profitPct: state.profitPct,
 laborHourly: state.laborHourly,
 prepTime: state.prepTime,
-utilitiesCost: state.utilitiesCost
+utilitiesCost: state.utilitiesCost,
+leftoverCosting: state.leftoverCosting
 };
 }
 
@@ -1581,6 +1598,7 @@ state.profitPct = data.profitPct || 35;
 state.laborHourly = data.laborHourly || 8;
 state.prepTime = data.prepTime || 60;
 state.utilitiesCost = data.utilitiesCost || 2;
+state.leftoverCosting = data.leftoverCosting || "absorb";
 
 recipeNameEl.value = state.recipeName;
 weightPerPotEl.value = state.weightPerPot;
@@ -1589,6 +1607,7 @@ profitPctEl.value = state.profitPct;
 document.getElementById('laborHourly').value = state.laborHourly;
 document.getElementById('prepTime').value = state.prepTime;
 document.getElementById('utilitiesCost').value = state.utilitiesCost;
+document.getElementById('leftoverCosting').value = state.leftoverCosting;
 
 saveState();
 renderAll();
@@ -1797,6 +1816,12 @@ saveState();
 render();
 }
 );
+
+document.getElementById('leftoverCosting').addEventListener('change', function() {
+state.leftoverCosting = this.value;
+saveState();
+render();
+});
 
 const tabBtns =
 document.querySelectorAll(".tab-btn");
@@ -2192,7 +2217,8 @@ return isUnitCounted
 ? invUnit
 : (unitInput ? unitInput.value : "");
 }
-function updateCost() {
+
+function updateCostAndWarning() {
 const cost =
 getIngredientCost(
 item.invIndex,
@@ -2204,7 +2230,20 @@ cost.toLocaleString("pt-BR", {
 minimumFractionDigits: 2,
 maximumFractionDigits: 2
 });
+
+if (inv) {
+const invTotalGrams = toGrams(inv.total, inv.unit, inv);
+const usedGrams = toGrams(qtyInput.value, currentUnit(), inv);
+if (invTotalGrams > 0 && usedGrams > invTotalGrams) {
+tr.classList.add("excess-warning");
+tr.setAttribute("title", "Atenção: A quantidade informada excede o lote comprado cadastrado no Mercado!");
+} else {
+tr.classList.remove("excess-warning");
+tr.removeAttribute("title");
 }
+}
+}
+
 qtyInput.addEventListener(
 "input",
 function() {
@@ -2217,7 +2256,7 @@ isFinite(v) && v >= 0
 ? v
 : 0;
 saveState();
-updateCost();
+updateCostAndWarning();
 render();
 }
 );
@@ -2227,7 +2266,7 @@ unitInput.addEventListener(
 function() {
 state.recipe[idx].unit = unitInput.value;
 saveState();
-updateCost();
+updateCostAndWarning();
 render();
 }
 );
@@ -2263,7 +2302,7 @@ renderRecipe();
 render();
 }
 );
-updateCost();
+updateCostAndWarning();
 return tr;
 }
 
@@ -2615,6 +2654,7 @@ weightPerPotEl.value =
 state.weightPerPot;
 profitPctEl.value =
 state.profitPct;
+document.getElementById('leftoverCosting').value = state.leftoverCosting;
 saveState();
 renderAll();
 });
@@ -2722,9 +2762,13 @@ state.laborHourly = laborHourly;
 state.prepTime = prepTime;
 state.utilitiesCost = utilitiesCost;
 
-const laborPerPot = (laborHourly * (prepTime / 60)) / (numPots || 1);
-const utilitiesPerPot = utilitiesCost / (numPots || 1);
+if (numPots <= 0) {
+document.getElementById('operationalTotal').textContent = "—";
+return { total: 0, labor: 0, utilities: 0 };
+}
 
+const laborPerPot = (laborHourly * (prepTime / 60)) / numPots;
+const utilitiesPerPot = utilitiesCost / numPots;
 const totalOperational = laborPerPot + utilitiesPerPot;
 
 document.getElementById('operationalTotal').textContent = brl(totalOperational);
@@ -2861,14 +2905,17 @@ warningEl.classList.remove(
 );
 }
 
-const costIngPot =
-numPots > 0
-? recV / numPots
-: 0;
-const costPkgPot =
-pkgV;
+let costIngPot = 0;
+if (numPots > 0) {
+if (state.leftoverCosting === "proportional" && recW > 0) {
+costIngPot = (recV / recW) * weightPerPot;
+} else {
+costIngPot = recV / numPots;
+}
+}
 
-const operational = calculateOperationalCost(numPots || 1);
+const costPkgPot = pkgV;
+const operational = calculateOperationalCost(numPots);
 
 const costTotalPot =
 numPots > 0
