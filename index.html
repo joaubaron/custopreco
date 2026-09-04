@@ -334,13 +334,13 @@ table th:nth-child(3), table td:nth-child(3) { width: 17% !important; }
 table th:nth-child(4), table td:nth-child(4) { width: 14% !important; }
 table th:nth-child(5), table td:nth-child(5) { width: 8% !important; }
 
-/* Ajuste específico para o total na aba Mercado - SEM CORTAR */
-#tab0 .total-value {
-    white-space: normal !important;
-    overflow: visible !important;
-    text-overflow: clip !important;
-    padding-right: 4px !important;
-    font-size: 15px !important;
+/* Linhas de total (rodapé) - texto e valor numa única linha, sem cortar */
+.total-line {
+display: flex;
+align-items: baseline;
+justify-content: space-between;
+gap: 10px;
+width: 100%;
 }
 
 /* Colunas de valor com visual padronizado */
@@ -440,6 +440,11 @@ font-size: 11px !important;
 font-weight: 600 !important;
 text-transform: uppercase;
 letter-spacing: .05em;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+min-width: 0;
+flex-shrink: 1;
 }
 
 .total-value {
@@ -447,11 +452,11 @@ color: var(--gold) !important;
 font-family: var(--font-display);
 font-size: 15px !important;
 font-weight: 800 !important;
-text-align: right;
 font-variant-numeric: tabular-nums;
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
+white-space: nowrap !important;
+overflow: visible !important;
+text-overflow: clip !important;
+flex-shrink: 0;
 }
 
 .add-row-btn {
@@ -932,10 +937,11 @@ table th:nth-child(3), table td:nth-child(3) { width: 17% !important; }
 table th:nth-child(4), table td:nth-child(4) { width: 17% !important; }
 table th:nth-child(5), table td:nth-child(5) { width: 8% !important; }
 
-/* Ajuste mobile para o total - SEM CORTAR */
-#tab0 .total-value {
-    padding-right: 4px !important;
-    font-size: 14px !important;
+.total-value {
+font-size: 13px !important;
+}
+.total-label {
+font-size: 9px !important;
 }
 
 input.cell, select.cell, .product-display, .cost-display {
@@ -1012,10 +1018,12 @@ Cadastre os produtos que você compra e seus valores
 <tbody id="invBody"></tbody>
 <tfoot>
 <tr class="tfoot-total-row">
-<td class="total-label" colspan="2">Total em estoque</td>
-<td></td>
-<td class="total-value" id="invTotalValue">R$ 0,00</td>
-<td></td>
+<td colspan="5">
+<div class="total-line">
+<span class="total-label">Total em estoque</span>
+<span class="total-value" id="invTotalValue">R$ 0,00</span>
+</div>
+</td>
 </tr>
 </tfoot>
 </table>
@@ -1049,13 +1057,12 @@ Ajusta automaticamente peso e volume
 <tbody id="recBody"></tbody>
 <tfoot>
 <tr>
-<td class="total-label" colspan="3">
-Subtotal receita
+<td colspan="5">
+<div class="total-line">
+<span class="total-label">Subtotal receita</span>
+<span class="total-value" id="recSubV">R$ 0,00</span>
+</div>
 </td>
-<td class="total-value" id="recSubV">
-R$ 0,00
-</td>
-<td></td>
 </tr>
 </tfoot>
 </table>
@@ -1088,13 +1095,12 @@ Custo fixo de cada pote da receita
 <tbody id="pkgBody"></tbody>
 <tfoot>
 <tr>
-<td class="total-label" colspan="3">
-Subtotal embalagem
+<td colspan="5">
+<div class="total-line">
+<span class="total-label">Subtotal embalagem</span>
+<span class="total-value" id="pkgSubV">R$ 0,00</span>
+</div>
 </td>
-<td class="total-value" id="pkgSubV">
-R$ 0,00
-</td>
-<td></td>
 </tr>
 </tfoot>
 </table>
@@ -1140,11 +1146,11 @@ Inclui mão de obra, energia, água e estrutura
 </tbody>
 <tfoot>
 <tr>
-<td class="total-label" colspan="2">
-Custo operacional (por pote)
-</td>
-<td class="total-value" id="operationalTotal">
-R$ 0,00
+<td colspan="3">
+<div class="total-line">
+<span class="total-label">Custo operacional (por pote)</span>
+<span class="total-value" id="operationalTotal">R$ 0,00</span>
+</div>
 </td>
 </tr>
 </tfoot>
