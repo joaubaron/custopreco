@@ -920,6 +920,20 @@ margin-top: 30px;
 line-height: 1.6;
 }
 
+/* Estilos para os botões de importação/exportação */
+.import-export-bar {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 10px;
+margin-bottom: 16px;
+}
+
+.import-export-bar .action-btn {
+font-size: 12px;
+padding: 8px 12px;
+min-height: 38px;
+}
+
 @media screen and (max-width:600px) {
 body { padding: 10px 6px 80px; }
 section.card { padding: 14px 8px; }
@@ -976,6 +990,17 @@ padding: 8px 2px !important;
 width: 26px !important;
 height: 26px !important;
 font-size: 12px !important;
+}
+
+.import-export-bar {
+grid-template-columns: 1fr 1fr;
+gap: 6px;
+}
+
+.import-export-bar .action-btn {
+font-size: 11px;
+padding: 6px 8px;
+min-height: 34px;
 }
 }
 </style>
@@ -1270,6 +1295,17 @@ R$ 0,00</div>
 <p class="sub">
 Gerencie suas receitas. Clique para carregar e editar
 </p>
+
+<!-- BARRA DE IMPORTAÇÃO/EXPORTAÇÃO -->
+<div class="import-export-bar">
+<button class="action-btn save-btn" id="importRecipesBtn" style="flex:1;">
+📤 Importar (JSON)
+</button>
+<button class="action-btn save-btn" id="exportRecipesBtn" style="flex:1;">
+📥 Exportar
+</button>
+</div>
+
 <div class="current-recipe-indicator" style="margin-bottom:16px;">
 <span class="label">📌 Receita atual:</span>
 <span id="recipesTabLoadedName" style="color:var(--gold);font-weight:600;">Nenhuma</span>
@@ -2675,6 +2711,145 @@ loadRecipeFromList(id);
 });
 }
 
+// ============================================
+// FUNÇÃO PARA IMPORTAR RECEITAS
+// ============================================
+function importRecipesFromJSON() {
+const input = document.createElement('input');
+input.type = 'file';
+input.accept = '.json';
+
+input.onchange = function(e) {
+const file = e.target.files[0];
+if (!file) return;
+
+const reader = new FileReader();
+reader.onload = function(ev) {
+try {
+const data = JSON.parse(ev.target.result);
+
+let recipesToImport = [];
+
+if (data.recipes && Array.isArray(data.recipes)) {
+recipesToImport = data.recipes;
+} else if (Array.isArray(data)) {
+recipesToImport = data;
+} else if (data.id && data.data) {
+recipesToImport = [data];
+} else {
+throw new Error('Formato inválido');
+}
+
+let importedCount = 0;
+let skippedCount = 0;
+
+recipesToImport.forEach(function(recipe) {
+const exists = recipesList.some(function(r) {
+return r.id === recipe.id ||
+(r.name === recipe.name && r.data && recipe.data);
+});
+
+if (!exists) {
+if (!recipe.id) {
+recipe.id = 'recipe_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
+}
+if (!recipe.createdAt) recipe.createdAt = Date.now();
+if (!recipe.updatedAt) recipe.updatedAt = Date.now();
+recipesList.push(recipe);
+importedCount++;
+} else {
+skippedCount++;
+}
+});
+
+saveRecipesList();
+renderRecipeList();
+updateLoadedIndicators();
+
+let message = `${importedCount} receita(s) importada(s) com sucesso!`;
+if (skippedCount > 0) {
+message += `\n${skippedCount} receita(s) ignorada(s) (já existem).`;
+}
+
+showModal({
+icon: "✅",
+title: "Importação concluída",
+message: message,
+confirmText: "OK",
+onlyOk: true
+});
+
+} catch (err) {
+console.error('Erro na importação:', err);
+showModal({
+icon: "❌",
+title: "Erro ao importar",
+message: "Arquivo inválido. Certifique-se de que é um JSON válido com o formato correto.\n\n" + err.message,
+confirmText: "OK",
+onlyOk: true
+});
+}
+};
+
+reader.onerror = function() {
+showModal({
+icon: "❌",
+title: "Erro de leitura",
+message: "Não foi possível ler o arquivo. Tente novamente.",
+confirmText: "OK",
+onlyOk: true
+});
+};
+
+reader.readAsText(file);
+};
+
+input.click();
+}
+
+// ============================================
+// FUNÇÃO PARA EXPORTAR RECEITAS
+// ============================================
+function exportAllRecipes() {
+if (recipesList.length === 0) {
+showModal({
+icon: "ℹ️",
+title: "Nenhuma receita",
+message: "Não há receitas salvas para exportar.",
+confirmText: "OK",
+onlyOk: true
+});
+return;
+}
+
+const data = {
+exportedAt: new Date().toISOString(),
+totalRecipes: recipesList.length,
+recipes: recipesList,
+version: "1.0"
+};
+
+const json = JSON.stringify(data, null, 2);
+const blob = new Blob([json], { type: 'application/json' });
+const url = URL.createObjectURL(blob);
+
+const a = document.createElement('a');
+a.href = url;
+a.download = `receitas_${new Date().toISOString().slice(0,10)}.json`;
+document.body.appendChild(a);
+a.click();
+document.body.removeChild(a);
+URL.revokeObjectURL(url);
+
+showModal({
+icon: "📥",
+title: "Exportação concluída",
+message: `${recipesList.length} receita(s) exportada(s) com sucesso!`,
+confirmText: "OK",
+onlyOk: true
+});
+}
+
 function handleSaveRecipe() {
 saveCurrentRecipe();
 }
@@ -2691,6 +2866,10 @@ switchTab('tab4');
 document.getElementById('saveRecipeBtn').addEventListener('click', handleSaveRecipe);
 document.getElementById('saveRecipeBtnTab4').addEventListener('click', handleSaveRecipe);
 document.getElementById('deleteCurrentRecipeBtnTab4').addEventListener('click', handleDeleteRecipe);
+
+// Conecta os botões de importação/exportação
+document.getElementById('importRecipesBtn').addEventListener('click', importRecipesFromJSON);
+document.getElementById('exportRecipesBtn').addEventListener('click', exportAllRecipes);
 
 const jarLegend =
 document.getElementById(
