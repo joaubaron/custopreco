@@ -1171,98 +1171,110 @@ Inclui mão de obra, energia, água e estrutura
 </section>
 </div>
 <div class="tab-content" id="tab3">
-<section class="card">
-<h2>🫙 Rendimento</h2>
-<div class="kv-grid">
-<div class="k">Peso total da receita</div>
-<div class="v" id="totalWeight"></div>
-<div class="k">Tamanho do pote</div>
-<div class="v editable">
-<input
-type="number"
-id="weightPerPot"
-min="1"
-step="1"
-inputmode="numeric"
-value="500"
-/>
-<span class="unit-suffix">g</span>
-</div>
-<div class="divider"></div>
-<div class="k total">Número de potes</div>
-<div class="v total" id="numPots"></div>
-<div class="k">Sobra da receita</div>
-<div class="v leftover-note" id="leftoverWeight"></div>
-</div>
-<div class="warning-message" id="insufficientWarning">
-⚠️ A receita não rende um pote completo de
-<span id="warningPotSize"></span> g.
-<br />
-Reduza o tamanho do pote ou aumente a quantidade da receita
-para obter pelo menos 1 pote completo.
-</div>
-</section>
-<section class="card">
-<h2>
-💰 Custo &amp; Lucro
-<span class="badge">por pote</span>
-</h2>
-<div class="kv-grid">
-<div class="k">Ingredientes rateados</div>
-<div class="v" id="costIngPot"></div>
-<div class="k">Embalagem</div>
-<div class="v" id="costPkgPot"></div>
-<div class="k">Custos operacionais</div>
-<div class="v" id="costOpPot"></div>
-<div class="divider"></div>
-<div class="k total">Custo total</div>
-<div class="v total" id="costTotalPot"></div>
-<div class="k">
-Margem de lucro desejada (%)
-</div>
-<div class="v editable">
-<input
-type="number"
-id="profitPct"
-min="0"
-max="99.99"
-step="1"
-inputmode="numeric"
-value="35"
-/>
-</div>
-<div class="k">
-Markup equivalente
-</div>
-<div class="v" id="markup"></div>
-</div>
-<p class="sub" style="margin-top:14px;margin-bottom:0;">
-Margem de lucro calculada sobre o preço de venda
-</p>
-</section>
-<section class="card jar-card-inline">
-<div class="price-tag">
-<div class="lbl">
-Preço de venda por pote
-</div>
-<div class="amt" id="finalPrice">
-R$ 0,00</div>
-<div class="per" id="jarPots">
-— potes
-</div>
-</div>
-<div class="jar-legend" id="jarLegend"></div>
-<div class="price-tab-footer">
-<div class="current-recipe-indicator" id="priceTabLoadedIndicator">
-<span class="label">📌 Receita carregada:</span>
-<span id="priceTabLoadedName" style="color:var(--gold);font-weight:600;">Nenhuma</span>
-</div>
-<div class="save-row" style="display:flex;gap:10px;">
-<button class="action-btn save-btn" id="saveRecipeBtn" style="flex:1;">💾 Salvar receita</button>
-<a id="goToRecipesTab" class="action-btn save-btn" style="flex:1;text-align:center;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;">🗒️ Receitas salvas</a>
-</div>
-</div>
-</section>
+    <!-- Card 1: Rendimento e Custo (unificado) -->
+    <section class="card">
+        <h2>📊 Rendimento e Custo por Pote</h2>
+        <p class="sub">
+            Veja o rendimento da sua receita e o custo detalhado de cada pote
+        </p>
+        
+        <div class="kv-grid">
+            <div class="k">Peso total da receita</div>
+            <div class="v" id="totalWeight"></div>
+            
+            <div class="k">Tamanho do pote</div>
+            <div class="v editable">
+                <input type="number" id="weightPerPot" min="1" step="1" inputmode="numeric" value="500" />
+                <span class="unit-suffix">g</span>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <div class="k total">Número de potes</div>
+            <div class="v total" id="numPots"></div>
+            
+            <div class="k">Sobra da receita</div>
+            <div class="v leftover-note" id="leftoverWeight"></div>
+        </div>
+        
+        <div class="warning-message" id="insufficientWarning">
+            ⚠️ A receita não rende um pote completo de <span id="warningPotSize"></span> g.<br />
+            Reduza o tamanho do pote ou aumente a quantidade da receita para obter pelo menos 1 pote completo.
+        </div>
+        
+        <div class="divider" style="margin: 16px 0;"></div>
+        
+        <!-- Custos detalhados -->
+        <div class="kv-grid">
+            <div class="k">Ingredientes rateados</div>
+            <div class="v" id="costIngPot"></div>
+            
+            <div class="k">Embalagem</div>
+            <div class="v" id="costPkgPot"></div>
+            
+            <div class="k">Custos operacionais</div>
+            <div class="v" id="costOpPot"></div>
+            
+            <div class="divider"></div>
+            
+            <div class="k total">Custo total por pote</div>
+            <div class="v total" id="costTotalPot"></div>
+        </div>
+    </section>
+
+    <!-- Card 2: Precificação -->
+    <section class="card">
+        <h2>💰 Precificação</h2>
+        <p class="sub">
+            Defina sua margem de lucro e veja o preço de venda sugerido
+        </p>
+        
+        <div class="price-tag">
+            <div class="lbl">Preço de venda por pote</div>
+            <div class="amt" id="finalPrice">R$ 0,00</div>
+            <div class="per" id="jarPots">— potes</div>
+        </div>
+        
+        <div class="kv-grid">
+            <div class="k">Margem de lucro desejada</div>
+            <div class="v editable">
+                <input type="number" id="profitPct" min="0" max="99.99" step="1" inputmode="numeric" value="35" />
+                <span>%</span>
+            </div>
+            
+            <div class="k">Markup equivalente</div>
+            <div class="v" id="markup"></div>
+        </div>
+        
+        <p class="sub" style="margin-top: 12px; margin-bottom: 0; font-size: 12px;">
+            💡 Margem de lucro calculada sobre o preço de venda
+        </p>
+        
+        <!-- Legenda do preço -->
+        <div class="jar-legend" id="jarLegend"></div>
+    </section>
+
+    <!-- Card 3: Ações -->
+    <section class="card">
+        <h2>⚡ Ações</h2>
+        <p class="sub">
+            Salve sua receita para acessá-la depois ou veja suas receitas salvas
+        </p>
+        
+        <div class="current-recipe-indicator" style="margin-bottom: 12px;">
+            <span class="label">📌 Receita atual:</span>
+            <span id="priceTabLoadedName" style="color:var(--gold);font-weight:600;">Nenhuma</span>
+        </div>
+        
+        <div class="recipe-actions-bar" style="display: flex; flex-direction: row; gap: 10px;">
+            <button class="action-btn save-btn" id="saveRecipeBtn" style="flex: 1;">
+                💾 Salvar receita
+            </button>
+            <a id="goToRecipesTab" class="action-btn save-btn" style="flex: 1; text-align: center; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+                📋 Receitas salvas
+            </a>
+        </div>
+    </section>
 </div>
 <div class="tab-content" id="tab4">
 <section class="card">
