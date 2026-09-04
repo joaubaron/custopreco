@@ -760,7 +760,19 @@ transition: var(--transition);
 .recipe-actions .load-btn:hover { color: var(--gold); background: var(--gold-soft); }
 .recipe-actions .del-btn:hover { color: var(--red); background: var(--red-dim); }
 
-.recipe-actions-bar, .price-tab-footer {
+.recipe-actions-bar {
+display: flex;
+flex-direction: row;
+gap: 12px;
+margin-top: 16px;
+}
+
+.recipe-actions-bar .action-btn {
+width: auto;
+flex: 1;
+}
+
+.price-tab-footer {
 display: flex;
 flex-direction: column;
 gap: 12px;
